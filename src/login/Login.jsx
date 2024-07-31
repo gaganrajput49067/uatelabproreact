@@ -1,30 +1,35 @@
 import React from "react";
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
+import logoitdose from "../assets/image/logoitdose.png"
+import BlueBanner from "../assets/image/BlueBanner.jpg"
+import './Login.css'; // Make sure to create and import this CSS file
+
 const Login = () => {
   return (
-    <>
-      <div className="card">
-        <div className="flex flex-column md:flex-row">
-          <div className="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
-            <div className="flex flex-wrap justify-content-center align-items-center gap-2">
-              <label className="w-6rem">Username</label>
-              <InputText id="username" type="text" className="w-12rem" />
-            </div>
-            <div className="flex flex-wrap justify-content-center align-items-center gap-2">
-              <label className="w-6rem">Password</label>
-              <InputText id="password" type="password" className="w-12rem" />
-            </div>
-            <Button
-              label="Login"
-              icon="pi pi-user"
-              className="w-10rem mx-auto"
-            ></Button>
+    <div className="login-container">
+      <div className="login-box card" style={{backgroundImage:BlueBanner}}>
+        <div className="logo-section">
+          <img src={logoitdose} alt="itdoseinfosystem logo" className="logo-image" />
+          <h1 className="logo-text">ELABPRO</h1>
+        </div>
+        <div className="login-content">
+          <div className="login-field">
+            <label className="login-label">Username</label>
+            <InputText id="username" type="text" className="login-input" />
           </div>
-         
+          <div className="login-field">
+            <label className="login-label">Password</label>
+            <InputText id="password" type="password" className="login-input" />
+          </div>
+          <Button
+            label="Login"
+            icon="pi pi-user"
+            className="login-button"
+          ></Button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
