@@ -4,9 +4,68 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg-color: #555299;
+  --text-color: black;
+  --header-color: 	#ffffff;
+  --albg-color:#23272f;
+  --altext-color: white;
+}
+
+[data-theme='grey'] {
+  --bg-color: #666866;
+
+}
+
+
+[data-theme='blue'] {
+  --bg-color: #03a0e7;
+
+}
+
+[data-theme='brown'] {
+  --bg-color: #8b2424;
+
+}
+
+[data-theme='palePink'] {
+  --bg-color: #bc3c8b;
+
+}
+
+[data-theme='peach'] {
+  --bg-color: #bc8f3c;
+
+}
+
+[data-theme='green'] {
+  --bg-color:#22d8a9;
+
+}
+
+.row {
+  width: 100%;
+}
+
+.btn {
+  width: 100%;
+}
+
+.btn-sm {
+  height: 30px;
+  padding: 0;
+  margin: 0;
+}
+
 .pointer {
   cursor: pointer;
+  color: white;
 }
+.pointer:hover {
+  cursor: pointer;
+  box-shadow: #ced4da;
+}
+
 
 .form-group {
   position: relative;
@@ -87,7 +146,7 @@ input[type="number"] {
   position: absolute;
   top: 4px;
   left: 4px;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 500 !important;
   display: inline-block;
   max-width: 80%;

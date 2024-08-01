@@ -77,6 +77,7 @@ const Login = () => {
                 onClick={handleSubmit}
                 disabled={loading}
               >
+                Login
               </button>
               <span className="forgetpassword"> Forget Password</span>
             </div>
