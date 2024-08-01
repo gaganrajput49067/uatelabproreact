@@ -102,3 +102,199 @@ input[type="number"] {
   height: 100%;
   position: relative;
 }
+
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(181, 209, 218, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.itdose-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 50px;
+  opacity: 0.2;
+}
+
+@keyframes ldio-x2uulkbinbj {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.ldio-x2uulkbinbj div {
+  left: 133.44px;
+  top: 47.26px;
+  position: absolute;
+  animation: ldio-x2uulkbinbj linear 1.36986301369863s infinite;
+  background: #070707;
+  width: 11.12px;
+  height: 11.12px;
+  border-radius: 5.56px / 5.56px;
+  transform-origin: 5.56px 91.74px;
+}
+
+.ldio-x2uulkbinbj div:nth-child(1) {
+  transform: rotate(0deg);
+  animation-delay: -1.304631441617743s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(2) {
+  transform: rotate(17.142857142857142deg);
+  animation-delay: -1.2393998695368558s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(3) {
+  transform: rotate(34.285714285714285deg);
+  animation-delay: -1.1741682974559686s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(4) {
+  transform: rotate(51.42857142857143deg);
+  animation-delay: -1.1089367253750815s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(5) {
+  transform: rotate(68.57142857142857deg);
+  animation-delay: -1.0437051532941943s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(6) {
+  transform: rotate(85.71428571428571deg);
+  animation-delay: -0.9784735812133072s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(7) {
+  transform: rotate(102.85714285714286deg);
+  animation-delay: -0.91324200913242s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(8) {
+  transform: rotate(120deg);
+  animation-delay: -0.8480104370515329s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(9) {
+  transform: rotate(137.14285714285714deg);
+  animation-delay: -0.7827788649706457s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(10) {
+  transform: rotate(154.28571428571428deg);
+  animation-delay: -0.7175472928897586s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(11) {
+  transform: rotate(171.42857142857142deg);
+  animation-delay: -0.6523157208088715s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(12) {
+  transform: rotate(188.57142857142858deg);
+  animation-delay: -0.5870841487279843s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(13) {
+  transform: rotate(205.71428571428572deg);
+  animation-delay: -0.5218525766470972s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(14) {
+  transform: rotate(222.85714285714286deg);
+  animation-delay: -0.45662100456621s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(15) {
+  transform: rotate(240deg);
+  animation-delay: -0.3913894324853229s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(16) {
+  transform: rotate(257.14285714285717deg);
+  animation-delay: -0.32615786040443573s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(17) {
+  transform: rotate(274.2857142857143deg);
+  animation-delay: -0.2609262883235486s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(18) {
+  transform: rotate(291.42857142857144deg);
+  animation-delay: -0.19569471624266144s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(19) {
+  transform: rotate(308.57142857142856deg);
+  animation-delay: -0.1304631441617743s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(20) {
+  transform: rotate(325.7142857142857deg);
+  animation-delay: -0.06523157208088715s;
+  background: #bec4d3;
+}
+
+.ldio-x2uulkbinbj div:nth-child(21) {
+  transform: rotate(342.85714285714283deg);
+  animation-delay: 0s;
+  background: #bec4d3;
+}
+
+.loadingio-spinner-spinner-nq4q5u6dq7r {
+  width: 278px;
+  height: 278px;
+  text-align: center;
+  display: inline-block;
+  overflow: hidden;
+  margin-left: 5px;
+  margin-top: 10px;
+  z-index: 1;
+}
+
+.ldio-x2uulkbinbj {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+}
+
+.ldio-x2uulkbinbj div {
+  box-sizing: content-box;
+}
