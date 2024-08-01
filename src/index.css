@@ -3,6 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.pointer {
+  cursor: pointer;
+}
+
 .form-group {
   position: relative;
   margin-bottom: 0.4rem;
