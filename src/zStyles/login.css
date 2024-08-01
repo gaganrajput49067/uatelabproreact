@@ -1,0 +1,106 @@
+.main-login-outer-Container {
+    background-image: url("../src/assets/image/BlueBanner.jpg");
+    background-size: 100% 100%;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-login-inner-container {
+    background-image: url("../src/assets/image/Hospedia.jpg");
+    background-size: 100% 100%;
+    width: 70vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 3px;
+    box-shadow: 2px 2px 8px black;
+    border: 1px solid gray;
+    background-color: #f7f8f9;
+    position: relative;
+}
+
+.login-form-container {
+    width: 40%;
+    margin: 2rem;
+    height: 50vh;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 1px 1px 2px rgba(255, 255, 255, 0);
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 3px;
+    box-shadow: 1px 1px 2px black;
+    border: 1px solid gray;
+    background-color: #ffffff;
+}
+
+.login-style-container {
+    width: 40%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.main-login-input {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 1rem;
+}
+
+.main-login-button{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.icondiv {
+    width: 10%;
+    height: 24px;
+    /* border: 1px solid #ced4da; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-button{
+    width: 100%;
+}
+
+.logoStyle{
+    width: 10vw;
+    height: 10vh;
+}
+
+.logo-title{
+    font-size: 1.3vw;
+    margin-top: .5vw;
+}
+
+.forgetpassword{
+    margin-top: 5px;
+    font-size: 1vw;
+    padding-bottom: 5px;
+}
