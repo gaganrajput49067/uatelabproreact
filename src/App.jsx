@@ -1,10 +1,20 @@
 import "./App.css";
 
-
 function App() {
   return (
     <>
-Hello Main Page
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-12 col-md-6 col-lg-4">Column 1</div>
+          <div className="col-sm-12 col-md-6 col-lg-4">Column 2</div>
+          <div className="col-sm-12 col-md-6 col-lg-4">Column 3</div>
+        </div>
+        <div className="row">
+          <div className="col-sm-12 col-md-6 col-lg-4">Column 1</div>
+          <div className="col-sm-12 col-md-6 col-lg-4">Column 2</div>
+          <div className="col-sm-12 col-md-6 col-lg-4">Column 3</div>
+        </div>
+      </div>
     </>
   );
 }
