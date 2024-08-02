@@ -19,16 +19,25 @@ const SelectBox = ({
       value: "a",
       label: "chocolate",
     },
-    { value: "strawberry", label: "Strawberry" },
+    { value: "strawberry ", label: "strawberry strawberry strawberry" },
     { value: "vanilla", label: "Vanilla" },
     { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
+    {
+      value: "strawberry strawberry strawberry",
+      label: "strawberry strawberry strawberry",
+    },
     { value: "vanilla", label: "Vanilla" },
     { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
+    {
+      value: "strawberry strawberry strawberry",
+      label: "strawberry strawberry strawberry",
+    },
     { value: "vanilla", label: "Vanilla" },
     { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
+    {
+      value: "strawberry strawberry strawberry",
+      label: "strawberry strawberry strawberry",
+    },
     { value: "vanilla", label: "Vanilla" },
   ];
   const customStyles = {

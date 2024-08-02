@@ -1,0 +1,70 @@
+.main-nav-bar {
+    justify-content: space-between;
+    position: fixed;
+    top: 0px;
+    left: -100%;
+    width: 300px;
+    height: 100vh;
+    background-color :rgb(65, 65, 65);
+    transition: left 0.3s ease; 
+    z-index: 1000; 
+
+  }
+  
+  .main-nav-bar.open {
+    left: 0; 
+  }
+
+  .navBar-Container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navBar-header{
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: .6rem 1rem ;
+    background-color: var(--bg-color);
+  }
+
+  .nav-main-menu{
+    width: 100%;
+  }
+
+  .navBar-menu{
+    width: 100%;
+    padding: 1rem;
+    height: 100%;
+    background-color :rgb(65, 65, 65);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .nav-main-input{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-radius: 0.3rem;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .nav-main-menu-input{
+    margin: 5px 0 0 -1.6px;
+    padding: 5px 10px;
+    height: 2rem;
+    font-size: 0.8rem;
+    width: 101%;
+    border-radius: 0.3rem;
+  }

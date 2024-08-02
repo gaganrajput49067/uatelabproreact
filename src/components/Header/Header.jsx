@@ -5,7 +5,7 @@ import { toggleFullScreen, useClickOutside } from "../../utils/helpers";
 import Input from "../CommonComponent/Input";
 import SelectBox from "../CommonComponent/SelectBox";
 
-const Header = () => {
+const Header = ({ handleSidebar }) => {
   const userProfile = useRef(null);
   const themeProfile = useRef(null);
   const inputProfile = useRef(null);
@@ -25,6 +25,10 @@ const Header = () => {
     setShowInput(false);
   };
 
+  const handleThemeChange = () => {
+    setShowThemes(true);
+  };
+
   useClickOutside(userProfile, handleUserProfile, showUserProfile);
   useClickOutside(themeProfile, handleThemeProfile, showThemes);
   useClickOutside(inputProfile, handleInputProfile, showInput);
@@ -32,6 +36,9 @@ const Header = () => {
   return (
     <div className="header-main-container">
       <div className="company-info">
+        <div className="" onClick={handleSidebar}>
+          <i class="fa fa-bars m-1" aria-hidden="true"></i>
+        </div>
         <span>ITD </span>
         <span className="ss-none">&nbsp;Itdose Infosystem</span>
       </div>
@@ -64,13 +71,14 @@ const Header = () => {
             plcN="center"
           />
         </div>
-        <div className="header-search-btn">
+        {/* Visit Box Small Screen */}
+        <div className="header-search-btn ls-none" ref={inputProfile}>
           <i
-            class="fa fa-search mr-3 ml-2 pointer ls-none "
+            class="fa fa-barcode mr-3 ml-2 pointer ls-none "
             onClick={() => setShowInput(!showInput)}
           ></i>
           {showInput && (
-            <div className="header-search-menu" ref={inputProfile}>
+            <div className="header-search-menu">
               <div className="header-search-input">
                 <div className="maindiv mt-2">
                   <Input
@@ -84,6 +92,10 @@ const Header = () => {
                     // onChange={handleChange}
                   />
                 </div>
+                <i
+                  class="fa fa-search m-2 pointer ls-none "
+                  // onClick={() => setShowInput(!showInput)}
+                ></i>
               </div>
             </div>
           )}
@@ -107,34 +119,43 @@ const Header = () => {
         <div
           className="user-drop-container pointer"
           onClick={() => setShowThemes(!showThemes)}
+          ref={themeProfile}
         >
-          <i className="fas fa-palette mr-3 ml-2 pointer"></i>
+          <i className="fas fa-palette mr-3 ml-2 pointer ss-none"></i>
           {showThemes && (
-            <div className="header-dropDown-menu" ref={themeProfile}>
+            <div className="header-theme-menu">
               <ToggleTheme />
             </div>
           )}
         </div>
-        <i className="fa fa-home mr-3 pointer"></i>
+        {/* Home */}
+        <i className="fa fa-home mr-3 pointer ss-none"></i>
+        {/* full Screen */}
         <i
           className="fa fa-expand mr-3 pointer ss-none"
           aria-hidden="true"
           onClick={toggleFullScreen}
         ></i>
+        {/* User Profile */}
         <div
           className="user-Info-container"
           onClick={() => setShowUserProfile(!showUserProfile)}
+          ref={userProfile}
         >
           <img src={defaultUserImg} alt="" className="user-info-image" />
 
           <span className="header-userName">&nbsp;&nbsp;&nbsp;Itd-Admin</span>
           {showUserProfile && (
-            <div className="header-dropDown-menu" ref={userProfile}>
-              <UserHeader />
+            <div className="header-dropDown-menu">
+              <UserHeader handleThemeChange={handleThemeChange} />
             </div>
           )}
         </div>
-        <i className="fa fa-sign-out ml-3 pointer" aria-hidden="true"></i>
+        {/* Logout */}
+        <i
+          className="fa fa-sign-out ml-3 pointer ss-none"
+          aria-hidden="true"
+        ></i>
       </div>
     </div>
   );
@@ -142,15 +163,50 @@ const Header = () => {
 
 export default Header;
 
-function UserHeader() {
+function UserHeader({ handleThemeChange }) {
   return (
-    <div className="header-user-dropDown">
+    <div className="header-user-dropDown ">
       <img src={defaultUserImg} alt="" className="user-dropdown-info-image" />
       <div className="row pt-2">
-        <button className="btn btn-sm btn-primary">Edit Profile</button>
+        <button className="btn btn-sm btn-light text-left">
+          <i class="fa fa-home" aria-hidden="true">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          </i>
+          Home
+        </button>
       </div>
       <div className="row pt-2">
-        <button className="btn btn-sm btn-danger">Log Out</button>
+        <button
+          className="btn btn-sm btn-light text-left"
+          onClick={handleThemeChange}
+          style={{ textAlign: "left" }}
+        >
+          <i className="fas fa-palette">&nbsp;&nbsp;&nbsp;</i> Theme
+        </button>
+      </div>
+      <div className="row pt-2">
+        <button className="btn btn-sm btn-light text-left">
+          <i class="fa fa-edit">&nbsp;&nbsp;&nbsp;&nbsp;</i>Edit Profile
+        </button>
+      </div>
+      <div className="row pt-2">
+        <button
+          className="btn btn-sm btn-light text-left"
+          onClick={toggleFullScreen}
+        >
+          <i className="fa fa-expand " aria-hidden="true">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          </i>
+          Full Screen
+        </button>
+      </div>
+      <div className="row pt-2">
+        <button className="btn btn-sm btn-danger text-left">
+          <i className="fa fa-sign-out pointer" aria-hidden="true">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          </i>
+          Log Out
+        </button>
       </div>
     </div>
   );

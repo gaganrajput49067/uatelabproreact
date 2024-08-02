@@ -1,6 +1,15 @@
 .ls-none {
     display: none;
   }
+
+.text-left {
+  text-align: left;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
   
   @media (max-width: 900px) {
     .ss-none {
