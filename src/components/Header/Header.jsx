@@ -3,12 +3,15 @@ import "../../zStyles/Header.css";
 import defaultUserImg from "../../assets/image/user.png";
 import { toggleFullScreen, useClickOutside } from "../../utils/helpers";
 import Input from "../CommonComponent/Input";
+import SelectBox from "../CommonComponent/SelectBox";
 
 const Header = () => {
   const userProfile = useRef(null);
   const themeProfile = useRef(null);
+  const inputProfile = useRef(null);
   const [showUserProfile, setShowUserProfile] = useState(false);
   const [showThemes, setShowThemes] = useState(false);
+  const [showInput, setShowInput] = useState(false);
 
   const handleUserProfile = () => {
     setShowUserProfile(false);
@@ -18,13 +21,75 @@ const Header = () => {
     setShowThemes(false);
   };
 
+  const handleInputProfile = () => {
+    setShowInput(false);
+  };
+
   useClickOutside(userProfile, handleUserProfile, showUserProfile);
   useClickOutside(themeProfile, handleThemeProfile, showThemes);
+  useClickOutside(inputProfile, handleInputProfile, showInput);
 
   return (
     <div className="header-main-container">
+      <div className="company-info">
+        <span>ITD </span>
+        <span className="ss-none">&nbsp;Itdose Infosystem</span>
+      </div>
       <div className="header-item-container">
-        <div className="header-visit">
+        {/* Menu Select Box */}
+        <div type="button" className="header-menu mt-2">
+          <SelectBox
+            placeholderName="Registration"
+            // dynamicOptions={GetEmployeeWiseCenter?.map((ele) => {
+            //   return { label: ele.CentreName, value: ele.CentreID };
+            // })}
+            searchable={true}
+            // value={Number(localData?.defaultCentre)}
+            respclass="roll-off"
+            // handleChange={handleChangeCentre}
+            plcN="center"
+          />
+        </div>
+        {/* Centre Select Box */}
+        <div type="button" className="header-centre mt-2">
+          <SelectBox
+            placeholderName="Select Centre"
+            // dynamicOptions={GetEmployeeWiseCenter?.map((ele) => {
+            //   return { label: ele.CentreName, value: ele.CentreID };
+            // })}
+            searchable={true}
+            // value={Number(localData?.defaultCentre)}
+            respclass="roll-off"
+            // handleChange={handleChangeCentre}
+            plcN="center"
+          />
+        </div>
+        <div className="header-search-btn">
+          <i
+            class="fa fa-search mr-3 ml-2 pointer ls-none "
+            onClick={() => setShowInput(!showInput)}
+          ></i>
+          {showInput && (
+            <div className="header-search-menu" ref={inputProfile}>
+              <div className="header-search-input">
+                <div className="maindiv mt-2">
+                  <Input
+                    type="text"
+                    className="form-control"
+                    id="text"
+                    name="userName"
+                    lable={"Visit No. / Barcode No."}
+                    placeholder=" "
+                    // value={payload?.userName}
+                    // onChange={handleChange}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        {/* Vsit Box */}
+        <div className="header-visit ss-none">
           <div className="maindiv mt-2">
             <Input
               type="text"
@@ -38,6 +103,7 @@ const Header = () => {
             />
           </div>
         </div>
+        {/* theme */}
         <div
           className="user-drop-container pointer"
           onClick={() => setShowThemes(!showThemes)}
@@ -51,7 +117,7 @@ const Header = () => {
         </div>
         <i className="fa fa-home mr-3 pointer"></i>
         <i
-          className="fa fa-expand mr-3 pointer"
+          className="fa fa-expand mr-3 pointer ss-none"
           aria-hidden="true"
           onClick={toggleFullScreen}
         ></i>
@@ -60,8 +126,8 @@ const Header = () => {
           onClick={() => setShowUserProfile(!showUserProfile)}
         >
           <img src={defaultUserImg} alt="" className="user-info-image" />
-          &nbsp;&nbsp;&nbsp;
-          <span>Itd-Admin</span>
+
+          <span className="header-userName">&nbsp;&nbsp;&nbsp;Itd-Admin</span>
           {showUserProfile && (
             <div className="header-dropDown-menu" ref={userProfile}>
               <UserHeader />

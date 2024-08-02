@@ -5,7 +5,6 @@ function App() {
   return (
     <div>
       <Header />
-      sd
     </div>
   );
 }
