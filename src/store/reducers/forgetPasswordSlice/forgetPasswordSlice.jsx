@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { setLoading } from "../loadingSlice/loadingSlice";
 import { axiosInstance } from "../../../utils/axiosInstance";
-import { toast } from "react-toastify";
 
 const initialState = {
   user: {},
@@ -11,47 +10,48 @@ const initialState = {
   success: false,
 };
 
-export const signInAction = createAsyncThunk(
-  "login",
-  async (credentials, { rejectWithValue, dispatch }) => {
+export const forgetPasswordAction = createAsyncThunk(
+  "forget",
+  async ({ credentials, Api }, { rejectWithValue, dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await axiosInstance.post("Users/login", credentials);
+      const response = await axiosInstance.post(Api, credentials);
       dispatch(setLoading(false));
-      toast.success("Login is succeed!");
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      console.log(error);
       dispatch(setLoading(false));
       return rejectWithValue(error.response.data);
     }
   }
 );
 
-export const loginSlice = createSlice({
-  name: "loginSlice",
+export const forgetPasswordSlice = createSlice({
+  name: "forgetSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    resetState: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(signInAction.pending, (state) => {
+      .addCase(forgetPasswordAction.pending, (state) => {
         state.loading = true;
         state.error = "";
         state.success = false;
       })
-      .addCase(signInAction.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+      .addCase(forgetPasswordAction.fulfilled, (state, action) => {
+
         state.loading = false;
         state.success = true;
         state.error = "";
       })
-      .addCase(signInAction.rejected, (state,  error ) => {
+      .addCase(forgetPasswordAction.rejected, (state, { error }) => {
         state.loading = false;
-        state.error = error.payload.message;
+        state.error = error.message;
         state.success = false;
-        state.message = error.payload.message;
+        state.message = error.message;
       });
   },
 });
-
-export default loginSlice.reducer;
+export const { resetState } = forgetPasswordSlice.actions;
+export default forgetPasswordSlice.reducer;
