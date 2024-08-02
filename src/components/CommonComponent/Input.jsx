@@ -26,17 +26,18 @@ function Input({
   min,
   showTooltipCount,
   tabIndex,
+  error,
+  errorMessage,
 }) {
   const [t] = useTranslation();
 
   return (
     <>
       <div className={`${respclass}  custominputbox`}>
-        {/* <div className={!isFromGroup ? "" : "form-group"}> */}
         <div className={removeFormGroupClass ? "" : "form-group"}>
           <input
             type={type}
-            className={className}
+            className={`${className} ${error ? "required-fields-active" : ""}`}
             id={id}
             name={name}
             placeholder={placeholder}
@@ -61,6 +62,7 @@ function Input({
           </label>
         </div>
       </div>
+      {error && <div className="error-message">{errorMessage}</div>}
     </>
   );
 }

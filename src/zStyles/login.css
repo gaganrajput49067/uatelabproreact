@@ -1,54 +1,60 @@
 .main-login-outer-Container {
     background-image: url("../src/assets/image/BlueBanner.jpg");
-    background-size: 100% 100%;
+    background-size: cover;
     height: 100vh;
     width: 100vw;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 .main-login-inner-container {
     background-image: url("../src/assets/image/Hospedia.jpg");
-    background-size: 100% 100%;
+    background-size: cover;
     width: 70vw;
-    height: 70vh;
+    max-width: 1200px;
+    min-height: 70vh;
+    height: auto;
+    max-height: 800px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     border-radius: 3px;
     box-shadow: 2px 2px 8px black;
     border: 1px solid gray;
     background-color: #f7f8f9;
     position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .login-form-container {
     width: 40%;
     margin: 2rem;
-    height: 50vh;
+    height: auto;
+    max-height: 400px;
     background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 1px 1px 2px rgba(255, 255, 255, 0);
     padding: 20px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    border-radius: 3px;
     box-shadow: 1px 1px 2px black;
     border: 1px solid gray;
-    background-color: #ffffff;
+    box-sizing: border-box;
 }
 
 .login-style-container {
-    width: 40%;
-    margin-top: 20px;
+    width: 30%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .login-form {
@@ -64,44 +70,134 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 1rem;
+    margin: 0.8rem;
 }
 
-.main-login-button{
+.main-login-button {
     width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    margin: 0.5rem;
+    /* margin: 1rem; */
 }
 
 .icondiv {
     width: 10%;
     height: 28px;
     font-size: 18px;
-    /* border: 1px solid #ced4da; */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.login-button{
+.login-button {
     width: 100%;
 }
 
-.logoStyle{
+.logoStyle {
     width: 10vw;
-    height: 10vh;
+    height: auto;
 }
 
-.logo-title{
+.logo-title {
     font-size: 1.3vw;
-    margin-top: .5vw;
+    margin-top: 0.5vw;
+    text-align: center;
 }
 
-.forgetpassword{
+.forgetpassword {
     margin-top: 5px;
     font-size: 1vw;
     padding-bottom: 5px;
+}
+
+/* Media Queries for Responsive Design */
+
+@media (max-width: 1200px) {
+    .main-login-inner-container {
+        flex-direction: column;
+        width: 90vw;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .login-form-container {
+        width: 80%;
+        height: auto;
+        margin: 1rem 0;
+    }
+
+    .login-style-container {
+        width: 80%;
+        height: auto;
+    }
+
+    .logoStyle {
+        width: 20vw;
+    }
+
+    .logo-title {
+        font-size: 3vw;
+    }
+
+    .forgetpassword {
+        font-size: 2vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-login-input {
+        margin: 0.5rem;
+    }
+
+    .main-login-button {
+        margin: 0.5rem;
+    }
+    .login-style-container{
+        display: none;
+    }
+    .logoStyle {
+        width: 30vw;
+    }
+
+    .logo-title {
+        font-size: 4vw;
+    }
+
+    .forgetpassword {
+        font-size: 3vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-login-inner-container {
+        width: 100vw;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .login-form-container {
+        width: 90%;
+        height: auto;
+        margin: 1rem 0;
+    }
+
+    .login-style-container {
+        width: 90%;
+        height: auto;
+        display: none;
+    }
+
+    .logoStyle {
+        width: 40vw;
+    }
+
+    .logo-title {
+        font-size: 5vw;
+    }
+
+    .forgetpassword {
+        font-size: 4vw;
+    }
 }
