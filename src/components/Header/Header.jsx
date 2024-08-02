@@ -36,10 +36,10 @@ const Header = ({ handleSidebar }) => {
   return (
     <div className="header-main-container">
       <div className="company-info">
-        <div className="" onClick={handleSidebar}>
-          <i class="fa fa-bars m-1" aria-hidden="true"></i>
+        <div className="header-show-menu" onClick={handleSidebar}>
+          <i class="fa fa-bars m-2" aria-hidden="true"></i>
         </div>
-        <span>ITD </span>
+        <span style={{ fontSize: "1.5rem" }}>ITD </span>
         <span className="ss-none">&nbsp;Itdose Infosystem</span>
       </div>
       <div className="header-item-container">
