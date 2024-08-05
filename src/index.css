@@ -921,6 +921,57 @@ td {
 /* page heading */
 .main-page-head-container{
 width: 100%;
-padding: .4rem;
-border: 1px solid black;
+border-radius: 0.3rem;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+border: 1px solid var(--bg-color);
+}
+
+.main-sub-page-head-container{
+  width: 100%;
+border-radius: 0.3rem;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+border: 1px solid var(--bg-subMenu);
+}
+
+.main-page-heading{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  padding: 0.5rem;
+  width: 100%;
+  border-radius: 0.3rem;
+  background-color: var(--bg-color);
+  color: var(--subMenuText-color);
+}
+
+.main-subpage-heading{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  padding: 0.5rem;
+  width: 100%;
+  border-radius: 0.3rem;
+  background-color:  var(--bg-subMenu);
+  color: var(--subMenuText-color);
+}
+
+.main-page-content{
+  padding: 0.3rem;
+}
+
+.main-heading-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 }

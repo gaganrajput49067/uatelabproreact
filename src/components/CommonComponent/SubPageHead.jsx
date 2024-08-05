@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-const PageHead = ({ children, drop = true }) => {
+const SubPageHead = ({ children, drop = true }) => {
   const [showContent, setShowContent] = useState(true);
   return (
-    <div className="main-page-head-container">
-      <div className="main-page-heading">
+    <div className="main-sub-page-head-container">
+      <div className="main-subpage-heading">
         <h6 className="mb-0">Patient Registration</h6>
         <div className="main-heading-content ">
           {drop && (
@@ -24,4 +24,4 @@ const PageHead = ({ children, drop = true }) => {
   );
 };
 
-export default PageHead;
+export default SubPageHead;
