@@ -15,10 +15,15 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Loading from "./components/Loading/Loading.jsx";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 const Loader = () => {
   const loading = useSelector((state) => state.loadingSlice.loading);
-  return loading ? <Loading /> : <RouterProvider router={router} />;
+  return (
+    <>
+      {loading && <Loading />}
+      <RouterProvider router={router} />
+    </>
+  );
 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(

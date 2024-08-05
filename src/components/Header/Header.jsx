@@ -1,17 +1,40 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../zStyles/Header.css";
 import defaultUserImg from "../../assets/image/user.png";
-import { toggleFullScreen, useClickOutside } from "../../utils/helpers";
+import {
+  getCookie,
+  toggleFullScreen,
+  useClickOutside,
+} from "../../utils/helpers";
 import Input from "../CommonComponent/Input";
 import SelectBox from "../CommonComponent/SelectBox";
+import axios from "axios";
+import { axiosInstance } from "../../utils/axiosInstance";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logOutAction } from "../../store/reducers/loginSlice/loginSlice";
+import { getCentreDetails } from "../../utils/NetworkApi/commonApi";
 
-const Header = ({ handleSidebar }) => {
+const Header = ({ handleSidebar, menuData }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userProfile = useRef(null);
   const themeProfile = useRef(null);
   const inputProfile = useRef(null);
   const [showUserProfile, setShowUserProfile] = useState(false);
   const [showThemes, setShowThemes] = useState(false);
   const [showInput, setShowInput] = useState(false);
+  const [centreData, setCentreData] = useState(null);
+  const [selectedMenu, setSelectedMenu] = useState(menuData ? menuData[0] : []);
+
+  console.log(centreData);
+  useEffect(() => {
+    getCentreDetails(setCentreData);
+  }, []);
+
+  const { user, loading, error, success } = useSelector(
+    (state) => state.loginSlice
+  );
 
   const handleUserProfile = () => {
     setShowUserProfile(false);
@@ -28,15 +51,42 @@ const Header = ({ handleSidebar }) => {
   const handleThemeChange = () => {
     setShowThemes(true);
   };
- 
+
   useClickOutside(userProfile, handleUserProfile, showUserProfile);
   useClickOutside(themeProfile, handleThemeProfile, showThemes);
   useClickOutside(inputProfile, handleInputProfile, showInput);
+
+  const handleLogout = async () => {
+    const payLoad = {
+      Username: localStorage?.getItem("Username"),
+    };
+    try {
+      await dispatch(logOutAction(payLoad))
+        .unwrap()
+        .then(() => {
+          window.sessionStorage.clear();
+          window.localStorage.clear();
+          navigate("/login");
+        });
+    } catch (err) {
+      toast.error(err?.message || "Error Occurred");
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "centre") {
+      setCentreData({ ...centreData, defaultCentreId: value });
+    } else if (name === "menu") {
+      setSelectedMenu(e.target);
+    }
+  };
+
   return (
     <div className="header-main-container">
       <div className="company-info">
         <div className="header-show-menu" onClick={handleSidebar}>
-          <i class="fa fa-bars m-2" aria-hidden="true"></i>
+          <i className="fa fa-bars m-2" aria-hidden="true"></i>
         </div>
         <span style={{ fontSize: "1.5rem" }}>ITD </span>
         <span className="ss-none">&nbsp;Itdose Infosystem</span>
@@ -46,34 +96,31 @@ const Header = ({ handleSidebar }) => {
         <div type="button" className="header-menu mt-2">
           <SelectBox
             placeholderName="Registration"
-            // dynamicOptions={GetEmployeeWiseCenter?.map((ele) => {
-            //   return { label: ele.CentreName, value: ele.CentreID };
-            // })}
+            dynamicOptions={menuData}
             searchable={true}
-            // value={Number(localData?.defaultCentre)}
+            value={Number(selectedMenu?.value)}
             respclass="roll-off"
-            // handleChange={handleChangeCentre}
-            plcN="center"
+            handleChange={handleChange}
+            plcN="Menu"
           />
         </div>
         {/* Centre Select Box */}
         <div type="button" className="header-centre mt-2">
           <SelectBox
+            name={"centre"}
             placeholderName="Select Centre"
-            // dynamicOptions={GetEmployeeWiseCenter?.map((ele) => {
-            //   return { label: ele.CentreName, value: ele.CentreID };
-            // })}
+            dynamicOptions={centreData?.centre}
             searchable={true}
-            // value={Number(localData?.defaultCentre)}
+            value={Number(centreData?.defaultCentreId)}
             respclass="roll-off"
-            // handleChange={handleChangeCentre}
-            plcN="center"
+            handleChange={handleChange}
+            plcN="All Centres"
           />
         </div>
         {/* Visit Box Small Screen */}
         <div className="header-search-btn ls-none" ref={inputProfile}>
           <i
-            class="fa fa-barcode mr-3 ml-2 pointer ls-none "
+            className="fa fa-barcode mr-3 ml-2 pointer ls-none "
             onClick={() => setShowInput(!showInput)}
           ></i>
           {showInput && (
@@ -92,7 +139,7 @@ const Header = ({ handleSidebar }) => {
                   />
                 </div>
                 <i
-                  class="fa fa-search m-2 pointer ls-none "
+                  className="fa fa-search m-2 pointer ls-none "
                   // onClick={() => setShowInput(!showInput)}
                 ></i>
               </div>
@@ -146,7 +193,10 @@ const Header = ({ handleSidebar }) => {
           <span className="header-userName">&nbsp;&nbsp;&nbsp;Itd-Admin</span>
           {showUserProfile && (
             <div className="header-dropDown-menu">
-              <UserHeader handleThemeChange={handleThemeChange} />
+              <UserHeader
+                handleThemeChange={handleThemeChange}
+                handleLogout={handleLogout}
+              />
             </div>
           )}
         </div>
@@ -154,6 +204,7 @@ const Header = ({ handleSidebar }) => {
         <i
           className="fa fa-sign-out ml-3 pointer ss-none"
           aria-hidden="true"
+          onClick={handleLogout}
         ></i>
       </div>
     </div>
@@ -162,13 +213,13 @@ const Header = ({ handleSidebar }) => {
 
 export default Header;
 
-function UserHeader({ handleThemeChange }) {
+function UserHeader({ handleThemeChange, handleLogout }) {
   return (
     <div className="header-user-dropDown ">
       <img src={defaultUserImg} alt="" className="user-dropdown-info-image" />
       <div className="row pt-2">
         <button className="btn btn-sm btn-light text-left">
-          <i class="fa fa-home" aria-hidden="true">
+          <i className="fa fa-home" aria-hidden="true">
             &nbsp;&nbsp;&nbsp;&nbsp;
           </i>
           Home
@@ -185,7 +236,7 @@ function UserHeader({ handleThemeChange }) {
       </div>
       <div className="row pt-2">
         <button className="btn btn-sm btn-light text-left">
-          <i class="fa fa-edit">&nbsp;&nbsp;&nbsp;&nbsp;</i>Edit Profile
+          <i className="fa fa-edit">&nbsp;&nbsp;&nbsp;&nbsp;</i>Edit Profile
         </button>
       </div>
       <div className="row pt-2">
@@ -200,7 +251,10 @@ function UserHeader({ handleThemeChange }) {
         </button>
       </div>
       <div className="row pt-2">
-        <button className="btn btn-sm btn-danger text-left">
+        <button
+          className="btn btn-sm btn-danger text-left"
+          onClick={handleLogout}
+        >
           <i className="fa fa-sign-out pointer" aria-hidden="true">
             &nbsp;&nbsp;&nbsp;&nbsp;
           </i>

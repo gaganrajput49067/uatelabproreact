@@ -1,5 +1,16 @@
 import { useEffect } from "react";
 
+export function getCookie(name) {
+  const matches = document.cookie.match(
+    new RegExp(
+      "(?:^|; )" +
+        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+        "=([^;]*)"
+    )
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
 export const toggleFullScreen = () => {
   if (!document.fullscreenElement) {
     document.documentElement.requestFullscreen();
@@ -26,3 +37,11 @@ export function useClickOutside(ref, handleClose, active) {
     };
   }, [ref, handleClose, active]);
 }
+
+export const useLocalStorage = (key, type, valueToStore) => {
+  if (type === "set") {
+    window.localStorage.setItem(key, JSON.stringify(valueToStore));
+  } else if (type === "get") {
+    return JSON.parse(window.localStorage.getItem(key));
+  }
+};

@@ -12,7 +12,7 @@ const SelectBox = ({
   value,
   name,
   defaultValue,
-  inputId
+  inputId,
 }) => {
   const [t] = useTranslation();
   const options = [
@@ -22,6 +22,7 @@ const SelectBox = ({
     },
     { value: "strawberry ", label: "strawberry" },
     { value: "vanilla", label: "Vanilla" },
+    { value: "", label: "No Option Avalilable" },
   ];
   const customStyles = {
     control: (base, state) => ({
@@ -37,6 +38,7 @@ const SelectBox = ({
       borderColor: state.isFocused ? "#ced4da" : "#ced4da",
       boxShadow: "none",
       whiteSpace: "normal",
+      fontSize: "10",
       // fontWeight: " normal"
     }),
     placeholder: (defaultStyles, state) => {
@@ -80,6 +82,7 @@ const SelectBox = ({
     valueContainer: (provided, state) => ({
       ...provided,
       overflow: "visible",
+      fontSize: "10",
     }),
 
     singleValue: (provided, state) => ({
@@ -87,6 +90,18 @@ const SelectBox = ({
       fontSize: "11px",
       fontWeight: "600",
     }),
+  };
+
+  const handleSelectBox = (value) => {
+    let e = {
+      target: {
+        name: name || "",
+        value: value?.value || "",
+        option: value,
+      },
+    };
+
+    return handleChange(e) ? handleChange(e) : () => {};
   };
 
   return (
@@ -101,7 +116,7 @@ const SelectBox = ({
             inputId={inputId}
             value={dynamicOptions?.find((option) => option.value === value)}
             placeholder={placeholderName}
-            onChange={handleChange ? handleChange : () => {}}
+            onChange={handleSelectBox}
             name={name}
             defaultValue={defaultValue}
           />
