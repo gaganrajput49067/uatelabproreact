@@ -4,6 +4,7 @@ import SelectBox from "../../components/CommonComponent/SelectBox";
 import BrowseButton from "../../components/CommonComponent/BrowseButton";
 import CustomMultiSelectBox from "../../components/CommonComponent/MultiSelectComp";
 import MultiSelectComp from "../../components/CommonComponent/MultiSelectComp";
+import DatePicker from "../../components/CommonComponent/DatePicker";
 const FirstPage = () => {
   const dummyData = [
     {
@@ -36,6 +37,9 @@ const FirstPage = () => {
     { label: "Option 2", value: "option2" },
     { label: "Option 3", value: "option3" },
   ];
+  const handleChange = (e) => {
+    console.log(e);
+  };
   return (
     <div className="container">
       <div className="card border-success my-3">
@@ -87,18 +91,19 @@ const FirstPage = () => {
                 <SelectBox
                   className="form-control form-control-sm"
                   placeholder=" "
-                  id="SelectBox"
+                  id="SelectBox2"
                   lable="SelectBox"
+                  name="SelectBox"
+                  onChange={handleChange}
                 />
               </div>
               <div className="col-sm-3">
-                <Input
-                  type="date"
-                  id="date"
-                  className="form-control required-fields"
-                  name="date"
-                  lable="date"
-                  placeholder=" "
+                <DatePicker
+                  className="custom-calendar"
+                  id="DOB"
+                  name="DOB"
+                  lable={"DOB"}
+                  value={new Date()}
                 />
               </div>
               <div className="col-sm-3">

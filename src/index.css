@@ -98,6 +98,19 @@
   font-weight: 600 !important;
   outline: 0;
 }
+.label {
+  top: -4px;
+  left: 0px !important;
+  font-weight: bold !important;
+  background: #fff;
+  line-height: 5px;
+  padding: 1px 5px;
+  /* margin-bottom: 0 !important; */
+  font-size: 9px !important;
+}
+.label-item {
+  font-size: 12px !important;
+}
 input {
   height: 30px;
 }
@@ -667,15 +680,10 @@ input.required-fields-active {
   padding-left: 5px;
 }
 
-.custom-calendar {
-  height: 26px;
-  border-radius: 2px;
-  padding: 0;
-  width: 100%;
-}
 .datepicker {
   width: 100%;
 }
+
 /* CustomMultiSelectBox.css */
 
 
@@ -807,4 +815,74 @@ input.required-fields-active {
   100% {
     transform: translateX(-80%);
   }
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: normal;
+}
+
+/* select-box */
+
+.custom-calendar {
+  height: 30px;
+  border-radius: 2px;
+  width: 100%;
+  /* margin-top: 7px; */
+  font-size: 12px;
+}
+
+.p-datepicker {
+  box-shadow: 0px 0px 10px 0px;
+  padding: 0 !important;
+  width: 218px !important;
+  max-width: 100% !important;
+}
+
+.p-datepicker-calendar-container {
+  padding: 0 !important;
+  /* width:230px !important; */
+}
+
+.p-datepicker-calendar th,
+td {
+  padding: 0 !important;
+}
+
+.p-datepicker-calendar th > span {
+  font-size: 12px;
+}
+
+.p-datepicker-calendar td > span {
+  font-size: 10px;
+  height: 28px !important;
+  width: 30px !important;
+}
+
+.p-datepicker-title button {
+  font-size: 10px !important;
+}
+
+.p-datepicker-year .p-link {
+  font-size: 10px !important;
+}
+
+.p-datepicker-header {
+  padding: 0;
+  height: 24px;
+  /* width: 208px !important; */
+}
+
+.p-datepicker-calendar tr {
+  text-align: center;
+}
+
+.p-datepicker-calendar tbody tr td {
+  padding: 0 !important;
 }

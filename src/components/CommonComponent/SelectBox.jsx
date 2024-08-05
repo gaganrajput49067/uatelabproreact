@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Select, { components } from "react-select";
 
@@ -7,12 +7,13 @@ const SelectBox = ({
   searchable,
   respclass,
   id,
-  handleChange,
+  onChange,
   dynamicOptions,
   value,
   name,
   defaultValue,
   inputId,
+  isDisabled
 }) => {
   const [t] = useTranslation();
   const options = [
@@ -24,6 +25,7 @@ const SelectBox = ({
     { value: "vanilla", label: "Vanilla" },
     { value: "", label: "No Option Avalilable" },
   ];
+  const selectRef = useRef(null);
   const customStyles = {
     control: (base, state) => ({
       ...base,
@@ -87,7 +89,7 @@ const SelectBox = ({
 
     singleValue: (provided, state) => ({
       ...provided,
-      fontSize: "11px",
+      fontSize: "12px",
       fontWeight: "600",
     }),
   };
@@ -97,11 +99,12 @@ const SelectBox = ({
       target: {
         name: name || "",
         value: value?.value || "",
+        label:value?.label||"",
         option: value,
       },
     };
 
-    return handleChange(e) ? handleChange(e) : () => {};
+    return onChange(e) ? onChange(e) : () => {};
   };
 
   return (
@@ -112,14 +115,17 @@ const SelectBox = ({
             options={dynamicOptions ? dynamicOptions : options}
             isSearchable={searchable}
             id={id}
+            ref={selectRef}
             styles={customStyles}
             inputId={inputId}
             value={dynamicOptions?.find((option) => option.value === value)}
             placeholder={placeholderName}
             onChange={handleSelectBox}
+            isDisabled={isDisabled}
             name={name}
             defaultValue={defaultValue}
           />
+          
         </div>
       </div>
     </>
