@@ -6,34 +6,49 @@
 
 :root {
   --bg-color: #555299;
+  --bg-subMenu: #918ecd;
   --text-color: black;
   --header-color: #ffffff;
   --albg-color: #23272f;
   --altext-color: white;
+  --subMenuText-color: rgb(255, 255, 255);
 }
 
 [data-theme="grey"] {
   --bg-color: #666866;
+  --bg-subMenu:#888888;
+  --subMenuText-color: rgb(255, 255, 255);
 }
 
 [data-theme="blue"] {
   --bg-color: #03a0e7;
+  --bg-subMenu: #8fd3f3;
+  --subMenuText-color: black;
 }
 
 [data-theme="brown"] {
   --bg-color: #8b2424;
+  --bg-subMenu: #b15555;
+  --subMenuText-color: rgb(255, 255, 255);
 }
 
 [data-theme="palePink"] {
   --bg-color: #bc3c8b;
+  --bg-subMenu: #c781ac;
+  --subMenuText-color: black;
+
 }
 
 [data-theme="peach"] {
   --bg-color: #bc8f3c;
+  --bg-subMenu: #dabb82;
+  --subMenuText-color: black;
 }
 
 [data-theme="green"] {
   --bg-color: #22d8a9;
+  --bg-subMenu: #96f9e0;
+  --subMenuText-color: black;
 }
 
 .row {
