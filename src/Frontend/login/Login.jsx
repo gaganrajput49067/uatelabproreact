@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -12,13 +12,21 @@ const Login = () => {
   const [t] = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.loadingSlice.loading);
+  const { user, loading, error, success } = useSelector(
+    (state) => state.loginSlice
+  );
+
+  useEffect(() => {
+    if (success) {
+      window.localStorage.setItem("Username", user.Username);
+      navigate("/");
+    }
+  }, [success, navigate]);
 
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
-  console.log(credentials)
   const [errors, setErrors] = useState({});
   const validate = () => {
     const newErrors = {};

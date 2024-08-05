@@ -5,8 +5,8 @@ export const axiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true, // Use withCredentials instead of credentials
 });
-
 export const logOut = () => {
   localStorage.clear();
   window.location.href = "/login";

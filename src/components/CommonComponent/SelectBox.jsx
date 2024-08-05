@@ -16,29 +16,9 @@ const SelectBox = ({
   const [t] = useTranslation();
   const options = [
     {
-      value: "a",
-      label: "chocolate",
+      value: "",
+      label: "No Option Avalilable",
     },
-    { value: "strawberry ", label: "strawberry strawberry strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "chocolate", label: "Chocolate" },
-    {
-      value: "strawberry strawberry strawberry",
-      label: "strawberry strawberry strawberry",
-    },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "chocolate", label: "Chocolate" },
-    {
-      value: "strawberry strawberry strawberry",
-      label: "strawberry strawberry strawberry",
-    },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "chocolate", label: "Chocolate" },
-    {
-      value: "strawberry strawberry strawberry",
-      label: "strawberry strawberry strawberry",
-    },
-    { value: "vanilla", label: "Vanilla" },
   ];
   const customStyles = {
     control: (base, state) => ({
@@ -54,6 +34,7 @@ const SelectBox = ({
       borderColor: state.isFocused ? "#ced4da" : "#ced4da",
       boxShadow: "none",
       whiteSpace: "normal",
+      fontSize: "10",
       // fontWeight: " normal"
     }),
     placeholder: (defaultStyles, state) => {
@@ -97,7 +78,20 @@ const SelectBox = ({
     valueContainer: (provided, state) => ({
       ...provided,
       overflow: "visible",
+      fontSize: "10",
     }),
+  };
+
+  const handleSelectBox = (value) => {
+    let e = {
+      target: {
+        name: name || "",
+        value: value?.value || "",
+        option: value,
+      },
+    };
+
+    return handleChange(e) ? handleChange(e) : () => {};
   };
 
   return (
@@ -112,7 +106,7 @@ const SelectBox = ({
             // value={value}
             value={dynamicOptions?.find((option) => option.value === value)}
             placeholder={placeholderName}
-            onChange={handleChange ? handleChange : () => {}}
+            onChange={handleSelectBox}
             name={name}
             defaultValue={defaultValue}
           />
