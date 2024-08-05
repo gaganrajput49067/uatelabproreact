@@ -13,6 +13,7 @@ function App() {
   const sideBarRef = useRef(null);
   const [showSidebar, setShowSideBar] = useState(false);
   const [menuData, setMenuData] = useState(null);
+  const [notification, setNotification] = useState(true);
 
   const { user, loading, error, success } = useSelector(
     (state) => state.loginSlice
@@ -43,9 +44,12 @@ function App() {
 
   return (
     <div>
-      <div className="text-run">
-        <span>Your Subscription is going to expire on 12th August 2024</span>
-      </div>
+      {notification && (
+        <div className="text-notification">
+          <span>Your Subscription is going to expire on 12th August 2024</span>
+          <i class="fa fa-close" onClick={() => setNotification(false)}></i>
+        </div>
+      )}
       <Header handleSidebar={handleSidebar} menuData={menuData} />
       <div
         className={`main-nav-bar ${showSidebar ? "open" : ""}`}
