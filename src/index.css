@@ -787,9 +787,18 @@ input.required-fields-active {
   animation: text-notification 20s linear infinite;
 }
 
-.text-notification span {
+.text-notification i {
+  cursor: pointer;
   position: absolute;
-  right: 0;
+  right: 0px;
+  top: 0px;
+  padding-top: 4px;
+  padding-left: 5px;
+  background-color: #ffff;
+  height: 100%;
+  margin: 0 auto;
+  width: 25px;
+  /* border-radius: 1rem; */
 }
 @keyframes text-notification {
   0% {
