@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { logOutAction } from "../../store/reducers/loginSlice/loginSlice";
 import { getCentreDetails } from "../../utils/NetworkApi/commonApi";
 
-const Header = ({ handleSidebar, menuData }) => {
+const Header = ({ handleSidebar, menuData, handlePage }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userProfile = useRef(null);
@@ -27,14 +27,9 @@ const Header = ({ handleSidebar, menuData }) => {
   const [centreData, setCentreData] = useState(null);
   const [selectedMenu, setSelectedMenu] = useState(menuData ? menuData[0] : []);
 
-  console.log(centreData);
   useEffect(() => {
     getCentreDetails(setCentreData);
   }, []);
-
-  const { user, loading, error, success } = useSelector(
-    (state) => state.loginSlice
-  );
 
   const handleUserProfile = () => {
     setShowUserProfile(false);
@@ -79,22 +74,26 @@ const Header = ({ handleSidebar, menuData }) => {
       setCentreData({ ...centreData, defaultCentreId: value });
     } else if (name === "menu") {
       setSelectedMenu(e.target);
+      handlePage(e.target);
     }
   };
 
   return (
     <div className="header-main-container">
       <div className="company-info">
-        <div className="header-show-menu" onClick={handleSidebar}>
+        <span className="ss-none">&nbsp;Itdose Infosystem</span>
+        <div className="header-show-menu ls-none" onClick={handleSidebar}>
           <i className="fa fa-bars m-2" aria-hidden="true"></i>
         </div>
-        <span style={{ fontSize: "1.5rem" }}>ITD </span>
-        <span className="ss-none">&nbsp;Itdose Infosystem</span>
+        <span style={{ fontSize: "1.5rem" }} className="ls-none">
+          ITD
+        </span>
       </div>
       <div className="header-item-container">
         {/* Menu Select Box */}
         <div type="button" className="header-menu mt-2">
           <SelectBox
+            name={"menu"}
             placeholderName="Registration"
             dynamicOptions={menuData}
             searchable={true}
@@ -148,7 +147,7 @@ const Header = ({ handleSidebar, menuData }) => {
         </div>
         {/* Vsit Box */}
         <div className="header-visit ss-none">
-          <div className="maindiv mt-2">
+          <div className="maindiv " style={{ marginTop: "12px" }}>
             <Input
               type="text"
               className="form-control"

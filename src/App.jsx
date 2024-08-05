@@ -1,19 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
+import "./index.css";
 import "./zStyles/Sidebar.css";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { getCookie, useClickOutside } from "./utils/helpers";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { axiosInstance } from "./utils/axiosInstance";
 import { getPageData } from "./utils/NetworkApi/commonApi";
+import Menubar from "./components/MenuBar/Menubar";
 function App() {
   const navigate = useNavigate();
   const sideBarRef = useRef(null);
   const [showSidebar, setShowSideBar] = useState(false);
   const [menuData, setMenuData] = useState(null);
   const [notification, setNotification] = useState(true);
+  const [pageData, setPageData] = useState([]);
 
   const { user, loading, error, success } = useSelector(
     (state) => state.loginSlice
@@ -39,18 +42,30 @@ function App() {
   }, [success, navigate]);
 
   useEffect(() => {
-    getPageData(setMenuData);
+    getPageData(setMenuData, setPageData);
   }, []);
+
+  const handlePage = (e) => {
+    setPageData(e.option);
+  };
 
   return (
     <div>
       {notification && (
         <div className="text-notification">
           <span>Your Subscription is going to expire on 12th August 2024</span>
-          <i class="fa fa-close" onClick={() => setNotification(false)}></i>
+          <i className="fa fa-close" onClick={() => setNotification(false)}></i>
         </div>
       )}
-      <Header handleSidebar={handleSidebar} menuData={menuData} />
+      <Header
+        handleSidebar={handleSidebar}
+        menuData={menuData}
+        handlePage={handlePage}
+      />
+      <Menubar pageData={pageData} />
+      <div className="outer-container-main">
+        <Outlet />
+      </div>
       <div
         className={`main-nav-bar ${showSidebar ? "open" : ""}`}
         ref={sideBarRef}
@@ -60,6 +75,7 @@ function App() {
             showSidebar={showSidebar}
             closeSidebar={closeSidebar}
             menuData={menuData}
+            handlePage={handlePage}
           />
         )}
       </div>

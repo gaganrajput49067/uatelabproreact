@@ -72,7 +72,7 @@ function SidebarMenu(pageData = []) {
         page.map((ele) => {
           return (
             <p className="sidebar-submenu">
-              <i class="fa fa-bullseye" aria-hidden="true">
+              <i className="fa fa-bullseye" aria-hidden="true">
                 &nbsp;&nbsp;
               </i>
               {ele?.PageName}

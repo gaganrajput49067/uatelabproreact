@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { axiosInstance } from "../axiosInstance";
 
 export const getCentreDetails = (state) => {
@@ -24,13 +25,14 @@ export const getCentreDetails = (state) => {
     });
 };
 
-export const getPageData = (state) => {
+export const getPageData = (state, state2) => {
   axiosInstance
     .get("Menu/MainMenuPageData")
     .then((res) => {
       let data = res?.data?.message;
       let finalData = filtermenu(data?.MenuData, data?.pageData);
       state(finalData);
+      state2(finalData[0]);
     })
     .catch((err) => {
       toast.error(
