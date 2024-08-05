@@ -57,27 +57,29 @@ function App() {
           <i className="fa fa-close" onClick={() => setNotification(false)}></i>
         </div>
       )}
-      <Header
-        handleSidebar={handleSidebar}
-        menuData={menuData}
-        handlePage={handlePage}
-      />
-      <Menubar pageData={pageData} />
+      <div className="main-header-sidebar-container">
+        <Header
+          handleSidebar={handleSidebar}
+          menuData={menuData}
+          handlePage={handlePage}
+        />
+        <div
+          className={`main-nav-bar ${showSidebar ? "open" : ""}`}
+          ref={sideBarRef}
+        >
+          {showSidebar && (
+            <Sidebar
+              showSidebar={showSidebar}
+              closeSidebar={closeSidebar}
+              menuData={menuData}
+              handlePage={handlePage}
+            />
+          )}
+        </div>
+      </div>
+      <Menubar pageData={pageData} handleSidebar={handleSidebar} />
       <div className="outer-container-main">
         <Outlet />
-      </div>
-      <div
-        className={`main-nav-bar ${showSidebar ? "open" : ""}`}
-        ref={sideBarRef}
-      >
-        {showSidebar && (
-          <Sidebar
-            showSidebar={showSidebar}
-            closeSidebar={closeSidebar}
-            menuData={menuData}
-            handlePage={handlePage}
-          />
-        )}
       </div>
     </div>
   );

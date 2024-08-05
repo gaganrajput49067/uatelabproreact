@@ -40,7 +40,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 5px;
+    padding: 0 5px 0 0 ;
     margin: 0 5px 0  0 ;
     height: 100%;
     overflow-y: auto;
@@ -56,4 +56,9 @@
 .main-menu-container span:hover{
 background-color: var(--bg-color);
 border-radius: 0.2rem;
+}
+
+
+.menubar-navbar{
+    color: var(--subMenuText-color);
 }

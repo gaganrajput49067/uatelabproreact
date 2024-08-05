@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../zStyles/menubar.css";
 import { useNavigate } from "react-router-dom";
-const Menubar = ({ pageData = [] }) => {
+const Menubar = ({ pageData = [], handleSidebar }) => {
   const navigate = useNavigate();
   const [filterdMenu, setFilterdMenu] = useState([]);
 
@@ -42,7 +42,11 @@ const Menubar = ({ pageData = [] }) => {
   };
 
   return (
-    <div className="menubar-main-container">
+    <div className="menubar-main-container ss-none">
+      <i
+        class="fa fa-bars mr-2 pointer menubar-navbar"
+        onClick={handleSidebar}
+      ></i>
       <div className="main-menu-container" ref={containerRef}>
         {filterdMenu.map((ele, key) => {
           return (

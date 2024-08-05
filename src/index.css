@@ -905,6 +905,25 @@ td {
 }
 }
 
+/* Main div */
 .outer-container-main{
   max-width: 100%;
+  padding: 0.5rem;
+}
+
+/* Box */
+.box {
+
+}
+
+.main-header-sidebar-container{
+  position: relative;
+}
+
+
+/* page heading */
+.main-page-head-container{
+width: 100%;
+padding: .4rem;
+border: 1px solid black;
 }
