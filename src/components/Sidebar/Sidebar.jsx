@@ -34,7 +34,7 @@ const Sidebar = ({ closeSidebar, menuData }) => {
             searchable={true}
             value={Number(selectedMenu?.value)}
             respclass="roll-off"
-            handleChange={handleChange}
+            onChange={handleChange}
             plcN="Menu"
           />
         </div>
