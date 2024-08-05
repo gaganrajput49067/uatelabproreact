@@ -823,3 +823,7 @@ input.required-fields-active {
     transform: translateX(-80%);
   }
 }
+
+.outer-container-main{
+  max-width: 100%;
+}
