@@ -82,7 +82,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
     <div className="header-main-container">
       <div className="company-info">
         <span className="ss-none">&nbsp;Itdose Infosystem</span>
-        <div className="header-show-menu ls-none" onClick={handleSidebar}>
+        <div className="header-show-menu" onClick={handleSidebar}>
           <i className="fa fa-bars m-2" aria-hidden="true"></i>
         </div>
         <span style={{ fontSize: "1.5rem" }} className="ls-none">
