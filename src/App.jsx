@@ -43,8 +43,9 @@ function App() {
 
   return (
     <div>
-      <div className="text-run">
+      <div className="text-notification">
         <span>Your Subscription is going to expire on 12th August 2024</span>
+        <i class="fa fa-close"></i>
       </div>
       <Header handleSidebar={handleSidebar} menuData={menuData} />
       <div
