@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
+import "./index.css";
 import "./zStyles/Sidebar.css";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -62,7 +63,9 @@ function App() {
         handlePage={handlePage}
       />
       <Menubar pageData={pageData} />
-      <Outlet />
+      <div className="outer-container-main">
+        <Outlet />
+      </div>
       <div
         className={`main-nav-bar ${showSidebar ? "open" : ""}`}
         ref={sideBarRef}
