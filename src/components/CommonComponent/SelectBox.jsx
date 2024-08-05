@@ -12,32 +12,15 @@ const SelectBox = ({
   value,
   name,
   defaultValue,
+  inputId
 }) => {
   const [t] = useTranslation();
   const options = [
     {
-      value: "a",
+      value: "chocolate",
       label: "chocolate",
     },
-    { value: "strawberry ", label: "strawberry strawberry strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "chocolate", label: "Chocolate" },
-    {
-      value: "strawberry strawberry strawberry",
-      label: "strawberry strawberry strawberry",
-    },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "chocolate", label: "Chocolate" },
-    {
-      value: "strawberry strawberry strawberry",
-      label: "strawberry strawberry strawberry",
-    },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "chocolate", label: "Chocolate" },
-    {
-      value: "strawberry strawberry strawberry",
-      label: "strawberry strawberry strawberry",
-    },
+    { value: "strawberry ", label: "strawberry" },
     { value: "vanilla", label: "Vanilla" },
   ];
   const customStyles = {
@@ -98,6 +81,12 @@ const SelectBox = ({
       ...provided,
       overflow: "visible",
     }),
+
+    singleValue: (provided, state) => ({
+      ...provided,
+      fontSize: "11px",
+      fontWeight: "600",
+    }),
   };
 
   return (
@@ -109,7 +98,7 @@ const SelectBox = ({
             isSearchable={searchable}
             id={id}
             styles={customStyles}
-            // value={value}
+            inputId={inputId}
             value={dynamicOptions?.find((option) => option.value === value)}
             placeholder={placeholderName}
             onChange={handleChange ? handleChange : () => {}}

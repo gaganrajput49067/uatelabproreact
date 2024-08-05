@@ -15,6 +15,10 @@ export let routeDetails = [
       path: "/ForgetPassword",
       element: "../Frontend/login/ForgetPassword",
     },
+    {
+      path: "/FirstPage",
+      element: "../Frontend/Page/FirstPage"
+    },
     // {
     //   type: "content",
     //   path: "/content",

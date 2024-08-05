@@ -7,40 +7,33 @@
 :root {
   --bg-color: #555299;
   --text-color: black;
-  --header-color: 	#ffffff;
-  --albg-color:#23272f;
+  --header-color: #ffffff;
+  --albg-color: #23272f;
   --altext-color: white;
 }
 
-[data-theme='grey'] {
+[data-theme="grey"] {
   --bg-color: #666866;
-
 }
 
-
-[data-theme='blue'] {
+[data-theme="blue"] {
   --bg-color: #03a0e7;
-
 }
 
-[data-theme='brown'] {
+[data-theme="brown"] {
   --bg-color: #8b2424;
-
 }
 
-[data-theme='palePink'] {
+[data-theme="palePink"] {
   --bg-color: #bc3c8b;
-
 }
 
-[data-theme='peach'] {
+[data-theme="peach"] {
   --bg-color: #bc8f3c;
-
 }
 
-[data-theme='green'] {
-  --bg-color:#22d8a9;
-
+[data-theme="green"] {
+  --bg-color: #22d8a9;
 }
 
 .row {
@@ -65,7 +58,6 @@
   cursor: pointer;
   box-shadow: #ced4da;
 }
-
 
 .form-group {
   position: relative;
@@ -420,3 +412,337 @@ input.required-fields-active {
   margin-top: 5px;
 }
 /* .error-message-end */
+
+/* box */
+/* styles.css */ /* General styles */
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  font-size: 14px;
+}
+
+.card-header {
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 10px 10px 0 0;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-color {
+  background-color: var(--bg-color);
+}
+.card-title {
+  margin: 0;
+  font-size: 18px;
+  color: #fff;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.table th {
+  background-color: var(--bg-color);
+  color: white;
+  text-align: left;
+}
+
+.table tr:nth-child(even) {
+  background-color: var(--bg-color);
+}
+
+.table tr:hover {
+  background-color: #ddd;
+}
+
+.table-responsive {
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.table-responsive::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: var(--bg-color);
+  border-radius: 5px;
+}
+
+.table-responsive thead {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+}
+
+/* Form styles */
+.form-control {
+  margin-bottom: 10px;
+}
+
+.row {
+  margin: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .card {
+    padding: 10px;
+  }
+
+  .card-header {
+    padding: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  .card-body {
+    padding: 8px;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+}
+
+/* Additional custom styles */
+.text-white {
+  color: #fff;
+}
+
+.bg-success {
+  background-color: var(--bg-color);
+}
+
+.border-success {
+  background-color: var(--bg-color);
+}
+
+.divResult {
+  background-color: #fff !important;
+  padding: 1px;
+}
+
+.tbRecord {
+  font-size: 12px;
+  background-color: #ffffff;
+  white-space: nowrap;
+}
+
+.tbRecord td,
+.tbRecord th {
+  padding: 3px !important;
+}
+
+.tbRecord th {
+  background-color: var(--bg-color);
+  color: aliceblue;
+}
+
+.tbRecord tr:hover {
+  background-color: var(--bg-color);
+}
+
+/* Responsive table */
+@media only screen and (max-width: 800px) {
+  #no-more-tables td:before {
+    content: attr(data-title);
+  }
+
+  #no-more-tables table,
+  #no-more-tables thead,
+  #no-more-tables tbody,
+  #no-more-tables th,
+  #no-more-tables td,
+  #no-more-tables tr {
+    display: block;
+  }
+
+  #no-more-tables thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  #no-more-tables tr {
+    border: 1px solid #ccc;
+  }
+
+  #no-more-tables td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50% !important;
+    white-space: normal;
+    text-align: left;
+  }
+
+  #no-more-tables td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+  }
+}
+
+/* table-end */
+
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-xs-1,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.custom-calendar {
+  height: 26px;
+  border-radius: 2px;
+  padding: 0;
+  width: 100%;
+}
+.datepicker {
+  width: 100%;
+}
+/* CustomMultiSelectBox.css */
+
+
+.p-multiselect {
+  height: 26px;
+  /* border: 2px solid #4CAF50;  */
+  /* border-radius: 10px;     */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.p-multiselect .p-multiselect-label-container {
+  background-color: #f0f0f0;
+  /* Change background color of the label container */
+}
+
+.p-multiselect .p-multiselect-label {
+  font-size: 10px !important;
+  padding: 0px 0px 0px 12px !important;
+  background: #fff !important;
+}
+
+.p-multiselect .p-multiselect-items .p-multiselect-item {
+  font-size: 16px;
+  /* Change font size of the items */
+  color: #333;
+  /* Change font color of the items */
+}
+
+.p-multiselect .p-multiselect-items .p-multiselect-item.p-highlight {
+  background-color: #e0e0e0;
+  /* Change background color of the selected item */
+}
+
+.p-multiselect .p-multiselect-token {
+  background-color: #4caf50;
+  /* Change background color of the tokens */
+  color: #fff;
+  /* Change text color of the tokens */
+}
+
+.p-multiselect .p-multiselect-token-icon {
+  color: #fff;
+  /* Change color of the token icons */
+}
+
+/* .p-multiselect-item {
+  
+} */
+
+.p-checkbox .p-checkbox-box {
+  width: 15px !important;
+  height: 15px !important;
+  border-radius: 1px !important;
+}
+
+.p-multiselect-item {
+  align-items: center;
+  padding: 5px 10px;
+}
+
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item .p-checkbox {
+  align-items: center;
+  /* width: 196px !important; */
+}
+
+.p-multiselect-items span {
+  font-size: 12px !important;
+}

@@ -28,11 +28,10 @@ const Header = ({ handleSidebar }) => {
   const handleThemeChange = () => {
     setShowThemes(true);
   };
-
+ 
   useClickOutside(userProfile, handleUserProfile, showUserProfile);
   useClickOutside(themeProfile, handleThemeProfile, showThemes);
   useClickOutside(inputProfile, handleInputProfile, showInput);
-
   return (
     <div className="header-main-container">
       <div className="company-info">
