@@ -99,7 +99,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
             searchable={true}
             value={Number(selectedMenu?.value)}
             respclass="roll-off"
-            handleChange={handleChange}
+            onChange={handleChange}
             plcN="Menu"
           />
         </div>
@@ -112,7 +112,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
             searchable={true}
             value={Number(centreData?.defaultCentreId)}
             respclass="roll-off"
-            handleChange={handleChange}
+            onChange={handleChange}
             plcN="All Centres"
           />
         </div>
