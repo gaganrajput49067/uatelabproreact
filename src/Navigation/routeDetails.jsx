@@ -11,6 +11,10 @@ export let routeDetails = [
         path: "dashboard",
         element: "../Frontend/DashBoard/DashBoard",
       },
+      {
+        path: "/FirstPage",
+        element: "../Frontend/Page/FirstPage",
+      },
       { path: "*", element: "../components/NotFound" },
     ],
   },
@@ -22,8 +26,5 @@ export let routeDetails = [
     path: "/ForgetPassword",
     element: "../Frontend/login/ForgetPassword",
   },
-  {
-    path: "/FirstPage",
-    element: "../Frontend/Page/FirstPage",
-  },
+
 ];
