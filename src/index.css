@@ -446,14 +446,14 @@ input.required-fields-active {
 .card {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  /* padding: 15px; */
   font-size: 14px;
 }
 
 .card-header {
   border-bottom: 1px solid #e0e0e0;
   border-radius: 10px 10px 0 0;
-  padding: 10px;
+  /* padding: 10px; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -695,80 +695,9 @@ input.required-fields-active {
   padding-left: 5px;
 }
 
-.datepicker {
-  width: 100%;
-}
 
 /* CustomMultiSelectBox.css */
 
-
-.p-multiselect {
-  height: 26px;
-  /* border: 2px solid #4CAF50;  */
-  /* border-radius: 10px;     */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.p-multiselect .p-multiselect-label-container {
-  background-color: #f0f0f0;
-  /* Change background color of the label container */
-}
-
-.p-multiselect .p-multiselect-label {
-  font-size: 10px !important;
-  padding: 0px 0px 0px 12px !important;
-  background: #fff !important;
-}
-
-.p-multiselect .p-multiselect-items .p-multiselect-item {
-  font-size: 16px;
-  /* Change font size of the items */
-  color: #333;
-  /* Change font color of the items */
-}
-
-.p-multiselect .p-multiselect-items .p-multiselect-item.p-highlight {
-  background-color: #e0e0e0;
-  /* Change background color of the selected item */
-}
-
-.p-multiselect .p-multiselect-token {
-  background-color: #4caf50;
-  /* Change background color of the tokens */
-  color: #fff;
-  /* Change text color of the tokens */
-}
-
-.p-multiselect .p-multiselect-token-icon {
-  color: #fff;
-  /* Change color of the token icons */
-}
-
-/* .p-multiselect-item {
-  
-} */
-
-.p-checkbox .p-checkbox-box {
-  width: 15px !important;
-  height: 15px !important;
-  border-radius: 1px !important;
-}
-
-.p-multiselect-item {
-  align-items: center;
-  padding: 5px 10px;
-}
-
-.p-multiselect-panel .p-multiselect-items .p-multiselect-item .p-checkbox {
-  align-items: center;
-  /* width: 196px !important; */
-}
-
-.p-multiselect-items span {
-  font-size: 12px !important;
-}
 /* scrollbar */
 
 .Flipped{
@@ -845,62 +774,6 @@ textarea {
 
 /* select-box */
 
-.custom-calendar {
-  height: 30px;
-  border-radius: 2px;
-  width: 100%;
-  /* margin-top: 7px; */
-  font-size: 12px;
-}
-
-.p-datepicker {
-  box-shadow: 0px 0px 10px 0px;
-  padding: 0 !important;
-  width: 218px !important;
-  max-width: 100% !important;
-}
-
-.p-datepicker-calendar-container {
-  padding: 0 !important;
-  /* width:230px !important; */
-}
-
-.p-datepicker-calendar th,
-td {
-  padding: 0 !important;
-}
-
-.p-datepicker-calendar th > span {
-  font-size: 12px;
-}
-
-.p-datepicker-calendar td > span {
-  font-size: 10px;
-  height: 28px !important;
-  width: 30px !important;
-}
-
-.p-datepicker-title button {
-  font-size: 10px !important;
-}
-
-.p-datepicker-year .p-link {
-  font-size: 10px !important;
-}
-
-.p-datepicker-header {
-  padding: 0;
-  height: 24px;
-  /* width: 208px !important; */
-}
-
-.p-datepicker-calendar tr {
-  text-align: center;
-}
-
-.p-datepicker-calendar tbody tr td {
-  padding: 0 !important;
-}
 
 /* Main div */
 .outer-container-main{
@@ -909,9 +782,7 @@ td {
 }
 
 /* Box */
-.box {
 
-}
 
 .main-header-sidebar-container{
   position: relative;

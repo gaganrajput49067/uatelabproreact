@@ -2,9 +2,6 @@ import React from "react";
 import Input from "../../components/CommonComponent/Input";
 import SelectBox from "../../components/CommonComponent/SelectBox";
 import BrowseButton from "../../components/CommonComponent/BrowseButton";
-import CustomMultiSelectBox from "../../components/CommonComponent/MultiSelectComp";
-import MultiSelectComp from "../../components/CommonComponent/MultiSelectComp";
-import DatePicker from "../../components/CommonComponent/DatePicker";
 const FirstPage = () => {
   const dummyData = [
     {
@@ -45,9 +42,79 @@ const FirstPage = () => {
       <div className="container-fluid">
         <div className="card border-success my-3">
           <div className="card-header bg-success text-white">
-            <h3 className="card-title">Route Master</h3>
+            <h4 className="card-title">Route Master</h4>
           </div>
           <div className="card-body">
+            <h4 className="card-title">Add New Entry</h4>
+            <form>
+              <div className="row">
+                <div className="col-sm-3">
+                  <Input
+                    type="text"
+                    id="username"
+                    className="form-control required-fields"
+                    name="username"
+                    lable="Username"
+                    placeholder=" "
+                  />
+                </div>
+                <div className="col-sm-3">
+                  <SelectBox
+                    className="form-control form-control-sm"
+                    placeholder=" "
+                    id="SelectBox2"
+                    lable="SelectBox"
+                    name="SelectBox"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="col-sm-3"></div>
+                <div className="col-sm-3">
+                  <Input
+                    type="time"
+                    id="time"
+                    className="form-control required-fields"
+                    name="time"
+                    lable="time"
+                    placeholder=" "
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-3">
+                  <BrowseButton accept="image/*" />
+                </div>
+                <div className="col-sm-3">
+                  <SelectBox
+                    inputId="SelectBox"
+                    placeholder="SelectBox"
+                    id="SelectBox"
+                    name="SelectBox"
+                    searchable={true}
+                  />
+                </div>
+                <div className="col-sm-3"></div>
+                <div className="col-sm-3">
+                  <Input
+                    type="time"
+                    id="time"
+                    className="form-control required-fields"
+                    name="time"
+                    lable="time"
+                    placeholder=" "
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-fluid ">
+        <div className="card border-success">
+          {" "}
+          <div className="card-body">
+            <h4 className="card-title">Data</h4>
             <div
               className="divResult boottable table-responsive"
               id="no-more-tables"
@@ -73,89 +140,6 @@ const FirstPage = () => {
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="container-fluid ">
-        <div className="card border-success">
-          {" "}
-          <div className="card-body">
-            <h4 className="card-title">Add New Entry</h4>
-            <form>
-              <div className="row">
-                <div className="col-sm-3">
-                  <Input
-                    type="text"
-                    id="username"
-                    className="form-control required-fields"
-                    name="username"
-                    lable="Username"
-                    placeholder=" "
-                  />
-                </div>
-                <div className="col-sm-3">
-                  <SelectBox
-                    className="form-control form-control-sm"
-                    placeholder=" "
-                    id="SelectBox2"
-                    lable="SelectBox"
-                    name="SelectBox"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="col-sm-3">
-                  <DatePicker
-                    className="custom-calendar"
-                    id="DOB"
-                    name="DOB"
-                    lable={"DOB"}
-                    value={new Date()}
-                  />
-                </div>
-                <div className="col-sm-3">
-                  <Input
-                    type="time"
-                    id="time"
-                    className="form-control required-fields"
-                    name="time"
-                    lable="time"
-                    placeholder=" "
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-3">
-                  <BrowseButton accept="image/*" />
-                </div>
-                <div className="col-sm-3">
-                  <SelectBox
-                    inputId="SelectBox"
-                    placeholder="SelectBox"
-                    id="SelectBox"
-                    name="SelectBox"
-                    searchable={true}
-                  />
-                </div>
-                <div className="col-sm-3">
-                  <MultiSelectComp
-                    options={options}
-                    placeholder="Select Options"
-                    style={{ width: "15rem" }}
-                  />
-                </div>
-                <div className="col-sm-3">
-                  <Input
-                    type="time"
-                    id="time"
-                    className="form-control required-fields"
-                    name="time"
-                    lable="time"
-                    placeholder=" "
-                  />
-                </div>
-              </div>
-            </form>
           </div>
         </div>
       </div>
