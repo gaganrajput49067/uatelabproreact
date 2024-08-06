@@ -1,0 +1,48 @@
+.Main-Modal-Container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-modal-box {
+    opacity: 1; /* Ensure full opacity */
+    min-width: 500px;
+    min-height: 300px;
+    background: #ffffff;
+    padding: 0px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--bg-subMenu);
+}
+
+
+.main-modal-header{
+    background-color: var(--bg-color);
+    color: var(--subMenuText-color);
+    padding:  0.5rem ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-modal-content{
+    padding:  0.5rem ;
+}
+
+.modal-close{
+    cursor: pointer;
+}
+
+.modal-close:hover{
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: red;
+}

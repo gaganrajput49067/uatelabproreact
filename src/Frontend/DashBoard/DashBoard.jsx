@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import PageHead from "../../components/CommonComponent/PageHead";
 import SubPageHead from "../../components/CommonComponent/SubPageHead";
+import { Button } from "react-bootstrap";
+import UploadFile from "../utils/UploadFile";
+import MedicalHistory from "../utils/MedicalHistory";
 
 const DashBoard = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+  };
   return (
     <div>
-      <PageHead>this is dashboard</PageHead>
-      <SubPageHead>this is sub page</SubPageHead>
+      <button onClick={() => setShow(!show)}>Show</button>
+      {show && <UploadFile handleClose={handleClose} />}
     </div>
   );
 };
