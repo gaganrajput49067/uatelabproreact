@@ -937,6 +937,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 border: 1px solid var(--bg-subMenu);
+margin: 0;padding: 0;
 }
 
 .main-page-heading{
