@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logOutAction } from "../../store/reducers/loginSlice/loginSlice";
 import { getCentreDetails } from "../../utils/NetworkApi/commonApi";
+import { toast } from "react-toastify";
 
 const Header = ({ handleSidebar, menuData, handlePage }) => {
   const navigate = useNavigate();
@@ -77,12 +78,17 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
       handlePage(e.target);
     }
   };
-
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-theme",
+      window.localStorage.getItem("theme")
+    );
+  }, []);
   return (
     <div className="header-main-container">
       <div className="company-info">
         <span className="ss-none">&nbsp;Itdose Infosystem</span>
-        <div className="header-show-menu" onClick={handleSidebar}>
+        <div className="header-show-menu ls-none" onClick={handleSidebar}>
           <i className="fa fa-bars m-2" aria-hidden="true"></i>
         </div>
         <span style={{ fontSize: "1.5rem" }} className="ls-none">
