@@ -19,11 +19,12 @@
     background-color: #ffff;
     padding: 2px 7px;
     border-radius: .3rem;
+    height: 23px;
 }
 
 .search-menu-container{
     width: 90%;
-    height: 22px;
+    height: 18px;
     font-size: 12px;
     padding: 2px;
     border-radius: 0.2rem;

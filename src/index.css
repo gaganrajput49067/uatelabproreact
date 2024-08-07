@@ -7,7 +7,9 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Source Sans Pro", sans-serif;
+  font-size: 13px;
 }
+
 :root {
   --bg-color: #555299;
   --bg-subMenu: #918ecd;
@@ -72,6 +74,7 @@
   cursor: pointer;
   color: white;
 }
+
 .pointer:hover {
   cursor: pointer;
   box-shadow: #ced4da;
@@ -88,6 +91,7 @@
   box-shadow: none;
   height: 30px !important;
 }
+
 .css-tzb43o-placeholder {
   max-width: 80% !important;
   line-height: 9px !important;
@@ -96,6 +100,7 @@
   display: inline-block !important;
   width: auto !important;
 }
+
 .lable {
   position: absolute;
   top: 4px;
@@ -108,8 +113,9 @@
   margin-left: 6px;
   /* color: #4f90d6; */
 }
-#search:focus-within + .lable,
-#search input[type="text"]:not(:placeholder-shown) + .lable {
+
+#search:focus-within+.lable,
+#search input[type="text"]:not(:placeholder-shown)+.lable {
   top: -5px;
   left: 2;
   background-color: #fff;
@@ -122,7 +128,7 @@
   max-width: 80%;
 }
 
-#searchtest > .p-inputwrapper-filled + .lable {
+#searchtest>.p-inputwrapper-filled+.lable {
   top: -5px;
   left: 2;
   background-color: #fff;
@@ -135,8 +141,8 @@
   max-width: 80%;
 }
 
-.form-control:not(:placeholder-shown) + label,
-.form-control:focus + label {
+.form-control:not(:placeholder-shown)+label,
+.form-control:focus+label {
   font-size: 9px !important;
   /* color: #777; */
   position: absolute;
@@ -147,8 +153,9 @@
   padding: 0px 5px;
   transition: top 0.1s ease-out, left 0.1s ease-out, font-size 0.1s ease-out;
 }
-.form-control:focus + label,
-.form-control:not(:placeholder-shown) + label {
+
+.form-control:focus+label,
+.form-control:not(:placeholder-shown)+label {
   top: -5px;
   left: 0px !important;
   background-color: #fff;
@@ -159,7 +166,8 @@
   font-weight: 600 !important;
   outline: 0;
 }
-.form-control:not(:placeholder-shown) + label {
+
+.form-control:not(:placeholder-shown)+label {
   top: -5px;
   left: 7px;
   background-color: #fff;
@@ -168,11 +176,12 @@
   font-size: 9px !important;
   font-weight: 600 !important;
 }
-.custom_radio_button input[type="radio"]:checked + .form-check-label {
+
+.custom_radio_button input[type="radio"]:checked+.form-check-label {
   font-weight: 600 !important;
 }
 
-.custom_radio_button input[type="radio"] + .form-check-label {
+.custom_radio_button input[type="radio"]+.form-check-label {
   position: absolute;
   font-size: 12px;
   font-weight: 500;
@@ -210,11 +219,13 @@ textarea {
   font-size: inherit;
   line-height: normal;
 }
+
 .truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .maindiv {
   width: 100%;
   height: 100%;
@@ -248,9 +259,11 @@ input.form-control {
   justify-content: space-between;
   align-items: center;
 }
+
 .header-color {
   background-color: var(--bg-color);
 }
+
 .card-title {
   margin: 0;
   font-size: 17px;
@@ -273,6 +286,7 @@ input.form-control {
 .border-success {
   background-color: var(--bg-color);
 }
+
 /* table-end */
 
 .col-lg-1,
@@ -328,14 +342,17 @@ input.form-control {
   padding-right: 5px;
   padding-left: 5px;
 }
+
 .Flipped {
   direction: rtl;
 }
+
 ::-webkit-scrollbar {
   width: 5px;
   background-color: #f5f5f5;
   border-radius: 5px;
   height: 2px !important;
+  cursor: pointer;
   /* display: none; */
 }
 
@@ -343,10 +360,12 @@ input.form-control {
   background-color: var(--bg-color);
   border-radius: 5px;
   height: 2px !important;
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--bg-color);
+  cursor: pointer;
 }
 
 .text-notification {
@@ -354,14 +373,17 @@ input.form-control {
   width: 100%;
   overflow: hidden;
   position: relative;
-  background-color: #f0f0f0; /* Added background for better visibility */
+  background-color: #f0f0f0;
+  /* Added background for better visibility */
 }
+
 .text-notification span {
   width: 100%;
   font-size: 1em;
   color: rgb(0, 0, 0);
   position: absolute;
-  white-space: nowrap; /* Ensure text does not wrap */
+  white-space: nowrap;
+  /* Ensure text does not wrap */
   line-height: 20px;
   transform: translateX(100%);
   animation: text-notification 20s linear infinite;
@@ -380,10 +402,12 @@ input.form-control {
   width: 25px;
   /* border-radius: 1rem; */
 }
+
 @keyframes text-notification {
   0% {
     transform: translateX(100%);
   }
+
   100% {
     transform: translateX(-80%);
   }
@@ -651,7 +675,7 @@ input.form-control {
   align-items: center;
 }
 
-.simple-box-container{
+.simple-box-container {
   background-color: var(--bg-subMenu);
   color: var(--subMenuText-color);
   margin-bottom: 0.3rem;
@@ -684,11 +708,11 @@ td {
   padding: 0 !important;
 }
 
-.p-datepicker-calendar th > span {
+.p-datepicker-calendar th>span {
   font-size: 12px;
 }
 
-.p-datepicker-calendar td > span {
+.p-datepicker-calendar td>span {
   font-size: 10px;
   height: 28px !important;
   width: 30px !important;
@@ -715,22 +739,27 @@ td {
 .p-datepicker-calendar tbody tr td {
   padding: 0 !important;
 }
+
 .p-datepicker-other-month {
   padding: 0 !important;
   font-size: 10px !important;
 }
+
 .p-datepicker.p-datepicker-timeonly .p-timepicker {
   border-top: 0 none;
 }
+
 .p-datepicker .p-timepicker {
   border-top: 1px solid #e5e7eb;
   padding: 0.5rem;
 }
+
 .p-timepicker {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 /* end */
 
 /* //multi-select */
@@ -767,13 +796,9 @@ td {
 
 
 input:focus {
-  /* outline: 1px solid #c6ced6;
-  border-radius: 3px; */
-  /* border-color: #66afe9; */
+
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
-    0 0 8px rgba(102, 175, 233, 0.6);
-  /* box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6) !important; */
+
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -1088,11 +1113,11 @@ td {
   padding: 0 !important;
 }
 
-.p-datepicker-calendar th > span {
+.p-datepicker-calendar th>span {
   font-size: 12px;
 }
 
-.p-datepicker-calendar td > span {
+.p-datepicker-calendar td>span {
   font-size: 10px;
   height: 28px !important;
   width: 30px !important;
@@ -1207,6 +1232,7 @@ td {
   background: white;
   padding: 0px 2px;
 }
+
 .rmsc .dropdown-heading {
   height: 23px !important;
 }

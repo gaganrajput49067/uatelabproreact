@@ -61,7 +61,7 @@ function MedicalHistorySpan() {
       <div className="d-flex justify-content-between">
         <span className="col-sm-7 small">28-Aug-2023 </span>
         <i
-          class="fa fa-trash pointer pr-1 pt-1"
+          className="fa fa-trash pointer pr-1 pt-1"
           title="Remove this medical History"
           style={{ fontSize: "0.9rem", color: "inherit" }}
         ></i>
