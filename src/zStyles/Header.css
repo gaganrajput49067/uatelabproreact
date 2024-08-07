@@ -7,6 +7,7 @@
     align-items: center;
     padding: 1.5rem;
     position: sticky;
+    z-index: 1;
 }
 
 .header-item-container{

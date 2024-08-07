@@ -1,14 +1,14 @@
 import React from "react";
+import { TextBox } from "rc-easyui";
 import { useTranslation } from "react-i18next";
-import { Tooltip } from "primereact/tooltip";
 
 function Input({
   type,
   name,
   className,
-  respclass,
   id,
   placeholder,
+  label,
   lable,
   value,
   onKeyDown,
@@ -20,7 +20,6 @@ function Input({
   defaultValue,
   onBlur,
   inputRef,
-  removeFormGroupClass,
   onInput,
   max,
   min,
@@ -33,11 +32,11 @@ function Input({
 
   return (
     <>
-      <div className={`${respclass}  custominputbox`}>
-        <div className={removeFormGroupClass ? "" : "form-group"}>
+      <div className="custominputbox">
+        <div className="form-group">
           <input
             type={type}
-            className={`${className} ${error ? "required-fields-active" : ""}`}
+            className={`${className} ${error ? "required-fields-active" : ""}` }
             id={id}
             name={name}
             placeholder={placeholder}
@@ -53,8 +52,8 @@ function Input({
             min={min}
             style={{ textAlign: display ?? "left" }}
             onInput={onInput}
-            disabled={disabled ? disabled : false}
-            tabIndex={tabIndex ? tabIndex : "-1"}
+            disabled={disabled}
+            tabIndex={tabIndex}
             readOnly={readOnly}
           />
           <label htmlFor={id} className="lable truncate">

@@ -19,12 +19,12 @@ function DatePicker({
   return (
     <>
       <div className={respclass} style={{ position: "relative" }}>
-        <div className="form-group ">
+        <div className="form-group">
           <Calendar
             inputId={id}
             id={id}
             showIcon
-            placeholder="DD/MM/YYYY"
+            placeholder={placeholder}
             className={className}
             dateFormat="dd-MM-yy"
             value={value}

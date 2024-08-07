@@ -26,16 +26,14 @@ const Sidebar = ({ closeSidebar, menuData }) => {
         </div>
       </div>
       <div className="navBar-menu">
-        <div type="button" className="nav-main-menu">
+        <div className="nav-main-menu">
           <SelectBox
-            name={"menu"}
-            placeholderName="Registration"
-            dynamicOptions={menuData}
+            name="MenuBar"
+            placeholderName="MenuBar"
             searchable={true}
+            dynamicOptions={menuData}
             value={Number(selectedMenu?.value)}
-            respclass="roll-off"
             onChange={handleChange}
-            plcN="Menu"
           />
         </div>
 

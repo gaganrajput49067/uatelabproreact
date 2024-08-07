@@ -16,6 +16,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Loading from "./components/Loading/Loading.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import 'rc-easyui/dist/themes/default/easyui.css';
+import 'rc-easyui/dist/themes/icon.css';
+import 'rc-easyui/dist/themes/react.css';
+
 const Loader = () => {
   const loading = useSelector((state) => state.loadingSlice.loading);
   return (

@@ -104,9 +104,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
             dynamicOptions={menuData}
             searchable={true}
             value={Number(selectedMenu?.value)}
-            respclass="roll-off"
             onChange={handleChange}
-            plcN="Menu"
           />
         </div>
         {/* Centre Select Box */}
@@ -117,9 +115,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
             dynamicOptions={centreData?.centre}
             searchable={true}
             value={Number(centreData?.defaultCentreId)}
-            respclass="roll-off"
             onChange={handleChange}
-            plcN="All Centres"
           />
         </div>
         {/* Visit Box Small Screen */}
