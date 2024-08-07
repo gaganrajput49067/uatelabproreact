@@ -26,11 +26,8 @@ const UploadFile = ({ handleClose }) => {
 
   return (
     <Modal handleClose={handleClose}>
-      <div className="row" style={{ width: "800px" }}>
-        <div
-          className="col-md-6 d-flex"
-          style={{ flexDirection: "column", width: "50%" }}
-        >
+      <div className="main-upload-container">
+        <div className="upload-file-cont">
           <label htmlFor="allergies">Upload File</label>
           <div
             className="file-upload-container"
@@ -49,31 +46,16 @@ const UploadFile = ({ handleClose }) => {
             </label>
           </div>
         </div>
-        <div
-          className="d-flex ml-2"
-          style={{
-            flexDirection: "column",
-            width: "49%",
-          }}
-        >
+        <div className="uploaded-file-preview">
           <label>Preview</label>
-          <div
-            className="d-flex"
-            style={{
-              flexDirection: "column",
-              width: "100%",
-              height: "240px",
-              overflowX: "auto",
-              padding: "5px",
-            }}
-          >
+          <div style={{ width: "100%" }}>
             <div className="file-upload-preview">
               <div className="preview-file"></div>
               <div className="document-details">
                 <span>Adhar card</span>
                 <span>FIle Name</span>
               </div>
-              <i className="fa fa-trash mt-2"></i>
+              <i className="fa fa-trash mt-2 mr-2"></i>
             </div>
             {/* <ul className="upload-file-list">
               {files.map((file, index) => (
@@ -92,7 +74,7 @@ const UploadFile = ({ handleClose }) => {
         </div>
       </div>
       <label className="mt-2">Uploaded Files</label>
-      <div style={{ width: "800px" }}>
+      <div className="upload-file-preview-cont">
         <div className="upload-file-preview">
           <div className="preview-file"></div>
           <div className="document-details">

@@ -1,97 +1,157 @@
+.main-upload-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  width: 800px;
+  overflow: auto;
+}
+
 .file-upload-container {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #cccccc;
+  border-radius: 10px;
+  width: 95%;
+  margin: 0 auto;
+  height: 250px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.file-upload-container:hover {
+  border-color: #666666;
+}
+
+.file-upload-input {
+  display: none;
+}
+
+.file-upload-message {
+  font-size: 16px;
+  color: #666666;
+  text-align: center;
+  padding: 20px;
+}
+
+.upload-file-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.upload-file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.upload-file-item:last-child {
+  border-bottom: none;
+}
+
+.upload-file-name {
+  font-size: 14px;
+  color: #333333;
+}
+
+.upload-file-preview-cont{
+  min-width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  justify-content: flex-start;
+}
+
+.upload-file-preview {
+  background: var(--bg-subMenu);
+  width: 45%;
+  margin: 5px;
+  border-radius: 0.3rem;
+  border: 1px solid var(--bg-color);
+  height: 100px;
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.file-upload-preview {
+  background: var(--bg-subMenu);
+  width: 100% !important;
+  border-radius: 0.3rem;
+  border: 1px solid var(--bg-color);
+  height: 100px;
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.preview-file {
+  width: 40%;
+  height: 89%;
+  margin: 0.4rem;
+  border-radius: 0.3rem;
+  border: 1px solid var(--bg-color);
+}
+
+.document-details {
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 50%;
+}
+
+.document-details :first-child {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: var(--subMenuText-color);
+}
+
+.uploaded-file-preview {
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.upload-file-cont {
+  width: 49%;
+}
+
+@media (max-width: 900px) {
+  .main-upload-container {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 2px dashed #cccccc;
-    border-radius: 10px;
-    width: 400px;
-    height: 250px;
-    cursor: pointer;
-    transition: border-color 0.3s;
+    width: 100% !important;
+    overflow-y: auto;
   }
-  
-  .file-upload-container:hover {
-    border-color: #666666;
+
+  .upload-file-preview {
+    width: 98%;
   }
-  
-  .file-upload-input {
-    display: none;
+  .upload-file-cont {
+    width: 98%;
   }
-  
-  .file-upload-message {
-    font-size: 16px;
-    color: #666666;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .upload-file-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+
+  .uploaded-file-preview {
     width: 100%;
   }
-  
-  .upload-file-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #cccccc;
-  }
-  
-  .upload-file-item:last-child {
-    border-bottom: none;
-  }
-  
-  .upload-file-name {
-    font-size: 14px;
-    color: #333333;
+
+  .file-upload-preview {
+    width: 100%;
   }
 
   .upload-file-preview{
-    background: var(--bg-subMenu);
-    max-width: 300px;
-    border-radius: 0.3rem;
-    border: 1px solid var(--bg-color);
-    height: 100px;
-    display: flex;
-    justify-content: start;
-    align-items: flex-start;
-    flex-direction: row;
-  }
-
-  .file-upload-preview{
-    background: var(--bg-subMenu);
     width: 100%;
-    border-radius: 0.3rem;
-    border: 1px solid var(--bg-color);
-    height: 100px;
-    display: flex;
-    justify-content: start;
-    align-items: flex-start;
-    flex-direction: row;
+    margin-bottom: 5px;
   }
-
-  .preview-file {
-    width: 40%;
-    height: 89%;
-    margin: .4rem;
-    border-radius: .3rem;
-    border: 1px solid var(--bg-color);
-  }
-
-  .document-details{
-    display: flex;
-    justify-content: start;
-    align-items: flex-start;
-    flex-direction: column;
-    width: 50%;
-  }
-
-  .document-details :first-child{
-    margin-top: 5px;
-    font-size: 0.8rem;
-    color: var(--subMenuText-color);
-  }
+}
