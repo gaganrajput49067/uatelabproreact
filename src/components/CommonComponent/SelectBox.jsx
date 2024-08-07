@@ -1,36 +1,44 @@
 import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Select, { components } from "react-select";
+const { ValueContainer, Placeholder } = components;
 
-const SelectBox = ({
+const CustomValueContainer = ({ children, ...props }) => (
+  <ValueContainer {...props}>
+    <Placeholder {...props} isFocused={props.isFocused} className="truncate">
+      {props.selectProps.placeholder}
+    </Placeholder>
+    {React.Children.map(children, (child) =>
+      child && child.type !== Placeholder ? child : null
+    )}
+  </ValueContainer>
+);
+
+const ReactSelect = ({
   placeholderName,
   searchable,
+  defaultValue,
   respclass,
   id,
-  onChange,
-  dynamicOptions,
+  handleChange,
   value,
+  requiredClassName,
+  dynamicOptions,
   name,
-  defaultValue,
   inputId,
-  isDisabled
+  isDisabled,
+  ref,
+  DropdownIndicator,
+  tabIndex,
 }) => {
   const [t] = useTranslation();
-  const options = [
-    {
-      value: "chocolate",
-      label: "chocolate",
-    },
-    { value: "strawberry ", label: "strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "", label: "No Option Avalilable" },
-  ];
   const selectRef = useRef(null);
+
   const customStyles = {
     control: (base, state) => ({
       ...base,
       height: 15,
-      minHeight: 30,
+      minHeight: "24px !important",
       width: "100%",
       display: "flex",
       alignItems: "center",
@@ -40,8 +48,7 @@ const SelectBox = ({
       borderColor: state.isFocused ? "#ced4da" : "#ced4da",
       boxShadow: "none",
       whiteSpace: "normal",
-      fontSize: "10",
-      // fontWeight: " normal"
+    
     }),
     placeholder: (defaultStyles, state) => {
       return {
@@ -67,15 +74,12 @@ const SelectBox = ({
       width: "100%",
       fontSize: 12,
       padding: 0,
-      textAlign: "left",
     }),
     menuList: (styles) => ({
       ...styles,
       width: "100%",
-
       fontSize: 12,
       padding: 0,
-      textAlign: "left",
     }),
     container: (provided, state) => ({
       ...provided,
@@ -84,52 +88,58 @@ const SelectBox = ({
     valueContainer: (provided, state) => ({
       ...provided,
       overflow: "visible",
-      fontSize: "10",
-    }),
-
-    singleValue: (provided, state) => ({
-      ...provided,
-      fontSize: "12px",
-      fontWeight: "600",
     }),
   };
 
-  const handleSelectBox = (value) => {
-    let e = {
-      target: {
-        name: name || "",
-        value: value?.value || "",
-        label:value?.label||"",
-        option: value,
-      },
-    };
-
-    return onChange(e) ? onChange(e) : () => {};
-  };
+  const DefaultDropdownIndicator = () => (
+    <div className="custom-dropdown-indicator">
+      {!DropdownIndicator && (
+        <svg
+          height="20"
+          width="20"
+          viewBox="0 0 20 20"
+          aria-hidden="true"
+          focusable="false"
+          className="css-tj5bde-Svg"
+        >
+          <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
+        </svg>
+      )}
+    </div>
+  );
 
   return (
     <>
       <div className={respclass}>
         <div className="form-group">
           <Select
-            options={dynamicOptions ? dynamicOptions : options}
+            options={dynamicOptions ? dynamicOptions : []}
             isSearchable={searchable}
+            defaultValue={defaultValue}
+            components={{
+              ValueContainer: CustomValueContainer,
+              DropdownIndicator: DefaultDropdownIndicator,
+            }}
             id={id}
             ref={selectRef}
-            styles={customStyles}
             inputId={inputId}
-            value={dynamicOptions?.find((option) => option.value === value)}
+            value={
+              value
+                ? dynamicOptions?.find((option) => option?.value === value)
+                : ""
+            }
+            styles={customStyles}
             placeholder={placeholderName}
-            onChange={handleSelectBox}
+            onChange={handleChange ? (e) => handleChange(name, e) : () => {}}
             isDisabled={isDisabled}
-            name={name}
-            defaultValue={defaultValue}
+            className={requiredClassName}
+            menuPortalTarget={document.body}
+            tabIndex={tabIndex ? tabIndex : "-1"}
           />
-          
         </div>
       </div>
     </>
   );
 };
 
-export default SelectBox;
+export default ReactSelect;
