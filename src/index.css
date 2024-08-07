@@ -56,6 +56,7 @@
 
 
 .row {
+  margin-top:4px !important;
   width: 100%;
 }
 
@@ -99,7 +100,7 @@
 }
 .lable {
   position: absolute;
-  top: 4px;
+  top: 3px;
   left: 4px;
   font-size: 13px;
   font-weight: 500 !important;
@@ -111,12 +112,12 @@
 }
 #search:focus-within + .lable,
 #search input[type="text"]:not(:placeholder-shown) + .lable {
-  top: -5px;
+  top: -6px;
   left: 2;
   background-color: #fff;
   background-image: linear-gradient(#f4f6f9, #fff) !important;
   padding: 0px 5px !important;
-  font-size: 9px !important;
+  font-size: 10px !important;
   font-weight: 600 !important;
   outline: 0;
   display: inline-block;
@@ -124,12 +125,12 @@
 }
 
 #searchtest > .p-inputwrapper-filled + .lable {
-  top: -5px;
+  top: -6px;
   left: 2;
   background-color: #fff;
   background-image: linear-gradient(#f4f6f9, #fff) !important;
   padding: 0px 5px !important;
-  font-size: 9px !important;
+  font-size: 10px !important;
   font-weight: 600 !important;
   outline: 0;
   display: inline-block;
@@ -138,10 +139,10 @@
 
 .form-control:not(:placeholder-shown) + label,
 .form-control:focus + label {
-  font-size: 9px !important;
+  font-size: 10px !important;
   /* color: #777; */
   position: absolute;
-  top: -5px;
+  top: -6px;
   left: 7px;
   background-color: #fff;
   background-image: linear-gradient(#446faf03, #446faf03) !important;
@@ -150,23 +151,23 @@
 }
 .form-control:focus + label,
 .form-control:not(:placeholder-shown) + label {
-  top: -5px;
+  top: -6px;
   left: 0px !important;
   background-color: #fff;
   background-image: linear-gradient(#446faf03, #446faf03) !important;
   padding: 0px 5px;
-  font-size: 9px !important;
+  font-size: 10px !important;
   /* color: #007bff; */
   font-weight: 600 !important;
   outline: 0;
 }
 .form-control:not(:placeholder-shown) + label {
-  top: -5px;
+  top: -6px;
   left: 7px;
   background-color: #fff;
   background-image: linear-gradient(#446faf03, #446faf03) !important;
   padding: 0px 5px;
-  font-size: 9px !important;
+  font-size: 10px !important;
   font-weight: 600 !important;
 }
 .custom_radio_button input[type="radio"]:checked + .form-check-label {
@@ -325,8 +326,8 @@ input.form-control {
 .col-xs-9 {
   position: relative;
   min-height: 1px;
-  padding-right: 5px;
-  padding-left: 5px;
+  padding-right: 3px;
+  padding-left: 3px;
 }
 .Flipped {
   direction: rtl;
@@ -1020,7 +1021,7 @@ input[type="number"] {
   max-width: 80% !important;
   line-height: 9px !important;
   top: -3px !important;
-  font-size: 9px !important;
+  font-size: 10px !important;
   display: inline-block !important;
   width: auto !important;
 }
@@ -1113,7 +1114,7 @@ td {
   line-height: 5px;
   padding: 1px 5px;
   /* margin-bottom: 0 !important; */
-  font-size: 9px !important;
+  font-size: 10px !important;
 }
 
 .label-item {
@@ -1160,10 +1161,10 @@ td {
 
 .floating-label {
   position: absolute;
-  top: -5px;
+  top: -7px;
   font-weight: bold;
   left: 8px;
-  font-size: 9px !important;
+  font-size: 10px !important;
   background: white;
   padding: 0px 2px;
 }

@@ -16,7 +16,7 @@ export let routeDetails = [
         element: "../Frontend/Page/FirstPage",
       },
       {
-        path: "/PatientRegistration",
+        path: "/PatientRegister",
         element: "../Frontend/Laboratory/PatientRegistration",
       },
       { path: "*", element: "../components/NotFound" },
