@@ -34,7 +34,7 @@ function Input({
         <div className="form-group">
           <input
             type={type}
-            className={className}
+            className={`${className} form-control`}
             id={id}
             name={name}
             placeholder={placeholder}
