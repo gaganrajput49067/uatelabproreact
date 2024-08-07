@@ -7,7 +7,7 @@ import {
   useClickOutside,
 } from "../../utils/helpers";
 import Input from "../CommonComponent/Input";
-import SelectBox from "../CommonComponent/SelectBox";
+import ReactSelect from "../CommonComponent/ReactSelect";
 import axios from "axios";
 import { axiosInstance } from "../../utils/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
@@ -98,7 +98,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
       <div className="header-item-container">
         {/* Menu Select Box */}
         <div type="button" className="header-menu mt-2">
-          <SelectBox
+          <ReactSelect
             name={"menu"}
             placeholderName="Registration"
             dynamicOptions={menuData}
@@ -109,7 +109,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
         </div>
         {/* Centre Select Box */}
         <div type="button" className="header-centre mt-2">
-          <SelectBox
+          <ReactSelect
             name={"centre"}
             placeholderName="Select Centre"
             dynamicOptions={centreData?.centre}

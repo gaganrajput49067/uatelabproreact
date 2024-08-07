@@ -25,8 +25,6 @@ function Input({
   min,
   showTooltipCount,
   tabIndex,
-  error,
-  errorMessage,
 }) {
   const [t] = useTranslation();
 
@@ -36,7 +34,7 @@ function Input({
         <div className="form-group">
           <input
             type={type}
-            className={`${className} ${error ? "required-fields-active" : ""}` }
+            className={className}
             id={id}
             name={name}
             placeholder={placeholder}
@@ -61,7 +59,6 @@ function Input({
           </label>
         </div>
       </div>
-      {error && <div className="error-message">{errorMessage}</div>}
     </>
   );
 }

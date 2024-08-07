@@ -80,11 +80,10 @@ const Login = () => {
                   lable={t("Username")}
                   placeholder=" "
                   onChange={handleChange}
-                  error={
-                    errors?.username && credentials?.username?.trim() === ""
-                  }
-                  errorMessage={errors?.username}
                 />
+                {errors?.username && credentials?.username?.trim() === "" && (
+                  <div className="error-message">{errors?.username}</div>
+                )}
               </div>
             </div>
             <div className="main-login-input">
@@ -101,11 +100,10 @@ const Login = () => {
                   lable={t("Password")}
                   placeholder=" "
                   onChange={handleChange}
-                  error={
-                    errors?.password && credentials?.password?.trim() === ""
-                  }
-                  errorMessage={errors?.password}
                 />
+                {errors?.password && credentials?.password?.trim() === "" && (
+                  <div className="error-message">{errors?.password}</div>
+                )}
               </div>
             </div>
             <div className="main-login-button">

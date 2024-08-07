@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../zStyles/Sidebar.css";
 import logo from "../../assets/image/logo.png";
-import SelectBox from "../CommonComponent/SelectBox";
+import ReactSelect from "../CommonComponent/ReactSelect";
 
 const Sidebar = ({ closeSidebar, menuData }) => {
   const [selectedMenu, setSelectedMenu] = useState(menuData ? menuData[0] : []);
@@ -27,7 +27,7 @@ const Sidebar = ({ closeSidebar, menuData }) => {
       </div>
       <div className="navBar-menu">
         <div className="nav-main-menu">
-          <SelectBox
+          <ReactSelect
             name="MenuBar"
             placeholderName="MenuBar"
             searchable={true}

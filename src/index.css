@@ -7,52 +7,53 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Source Sans Pro", sans-serif;
-}
-:root {
-  --bg-color: #555299;
-  --bg-subMenu: #918ecd;
-  --text-color: black;
-  --header-color: #ffffff;
-  --albg-color: #23272f;
-  --altext-color: white;
-  --subMenuText-color: rgb(255, 255, 255);
+  font-size: 14px !important;
+}:root {
+  --bg-color: #5956a0; /* Changed from #6563b4 */
+  --bg-subMenu: #7f7ddb; /* Changed from #9a99e6 */
+  --text-color: #1a1a1a; /* Slightly darker black */
+  --header-color: #f0f0f0; /* Changed from #ffffff */
+  --albg-color: #1e2128; /* Slightly darker */
+  --altext-color: #f0f0f0; /* Changed from white */
+  --subMenuText-color: #f0f0f0; /* Changed from #ffffff */
 }
 
 [data-theme="grey"] {
-  --bg-color: #666866;
-  --bg-subMenu: #888888;
-  --subMenuText-color: rgb(255, 255, 255);
+  --bg-color: #5e5c5c; /* Changed from #686666 */
+  --bg-subMenu: #9a9a9a; /* Changed from #b0b0b0 */
+  --subMenuText-color: #e6e6e6; /* Changed from #ffffff */
 }
 
 [data-theme="blue"] {
-  --bg-color: #03a0e7;
-  --bg-subMenu: #8fd3f3;
-  --subMenuText-color: black;
+  --bg-color: #2a91bd; /* Changed from #32a1d1 */
+  --bg-subMenu: #85bcd5; /* Changed from #95c6db */
+  --subMenuText-color: #e6f7ff; /* Changed from #ffffff */
 }
 
 [data-theme="brown"] {
-  --bg-color: #8b2424;
-  --bg-subMenu: #b15555;
-  --subMenuText-color: rgb(255, 255, 255);
+  --bg-color: #a52a2a; /* Changed from #c43333 */
+  --bg-subMenu: #d05050; /* Changed from #e05c5c */
+  --subMenuText-color: #f9f9f9; /* Changed from #ffffff */
 }
 
 [data-theme="palePink"] {
-  --bg-color: #bc3c8b;
-  --bg-subMenu: #c781ac;
-  --subMenuText-color: black;
+  --bg-color: #e91e63; /* Changed from #f1368d */
+  --bg-subMenu: #f48fb1; /* Changed from #f86da7 */
+  --subMenuText-color: #ffebee; /* Changed from #ffffff */
 }
 
 [data-theme="peach"] {
-  --bg-color: #bc8f3c;
-  --bg-subMenu: #dabb82;
-  --subMenuText-color: black;
+  --bg-color: #f39c12; /* Changed from #e9b74b */
+  --bg-subMenu: #f5b041; /* Changed from #f3ba74 */
+  --subMenuText-color: #fff7e6; /* Changed from #ffffff */
 }
 
 [data-theme="green"] {
-  --bg-color: #22d8a9;
-  --bg-subMenu: #96f9e0;
-  --subMenuText-color: black;
+  --bg-color: #27ae60; /* Changed from #36c099 */
+  --bg-subMenu: #58d68d; /* Changed from #68f0d2 */
+  --subMenuText-color: #e9ffe6; /* Changed from #ffffff */
 }
+
 
 .row {
   width: 100%;
@@ -225,7 +226,6 @@ input.form-control {
   font-size: 12px;
   padding: 10px;
 }
-
 
 .error-message {
   color: red;
@@ -651,7 +651,7 @@ input.form-control {
   align-items: center;
 }
 
-.simple-box-container{
+.simple-box-container {
   background-color: var(--bg-subMenu);
   color: var(--subMenuText-color);
   margin-bottom: 0.3rem;
@@ -747,10 +747,6 @@ td {
   overflow-x: hidden;
 }
 
-
-
-
-
 .form-group {
   position: relative;
   margin-bottom: 0.4rem;
@@ -762,9 +758,6 @@ td {
   height: 24px !important;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-
-
-
 
 input:focus {
   /* outline: 1px solid #c6ced6;
@@ -790,8 +783,6 @@ input[type="number"] {
 input[type="number"] {
   text-align: right;
 }
-
-
 
 .css-1rk20ah-control {
   box-shadow: none !important;
@@ -849,7 +840,6 @@ input[type="number"] {
   text-align: center;
 }
 
-
 /* .col-3{width: 20% !important;} */
 
 .headerboxsize {
@@ -863,8 +853,6 @@ input[type="number"] {
 /* .upload-image-model{
   display: flex;
 } */
-
-
 
 .ldio-x2uulkbinbj div {
   left: 133.44px;
@@ -1037,8 +1025,6 @@ input[type="number"] {
   width: auto !important;
 }
 
-
-
 .input-group-text {
   margin-bottom: auto !important;
 }
@@ -1046,7 +1032,6 @@ input[type="number"] {
 .input-group-append {
   margin-left: -10px !important;
 }
-
 
 .custom-calendar {
   height: 25px;
@@ -1131,19 +1116,9 @@ td {
   font-size: 9px !important;
 }
 
-
 .label-item {
   font-size: 12px !important;
 }
-
-
-
-
-
-
-
-
-
 
 .button {
   /* margin-top: 10px; */
@@ -1157,17 +1132,10 @@ td {
   width: 100%;
 }
 
-
-
-
-
-
 .p-datepicker-other-month {
   padding: 0 !important;
   font-size: 10px !important;
 }
-
-
 
 .p-inputtext {
   outline: none;
@@ -1178,9 +1146,6 @@ td {
   height: 25px;
 }
 
-
-
-
 .css-tj5bde-Svg {
   color: #b9bdc1;
 }
@@ -1189,14 +1154,9 @@ td {
   z-index: 999999 !important;
 }
 
-
 .css-1dimb5e-singleValue {
   font-size: 12px !important;
 }
-
-
-
-
 
 .floating-label {
   position: absolute;

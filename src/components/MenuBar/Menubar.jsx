@@ -51,7 +51,7 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
         {filterdMenu.map((ele, key) => {
           return (
             <span key={ele?.PageName} onClick={() => navigate(ele?.PageUrl)}>
-              {ele?.PageName}
+              <i className="fas fa-tachometer-alt nav-icon"></i> {ele?.PageName}
             </span>
           );
         })}
