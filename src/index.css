@@ -239,7 +239,7 @@ input.form-control {
 .card {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  padding: 8px 0px 13px 29px;
   font-size: 13px;
  } 
 
@@ -644,7 +644,7 @@ input.form-control {
 }
 
 .main-page-content {
-  padding: 0.5rem;
+  padding: 0.3rem;
 }
 
 .main-heading-content {
@@ -1194,3 +1194,4 @@ td {
   border: none;
   width: 1px;
 }
+

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-const PageHead = ({ children, drop = true, name }) => {
+const PageHead = ({ children,showDrop= false, drop = true, name }) => {
   const [showContent, setShowContent] = useState(true);
   return (
     <div className="main-page-head-container">
       <div className="main-page-heading">
         <h6 className="mb-0">{name}</h6>
         <div className="main-heading-content ">
-          {drop && (
+          {showDrop && (
             <i
               class={`fa ${
                 showContent ? "fa-angle-up" : "fa-angle-down"

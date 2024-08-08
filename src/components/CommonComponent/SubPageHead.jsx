@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-const SubPageHead = ({ children, drop = true }) => {
+const SubPageHead = ({title, children, drop = true }) => {
   const [showContent, setShowContent] = useState(true);
   return (
     <>
-      <div className="main-subpage-heading mt-4">
-        <h6 className="mb-0">Patient Registration</h6>
+      <div className="main-subpage-heading">
+        <h6 className="mb-0">{title}</h6>
         <div className="main-heading-content ">
           {drop && (
             <i
