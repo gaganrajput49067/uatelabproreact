@@ -1,35 +1,6 @@
-// Table Usages
-/* <Table data={data}>
-          {({ currentItems, finalIndex }) => (
-            <>
-              <thead>
-                <tr>
-                  <th>S.no</th>
-                  <th>Name</th>
-                  <th>Age</th>
-                  <th>City</th>
-                  <th>Country</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentItems.map((row, rowIndex) => (
-                  <tr key={row.id}>
-                    <td>{rowIndex + finalIndex}</td>
-                    <td>{row.name}</td>
-                    <td>{row.age}</td>
-                    <td>{row.city}</td>
-                    <td>{row.country}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </>
-          )}
-        </Table> */
-
 import React, { useState, useEffect } from "react";
 import "./Table.css";
 import {
-  filterData,
   getPaginatedData,
   calculateTotalPages,
   renderPaginationButtons,
@@ -38,13 +9,24 @@ import {
 
 const Table = ({
   data = [],
-  paginate = true,
+  paginate = false,
   itemsPerPage = 8,
   fixCol = 0,
   children,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filters, setFilters] = useState({});
+
+  useEffect(() => {
+    updateFixedColumns(fixCol);
+  }, [fixCol]);
+
+  if (!paginate) {
+    return (
+      <div className="simple-table-container">
+        <table className="simple-table">{children}</table>
+      </div>
+    );
+  }
 
   // Handle page change
   const handlePageChange = (pageNumber) => {
@@ -53,20 +35,9 @@ const Table = ({
     }
   };
 
-  // Filter and paginate data
-  const filteredData = filterData(data, filters);
-  const currentItems = getPaginatedData(
-    filteredData,
-    currentPage,
-    itemsPerPage
-  );
-  const totalPages = calculateTotalPages(filteredData, itemsPerPage);
-
-  useEffect(() => {
-    updateFixedColumns(fixCol);
-  }, [fixCol]);
-
-  let finalIndex = 1 + (currentPage - 1) * itemsPerPage;
+  const currentItems = getPaginatedData(data, currentPage, itemsPerPage);
+  const totalPages = calculateTotalPages(data, itemsPerPage);
+  const finalIndex = 1 + (currentPage - 1) * itemsPerPage;
 
   return (
     <>
@@ -75,7 +46,8 @@ const Table = ({
           {children({ currentItems, finalIndex })}
         </table>
       </div>
-      {paginate && filteredData.length > itemsPerPage && (
+
+      {data.length > itemsPerPage && (
         <div className="pagination">
           <button
             onClick={() => handlePageChange(currentPage - 1)}

@@ -42,7 +42,7 @@ const defaultKeys = [
   {
     title: "Status",
     key: "status",
-    feild: { name: "input", type: "checkbox" },
+    feild: { name: "input", type: "checkbox", header: true },
   },
 ];
 
@@ -95,7 +95,7 @@ const defaultData = [
 
 const AdvTable = ({
   keys = defaultKeys,
-  data = [],
+  data = defaultData,
   paginate = true,
   itemsPerPage = 8,
   fixCol = 2,
@@ -250,6 +250,16 @@ const AdvTable = ({
     updateData(updatedData);
   };
 
+  const handleHeaderInputChange = (e, key) => {
+    const newValue =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    const updatedData = data.map((row) => {
+      row[key] = newValue;
+      return row;
+    });
+    updateData(updatedData);
+  };
+
   return (
     <>
       <div className="simple-table-container">
@@ -270,6 +280,17 @@ const AdvTable = ({
                       onChange={handleSearchChange}
                       placeholder={`Search ${col.title}`}
                     />
+                  ) : col.feild && col.feild.header ? (
+                    col.feild.name === "input" &&
+                    col.feild.type === "checkbox" ? (
+                      <input
+                        type="checkbox"
+                        checked={data.every((row) => row[col.key])}
+                        onChange={(e) => handleHeaderInputChange(e, col.key)}
+                      />
+                    ) : (
+                      col.title
+                    )
                   ) : (
                     <>
                       {col.title}

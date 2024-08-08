@@ -128,13 +128,23 @@
     }
   }
   
-  .simple-table th.fixed-column,
+
   .simple-table td.fixed-column {
     position: sticky;
     left: 0;
     background-color: white;
     z-index: 1;
-    box-shadow: 2px 0 5px -2px #ccc;
+    /* box-shadow: 2px 0 5px -2px #ccc; */
+    border: 1px solid var(--bg-color);
+  }
+
+  .simple-table th.fixed-column{
+    position: sticky;
+    left: 0;
+    background-color: var(--bg-color);
+    border: 1px solid var(--bg-color);
+    z-index: 1;
+    /* box-shadow: 2px 0 5px -2px #ccc; */
   }
   
   .simple-table th.fixed-column + th.fixed-column,
