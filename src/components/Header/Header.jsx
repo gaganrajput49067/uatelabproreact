@@ -87,7 +87,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
   return (
     <div className="header-main-container">
       <div className="company-info">
-        <span className="ss-none">&nbsp;Itdose Infosystem</span>
+        <span className="ss-none ml-2">&nbsp;Itdose Infosystem</span>
         <div className="header-show-menu ls-none" onClick={handleSidebar}>
           <i className="fa fa-bars m-2" aria-hidden="true"></i>
         </div>
@@ -149,7 +149,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
         </div>
         {/* Vsit Box */}
         <div className="header-visit ss-none">
-          <div className="maindiv " style={{ marginTop: "12px" }}>
+          <div className="maindiv " style={{ marginTop: "7px" }}>
             <Input
               type="text"
               className="form-control"

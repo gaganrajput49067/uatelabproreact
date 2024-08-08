@@ -44,7 +44,7 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
   return (
     <div className="menubar-main-container ss-none">
       <i
-        class="fa fa-bars mr-2 pointer menubar-navbar"
+        className="fa fa-bars mr-2 pointer menubar-navbar"
         onClick={handleSidebar}
       ></i>
       <div className="main-menu-container" ref={containerRef}>

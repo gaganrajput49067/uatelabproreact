@@ -9,7 +9,7 @@ const PageHead = ({ children,showDrop= false, drop = true, name }) => {
         <div className="main-heading-content ">
           {showDrop && (
             <i
-              class={`fa ${
+              className={`fa ${
                 showContent ? "fa-angle-up" : "fa-angle-down"
               } pointer mr-2`}
               onClick={() => setShowContent(!showContent)}

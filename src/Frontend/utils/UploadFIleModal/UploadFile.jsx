@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./UploadFile.css";
-import Modal from "../../components/Modal/Modal";
+import Modal from "../../../components/Modal/Modal";
 
 const UploadFile = ({ handleClose }) => {
   const [files, setFiles] = useState([]);
@@ -84,7 +84,7 @@ const UploadFile = ({ handleClose }) => {
           <div>
             <i className="fa fa-trash mt-2 mr-2"></i>
             <br />
-            <i class="fa fa-download mt-1 mr-2"></i>
+            <i className="fa fa-download mt-1 mr-2"></i>
           </div>
         </div>
       </div>
