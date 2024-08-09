@@ -4,7 +4,7 @@ const SubPageHead = ({title, children, drop = true }) => {
   const [showContent, setShowContent] = useState(true);
   return (
     <>
-      <div className="main-subpage-heading">
+      <div className="main-subpage-heading mt-2">
         <h6 className="mb-0">{title}</h6>
         <div className="main-heading-content ">
           {drop && (

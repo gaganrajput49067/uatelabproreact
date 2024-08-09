@@ -9,6 +9,7 @@ function Input({
   id,
   placeholder,
   label,
+  checked,
   lable,
   value,
   onKeyDown,
@@ -46,6 +47,9 @@ function Input({
             required={required}
             ref={inputRef}
             onBlur={onBlur}
+            checked={checked}
+            maxLength={max}
+            minLength={min}
             max={max}
             min={min}
             style={{ textAlign: display ?? "left" }}
