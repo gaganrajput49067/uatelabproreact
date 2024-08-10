@@ -55,7 +55,11 @@ const Login = () => {
       dispatch(signInAction(credentials));
     }
   };
-
+  const handleKeyDown = (e) => {
+    if (e?.key === "Enter") {
+      handleSubmit(e);
+    }
+  };
   return (
     <div className="main-login-outer-Container">
       <div className="main-login-inner-container">
@@ -100,6 +104,7 @@ const Login = () => {
                   lable={t("Password")}
                   placeholder=" "
                   onChange={handleChange}
+                  onKeyDown={handleKeyDown}
                 />
                 {errors?.password && credentials?.password?.trim() === "" && (
                   <div className="error-message">{errors?.password}</div>
@@ -110,7 +115,6 @@ const Login = () => {
               <button
                 className="btn btn-sm btn-primary btn-block login-button"
                 onClick={handleSubmit}
-                disabled={loading}
               >
                 Login
               </button>

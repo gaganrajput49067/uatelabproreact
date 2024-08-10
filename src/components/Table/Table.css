@@ -23,23 +23,25 @@
     background: var(--bg-subMenu);
     color: var(--subMenuText-color);
     font-size: .35em;
-    text-transform: uppercase;
+    border: 1px solid var(--bg-color);
+    /* text-transform: uppercase; */
     padding: 0.2rem 0.3rem;
     text-align: justify;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    
   }
   
   .simple-table td {
     font-size: .35em;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     padding: 0.15rem .3rem !important;
     text-align: left;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    border: 1px solid var(--bg-subMenu);
+    border: 1px solid var(--bg-color);
   }
   
   .pagination {
@@ -120,7 +122,7 @@
       content: attr(data-label);
       float: left;
       font-weight: bold;
-      text-transform: uppercase;
+      /* text-transform: uppercase; */
     }
   
     .simple-table td:last-child {

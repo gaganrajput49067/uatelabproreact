@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import { axiosInstance } from "../axiosInstance";
+import axios from "axios";
 
 export const getCentreDetails = (state) => {
   axiosInstance
@@ -64,4 +65,254 @@ const filtermenu = (menu, page) => {
     resultData.push(item);
   }
   return resultData;
+};
+export const checkDuplicateBarcode = (barcodeNumber, LedgerTransactionID) => {
+  return new Promise((resolve, reject) => {
+    axiosInstance
+      .post("PatientRegistration/checkBarcodeNo", {
+        BarcodeNo: barcodeNumber,
+        LedgerTransactionID: LedgerTransactionID,
+      })
+      .then((res) => {
+        resolve(res?.data?.message);
+      })
+      .catch((err) => {
+        resolve(err?.response?.data?.message);
+      });
+  });
+};
+export const getAccessCentres = (
+  state,
+  centreState,
+  setCentreState,
+  LTDataIniti
+) => {
+  axiosInstance
+    .get("Centre/getAccessCentres")
+    .then((res) => {
+      let data = res.data.message;
+      console.log(data);
+      let CentreDataValue = data.map((ele) => {
+        return {
+          value: ele.CentreID,
+          label: ele.Centre,
+          VisitType: ele?.VisitType,
+          // HideAmount: ele?.HideAmount,
+          SetMRP: ele?.SetMRP,
+          BTB: ele?.BTB,
+        };
+      });
+      state(CentreDataValue);
+      if (centreState) {
+        setCentreState({
+          ...LTDataIniti,
+          SrfId: "",
+          IcmrId: "",
+          RegistrationDate: new Date(),
+          CentreID: CentreDataValue[0]?.value,
+          CentreName: CentreDataValue[0]?.label,
+          VisitType: CentreDataValue[0]?.VisitType,
+          // HideAmount: CentreDataValue[0]?.HideAmount,
+          SetMRP: CentreDataValue[0]?.SetMRP,
+          BTB: CentreDataValue[0]?.BTB,
+        });
+      }
+    })
+    .catch((err) => {
+      if (err.response.status === 401) {
+        window.sessionStorage.clear();
+        window.location.href = "/login";
+      }
+    });
+};
+export const getAccessDataRate = (state, centerID) => {
+  return new Promise((resolve, reject) => {
+    axiosInstance
+      .post("Centre/getRateTypeWithCentre", {
+        CentreID: centerID,
+      })
+      .then((res) => {
+        const data = res?.data?.message;
+        console.log(data);
+        const val = data.map((ele) => {
+          return {
+            value: ele?.RateTypeID,
+            label: ele?.RateTypeName,
+            BarcodeLogic: ele?.BarcodeLogic,
+            LockRegistration: ele?.LockRegistration,
+            PayMode: ele?.PayMode,
+            RateTypeEmail: ele?.Email,
+            RateTypePhone: ele?.Phone,
+            ClientAddress: ele?.ClientAddress,
+            HideAmount: ele?.HideAmount,
+            ProEmployee: ele?.ProEmployee,
+          };
+        });
+        centerID === "" && val.unshift({ label: "All RateType", value: "" });
+        state(val);
+        resolve(val);
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+      });
+  });
+};
+export const getBindDiscApproval = (state) => {
+  axiosInstance
+    .get("DiscApproval/BindDiscApproval")
+    .then((res) => {
+      const data = res.data?.message;
+      let val = data.map((ele) => {
+        return {
+          label: ele?.Name,
+          value: ele?.EmployeeID,
+        };
+      });
+      val.unshift({ label: "Select Disc Approval", value: "" });
+      state(val);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+export const getBindDiscReason = (state) => {
+  axiosInstance
+    .post("Global/getGlobaldata", {
+      Type: "DiscountReason",
+    })
+    .then((res) => {
+      const data = res.data?.message;
+      let val = data.map((ele) => {
+        return {
+          label: ele?.FieldDisplay,
+          value: ele?.FieldDisplay,
+        };
+      });
+      val.unshift({ label: "SelectDiscountReason", value: "" });
+      state(val);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+export const getBindReportDeliveryMethod = (state) => {
+  axiosInstance
+    .post("Global/getGlobaldata", {
+      Type: "ReportDeliveryMethod",
+    })
+    .then((res) => {
+      const data = res.data?.message;
+      const val = data.map((ele) => {
+        return {
+          label: ele?.FieldDisplay,
+          value: ele?.FieldDisplay,
+        };
+      });
+      state(val);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+export const getCollectionBoy = (state) => {
+  axiosInstance
+    .get("FieldBoyMaster/BindFieldBoy")
+    .then((res) => {
+      let data = res.data.message;
+      let collection = data.map((ele) => {
+        return {
+          value: ele.FieldBoyID,
+          label: ele.Name,
+        };
+      });
+      state(collection);
+    })
+    .catch((err) => console.log(err));
+};
+
+export const getDoctorSuggestion = (formData, state, setFormData) => {
+  if (formData.DoctorName.length >= 1) {
+    axiosInstance
+      .post("DoctorReferal/getDoctorData", {
+        DoctorName: formData.DoctorName,
+      })
+      .then((res) => {
+        if (res?.data?.message?.length > 0) {
+          state(res?.data?.message);
+        } else {
+          setTimeout(() => {
+            setFormData({ ...formData, DoctorName: "" });
+          }, 100);
+        }
+      })
+      .catch((err) => console.log(err));
+  } else {
+    state([]);
+    setFormData({ ...formData, DoctorReferal: "" });
+  }
+};
+export const getPaymentModes = (name, state) => {
+  axiosInstance
+    .post("Global/getGlobalData", { Type: name })
+    .then((res) => {
+      let data = res.data.message;
+      let value = data.map((ele) => {
+        return {
+          value: [
+            "specialization",
+            "PatientType",
+            "Source",
+            "BankName",
+          ].includes(name)
+            ? ele.FieldDisplay
+            : ele.FieldID,
+          label: ele.FieldDisplay,
+        };
+      });
+      state(value);
+    })
+    .catch((err) => {
+      toast.error(
+        err?.response?.data?.message
+          ? err?.response?.data?.message
+          : "Something Went Wrong"
+      );
+    });
+};
+export const getVisitType = (state) => {
+  axiosInstance
+    .get("Centre/visitTypeList")
+    .then((res) => {
+      let data = res.data.message;
+      let Visit = data.map((ele) => {
+        return {
+          value: ele.FieldID,
+          label: ele.FieldDisplay,
+        };
+      });
+      state(Visit);
+    })
+    .catch((err) => console.log(err));
+};
+export const getsecondDoctorSuggestion = (formData, state, setFormData) => {
+  if (formData.DoctorName.length >= 1) {
+    axiosInstance
+      .post("DoctorReferal/getSecondaryDoctorData", {
+        DoctorName: formData.SecondReferDoctor,
+      })
+      .then((res) => {
+        if (res?.data?.message?.length > 0) {
+          state(res?.data?.message);
+        } else {
+          setTimeout(() => {
+            setFormData({ ...formData, SecondReferDoctor: "" });
+          }, 100);
+        }
+      })
+      .catch((err) => console.log(err));
+  } else {
+    state([]);
+    setFormData({ ...formData, DoctorReferal: "" });
+  }
 };

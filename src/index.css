@@ -61,7 +61,7 @@
 
 
 .row {
-  margin-top:3px !important;
+  margin-top:4px !important;
   width: 100%;
 }
 
@@ -92,11 +92,20 @@
 
 .form-control {
   border: 1px solid #ced4da;
-  height: 24px !important;
+  height: 26px !important;
   box-shadow: none;
-  height: 30px !important;
 }
-
+.form-control-txtarea {
+  border: 1px solid #ced4da;
+  box-shadow: none;
+  resize: both; 
+  overflow: auto;
+}
+.modal-card{
+  width: 100%; 
+  max-width: 600px; 
+  padding: 10px; 
+}
 .css-tzb43o-placeholder {
   max-width: 80% !important;
   line-height: 9px !important;
@@ -122,7 +131,7 @@
 }
 #search:focus-within + .lable,
 #search input[type="text"]:not(:placeholder-shown) + .lable {
-  top: -7px;
+  top: -8px;
   left: 2;
   background-color: #fff;
   background-image: linear-gradient(#f4f6f9, #fff) !important;
@@ -135,7 +144,7 @@
 }
 
 #searchtest > .p-inputwrapper-filled + .lable {
-  top: -7px;
+  top: -8px;
   left: 2;
   background-color: #fff;
   background-image: linear-gradient(#f4f6f9, #fff) !important;
@@ -152,7 +161,7 @@
   font-size: 10px !important;
   /* color: #777; */
   position: absolute;
-  top: -7px;
+  top: -8px;
   left: 7px;
   background-color: #fff;
   background-image: linear-gradient(#446faf03, #446faf03) !important;
@@ -161,7 +170,7 @@
 }
 .form-control:focus + label,
 .form-control:not(:placeholder-shown) + label {
-  top: -7px;
+  top: -8px;
   left: 0px !important;
   background-color: #fff;
   background-image: linear-gradient(#446faf03, #446faf03) !important;
@@ -172,7 +181,7 @@
   outline: 0;
 }
 .form-control:not(:placeholder-shown) + label {
-  top: -7px;
+  top: -8px;
   left: 7px;
   background-color: #fff;
   background-image: linear-gradient(#446faf03, #446faf03) !important;
@@ -243,16 +252,21 @@ input.form-control {
 
 .error-message {
   color: red;
-  font-size: 12px;
-  margin-top: 5px;
+  font-size: 11px !important;
+  margin-top: 1px;
 }
 
 .card {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 8px 0px 13px 29px;
+  padding: 8px 3px 13px 25px;
   font-size: 13px;
+  
+  margin-bottom: 2px !important;
+  background-color: white !important;
  } 
+ 
+
 
 .card-header {
   border-bottom: 1px solid #e0e0e0;
@@ -271,10 +285,6 @@ input.form-control {
   margin: 0;
   font-size: 17px;
   color: #fff;
-}
-
-.card-body {
-  padding: 12px;
 }
 
 /* Additional custom styles */
@@ -354,7 +364,7 @@ input.form-control {
   width: 5px;
   background-color: #f5f5f5;
   border-radius: 5px;
-  height: 2px !important;
+  height: 4px !important;
   cursor: pointer;
   /* display: none; */
 }
@@ -695,7 +705,7 @@ input.form-control {
 }
 
 .p-datepicker {
-  box-shadow: 0px 0px 10px 0px;
+  box-shadow: 1px 0px 10px 0px;
   padding: 0 !important;
   width: 218px !important;
   max-width: 100% !important;
@@ -784,12 +794,7 @@ td {
   margin-bottom: 0.4rem;
 }
 
-.form-control {
-  border: 1px solid #ced4da;
-  /* border-radius: 4px 0px 0px 4px; */
-  height: 24px !important;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
+
 
 input:focus {
 
@@ -838,14 +843,6 @@ input[type="number"] {
   position: initial;
 }
 
-.card-header {
-  padding: 1px !important;
-}
-
-.card {
-  margin-bottom: 2px !important;
-  background-color: white !important;
-}
 
 .css-1ofwhjt-control {
   height: 27px !important;
@@ -1047,7 +1044,7 @@ input[type="number"] {
 .css-tzb43o-placeholder {
   max-width: 80% !important;
   line-height: 9px !important;
-  top: -3px !important;
+  top: -6px !important;
   font-size: 10px !important;
   display: inline-block !important;
   width: auto !important;
@@ -1087,7 +1084,7 @@ input::placeholder {
 }
 
 .p-datepicker {
-  box-shadow: 0px 0px 10px 0px;
+  box-shadow: 1px 0px 10px 0px;
   padding: 0 !important;
   width: 218px !important;
   max-width: 100% !important;
@@ -1141,7 +1138,7 @@ td {
   font-weight: bolder !important;
   background: #fff;
   line-height: 5px;
-  padding: 1px 5px;
+  padding: 3px 5px;
   /* margin-bottom: 0 !important; */
   font-size: 10px !important;
 }
@@ -1190,7 +1187,7 @@ td {
 
 .floating-label {
   position: absolute;
-  top: -7px;
+  top: -8px;
   font-weight: bold;
   left: 8px;
   font-size: 10px !important;
@@ -1209,13 +1206,13 @@ td {
 }
 
 .iconSize {
-  height: 22px;
+  height: 25px;
   border-radius: 4px;
   background-color: var(--bg-color);
   border: none;
 }
 .iconSizeAge {
-  height: 24px;
+  height: 26px;
   border-radius: 4px;
   border: none;
   width: 1px;
@@ -1242,4 +1239,35 @@ td {
 .p-datepicker-trigger:active {
   background-color: var(--bg-color); /* Even darker shade for active state */
   border: 2px solid var(--bg-color); /* Match border color on active */
+}
+.suggestion-data {
+  position: absolute;
+  top: 24px;
+  z-index: 999;
+  width: 86%;
+  right: 17px;
+  background-color: white;
+  padding: 1px;
+  border: 1px solid grey;
+  list-style: none;
+  min-height: auto;
+  max-height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.suggestion-data li {
+  padding: 4px;
+  cursor: pointer;
+}
+
+.suggestion-data li:hover {
+  background-color: blue;
+  color: white;
+  transition: 0.3s;
+}
+
+.matchIndex {
+  background-color: blue;
+  color: white;
 }
