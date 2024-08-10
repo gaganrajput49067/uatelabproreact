@@ -40,7 +40,7 @@ export const SelectBox = ({
         <label htmlFor={id} className="lable truncate">
           {lable}
         </label>
-        <i class="fa fa-angle-down"></i>
+        <i className="fa fa-angle-down"></i>
       </div>
     </>
   );

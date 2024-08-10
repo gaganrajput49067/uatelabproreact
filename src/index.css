@@ -63,6 +63,7 @@
 .row {
   margin-top:4px !important;
   width: 100%;
+  display: flex;
 }
 
 .btn {
@@ -1216,7 +1217,7 @@ td {
 .iconSize {
   height: 25px;
   border-radius: 4px;
-  background-color: var(--bg-color);
+  background-color: var(--bg-subMenu);
   border: none;
 }
 .iconSizeAge {

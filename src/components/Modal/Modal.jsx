@@ -1,9 +1,12 @@
 import "./Modal.css";
 
-const Modal = ({ title, children, handleClose }) => {
+const Modal = ({ title, children, handleClose, top }) => {
   return (
     <div className="Main-Modal-Container">
-      <div className="main-modal-box">
+      <div
+        className="main-modal-box"
+        style={top && top !== "" ? { top: top } : {}}
+      >
         <div className="main-modal-header">
           <h6 className="m-0">{title ?? "Modal Title"}</h6>
           <i className="fa fa-close modal-close" onClick={handleClose}></i>

@@ -1,3 +1,4 @@
+import moment from "moment";
 import { useEffect } from "react";
 export function getCookie(name) {
   const matches = document.cookie.match(
@@ -55,7 +56,7 @@ export const PreventNumber = (value) => {
 };
 export const number = (e, sliceValue, valueGreater) => {
   if (handleCheckDot(e)) {
-    return (e.target.value = e.target.value.replace(".",""));
+    return (e.target.value = e.target.value.replace(".", ""));
   } else {
     if (valueGreater) {
       return e.target.value > valueGreater
@@ -95,4 +96,16 @@ export const getTrimmedData = (obj) => {
     });
   }
   return obj;
+};
+
+export const dateConfig = (date, withTime) => {
+  if (withTime === 0) {
+    return moment(date && date).format("DD/MMM/YYYY") === "Invalid date"
+      ? "-"
+      : moment(date && date).format("DD/MMM/YYYY");
+  } else {
+    return moment(date && date).format("DD/MMM/YYYY hh:mm a") === "Invalid date"
+      ? "-"
+      : moment(date && date).format("DD/MMM/YYYY hh:mm a");
+  }
 };

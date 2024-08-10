@@ -15,7 +15,7 @@ function App() {
   const sideBarRef = useRef(null);
   const [showSidebar, setShowSideBar] = useState(false);
   const [menuData, setMenuData] = useState(null);
-  const [notification, setNotification] = useState(true);
+  const [notification, setNotification] = useState(false);
   const [pageData, setPageData] = useState([]);
 
   const { user, loading, error, success } = useSelector(

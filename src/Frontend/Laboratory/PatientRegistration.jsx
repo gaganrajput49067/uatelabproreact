@@ -40,7 +40,13 @@ import {
 } from "../../utils/Schema";
 import RegisterationTable from "../Table/RegisterationTable";
 import SampleRemark from "../CustomModal/SampleRemark";
+import SaveSmsEmail from "../utils/SaveSmsEmail";
+import MobileDataModal from "../utils/MobileDataModal";
+import PatientRegisterModal from "../utils/PatientRegisterModal";
+import { useTranslation } from "react-i18next";
+import MedicialModal from "../utils/MedicialModal";
 const PatientRegistration = () => {
+  const { t } = useTranslation();
   const [patientImg, setPatientImg] = useState({
     img: MyImage,
     show: false,
@@ -170,7 +176,6 @@ const PatientRegistration = () => {
       show: false,
     },
   });
-  console.log(suggestionData);
 
   const getProEmployee = () => {
     axiosInstance
@@ -261,7 +266,6 @@ const PatientRegistration = () => {
     handleSubmitFinalBooking(data);
   };
   const handleSubmitFinalBooking = (data) => {
-    console.log(data);
     axiosInstance
       .post("PatientRegistration/SaveData", {
         PatientData: getTrimmedData({
@@ -479,8 +483,7 @@ const PatientRegistration = () => {
   const getPaymentModeAmount = RcData?.filter(
     (ele) => ele?.PaymentMode == "Online Payment"
   );
-  console.log(getPaymentModeAmount);
-  console.log(RcData);
+
   const [searchTest, setSearchTest] = useState("TestName");
   const [slotOpen, setSlotOpen] = useState({
     show: false,
@@ -1394,7 +1397,6 @@ const PatientRegistration = () => {
   };
 
   const handleSelectSlot = (data, slotData, testData) => {
-    // console.log(data, slotData, testData,key);
     toast.success("Slot Added Successfully");
     const index = tableData?.findIndex(
       (item) => item.InvestigationID === testData.InvestigationID
@@ -1450,7 +1452,6 @@ const PatientRegistration = () => {
   };
 
   const getTableData = (data, key, Promo) => {
-    console.log(data);
     const ItemIndex = tableData.findIndex(
       (e) => e.InvestigationID == data.InvestigationID
     );
@@ -2532,7 +2533,7 @@ const PatientRegistration = () => {
         });
     }
   };
-  console.log(state);
+
   const checkPaymentStatus = async (order_id, pLink) => {
     try {
       const { data } = await axiosInstance.post("RazorPay/paymentstatus", {
@@ -2543,7 +2544,7 @@ const PatientRegistration = () => {
         toast.success("Payment successful!");
         return true;
       } else {
-        console.log("Payment not completed yet.");
+        toast.error("Payment failed. Please try again.");
         return false;
       }
     } catch (error) {
@@ -2561,7 +2562,6 @@ const PatientRegistration = () => {
       })
       .then((res) => {
         if (res.data.success) {
-          console.log(res.data.paymentLink.short_url);
           const order_id = res.data.paymentLink.notes.order_id;
           let timeoutId;
           let intervalId;
@@ -2639,7 +2639,6 @@ const PatientRegistration = () => {
     axiosInstance
       .get("RazorPay/Otherpayment")
       .then((res) => {
-        console.log(res);
         if (res?.data?.payment_capture == 1) {
           setIsRazorPayOpen(true);
           getPaymentLink();
@@ -2659,7 +2658,7 @@ const PatientRegistration = () => {
         )
       );
   };
-  console.log(isRazorPayOpen, getPaymentModeAmount);
+
   const handleSubmitApi = () => {
     const { DocumentFlag, message } = handleFileValidationUpload();
     if (!filterUnPaidRcData()) {
@@ -3049,7 +3048,7 @@ const PatientRegistration = () => {
 
     getTableData(data, "Coupon");
   };
-  console.log(visibleFields);
+
   const handleCouponValidate = () => {
     const generatedError = CouponValidateSchema(state, formData, LTData);
     setCoupon({
@@ -3251,7 +3250,7 @@ const PatientRegistration = () => {
       );
 
       const finalResult = parseFloat((value - finalData).toFixed(2));
-      console.log(finalResult);
+
       return finalResult;
     }
   };
@@ -3270,6 +3269,7 @@ const PatientRegistration = () => {
   };
   return (
     <>
+      {show && <PatientRegisterModal handleClose={handleClose} />}
       {showRemark && (
         <SampleRemark
           show={showRemark}
@@ -3278,6 +3278,30 @@ const PatientRegistration = () => {
           PageName={LTData?.Remarks}
           handleSave={handleSaveremark}
           title={"Billing Remarks"}
+        />
+      )}
+      {show6 && (
+        <SaveSmsEmail
+          state={state}
+          LTData={LTData}
+          saveSmsEmail={saveSmsEmail}
+          setSaveSmsEmail={setSaveSmsEmail}
+          setShow6={setShow6}
+        />
+      )}
+      {mobleData.length > 0 && show4 && (
+        <MobileDataModal
+          show={show4}
+          mobleData={mobleData}
+          handleClose4={handleClose4}
+          handleSelctData={handleSelctData}
+        />
+      )}
+      {show3 && (
+        <MedicialModal
+          handleClose={handleClose3}
+          MedicalId={PatientGuid}
+          handleUploadCount={handleUploadCount}
         />
       )}
       <PageHead name="PatientRegistration">
@@ -3377,26 +3401,25 @@ const PatientRegistration = () => {
               </div>
               <div className="row">
                 <div className="col-sm-2">
-                  <div className="p-inputgroup flex-1">
-                    <Input
-                      className="select-input-box form-control input-sm required"
-                      name="Mobile"
-                      id="Mobile"
-                      onInput={(e) => number(e, 10)}
-                      onKeyDown={(e) => handlePatientData(e, "Mobile")}
-                      value={state.Mobile}
-                      disabled={throughMobileData || throughMemberData}
-                      onChange={handleMainChange}
-                      type="number"
-                      lable="Mobile Number"
-                      placeholder=" "
-                    />
-                    <Button
-                      icon="pi pi-search"
-                      className="iconSize "
-                      onClick={handleShowMobile}
-                    />
-                  </div>
+                  <Input
+                    // className="select-input-box form-control input-sm required"
+                    name="Mobile"
+                    id="Mobile"
+                    onInput={(e) => number(e, 10)}
+                    onKeyDown={(e) => handlePatientData(e, "Mobile")}
+                    value={state.Mobile}
+                    disabled={throughMobileData || throughMemberData}
+                    onChange={handleMainChange}
+                    type="number"
+                    lable="Mobile Number"
+                    placeholder=" "
+                  />
+                  <Button
+                    icon="pi pi-search"
+                    className="iconSize ls-none"
+                    onClick={handleShowMobile}
+                  />
+
                   {!err?.Mobile && !err?.Mobiles && errors?.Mobile && (
                     <div className="error-message">{errors?.Mobile}</div>
                   )}
@@ -3508,6 +3531,64 @@ const PatientRegistration = () => {
                   <button
                     className="btn btn-primary btn-block btn-sm"
                     id="PRDM"
+                    onClick={() => {
+                      setSaveSmsEmail({
+                        ...saveSmsEmail,
+                        IsActiveEmailToClient:
+                          saveSmsEmail?.IsActiveEmailToClient !== ""
+                            ? saveSmsEmail?.IsActiveEmailToClient
+                            : saveSmsEmail?.EmailToClient != ""
+                            ? 1
+                            : state?.RateTypeEmail != ""
+                            ? 1
+                            : 0,
+                        IsActiveSmsToDoctor:
+                          saveSmsEmail?.IsActiveSmsToDoctor !== ""
+                            ? saveSmsEmail?.IsActiveSmsToDoctor
+                            : saveSmsEmail?.SmsToDoctor != ""
+                            ? 1
+                            : LTData?.DoctorMobile != ""
+                            ? 1
+                            : 0,
+                        IsActiveEmailToDoctor:
+                          saveSmsEmail?.IsActiveEmailToDoctor !== ""
+                            ? saveSmsEmail?.IsActiveEmailToDoctor
+                            : saveSmsEmail?.EmailToDoctor != ""
+                            ? 1
+                            : LTData?.DoctorEmail != ""
+                            ? 1
+                            : 0,
+                        IsActiveEmailToPatient:
+                          saveSmsEmail?.IsActiveEmailToPatient !== ""
+                            ? saveSmsEmail?.IsActiveEmailToPatient
+                            : saveSmsEmail?.EmailToPatient != ""
+                            ? 1
+                            : state?.Email != ""
+                            ? 1
+                            : 0,
+                        IsActiveSmsToPatient:
+                          saveSmsEmail?.IsActiveSmsToPatient !== ""
+                            ? saveSmsEmail?.IsActiveSmsToPatient
+                            : saveSmsEmail?.SmsToPatient != ""
+                            ? 1
+                            : state?.Mobile != ""
+                            ? 1
+                            : 0,
+                        IsActiveSmsToClient:
+                          saveSmsEmail?.IsActiveSmsToClient !== ""
+                            ? saveSmsEmail?.IsActiveSmsToClient
+                            : saveSmsEmail?.SmsToClient != ""
+                            ? 1
+                            : state?.RateTypePhone != ""
+                            ? 1
+                            : 0,
+                        IsWhatsappRequired: saveSmsEmail?.IsWhatsappRequired
+                          ? saveSmsEmail?.IsWhatsappRequired
+                          : 0,
+                      });
+
+                      setShow6(true);
+                    }}
                   >
                     PRDM
                   </button>
@@ -3617,7 +3698,11 @@ const PatientRegistration = () => {
                         ))}
                       </ul>
                     )}
-                    <Button icon="pi pi-plus" className="iconSize" />
+                    <Button
+                      icon="pi pi-plus"
+                      className="iconSize"
+                      onClick={handleShow}
+                    />
                   </div>
                   {!err?.DoctorName &&
                     !err?.DoctorID &&
@@ -4138,19 +4223,35 @@ const PatientRegistration = () => {
                 alt="Image"
                 width="115"
                 height="130"
+                margin="0"
+                padding="0"
                 preview
               />
               <button
-                className="btn btn-info btn-block btn-sm"
+                className={`btn ${
+                  LTData?.UploadDocumentCount === 0 ? "btn-info" : "btn-success"
+                } w-100 btn-sm p-0`}
                 id="Upload Document"
+                onClick={() => {
+                  setShow2(true);
+                }}
               >
-                Upload Document
+                {t("Upload Document")}
+                <span id="spnCount"> ({LTData?.UploadDocumentCount})</span>
               </button>
               <button
-                className="btn btn-info btn-block btn-sm"
+                className={`btn   ${
+                  LTData?.MedicalHistoryCount === 0 ? "btn-info" : "btn-success"
+                } w-100 btn-sm `}
                 id="Medical History"
+                onClick={() => {
+                  handleClose3();
+                }}
               >
-                Medical History
+                {t("Medical History")}&nbsp;
+                <span id="spnMedicalCount">
+                  ({LTData?.MedicalHistoryCount})
+                </span>
               </button>
             </div>
           </div>

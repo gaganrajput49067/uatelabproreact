@@ -349,3 +349,44 @@ export const getsecondDoctorSuggestion = (formData, state, setFormData) => {
     setFormData({ ...formData, DoctorReferal: "" });
   }
 };
+
+export const GetMedicalHistoryData = (
+  MedicalId,
+  setState,
+  state,
+  ID,
+  handleUploadCount
+) => {
+  axiosInstance
+    .post("patientRegistration/GetMedicalHistoryData", {
+      PatientGuid: MedicalId,
+      LedgerTransactionID: ID ? ID : 1,
+    })
+    .then((res) => {
+      const data = res?.data?.message;
+      if (data.length > 0) {
+        const val = data.map((ele) => {
+          return {
+            MedicalHistory: ele?.MedicalHistory,
+            LedgerTransactionID: ele?.LedgerTransactionID,
+            PatientMedicalHistoryIDs: ele?.PatientMedicalHistoryID,
+            date: ele?.dtEntry,
+          };
+        });
+        handleUploadCount(
+          "MedicalHistoryCount",
+          data.length,
+          "IsMedicalHistory"
+        );
+
+        setState({
+          ...state,
+          PatientGuid: MedicalId,
+          patientmedicalhistoryiesVM: val,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
