@@ -436,3 +436,21 @@ export const getRejectCount = () => {
       console.log(err);
     });
 };
+
+export const checkEmploypeeWiseDiscount = (data, id) => {
+  return new Promise((resolve, reject) => {
+    axiosInstance
+      .post("PatientRegistration/IsValidDiscountAmount", {
+        TotalAmount: data?.GrossAmount,
+        EmployeeID: id,
+        CentreId: data?.CentreID,
+        DiscountAmount: data?.DiscountOnTotal,
+      })
+      .then((res) => {
+        resolve(false);
+      })
+      .catch((err) => {
+        reject(err?.response?.data?.message);
+      });
+  });
+};
