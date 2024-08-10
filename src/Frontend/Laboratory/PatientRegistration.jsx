@@ -12,6 +12,7 @@ import DatePicker from "../../components/CommonComponent/DatePicker";
 import { toast } from "react-toastify";
 import { DISCOUNT_TYPE, LTDataIniti, stateIniti } from "../../utils/Constants";
 import {
+  checkEmploypeeWiseDiscount,
   getAccessCentres,
   getAccessDataRate,
   getBindDiscApproval,
@@ -27,6 +28,7 @@ import {
   PreventNumber,
   PreventSpecialCharacter,
   autocompleteOnBlur,
+  getTrimmedData,
   number,
 } from "../../utils/helpers";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -261,7 +263,7 @@ const PatientRegistration = () => {
     handleSubmitFinalBooking(data);
   };
   const handleSubmitFinalBooking = (data) => {
-    console.log(data);
+    debugger
     axiosInstance
       .post("PatientRegistration/SaveData", {
         PatientData: getTrimmedData({
@@ -579,7 +581,6 @@ const PatientRegistration = () => {
   };
 
   const PaymentData = () => {
-    //sahil
     let match = false;
     if (handleRateTypePaymode !== "Credit") {
       const data = ["Cash", "Online Payment", "Paytm"];
@@ -2443,7 +2444,7 @@ const PatientRegistration = () => {
 
   const getReceipt = (id, fullyPaid) => {
     axiosInstance
-      .post("/reports/v1/getReceipt", {
+      .post("reports/v1/getReceipt", {
         LedgerTransactionIDHash: id,
       })
       .then((res) => {
@@ -2460,7 +2461,7 @@ const PatientRegistration = () => {
   };
   const getReceiptFullyPaid = (id) => {
     axiosInstance
-      .post("/reports/v1/getReceiptFullyPaid", {
+      .post("reports/v1/getReceiptFullyPaid", {
         LedgerTransactionIDHash: id,
       })
       .then((res) => {
@@ -2661,6 +2662,7 @@ const PatientRegistration = () => {
   };
   console.log(isRazorPayOpen, getPaymentModeAmount);
   const handleSubmitApi = () => {
+    debugger
     const { DocumentFlag, message } = handleFileValidationUpload();
     if (!filterUnPaidRcData()) {
       if (getTestNamesWithBlankSampleTypeID()) {
@@ -2687,10 +2689,12 @@ const PatientRegistration = () => {
   };
 
   const { errors, handleSubmit } = useFormik({
+    
     initialValues: { ...state, ...LTData, ...formData, ...Pndt },
     enableReinitialize: true,
     validationSchema: PatientRegisterSchema,
     onSubmit: (values) => {
+      debugger
       const data = DynamicFieldValidations();
       setVisibleFields(data);
       const flag = data.filter((ele) => ele?.isError === true);

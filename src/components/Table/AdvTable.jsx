@@ -314,7 +314,7 @@ const AdvTable = ({
             {currentItems.map((row, rowIndex) => (
               <tr key={rowIndex}>
                 {keys.map((col) => (
-                  <td key={col.key} data-label={col.title}>
+                  <td key={col.key} data-title={col.title}>
                     {col.feild ? (
                       col.feild.name === "input" ? (
                         col.feild.type === "checkbox" ? (

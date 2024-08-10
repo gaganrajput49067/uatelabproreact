@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import moment from "moment";
 export function getCookie(name) {
   const matches = document.cookie.match(
     new RegExp(
@@ -55,7 +56,7 @@ export const PreventNumber = (value) => {
 };
 export const number = (e, sliceValue, valueGreater) => {
   if (handleCheckDot(e)) {
-    return (e.target.value = e.target.value.replace(".",""));
+    return (e.target.value = e.target.value.replace(".", ""));
   } else {
     if (valueGreater) {
       return e.target.value > valueGreater
@@ -95,4 +96,52 @@ export const getTrimmedData = (obj) => {
     });
   }
   return obj;
+};
+
+export const AddBlankData = (state, name) => {
+  return [{ label: name, value: "" }, ...state];
+};
+export const AllDataDropDownPayload = (data, state, key) => {
+  if (data) {
+    return [parseInt(data)];
+  } else {
+    const val = state?.map((ele) => ele[key]);
+    return val;
+  }
+};
+
+export const isChecked = (name, state, value, id) => {
+  if (id) {
+    const data = state?.map((ele) => {
+      if (ele?.TestID === id) {
+        return ele[name] === value ? true : false;
+      } else {
+        return ele;
+      }
+    });
+    return data;
+  } else {
+    const data = state?.map((ele) => {
+      return ele[name] == value ? true : false;
+    });
+    return data;
+  }
+};
+export const dateConfig = (date, withTime) => {
+  if (withTime === 0) {
+    return moment(date && date).format("DD/MMM/YYYY") === "Invalid date"
+      ? "-"
+      : moment(date && date).format("DD/MMM/YYYY");
+  } else {
+    return moment(date && date).format("DD/MMM/YYYY hh:mm a") === "Invalid date"
+      ? "-"
+      : moment(date && date).format("DD/MMM/YYYY hh:mm a");
+  }
+};
+export const Time = (date) => {
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const seconds = date.getSeconds().toString().padStart(2, '0');
+  
+  return `${hours}:${minutes}:${seconds}`;
 };

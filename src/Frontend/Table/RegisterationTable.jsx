@@ -91,7 +91,7 @@ function RegisterationTable({
           id={data?.InvestigationID}
         />
       )} */}
-      <td data-label="S.No">
+      <td data-title="S.No">
         <div style={{ display: "flex" }}>
           {index + 1}&nbsp;
           {location.pathname === "/EditPatientDetails" ? (
@@ -117,7 +117,7 @@ function RegisterationTable({
           )}
         </div>
       </td>
-      <td data-label="Slot">
+      <td data-title="Slot">
         {data?.Radiology == 1 ? (
           <i
             className="btn fa fa-search"
@@ -133,9 +133,9 @@ function RegisterationTable({
         )}
       </td>
 
-      <td data-label="TestCode">{data.TestCode}</td>
+      <td data-title="TestCode">{data.TestCode}</td>
       <td
-        data-label="TestName"
+        data-title="TestName"
         style={{
           wordWrap: "break-word",
           whiteSpace: "normal",
@@ -171,17 +171,17 @@ function RegisterationTable({
             data?.RequiredAttachment + " Req."}
         </small>
       </td>
-      <td onClick={() => setShow2(true)} data-label="View">
+      <td onClick={() => setShow2(true)} data-title="View">
         <i className="fa fa-search" />
       </td>
-      <td onClick={() => setDos(true)} data-label="DOS">
+      <td onClick={() => setDos(true)} data-title="DOS">
         <i className="fa fa-home" />
       </td>
-      <td data-label="MRP">
+      <td data-title="MRP">
         {state?.HideAmount == 1 ? "" : Number(data?.SetMRP).toFixed(2)}
       </td>
-      <td data-label="Rate">{state?.HideAmount == 1 ? "" : data?.Rate}</td>
-      <td data-label="Discount">
+      <td data-title="Rate">{state?.HideAmount == 1 ? "" : data?.Rate}</td>
+      <td data-title="Discount">
         {state?.HideAmount != 1 ? (
           <input
             style={{ width: "50px" }}
@@ -216,7 +216,7 @@ function RegisterationTable({
           ""
         )}
       </td>
-      <td data-label="NetAmount">
+      <td data-title="NetAmount">
         {state?.HideAmount != 1 ? (
           <input
             className="currency"
@@ -228,8 +228,8 @@ function RegisterationTable({
           ""
         )}
       </td>
-      <td data-label="DeleiveryDate">{data.deleiveryDate}</td>
-      <td data-label="SC">
+      <td data-title="DeleiveryDate">{data.deleiveryDate}</td>
+      <td data-title="SC">
         <input
           type="checkbox"
           name="Status"
@@ -239,7 +239,7 @@ function RegisterationTable({
           onChange={(e) => handlePLOChange(e, index)}
         />
       </td>
-      <td data-label="IsUrgent">
+      <td data-title="IsUrgent">
         <input
           type="checkbox"
           name={"IsUrgent"}

@@ -19,6 +19,10 @@ export let routeDetails = [
         path: "/PatientRegister",
         element: "../Frontend/Laboratory/PatientRegistration",
       },
+      {
+        path: "/SampleCollection",
+        element: "../Frontend/Laboratory/SampleCollection",
+      },
       { path: "*", element: "../components/NotFound" },
     ],
   },

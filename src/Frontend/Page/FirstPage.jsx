@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../../components/CommonComponent/Input";
 import ReactSelect from "../../components/CommonComponent/ReactSelect";
 import DatePicker from "../../components/CommonComponent/DatePicker";
@@ -7,12 +7,18 @@ import CustomTimePicker from "../../components/CommonComponent/TimePicker";
 import { SelectBoxWithCheckbox } from "../../components/CommonComponent/MultiSelectBox";
 import SubPageHead from "../../components/CommonComponent/SubPageHead";
 import { SelectBox } from "../../components/CommonComponent/SelectBox";
+import { Time } from "../../utils/helpers";
+
 const FirstPage = () => {
+  const [fromTime, setFromTime] = useState(new Date());
+  const [toTime, setToTime] = useState(new Date());
+
   const options = [
     { label: "Option 1", value: "option1" },
     { label: "Option 2", value: "option2" },
     { label: "Option 3", value: "option3" },
   ];
+
   const dummyData = [
     {
       id: 1,
@@ -47,6 +53,15 @@ const FirstPage = () => {
 
   const handleDateChange = (e) => {
     console.log(e);
+  };
+
+  const handleTime = (time, name) => {
+    if (name === "FromTime") {
+      setFromTime(time);
+    } else if (name === "ToTime") {
+      setToTime(time);
+    }
+    console.log(Time(time))
   };
 
   return (
@@ -90,22 +105,22 @@ const FirstPage = () => {
               <CustomTimePicker
                 className="form-control required-fields"
                 name="FromTime"
-                placeholder=" "
-                value={new Date()}
+                placeholder="From Time"
+                value={fromTime}
                 id="FromTime"
-                lable="FromTime"
-                onChange={handleDateChange}
+                lable="From Time"
+                onChange={handleTime}
               />
             </div>
             <div className="col-md-1">
               <CustomTimePicker
                 className="form-control required-fields"
                 name="ToTime"
-                placeholder=" "
-                value=""
+                placeholder="To Time"
+                value={toTime}
                 id="ToTime"
-                lable="ToTime"
-                onChange={handleDateChange}
+                lable="To Time"
+                onChange={handleTime}
               />
             </div>
             <div className="col-md-2"></div>
@@ -139,7 +154,6 @@ const FirstPage = () => {
         </div>
       </PageHead>
       <SubPageHead>
-        {" "}
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-2">
@@ -178,22 +192,21 @@ const FirstPage = () => {
               <CustomTimePicker
                 className="form-control required-fields"
                 name="FromTime"
-                placeholder=" "
-                value={new Date()}
+                placeholder="From Time"
+                value={fromTime}
                 id="FromTime"
-                lable="FromTime"
-                onChange={handleDateChange}
+                lable="From Time"
+                onChange={handleTime}
               />
             </div>
             <div className="col-md-1">
               <CustomTimePicker
-                className="form-control required-fields"
                 name="ToTime"
-                placeholder=" "
-                value=""
+                placeholder="To Time"
+                value={toTime}
                 id="ToTime"
-                lable="ToTime"
-                onChange={handleDateChange}
+                lable="To Time"
+                onChange={handleTime}
               />
             </div>
             <div className="col-md-2"></div>

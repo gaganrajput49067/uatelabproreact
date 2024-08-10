@@ -93,3 +93,56 @@ export const DISCOUNT_TYPE = [
   { label: "EmployeeWise", value: 1 },
   { label: "Discount Type Wise", value: 2 },
 ];
+export const SampleStatusSearch = [
+    {
+      label: "Sample Not Collected",
+      value: 1,
+      status: true,
+    },
+    {
+      label: "Collected",
+      value: 2,
+      status: true,
+    },
+    {
+      label: "Received",
+      value: 3,
+      status: true,
+    },
+    {
+      label: "Rejected",
+      value: 4,
+      status: true,
+    },
+  ];
+  export const SearchBy = [
+    { label: "Select", value: "" },
+    { label: "BarcodeNo", value: "BarcodeNo" },
+    { label: "Mobile", value: "Mobile" },
+    { label: "PatientCode", value: "PatientCode" },
+    { label: "PatientName", value: "PatientName" },
+    { label: "VisitNo", value: "VisitNo" },
+  ];export const NoOfPricks = [
+    { label: "Select", value: "" },
+    { label: "1", value: 1 },
+    { label: "2", value: 2 },
+    { label: "3", value: 3 },
+    { label: "4", value: 4 },
+    { label: "5", value: 5 },
+    { label: "6", value: 6 },
+    { label: "7", value: 7 },
+    { label: "8", value: 8 },
+    { label: "9", value: 9 },
+    { label: "10", value: 10 },
+  
+  ];export const SampleSource = [
+    {
+      label: "Left Arm",
+      value: "Left Arm",
+    },
+    {
+      label: "Right Arm",
+      value: "Right Arm",
+    },
+  ];
+  
