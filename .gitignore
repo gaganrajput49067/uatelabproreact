@@ -8,6 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+Dashboard
+Dashboard.css
+Dasgboard.jsx
 dist
 dist-ssr
 *.local

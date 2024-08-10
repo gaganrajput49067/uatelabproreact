@@ -12,48 +12,51 @@
 
 :root {
   --bg-color: #555299;
-  --bg-subMenu: #918ecd;
-  --text-color: black;
-  --header-color: #ffffff;
-  --albg-color: #23272f;
-  --altext-color: white;
+  --bg-subMenu: #918ecd; 
   --subMenuText-color: rgb(255, 255, 255);
+  --gradient: linear-gradient(90deg, rgba(85,82,153,1) 0%, rgba(145,142,205,1) 57%, rgba(255,255,255,1) 91%);
 }
 
 [data-theme="grey"] {
   --bg-color: #5e5c5c; /* Changed from #686666 */
   --bg-subMenu: #9a9a9a; /* Changed from #b0b0b0 */
   --subMenuText-color: #e6e6e6; /* Changed from #ffffff */
+  --gradient: linear-gradient(90deg, rgba(94,92,92,1) 0%, rgba(154,154,154,1) 57%, rgba(255,255,255,1) 91%);
 }
 
 [data-theme="blue"] {
   --bg-color: #2a91bd; /* Changed from #32a1d1 */
   --bg-subMenu: #85bcd5; /* Changed from #95c6db */
   --subMenuText-color: #e6f7ff; /* Changed from #ffffff */
+  --gradient: linear-gradient(90deg, rgba(42,145,189,1) 0%, rgba(133,188,213,1) 57%, rgba(255,255,255,1) 91%);;
 }
 
 [data-theme="brown"] {
   --bg-color: #a52a2a; /* Changed from #c43333 */
   --bg-subMenu: #d05050; /* Changed from #e05c5c */
   --subMenuText-color: #f9f9f9; /* Changed from #ffffff */
+  --gradient: linear-gradient(90deg, rgba(165,42,42,1) 0%, rgba(208,80,80,1) 57%, rgba(255,255,255,1) 91%);
 }
 
 [data-theme="palePink"] {
-  --bg-color: #e91e63; /* Changed from #f1368d */
-  --bg-subMenu: #f48fb1; /* Changed from #f86da7 */
-  --subMenuText-color: #ffebee; /* Changed from #ffffff */
+  --bg-color: #bc3c8b; /* Changed from #f1368d */
+  --bg-subMenu: #ee94cb; /* Changed from #f86da7 */
+  --subMenuText-color: #000000; /* Changed from #ffffff */
+  --gradient: linear-gradient(90deg, rgba(188,60,139,1) 0%, rgba(238,148,203,1) 57%, rgba(255,255,255,1) 91%);
 }
 
 [data-theme="peach"] {
-  --bg-color: #f39c12; /* Changed from #e9b74b */
-  --bg-subMenu: #f5b041; /* Changed from #f3ba74 */
+  --bg-color: #bc8f3c; /* Changed from #e9b74b */
+  --bg-subMenu: #f3ba74; /* Changed from #f3ba74 */
   --subMenuText-color: #fff7e6; /* Changed from #ffffff */
+  --gradient: linear-gradient(90deg, rgba(188,143,60,1) 0%, rgba(243,186,116,1) 57%, rgba(255,255,255,1) 91%);
 }
 
 [data-theme="green"] {
-  --bg-color: #27ae60; /* Changed from #36c099 */
-  --bg-subMenu: #58d68d; /* Changed from #68f0d2 */
-  --subMenuText-color: #e9ffe6; /* Changed from #ffffff */
+  --bg-color:  #36c099; /* Changed from #36c099 */
+  --bg-subMenu: #68f0d2; /* Changed from #68f0d2 */
+  --subMenuText-color: #000000; /* Changed from #ffffff */
+  --gradient: linear-gradient(90deg, rgba(54,192,153,1) 0%, rgba(104,240,210,1) 57%, rgba(255,255,255,1) 91%);
 }
 
 
@@ -1218,3 +1221,25 @@ td {
   width: 1px;
 }
 
+
+/*  */
+.p-datepicker-trigger {
+  background-color: var(--bg-subMenu); /* Change to your desired color */
+  border-color: var(--bg-subMenu); /* Match border color */
+
+}
+
+.p-datepicker-trigger .p-button-icon {
+  color: var(--subMenuText-color); /* Change icon color */
+}
+
+.p-datepicker-trigger:focus {
+  border: 2px solid var(--bg-color); /* Change border color on focus */
+  outline: none; /* Remove default focus outline */
+}
+
+/* Active state (when the button is pressed) */
+.p-datepicker-trigger:active {
+  background-color: var(--bg-color); /* Even darker shade for active state */
+  border: 2px solid var(--bg-color); /* Match border color on active */
+}
