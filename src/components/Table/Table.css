@@ -1,156 +1,175 @@
 .simple-table-container {
-    width: 100%;
-    position: relative;
-    overflow-x: auto;
-  }
+  width: 100%;
+  position: relative;
+  overflow-x: auto;
   
+}
+
+.simple-table-container::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  height: 4px !important;
+  cursor: pointer;
+}
+
+.simple-table-container::-webkit-scrollbar-thumb {
+  background-color: var(--bg-color);
+  border-radius: 5px;
+  height: 2px !important;
+  cursor: pointer;
+}
+
+.simple-table-container::-webkit-scrollbar-thumb:hover {
+  background-color: var(--bg-color);
+  cursor: pointer;
+}
+
+.simple-table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: auto;
+  border-radius: 1rem;
+  border: 1px solid  var(--bg-subMenu);;
+}
+
+.simple-table tr {
+  background-color: #e6e6e6;
+  padding: .35em;
+}
+
+.simple-table th {
+  background: var(--bg-subMenu);
+  color: var(--subMenuText-color);
+  font-size: .35em;
+    border: 1px solid white;
+    /* text-transform: uppercase; */
+  padding: 0.2rem 0.3rem;
+  text-align: justify;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.simple-table td {
+  font-size: .35em;
+    /* text-transform: uppercase; */
+  padding: 0.15rem .3rem !important;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid white;
+}
+
+.pagination {
+  position: sticky;
+  width: 100%;
+  background-color: var(--bg-subMenu);
+  display: flex;
+  justify-content: end;
+  bottom: 0;
+  left: 0;
+}
+
+.pagination button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #007bff;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 600px) {
   .simple-table {
-    border: 1px solid var(--bg-color);
-    border-collapse: collapse;
-    margin: 0;
+    border: 0;
+    width: 100%;
+  }
+
+  .simple-table caption {
+    font-size: 1.3em;
+  }
+
+  .simple-table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
     padding: 0;
-    width: 100%;
-    table-layout: auto;
-    border-radius: 1rem;
+    position: absolute;
+    width: 1px;
   }
-  
+
   .simple-table tr {
-    background-color: #ffffff;
-    padding: .35em;
-  }
-  
-  .simple-table th {
-    background: var(--bg-subMenu);
-    color: var(--subMenuText-color);
-    font-size: .35em;
-    border: 1px solid var(--bg-color);
-    /* text-transform: uppercase; */
-    padding: 0.2rem 0.3rem;
-    text-align: justify;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    
-  }
-  
-  .simple-table td {
-    font-size: .35em;
-    /* text-transform: uppercase; */
-    padding: 0.15rem .3rem !important;
-    text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    border: 1px solid var(--bg-color);
-  }
-  
-  .pagination {
-    position: sticky;
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
     width: 100%;
-    background-color: var(--bg-subMenu);
-    display: flex;
-    justify-content: end;
-    bottom: 0;
-    left: 0;
   }
-  
-  .pagination button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    margin: 0 5px;
-    padding: 5px 10px;
-    border: 1px solid #ddd;
-    background-color: #f4f4f4;
-    cursor: pointer;
+
+  .simple-table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  
-  .pagination button.active {
-    background-color: #007bff;
-    color: white;
-    border: 1px solid #007bff;
-  }
-  
-  .pagination button:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-  
-  /* Responsive styles */
-  @media screen and (max-width: 600px) {
-    .simple-table {
-      border: 0;
-      width: 100%;
-    }
-  
-    .simple-table caption {
-      font-size: 1.3em;
-    }
-  
-    .simple-table thead {
-      border: none;
-      clip: rect(0 0 0 0);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
-    }
-  
-    .simple-table tr {
-      border-bottom: 3px solid #ddd;
-      display: block;
-      margin-bottom: .625em;
-      width: 100%;
-    }
-  
-    .simple-table td {
-      border-bottom: 1px solid #ddd;
-      display: block;
-      font-size: .8em;
-      text-align: right;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  
-    .simple-table td::before {
-      content: attr(data-label);
-      float: left;
-      font-weight: bold;
+
+  .simple-table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
       /* text-transform: uppercase; */
-    }
-  
-    .simple-table td:last-child {
-      border-bottom: 0;
-    }
-  }
-  
-
-  .simple-table td.fixed-column {
-    position: sticky;
-    left: 0;
-    background-color: white;
-    z-index: 1;
-    /* box-shadow: 2px 0 5px -2px #ccc; */
-    border: 1px solid var(--bg-color);
   }
 
-  .simple-table th.fixed-column{
-    position: sticky;
-    left: 0;
-    background-color: var(--bg-color);
-    border: 1px solid var(--bg-color);
-    z-index: 1;
-    /* box-shadow: 2px 0 5px -2px #ccc; */
+  .simple-table td:last-child {
+    border-bottom: 0;
   }
-  
-  .simple-table th.fixed-column + th.fixed-column,
-  .simple-table td.fixed-column + td.fixed-column {
-    left: 100px; /* Adjust based on your column width */
-  }
-  
+}
+
+
+.simple-table td.fixed-column {
+  position: sticky;
+  left: 0;
+  background-color: white;
+  z-index: 1;
+  /* box-shadow: 2px 0 5px -2px #ccc; */
+  border: 1px solid var(--bg-color);
+}
+
+.simple-table th.fixed-column{
+  position: sticky;
+  left: 0;
+  background-color: var(--bg-color);
+  border: 1px solid var(--bg-color);
+  z-index: 1;
+  /* box-shadow: 2px 0 5px -2px #ccc; */
+}
+
+.simple-table th.fixed-column + th.fixed-column,
+.simple-table td.fixed-column + td.fixed-column {
+  left: 100px; /* Adjust based on your column width */
+}
