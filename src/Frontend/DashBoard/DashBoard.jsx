@@ -12,7 +12,7 @@ import {
   getDashBoardData,
 } from "./utitlity";
 import { useNavigate } from "react-router-dom";
-import { getAccessCentres } from "../../utils/NetworkApi/commonApi";
+import { getDashboardAccessCentres } from "../../utils/NetworkApi/commonApi";
 import MultiAxisLineChart from "./modules/MultiAxisLineChart";
 import RevenueChart from "./modules/RevenueChart";
 import { Bar } from "react-chartjs-2";
@@ -42,7 +42,7 @@ const MainDaashBoard = () => {
   });
 
   useEffect(() => {
-    getAccessCentres({
+    getDashboardAccessCentres({
       state: setAccessCentre,
       callbackFun: (field, values) => {
         let data = { ...payload };

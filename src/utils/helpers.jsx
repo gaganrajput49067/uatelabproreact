@@ -1,6 +1,5 @@
 import moment from "moment";
 import { useEffect } from "react";
-import moment from "moment";
 export function getCookie(name) {
   const matches = document.cookie.match(
     new RegExp(
