@@ -17,7 +17,7 @@ const CustomValueContainer = ({ children, ...props }) => (
 const ReactSelect = ({
   placeholderName,
   searchable,
-  defaultValue,
+  // defaultValue,
   respclass,
   id,
   handleChange,
@@ -116,7 +116,7 @@ const ReactSelect = ({
           <Select
             options={dynamicOptions ? dynamicOptions : []}
             isSearchable={searchable}
-            defaultValue={defaultValue}
+            // defaultValue={defaultValue}
             components={{
               ValueContainer: CustomValueContainer,
               DropdownIndicator: DefaultDropdownIndicator,

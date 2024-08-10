@@ -10,6 +10,7 @@ export const SelectBox = ({
   onKeyPress,
   lable,
 }) => {
+  
   return (
     <>
       {" "}
@@ -31,6 +32,8 @@ export const SelectBox = ({
               className={`Status-${ele?.status && ele?.value}`}
             >
               {ele?.label}
+              {selectedValue == ele?.value && "▼"}
+
             </option>
           ))}
         </select>

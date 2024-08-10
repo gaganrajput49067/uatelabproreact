@@ -12,10 +12,17 @@ function DatePicker({
   value,
   onKeyDown,
   required,
-  handleChange,
+  onChange,
   tabIndex,
-  timeOnly
+  timeOnly,
+  
+  maxDate,
+  minDate
 }) {
+
+  const handleDateChange = (e) => {
+    onChange(e?.target?.value, name);
+  };
   return (
     <>
       <div className={respclass} style={{ position: "relative" }}>
@@ -29,9 +36,11 @@ function DatePicker({
             dateFormat="dd-MM-yy"
             value={value}
             name={name}
-            onChange={handleChange}
-            wrapperClassName="datepicker"
+            onChange={handleDateChange}
+            // wrapperClassName="datepicker"
             tabIndex={tabIndex?tabIndex:"-1"}
+            maxDate={maxDate}
+            minDate={minDate}
           />
       
           <label
