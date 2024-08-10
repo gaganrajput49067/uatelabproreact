@@ -513,10 +513,10 @@ const PatientRegistration = () => {
       Husband: "",
     });
   };
-  const handleDatePNDT = (date, name) => {
+  const handleDatePNDT = (value, name) => {
     setPndt({
       ...Pndt,
-      [name]: date,
+      [name]: value,
     });
   };
   const handlePNDTChange = (e) => {
