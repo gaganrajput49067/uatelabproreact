@@ -51,8 +51,8 @@ const FirstPage = () => {
     console.log(e);
   };
 
-  const handleDateChange = (e) => {
-    console.log(e);
+  const handleDateChange = (value, name) => {
+    console.log(value, name);
   };
 
   const handleTime = (time, name) => {
@@ -95,7 +95,7 @@ const FirstPage = () => {
                 className="custom-calendar"
                 name="Date"
                 placeholder=" "
-                value=""
+                value={new Date()}
                 id="Date"
                 lable="CustomDate"
                 onChange={handleDateChange}

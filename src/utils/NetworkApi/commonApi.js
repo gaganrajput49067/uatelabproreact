@@ -66,6 +66,14 @@ const filtermenu = (menu, page) => {
   }
   return resultData;
 };
+
+export const getQuickLinks = (setState) => {
+  axiosInstance.get("Menu/getQuickLinks").then((res) => {
+    const datas = res?.data?.message?.map((ele) => ele?.Url?.toLowerCase());
+    setState(datas);
+  });
+};
+
 export const checkDuplicateBarcode = (barcodeNumber, LedgerTransactionID) => {
   return new Promise((resolve, reject) => {
     axiosInstance
@@ -280,6 +288,32 @@ export const getPaymentModes = (name, state) => {
       );
     });
 };
+
+export const getDashboardAccessCentres = ({ state, callbackFun }) => {
+  axiosInstance
+    .get("Centre/getAccessCentres")
+    .then((res) => {
+      let data = res.data.message;
+      if (Array.isArray(data)) {
+        let CentreDataValue = data.map((ele) => {
+          return {
+            value: ele.CentreID,
+            label: ele.Centre,
+          };
+        });
+        state(CentreDataValue);
+        callbackFun(
+          "CentreID",
+          CentreDataValue?.map((ele) => ele?.value)
+        );
+      } else {
+        console.error("Unexpected data format:", data);
+      }
+    })
+    .catch((err) => {
+      console.log("API call failed:", err); // Log error
+    });
+};
 export const getVisitType = (state) => {
   axiosInstance
     .get("Centre/visitTypeList")
@@ -315,64 +349,4 @@ export const getsecondDoctorSuggestion = (formData, state, setFormData) => {
     state([]);
     setFormData({ ...formData, DoctorReferal: "" });
   }
-};
-export const getRejectCount = () => {
-  axios
-    .get("/api/v1/SC/getrejectcount")
-    .then((res) => {
-      const data = res?.data?.message[0]?.Rejected;
-      const rejectCountElement = document.getElementById("RejectCount");
-      if (rejectCountElement) {
-        rejectCountElement.textContent = data;
-        if (data === 0) {
-          rejectCountElement.parentNode.parentNode.style.display = "none";
-        } else {
-          rejectCountElement.parentNode.parentNode.style.display = "block";
-        }
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-export const checkEmploypeeWiseDiscount = (data, id) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .post("/api/v1//PatientRegistration/IsValidDiscountAmount", {
-        TotalAmount: data?.GrossAmount,
-        EmployeeID: id,
-        CentreId: data?.CentreID,
-        DiscountAmount: data?.DiscountOnTotal,
-      })
-      .then((res) => {
-        resolve(false);
-      })
-      .catch((err) => {
-        reject(err?.response?.data?.message);
-      });
-  });
-};
-export const getSampleType = (state, id) => {
-  axiosInstance
-    .post("SampleType/getSampleTypeInVestigationWise", {
-      InvestigationID: id,
-    })
-    .then((res) => {
-      const data = res.data.message;
-      console.log(data);
-      let maindata = data.map((ele) => {
-        return {
-          value: ele?.id,
-          label: ele?.SampleName,
-        };
-      });
-      state(maindata);
-    })
-    .catch((err) => {
-      toast.error(
-        err?.response?.data?.message
-          ? err?.response?.data?.message
-          : "Error Occured"
-      );
-    });
 };

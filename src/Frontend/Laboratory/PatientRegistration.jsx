@@ -42,7 +42,13 @@ import {
 } from "../../utils/Schema";
 import RegisterationTable from "../Table/RegisterationTable";
 import SampleRemark from "../CustomModal/SampleRemark";
+import SaveSmsEmail from "../utils/SaveSmsEmail";
+import MobileDataModal from "../utils/MobileDataModal";
+import PatientRegisterModal from "../utils/PatientRegisterModal";
+import { useTranslation } from "react-i18next";
+import MedicialModal from "../utils/MedicialModal";
 const PatientRegistration = () => {
+  const { t } = useTranslation();
   const [patientImg, setPatientImg] = useState({
     img: MyImage,
     show: false,
@@ -172,7 +178,6 @@ const PatientRegistration = () => {
       show: false,
     },
   });
-  console.log(suggestionData);
 
   const getProEmployee = () => {
     axiosInstance
@@ -263,7 +268,6 @@ const PatientRegistration = () => {
     handleSubmitFinalBooking(data);
   };
   const handleSubmitFinalBooking = (data) => {
-    debugger
     axiosInstance
       .post("PatientRegistration/SaveData", {
         PatientData: getTrimmedData({
@@ -481,8 +485,7 @@ const PatientRegistration = () => {
   const getPaymentModeAmount = RcData?.filter(
     (ele) => ele?.PaymentMode == "Online Payment"
   );
-  console.log(getPaymentModeAmount);
-  console.log(RcData);
+
   const [searchTest, setSearchTest] = useState("TestName");
   const [slotOpen, setSlotOpen] = useState({
     show: false,
@@ -1395,7 +1398,6 @@ const PatientRegistration = () => {
   };
 
   const handleSelectSlot = (data, slotData, testData) => {
-    // console.log(data, slotData, testData,key);
     toast.success("Slot Added Successfully");
     const index = tableData?.findIndex(
       (item) => item.InvestigationID === testData.InvestigationID
@@ -1451,7 +1453,6 @@ const PatientRegistration = () => {
   };
 
   const getTableData = (data, key, Promo) => {
-    console.log(data);
     const ItemIndex = tableData.findIndex(
       (e) => e.InvestigationID == data.InvestigationID
     );
@@ -2533,7 +2534,7 @@ const PatientRegistration = () => {
         });
     }
   };
-  console.log(state);
+
   const checkPaymentStatus = async (order_id, pLink) => {
     try {
       const { data } = await axiosInstance.post("RazorPay/paymentstatus", {
@@ -2544,7 +2545,7 @@ const PatientRegistration = () => {
         toast.success("Payment successful!");
         return true;
       } else {
-        console.log("Payment not completed yet.");
+        toast.error("Payment failed. Please try again.");
         return false;
       }
     } catch (error) {
@@ -2562,7 +2563,6 @@ const PatientRegistration = () => {
       })
       .then((res) => {
         if (res.data.success) {
-          console.log(res.data.paymentLink.short_url);
           const order_id = res.data.paymentLink.notes.order_id;
           let timeoutId;
           let intervalId;
@@ -2640,7 +2640,6 @@ const PatientRegistration = () => {
     axiosInstance
       .get("RazorPay/Otherpayment")
       .then((res) => {
-        console.log(res);
         if (res?.data?.payment_capture == 1) {
           setIsRazorPayOpen(true);
           getPaymentLink();
@@ -2660,9 +2659,9 @@ const PatientRegistration = () => {
         )
       );
   };
-  console.log(isRazorPayOpen, getPaymentModeAmount);
+
   const handleSubmitApi = () => {
-    debugger
+    debugger;
     const { DocumentFlag, message } = handleFileValidationUpload();
     if (!filterUnPaidRcData()) {
       if (getTestNamesWithBlankSampleTypeID()) {
@@ -2689,12 +2688,11 @@ const PatientRegistration = () => {
   };
 
   const { errors, handleSubmit } = useFormik({
-    
     initialValues: { ...state, ...LTData, ...formData, ...Pndt },
     enableReinitialize: true,
     validationSchema: PatientRegisterSchema,
     onSubmit: (values) => {
-      debugger
+      debugger;
       const data = DynamicFieldValidations();
       setVisibleFields(data);
       const flag = data.filter((ele) => ele?.isError === true);
@@ -3053,7 +3051,7 @@ const PatientRegistration = () => {
 
     getTableData(data, "Coupon");
   };
-  console.log(visibleFields);
+
   const handleCouponValidate = () => {
     const generatedError = CouponValidateSchema(state, formData, LTData);
     setCoupon({
@@ -3255,7 +3253,7 @@ const PatientRegistration = () => {
       );
 
       const finalResult = parseFloat((value - finalData).toFixed(2));
-      console.log(finalResult);
+
       return finalResult;
     }
   };
@@ -3274,7 +3272,8 @@ const PatientRegistration = () => {
   };
   return (
     <>
-    {showRemark && (
+      {show && <PatientRegisterModal handleClose={handleClose} />}
+      {showRemark && (
         <SampleRemark
           show={showRemark}
           handleShow={handleShowRemark}
@@ -3284,10 +3283,34 @@ const PatientRegistration = () => {
           title={"Billing Remarks"}
         />
       )}
+      {show6 && (
+        <SaveSmsEmail
+          state={state}
+          LTData={LTData}
+          saveSmsEmail={saveSmsEmail}
+          setSaveSmsEmail={setSaveSmsEmail}
+          setShow6={setShow6}
+        />
+      )}
+      {mobleData.length > 0 && show4 && (
+        <MobileDataModal
+          show={show4}
+          mobleData={mobleData}
+          handleClose4={handleClose4}
+          handleSelctData={handleSelctData}
+        />
+      )}
+      {show3 && (
+        <MedicialModal
+          handleClose={handleClose3}
+          MedicalId={PatientGuid}
+          handleUploadCount={handleUploadCount}
+        />
+      )}
       <PageHead name="PatientRegistration">
         <div className="card">
-          <div className="row">
-            <div className="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+          <div className="patent-register-outlet">
+            <div className="patent-register-details">
               <div className="row">
                 <div className="col-sm-2">
                   <SelectBox
@@ -3381,26 +3404,25 @@ const PatientRegistration = () => {
               </div>
               <div className="row">
                 <div className="col-sm-2">
-                  <div className="p-inputgroup flex-1">
-                    <Input
-                      className="select-input-box form-control input-sm required"
-                      name="Mobile"
-                      id="Mobile"
-                      onInput={(e) => number(e, 10)}
-                      onKeyDown={(e) => handlePatientData(e, "Mobile")}
-                      value={state.Mobile}
-                      disabled={throughMobileData || throughMemberData}
-                      onChange={handleMainChange}
-                      type="number"
-                      lable="Mobile Number"
-                      placeholder=" "
-                    />
-                    <Button
-                      icon="pi pi-search"
-                      className="iconSize"
-                      onClick={handleShowMobile}
-                    />
-                  </div>
+                  <Input
+                    // className="select-input-box form-control input-sm required"
+                    name="Mobile"
+                    id="Mobile"
+                    onInput={(e) => number(e, 10)}
+                    onKeyDown={(e) => handlePatientData(e, "Mobile")}
+                    value={state.Mobile}
+                    disabled={throughMobileData || throughMemberData}
+                    onChange={handleMainChange}
+                    type="number"
+                    lable="Mobile Number"
+                    placeholder=" "
+                  />
+                  <Button
+                    icon="pi pi-search"
+                    className="iconSize ls-none"
+                    onClick={handleShowMobile}
+                  />
+
                   {!err?.Mobile && !err?.Mobiles && errors?.Mobile && (
                     <div className="error-message">{errors?.Mobile}</div>
                   )}
@@ -3512,6 +3534,64 @@ const PatientRegistration = () => {
                   <button
                     className="btn btn-primary btn-block btn-sm"
                     id="PRDM"
+                    onClick={() => {
+                      setSaveSmsEmail({
+                        ...saveSmsEmail,
+                        IsActiveEmailToClient:
+                          saveSmsEmail?.IsActiveEmailToClient !== ""
+                            ? saveSmsEmail?.IsActiveEmailToClient
+                            : saveSmsEmail?.EmailToClient != ""
+                            ? 1
+                            : state?.RateTypeEmail != ""
+                            ? 1
+                            : 0,
+                        IsActiveSmsToDoctor:
+                          saveSmsEmail?.IsActiveSmsToDoctor !== ""
+                            ? saveSmsEmail?.IsActiveSmsToDoctor
+                            : saveSmsEmail?.SmsToDoctor != ""
+                            ? 1
+                            : LTData?.DoctorMobile != ""
+                            ? 1
+                            : 0,
+                        IsActiveEmailToDoctor:
+                          saveSmsEmail?.IsActiveEmailToDoctor !== ""
+                            ? saveSmsEmail?.IsActiveEmailToDoctor
+                            : saveSmsEmail?.EmailToDoctor != ""
+                            ? 1
+                            : LTData?.DoctorEmail != ""
+                            ? 1
+                            : 0,
+                        IsActiveEmailToPatient:
+                          saveSmsEmail?.IsActiveEmailToPatient !== ""
+                            ? saveSmsEmail?.IsActiveEmailToPatient
+                            : saveSmsEmail?.EmailToPatient != ""
+                            ? 1
+                            : state?.Email != ""
+                            ? 1
+                            : 0,
+                        IsActiveSmsToPatient:
+                          saveSmsEmail?.IsActiveSmsToPatient !== ""
+                            ? saveSmsEmail?.IsActiveSmsToPatient
+                            : saveSmsEmail?.SmsToPatient != ""
+                            ? 1
+                            : state?.Mobile != ""
+                            ? 1
+                            : 0,
+                        IsActiveSmsToClient:
+                          saveSmsEmail?.IsActiveSmsToClient !== ""
+                            ? saveSmsEmail?.IsActiveSmsToClient
+                            : saveSmsEmail?.SmsToClient != ""
+                            ? 1
+                            : state?.RateTypePhone != ""
+                            ? 1
+                            : 0,
+                        IsWhatsappRequired: saveSmsEmail?.IsWhatsappRequired
+                          ? saveSmsEmail?.IsWhatsappRequired
+                          : 0,
+                      });
+
+                      setShow6(true);
+                    }}
                   >
                     PRDM
                   </button>
@@ -3621,7 +3701,11 @@ const PatientRegistration = () => {
                         ))}
                       </ul>
                     )}
-                    <Button icon="pi pi-plus" className="iconSize" />
+                    <Button
+                      icon="pi pi-plus"
+                      className="iconSize"
+                      onClick={handleShow}
+                    />
                   </div>
                   {!err?.DoctorName &&
                     !err?.DoctorID &&
@@ -4007,7 +4091,6 @@ const PatientRegistration = () => {
                 </>
               )}
               <div className="row">
-                {" "}
                 {Pndt?.PNDT && (
                   <>
                     <div className="col-md-2">
@@ -4137,723 +4220,718 @@ const PatientRegistration = () => {
                 )}
               </div>
             </div>
-            <div className="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-              <div className="row">
-                <div className="col-sm-12">
-                  <Image
-                    src={MyImage}
-                    alt="Image"
-                    width="182"
-                    height="130"
-                    preview
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-12">
-                  <button
-                    className="btn btn-info btn-block btn-sm"
-                    id="Upload Document"
-                  >
-                    Upload Document
-                  </button>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-12">
-                  <button
-                    className="btn btn-info btn-block btn-sm"
-                    id="Medical History"
-                  >
-                    Medical History
-                  </button>
-                </div>
-              </div>
+            <div className="patent-register-image">
+              <Image
+                src={MyImage}
+                alt="Image"
+                width="115"
+                height="130"
+                margin="0"
+                padding="0"
+                preview
+              />
+              <button
+                className={`btn ${
+                  LTData?.UploadDocumentCount === 0 ? "btn-info" : "btn-success"
+                } w-100 btn-sm p-0`}
+                id="Upload Document"
+                onClick={() => {
+                  setShow2(true);
+                }}
+              >
+                {t("Upload Document")}
+                <span id="spnCount"> ({LTData?.UploadDocumentCount})</span>
+              </button>
+              <button
+                className={`btn   ${
+                  LTData?.MedicalHistoryCount === 0 ? "btn-info" : "btn-success"
+                } w-100 btn-sm `}
+                id="Medical History"
+                onClick={() => {
+                  handleClose3();
+                }}
+              >
+                {t("Medical History")}&nbsp;
+                <span id="spnMedicalCount">
+                  ({LTData?.MedicalHistoryCount})
+                </span>
+              </button>
             </div>
           </div>
         </div>
 
-        <div className="card">
-          <div className="row">
-            <div className="col-sm-6">
-              <div className="card">
-                <div className="row">
-                  <div className="col-sm-5">
-                    <Input
-                      name="TestName"
-                      lable={
-                        searchTest == "TestName"
-                          ? "Type TestName For Add Test"
-                          : "Type TestCode For Add Test"
-                      }
-                      type="text"
-                      placeholder=" "
-                      max={30}
-                      id="testSearch"
-                      onChange={handleChange}
-                      onBlur={() => {
-                        autocompleteOnBlur(setSuggestion);
-                        setTimeout(() => {
-                          document.getElementById("testSearch").value = "";
-                        }, 500);
-                      }}
-                      onKeyDown={handleIndex}
-                    />
-                    {suggestion.length > 0 && (
-                      <ul className="suggestion-data" style={{ zIndex: 99 }}>
-                        {suggestion.map((data, index) => (
-                          <li
-                            onClick={() => handleListSearch(data, "TestName")}
-                            key={index}
-                            className={`${
-                              index === indexMatch && "matchIndex"
-                            }`}
-                          >
-                            {data.TestName}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                  <div className="col-sm-7">
-                    <div className="flex flex-wrap gap-3">
-                      <div className="flex ">
-                        <input
-                          type="radio"
-                          id="TestName"
-                          name="TestName"
-                          value="TestName"
-                          checked={searchTest == "TestName"}
-                          onChange={(e) => {
-                            setSearchTest(e.target.value);
-                          }}
-                        />
-                        <label htmlFor="TestName" className="ml-2">
-                          By TestName
-                        </label>
-                      </div>
-                      <div className="flex ">
-                        <input
-                          type="radio"
-                          id="TestCode"
-                          name="TestCode"
-                          value="TestCode"
-                          checked={searchTest == "TestCode"}
-                          onChange={(e) => {
-                            setSearchTest(e.target.value);
-                          }}
-                        />
-                        <label htmlFor="TestCode" className="ml-2">
-                          By TestCode
-                        </label>
-                      </div>
-                      <div className="flex ml-3">
-                        <input
-                          type="checkbox"
-                          name="isVIP"
-                          id="isVIP"
-                          checked={state?.isVIP}
-                          onChange={handleMainChange}
-                          value={state?.isVIP === 1 ? true : false}
-                        />
-                        <label htmlFor="isVIP" className="ml-2">
-                          VIP
-                        </label>
-                      </div>
-
-                      {state?.isVIP === 1 && (
-                        <>
-                          <div className="flex align-items-left">
-                            <input
-                              type="checkbox"
-                              name="IsMask"
-                              id="IsMask"
-                              checked={state?.IsMask}
-                              onChange={handleMainChange}
-                              value={state?.IsMask === 1 ? true : false}
-                            />
-                          </div>
-
-                          <label htmlFor="IsMask" className="ml-1">
-                            MASK
-                          </label>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <Table paginate={false}>
-                    <thead>
-                      <tr>
-                        <th>{"S.No"}</th>
-                        <th>{"Slot"}</th>
-                        <th>{"Code"}</th>
-                        <th
-                          style={{
-                            wordWrap: "break-word",
-                            whiteSpace: "normal",
-                          }}
+        <div className="patient-register-other">
+          <div className="">
+            <div className="card">
+              <div className="row">
+                <div className="col-sm-5">
+                  <Input
+                    name="TestName"
+                    lable={
+                      searchTest == "TestName"
+                        ? "Type TestName For Add Test"
+                        : "Type TestCode For Add Test"
+                    }
+                    type="text"
+                    placeholder=" "
+                    max={30}
+                    id="testSearch"
+                    onChange={handleChange}
+                    onBlur={() => {
+                      autocompleteOnBlur(setSuggestion);
+                      setTimeout(() => {
+                        document.getElementById("testSearch").value = "";
+                      }, 500);
+                    }}
+                    onKeyDown={handleIndex}
+                  />
+                  {suggestion.length > 0 && (
+                    <ul className="suggestion-data" style={{ zIndex: 99 }}>
+                      {suggestion.map((data, index) => (
+                        <li
+                          onClick={() => handleListSearch(data, "TestName")}
+                          key={index}
+                          className={`${index === indexMatch && "matchIndex"}`}
                         >
-                          {"Item"}
-                        </th>
-                        <th>{"View"}</th>
-                        <th>{"DOS"}</th>
-                        <th>{"MRP"}</th>
-                        <th>{"Rate"}</th>
-                        <th>{"Disc."}</th>
-                        <th>{"Amt"}</th>
-                        <th>{"D.Date"}</th>
-                        <th>{"SC"}</th>
-                        <th>
-                          <img src={Urgent} title="Is Urgent"></img>
-                        </th>
-                      </tr>
-                    </thead>{" "}
-                    {tableData.length > 0 && (
-                      <tbody>
-                        {tableData.map((data, index) => (
-                          <>
-                            <tr
-                              key={index}
-                              style={{
-                                backgroundColor:
-                                  data?.isOutSource === 1 ? "pink" : "",
-                              }}
-                            >
-                              <RegisterationTable
-                                data={data}
-                                slotOpen={slotOpen}
-                                setSlotOpen={setSlotOpen}
-                                handleSelectSlot={handleSelectSlot}
-                                tableData={tableData}
-                                setTableData={setTableData}
-                                LTData={LTData}
-                                index={index}
-                                coupon={coupon}
-                                member={throughMemberData}
-                                handleFilter={handleFilter}
-                                handleDiscount={handleDiscount}
-                                handlePLOChange={handlePLOChange}
-                                handleUrgent={handleUrgent}
-                                handleRateTypePaymode={handleRateTypePaymode}
-                                state={state}
-                              />
-                            </tr>
-                          </>
-                        ))}
-                      </tbody>
+                          {data.TestName}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+                <div className="col-sm-7">
+                  <div className="flex flex-wrap gap-3">
+                    <div className="flex ">
+                      <input
+                        type="radio"
+                        id="TestName"
+                        name="TestName"
+                        value="TestName"
+                        checked={searchTest == "TestName"}
+                        onChange={(e) => {
+                          setSearchTest(e.target.value);
+                        }}
+                      />
+                      <label htmlFor="TestName" className="ml-2">
+                        By TestName
+                      </label>
+                    </div>
+                    <div className="flex ">
+                      <input
+                        type="radio"
+                        id="TestCode"
+                        name="TestCode"
+                        value="TestCode"
+                        checked={searchTest == "TestCode"}
+                        onChange={(e) => {
+                          setSearchTest(e.target.value);
+                        }}
+                      />
+                      <label htmlFor="TestCode" className="ml-2">
+                        By TestCode
+                      </label>
+                    </div>
+                    <div className="flex ml-3">
+                      <input
+                        type="checkbox"
+                        name="isVIP"
+                        id="isVIP"
+                        checked={state?.isVIP}
+                        onChange={handleMainChange}
+                        value={state?.isVIP === 1 ? true : false}
+                      />
+                      <label htmlFor="isVIP" className="ml-2">
+                        VIP
+                      </label>
+                    </div>
+
+                    {state?.isVIP === 1 && (
+                      <>
+                        <div className="flex align-items-left">
+                          <input
+                            type="checkbox"
+                            name="IsMask"
+                            id="IsMask"
+                            checked={state?.IsMask}
+                            onChange={handleMainChange}
+                            value={state?.IsMask === 1 ? true : false}
+                          />
+                        </div>
+
+                        <label htmlFor="IsMask" className="ml-1">
+                          MASK
+                        </label>
+                      </>
                     )}
-                  </Table>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-sm-6">
-              <div className="card">
-                <div className="row">
-                  <div className="col-sm-3">
-                    <Input
-                      className="select-input-box form-control input-sm currency"
-                      data-val="false"
-                      placeholder=" "
-                      lable=" Total Amount"
-                      id="Total_Amount"
-                      name="Total_Amount"
-                      disabled={true}
-                      value={Number(LTData?.NetAmount).toFixed(2)}
-                      type="text"
-                      readOnly="readonly"
-                    />
-                  </div>
-                  <div className="col-sm-3">
-                    <Input
-                      className="select-input-box form-control input-sm currency"
-                      id="Paid_Amount"
-                      lable="Paid Amount"
-                      placeholder=" "
-                      name="Paid_Amount"
-                      type="number"
-                      value={Number(paid).toFixed(2)}
-                      readOnly="readonly"
-                    />
-                  </div>
-                  <div className="col-sm-3">
-                    <Input
-                      className="select-input-box form-control input-sm currency"
-                      data-val="false"
-                      placeholder=" "
-                      id="DiscountAmt"
-                      lable="Discount Amount"
-                      disabled={
-                        tableData?.length > 0
-                          ? LTData?.DiscountId != ""
-                            ? true
-                            : handleRateTypePaymode === "Credit"
-                            ? true
-                            : LTData?.DiscountApprovedBy != ""
-                            ? true
-                            : false
-                          : true
-                      }
-                      value={disAmt}
-                      name="disAmt"
-                      onChange={(e) => {
-                        let match = Match();
 
-                        if (coupon?.field == true) {
-                          toast.error("Remove Coupon First");
-                        } else {
-                          if (discountPercentage === "" && !match) {
-                            if (LTData?.GrossAmount < Number(e.target.value)) {
-                              toast.error("please Enter Valid Discount");
-                            } else {
-                              const val = e.target.value;
-                              const isValidInput =
-                                /^\d+(\.\d{0,2})?$/.test(val) &&
-                                parseFloat(val) >= 0 &&
-                                parseFloat(val) <= 99999999999;
-                              setdisAmt(
-                                isValidInput || val === "" ? val : disAmt
-                              );
-                              setLTData({
-                                ...LTData,
-                                DiscountOnTotal:
-                                  isValidInput || val === ""
-                                    ? val
-                                    : LTData.DiscountOnTotal,
-                              });
-
-                              const findPercentageDiscount =
-                                (val / LTData?.GrossAmount) * 100;
-
-                              const data = PLO.map((ele, index) => {
-                                const finalDiscountamont =
-                                  handleDiscountLastIndex(
-                                    ele,
-                                    index,
-                                    findPercentageDiscount,
-                                    val
-                                  );
-
-                                return {
-                                  ...ele,
-                                  Amount:
-                                    tableData?.length > 1
-                                      ? ele.Rate - finalDiscountamont
-                                      : ele?.Rate - val,
-                                  DiscountAmt:
-                                    tableData?.length > 1
-                                      ? finalDiscountamont
-                                      : val,
-                                };
-                              });
-                              setPLO(data);
-                            }
-                          } else {
-                            toast.error("Discount already Given");
-                          }
-                        }
+              <Table paginate={false}>
+                <thead>
+                  <tr>
+                    <th>{"S.No"}</th>
+                    <th>{"Slot"}</th>
+                    <th>{"Code"}</th>
+                    <th
+                      style={{
+                        wordWrap: "break-word",
+                        whiteSpace: "normal",
                       }}
-                    />
-                  </div>
-                  <div className="col-sm-3">
-                    <Input
-                      className="select-input-box form-control input-sm currency"
-                      id="DiscountPer"
-                      lable="Discount Percentage"
-                      value={discountPercentage}
-                      name="DiscountPer"
-                      disabled={
-                        tableData?.length > 0
-                          ? LTData?.DiscountId != ""
-                            ? true
-                            : handleRateTypePaymode === "Credit"
-                            ? true
-                            : LTData?.DiscountApprovedBy != ""
-                            ? true
-                            : false
-                          : true
-                      }
-                      placeholder=" "
-                      onChange={(e) => {
-                        const val = e.target.value;
-                        const isValidInput =
-                          /^\d+(\.\d{0,2})?$/.test(val) &&
-                          parseFloat(val) >= 0 &&
-                          parseFloat(val) <= 100;
-                        let match = Match();
+                    >
+                      {"Item"}
+                    </th>
+                    <th>{"View"}</th>
+                    <th>{"DOS"}</th>
+                    <th>{"MRP"}</th>
+                    <th>{"Rate"}</th>
+                    <th>{"Disc."}</th>
+                    <th>{"Amt"}</th>
+                    <th>{"D.Date"}</th>
+                    <th>{"SC"}</th>
+                    <th>
+                      <img src={Urgent} title="Is Urgent"></img>
+                    </th>
+                  </tr>
+                </thead>{" "}
+                {tableData.length > 0 && (
+                  <tbody>
+                    {tableData.map((data, index) => (
+                      <>
+                        <tr
+                          key={index}
+                          style={{
+                            backgroundColor:
+                              data?.isOutSource === 1 ? "pink" : "",
+                          }}
+                        >
+                          <RegisterationTable
+                            data={data}
+                            slotOpen={slotOpen}
+                            setSlotOpen={setSlotOpen}
+                            handleSelectSlot={handleSelectSlot}
+                            tableData={tableData}
+                            setTableData={setTableData}
+                            LTData={LTData}
+                            index={index}
+                            coupon={coupon}
+                            member={throughMemberData}
+                            handleFilter={handleFilter}
+                            handleDiscount={handleDiscount}
+                            handlePLOChange={handlePLOChange}
+                            handleUrgent={handleUrgent}
+                            handleRateTypePaymode={handleRateTypePaymode}
+                            state={state}
+                          />
+                        </tr>
+                      </>
+                    ))}
+                  </tbody>
+                )}
+              </Table>
+            </div>
+          </div>
+          <div className="">
+            <div className="card">
+              <div className="row">
+                <div className="col-sm-3">
+                  <Input
+                    className="select-input-box form-control input-sm currency"
+                    data-val="false"
+                    placeholder=" "
+                    lable=" Total Amount"
+                    id="Total_Amount"
+                    name="Total_Amount"
+                    disabled={true}
+                    value={Number(LTData?.NetAmount).toFixed(2)}
+                    type="text"
+                    readOnly="readonly"
+                  />
+                </div>
+                <div className="col-sm-3">
+                  <Input
+                    className="select-input-box form-control input-sm currency"
+                    id="Paid_Amount"
+                    lable="Paid Amount"
+                    placeholder=" "
+                    name="Paid_Amount"
+                    type="number"
+                    value={Number(paid).toFixed(2)}
+                    readOnly="readonly"
+                  />
+                </div>
+                <div className="col-sm-3">
+                  <Input
+                    className="select-input-box form-control input-sm currency"
+                    data-val="false"
+                    placeholder=" "
+                    id="DiscountAmt"
+                    lable="Discount Amount"
+                    disabled={
+                      tableData?.length > 0
+                        ? LTData?.DiscountId != ""
+                          ? true
+                          : handleRateTypePaymode === "Credit"
+                          ? true
+                          : LTData?.DiscountApprovedBy != ""
+                          ? true
+                          : false
+                        : true
+                    }
+                    value={disAmt}
+                    name="disAmt"
+                    onChange={(e) => {
+                      let match = Match();
 
-                        if (coupon?.field == true) {
-                          toast.error("Remove Coupon First");
-                        } else {
-                          if (disAmt === "" && !match) {
-                            setDiscountPercentage(
-                              isValidInput || val === ""
-                                ? val
-                                : discountPercentage
+                      if (coupon?.field == true) {
+                        toast.error("Remove Coupon First");
+                      } else {
+                        if (discountPercentage === "" && !match) {
+                          if (LTData?.GrossAmount < Number(e.target.value)) {
+                            toast.error("please Enter Valid Discount");
+                          } else {
+                            const val = e.target.value;
+                            const isValidInput =
+                              /^\d+(\.\d{0,2})?$/.test(val) &&
+                              parseFloat(val) >= 0 &&
+                              parseFloat(val) <= 99999999999;
+                            setdisAmt(
+                              isValidInput || val === "" ? val : disAmt
                             );
+                            setLTData({
+                              ...LTData,
+                              DiscountOnTotal:
+                                isValidInput || val === ""
+                                  ? val
+                                  : LTData.DiscountOnTotal,
+                            });
+
+                            const findPercentageDiscount =
+                              (val / LTData?.GrossAmount) * 100;
+
+                            const data = PLO.map((ele, index) => {
+                              const finalDiscountamont =
+                                handleDiscountLastIndex(
+                                  ele,
+                                  index,
+                                  findPercentageDiscount,
+                                  val
+                                );
+
+                              return {
+                                ...ele,
+                                Amount:
+                                  tableData?.length > 1
+                                    ? ele.Rate - finalDiscountamont
+                                    : ele?.Rate - val,
+                                DiscountAmt:
+                                  tableData?.length > 1
+                                    ? finalDiscountamont
+                                    : val,
+                              };
+                            });
+                            setPLO(data);
+                          }
+                        } else {
+                          toast.error("Discount already Given");
+                        }
+                      }
+                    }}
+                  />
+                </div>
+                <div className="col-sm-3">
+                  <Input
+                    className="select-input-box form-control input-sm currency"
+                    id="DiscountPer"
+                    lable="Discount Percentage"
+                    value={discountPercentage}
+                    name="DiscountPer"
+                    disabled={
+                      tableData?.length > 0
+                        ? LTData?.DiscountId != ""
+                          ? true
+                          : handleRateTypePaymode === "Credit"
+                          ? true
+                          : LTData?.DiscountApprovedBy != ""
+                          ? true
+                          : false
+                        : true
+                    }
+                    placeholder=" "
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      const isValidInput =
+                        /^\d+(\.\d{0,2})?$/.test(val) &&
+                        parseFloat(val) >= 0 &&
+                        parseFloat(val) <= 100;
+                      let match = Match();
+
+                      if (coupon?.field == true) {
+                        toast.error("Remove Coupon First");
+                      } else {
+                        if (disAmt === "" && !match) {
+                          setDiscountPercentage(
+                            isValidInput || val === ""
+                              ? val
+                              : discountPercentage
+                          );
+                        } else {
+                          toast.error("Discount Already Given");
+                        }
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-3">
+                  <SelectBox
+                    options={PaymentMode}
+                    selectedValue={RcData[RcData.length - 1].PaymentModeID}
+                    onChange={handlePaymentChange}
+                    isDisabled={
+                      tableData?.length > 0
+                        ? handleRateTypePaymode === "Credit"
+                          ? true
+                          : false
+                        : true
+                    }
+                  />
+                </div>
+                <div className="col-sm-3">
+                  <SelectBox
+                    options={DISCOUNT_TYPE}
+                    selectedValue={LTData?.DiscountType}
+                    onChange={handleSelectChange}
+                    name={"DiscountType"}
+                    isDisabled={
+                      tableData?.length > 0 && !coupon.field ? false : true
+                    }
+                  />
+                </div>
+                <div className="col-sm-3">
+                  {LTData?.DiscountType === 1 ? (
+                    <SelectBox
+                      options={BindDiscApproval}
+                      name="DiscountApprovedBy"
+                      selectedValue={LTData?.DiscountApprovedBy}
+                      onChange={handleSelectChange}
+                      isDisabled={
+                        coupon?.field
+                          ? true
+                          : LTData?.DiscountId != ""
+                          ? true
+                          : LTData?.DiscountOnTotal === "" ||
+                            LTData?.DiscountOnTotal == 0
+                          ? true
+                          : false
+                      }
+                    />
+                  ) : (
+                    AgeWiseDiscountDropdown.length > 0 && (
+                      <SelectBox
+                        options={AgeWiseDiscountDropdown}
+                        selectedValue={LTData?.DiscountId}
+                        name="DiscountId"
+                        onChange={(e) => {
+                          let match = Match();
+                          if (disAmt === "" && !match) {
+                            const data = AgeWiseDiscountDropdown.find(
+                              (ele) => ele?.value == e.target.value
+                            );
+
+                            setDiscountPercentage(data?.perCentage);
+                            setLTData({
+                              ...LTData,
+                              DiscountId: e.target.value,
+                              DiscountApprovedBy: "",
+                              DiscountReason: "",
+                            });
                           } else {
                             toast.error("Discount Already Given");
                           }
-                        }
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-3">
-                    <SelectBox
-                      options={PaymentMode}
-                      selectedValue={RcData[RcData.length - 1].PaymentModeID}
-                      onChange={handlePaymentChange}
-                      isDisabled={
-                        tableData?.length > 0
-                          ? handleRateTypePaymode === "Credit"
-                            ? true
-                            : false
-                          : true
-                      }
-                    />
-                  </div>
-                  <div className="col-sm-3">
-                    <SelectBox
-                      options={DISCOUNT_TYPE}
-                      selectedValue={LTData?.DiscountType}
-                      onChange={handleSelectChange}
-                      name={"DiscountType"}
-                      isDisabled={
-                        tableData?.length > 0 && !coupon.field ? false : true
-                      }
-                    />
-                  </div>
-                  <div className="col-sm-3">
-                    {LTData?.DiscountType === 1 ? (
-                      <SelectBox
-                        options={BindDiscApproval}
-                        name="DiscountApprovedBy"
-                        selectedValue={LTData?.DiscountApprovedBy}
-                        onChange={handleSelectChange}
-                        isDisabled={
-                          coupon?.field
-                            ? true
-                            : LTData?.DiscountId != ""
-                            ? true
-                            : LTData?.DiscountOnTotal === "" ||
-                              LTData?.DiscountOnTotal == 0
-                            ? true
-                            : false
-                        }
-                      />
-                    ) : (
-                      AgeWiseDiscountDropdown.length > 0 && (
-                        <SelectBox
-                          options={AgeWiseDiscountDropdown}
-                          selectedValue={LTData?.DiscountId}
-                          name="DiscountId"
-                          onChange={(e) => {
-                            let match = Match();
-                            if (disAmt === "" && !match) {
-                              const data = AgeWiseDiscountDropdown.find(
-                                (ele) => ele?.value == e.target.value
-                              );
-
-                              setDiscountPercentage(data?.perCentage);
-                              setLTData({
-                                ...LTData,
-                                DiscountId: e.target.value,
-                                DiscountApprovedBy: "",
-                                DiscountReason: "",
-                              });
-                            } else {
-                              toast.error("Discount Already Given");
-                            }
-                          }}
-                        />
-                      )
-                    )}
-                  </div>
-                  <div className="col-sm-3">
-                    {LTData?.DiscountId === "" ? (
-                      <SelectBox
-                        options={BindDiscReason}
-                        name="DiscountReason"
-                        selectedValue={LTData?.DiscountReason}
-                        onChange={handleSelectChange}
-                        isDisabled={
-                          coupon?.field
-                            ? true
-                            : LTData?.DiscountId != ""
-                            ? true
-                            : LTData?.DiscountOnTotal === "" ||
-                              LTData?.DiscountOnTotal == 0
-                            ? true
-                            : false
-                        }
-                      />
-                    ) : (
-                      <Input
-                        name="DiscountReason"
-                        lable="Discount Reason"
-                        placeholder=" "
-                        value={LTData?.DiscountReason}
-                        onChange={handleSelectChange}
-                      />
-                    )}
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-4">
-                    <div className="d-flex">
-                      <div style={{ width: "87%" }}>
-                        <Input
-                          id="CouponCode"
-                          lable="Enter Your Coupon Code"
-                          type="text"
-                          value={coupon.code}
-                          max={30}
-                          placeholder={" "}
-                          disabled={coupon.field}
-                          onChange={(e) =>
-                            setCoupon({
-                              ...coupon,
-                              code: e.target.value,
-                            })
-                          }
-                        />
-                      </div>
-
-                      <div style={{ width: "13%" }}>
-                        <button
-                          className="btn btn-primary btn-sm"
-                          id="NewReferDoc"
-                          type="button"
-                          onClick={handleCouponDetailsModal}
-                          style={{ borderRadius: "0px !important" }}
-                        >
-                          <i
-                            className="fa fa-search coloricon"
-                            style={{ cursor: "pointer" }}
-                          ></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-sm-2">
-                    {coupon?.load ? (
-                      <Loading />
-                    ) : (
-                      <button
-                        className="btn btn-success btn-block btn-sm"
-                        onClick={handleCouponValidate}
-                        disabled={coupon.field}
-                      >
-                        {"Validate"}
-                      </button>
-                    )}
-                  </div>
-                  <div className="col-sm-2">
-                    <button
-                      id="btndeleterow"
-                      className="btn btn-danger btn-block btn-sm"
-                      onClick={handleCouponCancel}
-                    >
-                      {"Cancel"}
-                    </button>
-                  </div>
-                </div>
-                <div className="row m-0 p-0">
-                  <Table paginate={false}>
-                    <thead className="cf">
-                      <tr>
-                        <th>{"Action"}</th>
-                        <th>{"Mode"}</th>
-                        <th>{"Paid Amount"}</th>
-                        <th>{"Currency"}</th>
-                        <th>{"Base"}</th>
-                        <th>{"Bank Name"}</th>
-                        <th>{"Cheque/Card No."}</th>
-                        <th>{"Cheque Date/Trans No"}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {RcData?.map((data, index) => (
-                        <tr key={index}>
-                          <td data-title={"Action"}>
-                            <button
-                              className="btn btn-danger"
-                              onClick={() => handleFilterPayment(index)}
-                            >
-                              X
-                            </button>
-                          </td>
-                          <td data-title={"Mode"}>
-                            <span id="SpanPaymentMode">
-                              {data?.PaymentMode} &nbsp;
-                            </span>
-                          </td>
-                          <td data-title={"Paid Amount"}>
-                            {handleRateTypePaymode === "Credit" ? (
-                              ""
-                            ) : (
-                              <Input
-                                name="Amount"
-                                value={data?.Amount}
-                                placeholder={"0.00"}
-                                type="number"
-                                onChange={(e) => {
-                                  let sum = calculate(e.target.value, index);
-                                  if (
-                                    sum > LTData?.NetAmount ||
-                                    e.target.value > LTData?.NetAmount
-                                  ) {
-                                    toast.error("Please Enter Correct Amount");
-                                    const data = [...RcData];
-                                    data[index]["Amount"] = "";
-                                    calculate("", index);
-                                    setRcData(data);
-                                  } else {
-                                    const data = [...RcData];
-                                    data[index]["Amount"] = e.target.value;
-                                    setRcData(data);
-                                  }
-                                }}
-                              />
-                            )}
-                          </td>
-                          <td data-title={"Currency"}>
-                            <span id="SpanCurrency">{"INR"}</span>
-                          </td>
-                          <td data-title={"Base"}>
-                            <span id="spnbaseAmount">
-                              {data?.Amount} &nbsp;
-                            </span>
-                          </td>
-                          <td data-title={"Bank Name"}>
-                            {["Cash", "Online Payment", "Paytm"].includes(
-                              data?.PaymentMode
-                            ) ? (
-                              ""
-                            ) : (
-                              <select
-                                className="required"
-                                name="BankName"
-                                value={data?.BankName}
-                                disabled={
-                                  handleRateTypePaymode === "Credit"
-                                    ? true
-                                    : false
-                                }
-                                onChange={(e) => handleChangeRTCData(e, index)}
-                              >
-                                <option hidden>--Select Bank --</option>
-                                {BankName.map((ele, index) => (
-                                  <option value={ele.value} key={index}>
-                                    {ele.label}
-                                  </option>
-                                ))}
-                              </select>
-                            )}
-                            &nbsp;
-                          </td>
-                          <td data-title={"Cheque/Card No."}>
-                            <Input
-                              disabled={
-                                ["Cash", "Online Payment", "Paytm"].includes(
-                                  data?.PaymentMode
-                                )
-                                  ? true
-                                  : handleRateTypePaymode === "Credit"
-                                  ? true
-                                  : false
-                              }
-                              type="number"
-                              id="CardNo"
-                              onInput={(e) => number(e, 16)}
-                              name="CardNo"
-                              value={data?.CardNo}
-                              onChange={(e) => handleChangeRTCData(e, index)}
-                              className={`select-input-box form-control input-sm ${
-                                ["Cash", "Online Payment", "Paytm"].includes(
-                                  data?.PaymentMode
-                                )
-                                  ? ""
-                                  : "required"
-                              }`}
-                            />
-                          </td>
-                          <td data-title={"Cheque Date/Trans No"}>
-                            <Input
-                              disabled={
-                                data?.PaymentMode !== "Cash"
-                                  ? handleRateTypePaymode === "Credit"
-                                    ? true
-                                    : false
-                                  : true
-                              }
-                              type={
-                                ["Cash", "Online Payment", "Paytm"].includes(
-                                  data?.PaymentMode
-                                )
-                                  ? "text"
-                                  : "date"
-                              }
-                              id="CardDate"
-                              className={`select-input-box form-control input-sm ${
-                                ["Cash", "Online Payment", "Paytm"].includes(
-                                  data?.PaymentMode
-                                )
-                                  ? ""
-                                  : "required"
-                              }`}
-                              name="CardDate"
-                              value={data?.CardDate}
-                              onChange={(e) => handleChangeRTCData(e, index)}
-                            />
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                </div>
-                <div className="row">
-                  <div className="col-md-2">
-                    {(isSubmit?.isLoading && isSubmit?.type === "Success") ||
-                    isRazorPayOpen ? (
-                      <Loading />
-                    ) : (
-                      <button
-                        type="submit"
-                        id="btnSave"
-                        disabled={handleLockRegistation}
-                        className="btn btn-success w-100 btn-sm"
-                        onClick={() => {
-                          handleSubmit();
-                          window.scrollTo(0, 0);
                         }}
-                      >
-                        {"Submit"}
-                      </button>
-                    )}
-                  </div>
-                  {state?.HideAmount != 1 && (
-                    <div className="col-md-3">
-                      <small>
-                        {"Due Amount"} :{" "}
-                        {Number(LTData?.NetAmount - paid).toFixed(2)}
-                      </small>
-                    </div>
-                  )}
-                  {state?.HideAmount != 1 && (
-                    <div className="col-md-4">
-                      <small>
-                        {"Total Discount Amount"} :
-                        {LTData?.DiscountOnTotal
-                          ? parseFloat(LTData?.DiscountOnTotal).toFixed(2)
-                          : " 0"}
-                      </small>
-                    </div>
+                      />
+                    )
                   )}
                 </div>
+                <div className="col-sm-3">
+                  {LTData?.DiscountId === "" ? (
+                    <SelectBox
+                      options={BindDiscReason}
+                      name="DiscountReason"
+                      selectedValue={LTData?.DiscountReason}
+                      onChange={handleSelectChange}
+                      isDisabled={
+                        coupon?.field
+                          ? true
+                          : LTData?.DiscountId != ""
+                          ? true
+                          : LTData?.DiscountOnTotal === "" ||
+                            LTData?.DiscountOnTotal == 0
+                          ? true
+                          : false
+                      }
+                    />
+                  ) : (
+                    <Input
+                      name="DiscountReason"
+                      lable="Discount Reason"
+                      placeholder=" "
+                      value={LTData?.DiscountReason}
+                      onChange={handleSelectChange}
+                    />
+                  )}
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-4">
+                  <div className="d-flex">
+                    <div style={{ width: "87%" }}>
+                      <Input
+                        id="CouponCode"
+                        lable="Enter Your Coupon Code"
+                        type="text"
+                        value={coupon.code}
+                        max={30}
+                        placeholder={" "}
+                        disabled={coupon.field}
+                        onChange={(e) =>
+                          setCoupon({
+                            ...coupon,
+                            code: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+
+                    <div style={{ width: "13%" }}>
+                      <button
+                        className="btn btn-primary btn-sm"
+                        id="NewReferDoc"
+                        type="button"
+                        onClick={handleCouponDetailsModal}
+                        style={{ borderRadius: "0px !important" }}
+                      >
+                        <i
+                          className="fa fa-search coloricon"
+                          style={{ cursor: "pointer" }}
+                        ></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-sm-2">
+                  {coupon?.load ? (
+                    <Loading />
+                  ) : (
+                    <button
+                      className="btn btn-success btn-block btn-sm"
+                      onClick={handleCouponValidate}
+                      disabled={coupon.field}
+                    >
+                      {"Validate"}
+                    </button>
+                  )}
+                </div>
+                <div className="col-sm-2">
+                  <button
+                    id="btndeleterow"
+                    className="btn btn-danger btn-block btn-sm"
+                    onClick={handleCouponCancel}
+                  >
+                    {"Cancel"}
+                  </button>
+                </div>
+              </div>
+
+              <Table paginate={false}>
+                <thead className="cf">
+                  <tr>
+                    <th>{"Action"}</th>
+                    <th>{"Mode"}</th>
+                    <th>{"Paid Amount"}</th>
+                    <th>{"Currency"}</th>
+                    <th>{"Base"}</th>
+                    <th>{"Bank Name"}</th>
+                    <th>{"Cheque/Card No."}</th>
+                    <th>{"Cheque Date/Trans No"}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {RcData?.map((data, index) => (
+                    <tr key={index}>
+                      <td data-label={"Action"}>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => handleFilterPayment(index)}
+                        >
+                          X
+                        </button>
+                      </td>
+                      <td data-label={"Mode"}>
+                        <span id="SpanPaymentMode">
+                          {data?.PaymentMode} &nbsp;
+                        </span>
+                      </td>
+                      <td data-label={"Paid Amount"}>
+                        {handleRateTypePaymode === "Credit" ? (
+                          ""
+                        ) : (
+                          <Input
+                            name="Amount"
+                            value={data?.Amount}
+                            placeholder={"0.00"}
+                            type="number"
+                            onChange={(e) => {
+                              let sum = calculate(e.target.value, index);
+                              if (
+                                sum > LTData?.NetAmount ||
+                                e.target.value > LTData?.NetAmount
+                              ) {
+                                toast.error("Please Enter Correct Amount");
+                                const data = [...RcData];
+                                data[index]["Amount"] = "";
+                                calculate("", index);
+                                setRcData(data);
+                              } else {
+                                const data = [...RcData];
+                                data[index]["Amount"] = e.target.value;
+                                setRcData(data);
+                              }
+                            }}
+                          />
+                        )}
+                      </td>
+                      <td data-label={"Currency"}>
+                        <span id="SpanCurrency">{"INR"}</span>
+                      </td>
+                      <td data-label={"Base"}>
+                        <span id="spnbaseAmount">{data?.Amount} &nbsp;</span>
+                      </td>
+                      <td data-label={"Bank Name"}>
+                        {["Cash", "Online Payment", "Paytm"].includes(
+                          data?.PaymentMode
+                        ) ? (
+                          ""
+                        ) : (
+                          <select
+                            className="required"
+                            name="BankName"
+                            value={data?.BankName}
+                            disabled={
+                              handleRateTypePaymode === "Credit" ? true : false
+                            }
+                            onChange={(e) => handleChangeRTCData(e, index)}
+                          >
+                            <option hidden>--Select Bank --</option>
+                            {BankName.map((ele, index) => (
+                              <option value={ele.value} key={index}>
+                                {ele.label}
+                              </option>
+                            ))}
+                          </select>
+                        )}
+                        &nbsp;
+                      </td>
+                      <td data-label={"Cheque/Card No."}>
+                        <Input
+                          disabled={
+                            ["Cash", "Online Payment", "Paytm"].includes(
+                              data?.PaymentMode
+                            )
+                              ? true
+                              : handleRateTypePaymode === "Credit"
+                              ? true
+                              : false
+                          }
+                          type="number"
+                          id="CardNo"
+                          onInput={(e) => number(e, 16)}
+                          name="CardNo"
+                          value={data?.CardNo}
+                          onChange={(e) => handleChangeRTCData(e, index)}
+                          className={`select-input-box form-control input-sm ${
+                            ["Cash", "Online Payment", "Paytm"].includes(
+                              data?.PaymentMode
+                            )
+                              ? ""
+                              : "required"
+                          }`}
+                        />
+                      </td>
+                      <td data-label={"Cheque Date/Trans No"}>
+                        <Input
+                          disabled={
+                            data?.PaymentMode !== "Cash"
+                              ? handleRateTypePaymode === "Credit"
+                                ? true
+                                : false
+                              : true
+                          }
+                          type={
+                            ["Cash", "Online Payment", "Paytm"].includes(
+                              data?.PaymentMode
+                            )
+                              ? "text"
+                              : "date"
+                          }
+                          id="CardDate"
+                          className={`select-input-box form-control input-sm ${
+                            ["Cash", "Online Payment", "Paytm"].includes(
+                              data?.PaymentMode
+                            )
+                              ? ""
+                              : "required"
+                          }`}
+                          name="CardDate"
+                          value={data?.CardDate}
+                          onChange={(e) => handleChangeRTCData(e, index)}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+
+              <div className="row">
+                <div className="col-md-2">
+                  {(isSubmit?.isLoading && isSubmit?.type === "Success") ||
+                  isRazorPayOpen ? (
+                    <Loading />
+                  ) : (
+                    <button
+                      type="submit"
+                      id="btnSave"
+                      disabled={handleLockRegistation}
+                      className="btn btn-success w-100 btn-sm"
+                      onClick={() => {
+                        handleSubmit();
+                        window.scrollTo(0, 0);
+                      }}
+                    >
+                      {"Submit"}
+                    </button>
+                  )}
+                </div>
+                {state?.HideAmount != 1 && (
+                  <div className="col-md-3">
+                    <small>
+                      {"Due Amount"} :{" "}
+                      {Number(LTData?.NetAmount - paid).toFixed(2)}
+                    </small>
+                  </div>
+                )}
+                {state?.HideAmount != 1 && (
+                  <div className="col-md-4">
+                    <small>
+                      {"Total Discount Amount"} :
+                      {LTData?.DiscountOnTotal
+                        ? parseFloat(LTData?.DiscountOnTotal).toFixed(2)
+                        : " 0"}
+                    </small>
+                  </div>
+                )}
               </div>
             </div>
           </div>

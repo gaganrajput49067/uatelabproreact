@@ -10,11 +10,9 @@ export const SelectBox = ({
   onKeyPress,
   lable,
 }) => {
-  
   return (
     <>
-      {" "}
-      <div className="form-group">
+      <div className="form-group selectbox">
         <select
           className={`form-control input-sm ${className}`}
           value={selectedValue?.label !== "" && selectedValue}
@@ -30,16 +28,19 @@ export const SelectBox = ({
               key={index}
               value={ele?.value}
               className={`Status-${ele?.status && ele?.value}`}
+              style={
+                selectedValue == ele?.value ? { background: "lightblue" } : {}
+              }
             >
               {ele?.label}
-              {selectedValue == ele?.value && "▼"}
-
             </option>
           ))}
         </select>
+
         <label htmlFor={id} className="lable truncate">
           {lable}
         </label>
+        <i className="fa fa-angle-down"></i>
       </div>
     </>
   );

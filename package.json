@@ -24,6 +24,7 @@
     "rc-easyui": "^1.2.9",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
     "react-i18next": "^15.0.0",
     "react-multi-select-component": "^4.3.4",
