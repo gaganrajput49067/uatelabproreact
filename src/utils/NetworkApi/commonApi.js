@@ -416,3 +416,23 @@ export const getSampleType = (state, id) => {
       );
     });
 };
+
+export const getRejectCount = () => {
+  axiosInstance
+    .get("SC/getrejectcount")
+    .then((res) => {
+      const data = res?.data?.message[0]?.Rejected;
+      const rejectCountElement = document.getElementById("RejectCount");
+      if (rejectCountElement) {
+        rejectCountElement.textContent = data;
+        if (data === 0) {
+          rejectCountElement.parentNode.parentNode.style.display = "none";
+        } else {
+          rejectCountElement.parentNode.parentNode.style.display = "block";
+        }
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
