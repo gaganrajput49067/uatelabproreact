@@ -8,15 +8,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-<<<<<<< HEAD
-Dashboard
-Dashboard.css
-Dasgboard.jsx
-=======
-DashBoard
-DashBoard.css
-DashBoard.jsx
->>>>>>> prakhar_main
 dist
 dist-ssr
 *.local
