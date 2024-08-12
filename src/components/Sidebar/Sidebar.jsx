@@ -4,16 +4,39 @@ import logo from "../../assets/image/logo.png";
 import ReactSelect from "../CommonComponent/ReactSelect";
 
 const Sidebar = ({ closeSidebar, menuData }) => {
-  const [selectedMenu, setSelectedMenu] = useState(menuData ? menuData[0] : []);
-
-  const handleChange = (e) => {
-    const { name, value, option } = e.target;
-    console.log(e.target);
-    if (name === "menu") {
-      setSelectedMenu(option);
+  const [selectedMenu, setSelectedMenu] = useState({
+    menuValue: menuData ? menuData[0]?.value : "",
+    pageData: menuData ? menuData[0]?.pageData : [],
+  });
+  const handleChange = (name, e) => {
+    const { value, pageData } = e;
+    if (name === "MenuBar") {
+      setSelectedMenu({
+        menuValue: value,
+        pageData: pageData,
+      });
     }
   };
+  const [originalPageData] = useState(selectedMenu?.pageData);
 
+  const handleSearchPage = (value) => {
+      if (!value) {
+          setSelectedMenu({
+              ...selectedMenu,
+              pageData: originalPageData,
+          });
+          return;
+      }
+      const filteredPages = originalPageData?.filter((page) =>
+        page?.PageName?.toLowerCase()?.includes(value?.toLowerCase())
+      );
+  
+      setSelectedMenu({
+        ...selectedMenu,
+        pageData: filteredPages,
+      });
+  };
+  
   return (
     <div className="navBar-Container">
       <div className="navBar-header">
@@ -28,11 +51,12 @@ const Sidebar = ({ closeSidebar, menuData }) => {
       <div className="navBar-menu">
         <div className="nav-main-menu">
           <ReactSelect
+            className="required-fields"
             name="MenuBar"
             placeholderName="MenuBar"
-            searchable={true}
+            id="MenuBar"
             dynamicOptions={menuData}
-            value={Number(selectedMenu?.value)}
+            value={selectedMenu?.menuValue}
             onChange={handleChange}
           />
         </div>
@@ -41,6 +65,7 @@ const Sidebar = ({ closeSidebar, menuData }) => {
           type="text"
           className="nav-main-menu-input"
           placeholder="Search Menu"
+          onChange={(e) => handleSearchPage(e?.target?.value)}
         />
       </div>
 
