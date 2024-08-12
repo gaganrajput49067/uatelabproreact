@@ -198,7 +198,6 @@ const SampleCollection = () => {
         setCentreData(CentreDataValue);
       })
       .catch((err) => {
-        console.log(err);
         getDepartment([]);
       });
   };
@@ -222,9 +221,7 @@ const SampleCollection = () => {
         setDepartmentData(DeptDataValue);
         fetchRateTypes(Centre, Dept);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   const filterPayload = (filterData) => {
@@ -494,7 +491,6 @@ const SampleCollection = () => {
     sampletypeId
   ) => {
     checkDuplicateBarcode(value, LedgerTransactionID).then((res) => {
-      console.log(res);
       if (res === " " || res === "") {
       } else {
         if (barcodeLogic === 3) {
@@ -655,7 +651,7 @@ const SampleCollection = () => {
   };
   return (
     <>
-      <PageHead name="SampleCollection">
+      <PageHead name="SampleCollection" showDrop={"true"}>
         <div className="card">
           <div className="row">
             <div className="col-sm-2">
@@ -854,390 +850,389 @@ const SampleCollection = () => {
             </div>{" "}
           </div>
         </div>
-        <div className="card">
-          {loading ? (
-            <Loading />
-          ) : toggleTable ? (
-            <>
-              <div className="row">
-                {scdata.length > 0 ? (
-                  <Table paginate={false}>
-                    <thead className="cf">
+      </PageHead>
+      <div className="card mt-2">
+        {loading ? (
+          <Loading />
+        ) : toggleTable ? (
+          <>
+            {scdata.length > 0 ? (
+              <Table paginate={true} data={scdata ?? []} itemsPerPage={10}>
+                {({ currentItems, finalIndex }) => {
+                  console.log(currentItems);
+                  return (
+                    <>
+                      <thead className="cf">
+                        <tr>
+                          <th>{"S.No"}</th>
+                          <th>{"Sin No"}</th>
+                          <th>{"RegDate"}</th>
+                          <th>{"VisitNo"}</th>
+                          <th>{"UHID"}</th>
+                          <th>{"Name"} </th>
+                          <th>{"Remarks"} </th>
+                          <th>{"Barcode"} </th>
+                          <th>{"Age"}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {currentItems &&
+                          currentItems?.map((data, index) => (
+                            <tr key={index}>
+                              <td
+                                data-title={"S.No"}
+                                onClick={() => {
+                                  setShowLog({
+                                    modal: true,
+                                    visitId: data?.VisitNo,
+                                  });
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-around",
+                                    gap: "0px",
+                                  }}
+                                >
+                                  <div>{index + finalIndex}</div>
+                                  <div>
+                                    <i className="fa fa-search" />
+                                  </div>
+                                  {data?.isUrgent === 1 && (
+                                    <div>
+                                      <img src={urgentGIF}></img>
+                                    </div>
+                                  )}
+
+                                  {data?.IsVip === 1 && (
+                                    <div>
+                                      <img src={VIP}></img>
+                                    </div>
+                                  )}
+                                </div>
+                                &nbsp;
+                              </td>
+
+                              <td data-title={"Sin No"}>{data?.SinNo}&nbsp;</td>
+                              <td data-title={"Date"}>
+                                {dateConfig(data.Date)}&nbsp;
+                              </td>
+                              <td
+                                className={`color-Status-${data.Status} text-info`}
+                                onClick={() =>
+                                  SearchInvestigationData(
+                                    data.LedgerTransactionID
+                                  )
+                                }
+                                data-title={"Status"}
+                                style={{ cursor: "pointer" }}
+                              >
+                                {data?.VisitNo}&nbsp;
+                              </td>
+                              <td data-title={"PatientCode"}>
+                                {data?.PatientCode}&nbsp;
+                              </td>
+
+                              <td data-title={"PName"}>
+                                {data?.PName}
+                                &nbsp;
+                              </td>
+
+                              <td data-title={"Remarks"}>
+                                {data?.Remarks}&nbsp;
+                              </td>
+                              <td data-title={"Barcode Print"}>
+                                <div
+                                  className="text-info"
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  {data?.Status == 2 || data?.Status == 3 ? (
+                                    <i
+                                      className="fa fa-print"
+                                      onClick={() => {
+                                        getBarcodeData(
+                                          data?.TestID,
+                                          data?.VisitNo,
+                                          data?.SinNo
+                                        );
+                                      }}
+                                    ></i>
+                                  ) : null}
+                                </div>
+                                &nbsp;
+                              </td>
+                              <td data-title={"Gender"}>
+                                {data?.Age}/{data?.Gender}&nbsp;
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </>
+                  );
+                }}
+              </Table>
+            ) : (
+              <span style={{ width: "100%", textAlign: "center" }}>
+                {"No Data Found"}
+              </span>
+            )}
+          </>
+        ) : (
+          <>
+            {showRemark && (
+              <SampleRemark
+                show={showRemark}
+                handleShow={handleShowRemark}
+                state={handleShowRemark}
+                PageName={searchInvdata[0]?.Remarks}
+                handleSave={handleShowRemark}
+                title={"Remarks"}
+              />
+            )}
+            {showPrickRemark && (
+              <SampleRemark
+                show={showPrickRemark}
+                handleShow={handleShowPrickRemarks}
+                state={handleShowPrickRemarks}
+                PageName={searchInvdata[0]?.PricksRemarks}
+                handleSave={handleShowRemark}
+                title={"PricksRemarks"}
+              />
+            )}
+            <div className="custom-box-body">
+              <div className="custom-row">
+                <div className="custom-col custom-col-visit">
+                  <span className="fa fa-folder custom-text">
+                    &nbsp; <span> {searchInvdata[0]?.VisitNo}</span>
+                  </span>
+                  {searchInvdata.filter((item) => item.StatSample == 1).length >
+                  0 ? (
+                    <span
+                      className="fa fa-cog fa-spin"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="STATSample"
+                      style={{ marginLeft: "4px" }}
+                    ></span>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+
+                <div className="custom-col">
+                  <span className="fa fa-user custom-text">
+                    &nbsp; <span>{searchInvdata[0]?.PName}</span>
+                  </span>
+                </div>
+
+                <div className="custom-col">
+                  <span className="fa fa-book custom-text">
+                    &nbsp;<span>{searchInvdata[0]?.PatientCode}</span>
+                  </span>
+                </div>
+
+                <div className="custom-col custom-col-age-gender">
+                  <span className="fa fa-calendar-check-o custom-text">
+                    &nbsp;<span> {searchInvdata[0]?.Age}</span>
+                  </span>
+                  <span className="fa fa-street-view custom-text">
+                    &nbsp; <span> {searchInvdata[0]?.Gender}</span>
+                  </span>
+                </div>
+
+                <div className="custom-col">
+                  <span className="fa fa-h-square custom-text">
+                    &nbsp; <span>{searchInvdata[0]?.Centre}</span>
+                  </span>
+                </div>
+
+                <div className="custom-col">
+                  <span className="fa fa-user-md custom-text">
+                    &nbsp; <span> {searchInvdata[0]?.Referdoctor}</span>
+                  </span>
+                </div>
+
+                <div className="custom-col">
+                  <span className="fa fa-plus-square custom-text">
+                    &nbsp;<span> {searchInvdata[0]?.RateType} </span>
+                  </span>
+                </div>
+
+                <div className="custom-col custom-col-regdate">
+                  <span className="fa fa-calendar custom-text">
+                    &nbsp; <span> {dateConfig(searchInvdata[0]?.RegDate)}</span>
+                  </span>
+                </div>
+
+                <div className="custom-col custom-end">
+                  <span
+                    className="fa fa-cloud-upload custom-text"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Upload Document"
+                    onClick={() => {
+                      setShow({
+                        modal: true,
+                        data: searchInvdata[0]?.PatientGuid,
+                      });
+                    }}
+                    style={{
+                      color:
+                        searchInvdata[0]?.UploadDocumentCount > 0
+                          ? "#4ea30c"
+                          : "black !important",
+                      marginRight: "10px",
+                    }}
+                  >
+                    <span>{searchInvdata[0]?.UploadDocumentCount}</span>
+                  </span>
+                  <span
+                    className="fa fa-history custom-text"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Medical History"
+                    onClick={() => {
+                      setShow4({
+                        modal: true,
+                        data: searchInvdata[0]?.PatientGuid,
+                      });
+                    }}
+                    style={{
+                      color:
+                        searchInvdata[0]?.MedicalHistoryCount > 0
+                          ? "#4ea30c"
+                          : "black !important",
+                      marginRight: "10px",
+                    }}
+                  >
+                    <span>{searchInvdata[0]?.MedicalHistoryCount}</span>
+                  </span>
+                  <span
+                    className="fa fa-comment custom-icon-large"
+                    title="Remarks"
+                    onClick={() => setShowRemark(true)}
+                    style={{ marginRight: "10px" }}
+                  ></span>
+                  <span
+                    className="fa fa-eyedropper custom-icon-large"
+                    title="Prickremarks"
+                    onClick={() => setShowPrickRemark(true)}
+                  ></span>
+                </div>
+              </div>
+            </div>
+            <div>
+              {searchInvdata.length > 0 ? (
+                <div
+                  className="box-body divResult boottable table-responsive"
+                  id="no-more-tables"
+                >
+                  <Table>
+                    <thead>
                       <tr>
                         <th>{"S.No"}</th>
+                        <th>{"Test"}</th>
                         <th>{"Sin No"}</th>
-                        <th>{"RegDate"}</th>
-                        <th>{"VisitNo"}</th>
-                        <th>{"UHID"}</th>
-                        <th>{"Name"} </th>
-                        <th>{"Remarks"} </th>
                         <th>{"Barcode"} </th>
-                        <th>{"Age"}</th>
+                        <th>{"Source"}</th>
+                        <th>{"DOS"}</th>
+                        <th>{"Vial Qty"}</th>
+                        <th>{"No Of Pricks"}</th>
+                        <th>{"Prick Remarks"}</th>
+                        <th>{"SampleTypeName"}</th>
+                        <th>{"Reject"}</th>
+                        <th>
+                          {handleCheckboxCondition(searchInvdata) && (
+                            <input
+                              type="checkbox"
+                              onChange={(e) => {
+                                setTimeout(handlePayload(e), 500);
+                              }}
+                              checked={
+                                searchInvdata.length > 0
+                                  ? isChecked(
+                                      "isSelected",
+                                      searchInvdata,
+                                      true
+                                    ).includes(false)
+                                    ? false
+                                    : true
+                                  : false
+                              }
+                            />
+                          )}
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {scdata?.map((data, index) => (
-                        <tr key={index}>
-                          <td
-                            data-title={"S.No"}
-                            onClick={() => {
-                              setShowLog({
-                                modal: true,
-                                visitId: data?.VisitNo,
-                              });
-                            }}
-                          >
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-around",
-                                gap: "0px",
-                              }}
-                            >
-                              <div>{index + 1}</div>
-                              <div>
-                                <i className="fa fa-search" />
-                              </div>
-                              {data?.isUrgent === 1 && (
-                                <div>
-                                  <img src={urgentGIF}></img>
-                                </div>
-                              )}
-
-                              {data?.IsVip === 1 && (
-                                <div>
-                                  <img src={VIP}></img>
-                                </div>
-                              )}
-                            </div>
-                            &nbsp;
-                          </td>
-                          {console.log(data)}
-                          <td data-title={"Sin No"}>{data?.SinNo}&nbsp;</td>
-                          <td data-title={"Date"}>
-                            {dateConfig(data.Date)}&nbsp;
-                          </td>
-                          <td
-                            className={`color-Status-${data.Status} text-info`}
-                            onClick={() =>
-                              SearchInvestigationData(data.LedgerTransactionID)
-                            }
-                            data-title={"Status"}
-                            style={{ cursor: "pointer" }}
-                          >
-                            {data?.VisitNo}&nbsp;
-                          </td>
-                          <td data-title={"PatientCode"}>
-                            {data?.PatientCode}&nbsp;
-                          </td>
-
-                          <td data-title={"PName"}>
-                            {data?.PName}
-                            &nbsp;
-                          </td>
-
-                          <td data-title={"Remarks"}>{data?.Remarks}&nbsp;</td>
-                          <td data-title={"Barcode Print"}>
-                            <div
-                              className="text-info"
-                              style={{ cursor: "pointer" }}
-                            >
-                              {data?.Status == 2 || data?.Status == 3 ? (
-                                <i
-                                  className="fa fa-print"
-                                  onClick={() => {
-                                    getBarcodeData(
-                                      data?.TestID,
-                                      data?.VisitNo,
-                                      data?.SinNo
-                                    );
-                                  }}
-                                ></i>
-                              ) : null}
-                            </div>
-                            &nbsp;
-                          </td>
-                          <td data-title={"Gender"}>
-                            {data?.Age}/{data?.Gender}&nbsp;
-                          </td>
+                      {searchInvdata?.map((data, index) => (
+                        <tr
+                          key={index}
+                          style={{
+                            backgroundColor:
+                              data?.isOutSource == 1 ? "pink" : "",
+                          }}
+                        >
+                          <SampleCollectionTable
+                            data={data}
+                            index={index}
+                            payload={payload}
+                            setPayload={setPayload}
+                            setSearchInvdata={setSearchInvdata}
+                            searchInvdata={searchInvdata}
+                            TableData={TableData}
+                            handleBarcode={handleBarcode}
+                            handleCloseBarcodeModal={handleCloseBarcodeModal}
+                            handleValQty={handleValQty}
+                            snr={snr}
+                          />
                         </tr>
                       ))}
                     </tbody>
                   </Table>
-                ) : (
-                  <>{"No Data Found"}</>
-                )}
-              </div>
-            </>
-          ) : (
-            <>
-              {showRemark && (
-                <SampleRemark
-                  show={showRemark}
-                  handleShow={handleShowRemark}
-                  state={handleShowRemark}
-                  PageName={searchInvdata[0]?.Remarks}
-                  handleSave={handleShowRemark}
-                  title={"Remarks"}
-                />
-              )}
-              {showPrickRemark && (
-                <SampleRemark
-                  show={showPrickRemark}
-                  handleShow={handleShowPrickRemarks}
-                  state={handleShowPrickRemarks}
-                  PageName={searchInvdata[0]?.PricksRemarks}
-                  handleSave={handleShowRemark}
-                  title={"PricksRemarks"}
-                />
-              )}
-              <div className="custom-box-body">
-                <div className="custom-row">
-                  <div className="custom-col custom-col-visit">
-                    <i className="fa fa-folder"></i>
-                    <span className="custom-text">
-                      {searchInvdata[0]?.VisitNo}
-                    </span>
-
-                    {searchInvdata.filter((item) => item.StatSample == 1)
-                      .length > 0 ? (
-                      <span
-                        className="fa fa-cog fa-spin"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="STATSample"
-                        style={{ marginLeft: "4px" }}
-                      ></span>
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-
-                  <div className="custom-col">
-                    <i className="fa fa-user"></i>
-                    <span className="custom-text">
-                      {searchInvdata[0]?.PName}
-                    </span>
-                  </div>
-
-                  <div className="custom-col">
-                    <i className="fa fa-book"></i>
-                    <span className="custom-text">
-                      {searchInvdata[0]?.PatientCode}
-                    </span>
-                  </div>
-
-                  <div className="custom-col custom-col-age-gender">
-                    <i className="fa fa-calendar-check-o "></i>
-                    <span className="custom-text">{searchInvdata[0]?.Age}</span>
-
-                    <i className="fa fa-street-view "></i>
-                    <span className="custom-text">
-                      {searchInvdata[0]?.Gender}
-                    </span>
-                  </div>
-
-                  <div className="custom-col">
-                    <i className="fa fa-h-square"></i>
-                    <span className="custom-text">
-                      {searchInvdata[0]?.Centre}
-                    </span>
-                  </div>
-
-                  <div className="custom-col">
-                    <i className="fa fa-user-md "></i>
-                    <span className="custom-text">
-                      {searchInvdata[0]?.Referdoctor}
-                    </span>
-                  </div>
-
-                  <div className="custom-col">
-                    <i className="fa fa-plus-square "></i>
-                    <span className="custom-text">
-                      {searchInvdata[0]?.RateType}
-                    </span>
-                  </div>
-
-                  <div className="custom-col custom-col-regdate">
-                    <i className="fa fa-calendar-check-o "></i>
-                    <span className="custom-text">
-                      {dateConfig(searchInvdata[0]?.RegDate)}
-                    </span>
-                  </div>
-
-                  <div className="custom-col custom-end">
-                    <i className="fa fa-cloud-upload "></i>
-                    <span
-                      className="custom-icon"
-                      data-toggle="tooltip"
-                      data-placement="top"
-                      title="Upload Document"
-                      onClick={() => {
-                        setShow({
-                          modal: true,
-                          data: searchInvdata[0]?.PatientGuid,
-                        });
-                      }}
-                      style={{
-                        color:
-                          searchInvdata[0]?.UploadDocumentCount > 0
-                            ? "#4ea30c"
-                            : "",
-                        marginRight: "10px",
-                      }}
-                    >
-                      {searchInvdata[0]?.UploadDocumentCount}
-                    </span>{" "}
-                    <i className="fa fa-history "></i>
-                    <span
-                      className="custom-icon"
-                      data-toggle="tooltip"
-                      data-placement="top"
-                      title="Medical History"
-                      onClick={() => {
-                        setShow4({
-                          modal: true,
-                          data: searchInvdata[0]?.PatientGuid,
-                        });
-                      }}
-                      style={{
-                        color:
-                          searchInvdata[0]?.MedicalHistoryCount > 0
-                            ? "#4ea30c"
-                            : "",
-                        marginRight: "10px",
-                      }}
-                    >
-                      {searchInvdata[0]?.MedicalHistoryCount}
-                    </span>{" "}
-                    <i className="fa fa-comment "></i>
-                    <span
-                      className="custom-icon-large"
-                      title="Remarks"
-                      onClick={() => setShowRemark(true)}
-                      style={{ marginRight: "10px" }}
-                    ></span>{" "}
-                    <i className="fa fa-eyedropper "></i>
-                    <span
-                      className="custom-icon-large"
-                      title="Prickremarks"
-                      onClick={() => setShowPrickRemark(true)}
-                    ></span>
-                  </div>
                 </div>
-              </div>
-              <div>
-                {searchInvdata.length > 0 ? (
-                  <div
-                    className="box-body divResult boottable table-responsive"
-                    id="no-more-tables"
+              ) : (
+                "No Data Found"
+              )}
+              <div className="row mt-3">
+                <div className="d-flex col-md-3 ms-auto">
+                  <button
+                    className="btn btn-info btn-sm mx-2"
+                    onClick={() => {
+                      setToggleTable(true);
+                    }}
                   >
-                    <Table>
-                      <thead>
-                        <tr>
-                          <th>{"S.No"}</th>
-                          <th>{"Test"}</th>
-                          <th>{"Sin No"}</th>
-                          <th>{"Barcode"} </th>
-                          <th>{"Source"}</th>
-                          <th>{"DOS"}</th>
-                          <th>{"Vial Qty"}</th>
-                          <th>{"No Of Pricks"}</th>
-                          <th>{"Prick Remarks"}</th>
-                          <th>{"SampleTypeName"}</th>
-                          <th>{"Reject"}</th>
-                          <th>
-                            {handleCheckboxCondition(searchInvdata) && (
-                              <input
-                                type="checkbox"
-                                onChange={(e) => {
-                                  setTimeout(handlePayload(e), 500);
-                                }}
-                                checked={
-                                  searchInvdata.length > 0
-                                    ? isChecked(
-                                        "isSelected",
-                                        searchInvdata,
-                                        true
-                                      ).includes(false)
-                                      ? false
-                                      : true
-                                    : false
-                                }
-                              />
-                            )}
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {searchInvdata?.map((data, index) => (
-                          <tr
-                            key={index}
-                            style={{
-                              backgroundColor:
-                                data?.isOutSource == 1 ? "pink" : "",
-                            }}
-                          >
-                            <SampleCollectionTable
-                              data={data}
-                              index={index}
-                              payload={payload}
-                              setPayload={setPayload}
-                              setSearchInvdata={setSearchInvdata}
-                              searchInvdata={searchInvdata}
-                              TableData={TableData}
-                              handleBarcode={handleBarcode}
-                              handleCloseBarcodeModal={handleCloseBarcodeModal}
-                              handleValQty={handleValQty}
-                              snr={snr}
-                            />
-                          </tr>
-                        ))}
-                      </tbody>
-                    </Table>
-                  </div>
-                ) : (
-                  "No Data Found"
-                )}
-                <div className="row mt-3">
-                  <div className="d-flex col-md-3 ms-auto">
+                    Main List
+                  </button>
+                  &nbsp;
+                  {newdata && (
                     <button
                       className="btn btn-info btn-sm mx-2"
                       onClick={() => {
-                        setToggleTable(true);
+                        SaveSampleCollection();
                       }}
                     >
-                      Main List
+                      {"Collect"}
                     </button>
-                    &nbsp;
-                    {newdata && (
-                      <button
-                        className="btn btn-info btn-sm mx-2"
-                        onClick={() => {
-                          SaveSampleCollection();
-                        }}
-                      >
-                        {"Collect"}
-                      </button>
-                    )}
-                    &nbsp;
-                    {snr && (
-                      <button
-                        className="btn btn-danger btn-sm mx-2"
-                        onClick={() => {
-                          SaveSNR();
-                        }}
-                      >
-                        {"SNR"}
-                      </button>
-                    )}
-                  </div>
+                  )}
+                  &nbsp;
+                  {snr && (
+                    <button
+                      className="btn btn-danger btn-sm mx-2"
+                      onClick={() => {
+                        SaveSNR();
+                      }}
+                    >
+                      {"SNR"}
+                    </button>
+                  )}
                 </div>
               </div>
-            </>
-          )}
-        </div>
-      </PageHead>
+            </div>
+          </>
+        )}
+      </div>
     </>
   );
 };

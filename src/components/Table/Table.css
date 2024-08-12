@@ -225,7 +225,7 @@
       font-weight: bold;}
 
   .simple-table td::before {
-    content: attr(data-label);
+    content: attr(data-title);
     float: left;
     font-weight: bold;
       /* text-transform: uppercase; */

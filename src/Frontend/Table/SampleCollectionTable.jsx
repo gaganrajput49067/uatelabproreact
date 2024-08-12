@@ -154,22 +154,18 @@ function SampleCollectionTable({
 
   return (
     <>
-      <td className={`color-Status-${data.Status}`} data-title={"S.No"}>
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <div>{index + 1}</div>{" "}
-          {data.StatSample == 1 ? (
-            <div>
-              <span
-                className="fa fa-cog fa-spin"
-                data-toggle="tooltip"
-                data-placement="top"
-                title="STATSample"
-              ></span>
-            </div>
-          ) : (
-            <div></div>
-          )}
-        </div>
+      <td className={`color-Status-${data.Status} `} data-title={"S.No"}>
+        {index + 1}
+        {data.StatSample == 1 ? (
+          <span
+            className="fa fa-cog fa-spin"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="STATSample"
+          ></span>
+        ) : (
+          <></>
+        )}
         &nbsp;
       </td>
 
@@ -225,20 +221,21 @@ function SampleCollectionTable({
         />
         &nbsp;
       </td>
-      <td data-title={"Barcode Print"}>
+      <td
+        data-title={"Barcode Print"}
+        style={{ textAlign: "center", color: "black !important" }}
+      >
         {data?.Status == 2 || data?.Status == 3 ? (
-          <div className="text-primary" style={{ cursor: "pointer" }}>
-            <i
-              className="fa fa-print"
-              onClick={() => {
-                getBarcodeData(data?.TestID, data?.VisitNo, data?.SINNo);
-              }}
-            ></i>
-          </div>
+          <i
+            className="fa fa-print "
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              getBarcodeData(data?.TestID, data?.VisitNo, data?.SINNo);
+            }}
+          ></i>
         ) : (
-          <></>
+          <> &nbsp;</>
         )}
-        &nbsp;
       </td>
       <td data-title={"Source"}>
         <SelectBox
@@ -248,7 +245,6 @@ function SampleCollectionTable({
           options={SampleSource}
           selectedValue={data?.Source}
         ></SelectBox>
-        &nbsp;
       </td>
       <td
         data-title={"DOS"}
@@ -264,20 +260,21 @@ function SampleCollectionTable({
         data-title={"Vial Qty"}
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         {(data.Status === 1 || data.Status === 4) && data?.SINNo !== "" ? (
           <>
             <button
-              className="btn btn-sm btn-danger mt-2"
+              className="btn btn-sm btn-danger"
               onClick={() => handleValQty("sub", data?.SINNo, data?.isSelected)}
             >
               -
             </button>
-            <span className="mx-2 mt-2">{data?.valQty}</span>
+            <span className="mx-2 ">{data?.valQty}</span>
             <button
-              className="btn btn-sm btn-primary mt-2"
+              className="btn btn-sm btn-primary"
               onClick={() => handleValQty("add", data?.SINNo, data?.isSelected)}
             >
               +
@@ -288,7 +285,7 @@ function SampleCollectionTable({
         )}
       </td>
       <td data-title={"No Of Pricks"}>
-        <SelectBox
+        {/* <SelectBox
           options={NoOfPricks}
           id="NoOfPricks"
           name="NoOfPricks"
@@ -300,7 +297,7 @@ function SampleCollectionTable({
           onChange={(e) => {
             handleChange(e, index, data?.SINNo, data?.isSelected);
           }}
-        />
+        /> */}
       </td>
       <td data-title={"Remarks"}>
         {!(data.Status === 1 || data.Status === 4) ||
@@ -320,13 +317,13 @@ function SampleCollectionTable({
         )}
       </td>
       <td data-title={"SampleTypeID"}>
-        <SelectBox
+        {/* <SelectBox
           name="SampleTypeID"
           className="mt-2"
           options={sampleTypeDropdown}
           onChange={(e) => handleChange(e, index)}
           selectedValue={data?.SampleTypeID}
-        ></SelectBox>
+        ></SelectBox> */}
         &nbsp;
       </td>
       <td data-title={"Reject"}>
@@ -340,7 +337,6 @@ function SampleCollectionTable({
             {"Reject"}
           </button>
         )}
-        &nbsp;
       </td>
       <td data-title={"Select"}>
         {data.Status !== 2 &&

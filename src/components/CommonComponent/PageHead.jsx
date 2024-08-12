@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 
-const PageHead = ({ children,showDrop= false, drop = true, name }) => {
+const PageHead = ({
+  children,
+  showDrop = false,
+  drop = true,
+  name,
+  border = true,
+}) => {
   const [showContent, setShowContent] = useState(true);
   return (
-    <div className="main-page-head-container">
+    <div
+      className="main-page-head-container"
+      style={border ? { border: "0px" } : {}}
+    >
       <div className="main-page-heading">
         <h6 className="mb-0">{name}</h6>
         <div className="main-heading-content ">
@@ -18,7 +27,12 @@ const PageHead = ({ children,showDrop= false, drop = true, name }) => {
         </div>
       </div>
       {showContent && drop && (
-        <div className="main-page-content">{children}</div>
+        <div
+          className="main-page-content"
+          style={border ? { padding: "5px 0 0 0" } : {}}
+        >
+          {children}
+        </div>
       )}
     </div>
   );
