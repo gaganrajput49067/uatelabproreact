@@ -47,6 +47,7 @@ import MobileDataModal from "../utils/MobileDataModal";
 import PatientRegisterModal from "../utils/PatientRegisterModal";
 import { useTranslation } from "react-i18next";
 import MedicialModal from "../utils/MedicialModal";
+import UploadFile from "../utils/UploadFIleModal/UploadFile";
 const PatientRegistration = () => {
   const { t } = useTranslation();
   const [patientImg, setPatientImg] = useState({
@@ -3272,6 +3273,17 @@ const PatientRegistration = () => {
   };
   return (
     <>
+      {show2 && (
+        <UploadFile
+          options={Identity}
+          show={show2}
+          handleClose={handleClose2}
+          documentId={PatientGuid}
+          pageName="Patient Registration"
+          handleUploadCount={handleUploadCount}
+          getDocumentType={getDocumentType}
+        />
+      )}
       {show && <PatientRegisterModal handleClose={handleClose} />}
       {showRemark && (
         <SampleRemark

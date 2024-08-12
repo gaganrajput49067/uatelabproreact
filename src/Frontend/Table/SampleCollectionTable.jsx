@@ -285,7 +285,7 @@ function SampleCollectionTable({
         )}
       </td>
       <td data-title={"No Of Pricks"}>
-        {/* <SelectBox
+        <SelectBox
           options={NoOfPricks}
           id="NoOfPricks"
           name="NoOfPricks"
@@ -297,7 +297,7 @@ function SampleCollectionTable({
           onChange={(e) => {
             handleChange(e, index, data?.SINNo, data?.isSelected);
           }}
-        /> */}
+        />
       </td>
       <td data-title={"Remarks"}>
         {!(data.Status === 1 || data.Status === 4) ||
@@ -317,14 +317,13 @@ function SampleCollectionTable({
         )}
       </td>
       <td data-title={"SampleTypeID"}>
-        {/* <SelectBox
+        <SelectBox
           name="SampleTypeID"
           className="mt-2"
           options={sampleTypeDropdown}
           onChange={(e) => handleChange(e, index)}
           selectedValue={data?.SampleTypeID}
-        ></SelectBox> */}
-        &nbsp;
+        ></SelectBox>
       </td>
       <td data-title={"Reject"}>
         {data.Approved === 0 && data.Status != 4 && (

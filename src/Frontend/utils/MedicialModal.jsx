@@ -88,7 +88,7 @@ const MedicialModal = ({ MedicalId, ID, handleUploadCount, handleClose }) => {
 
   return (
     <Modal title={"Medical History"} handleClose={handleClose}>
-      <div className="row" style={{ width: "800px" }}>
+      <div className="medical-modal">
         <div
           className="col-md-6 d-flex"
           style={{ flexDirection: "column", width: "50%" }}

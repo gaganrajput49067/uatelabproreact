@@ -1586,7 +1586,18 @@ td {
   width: 49.5%;
 }
 
+
+.medical-modal{
+  display: flex;
+  width: 800px;
+}
 @media (max-width: 900px) {
+
+  .medical-modal{
+    display: flex;
+    flex-direction: column;
+    width: 200%;
+  }
   .patent-register-outlet{
     flex-direction: column;
     justify-content: center;
