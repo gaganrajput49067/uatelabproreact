@@ -20,7 +20,7 @@ const ReactSelect = ({
   // defaultValue,
   respclass,
   id,
-  handleChange,
+  onChange,
   value,
   requiredClassName,
   dynamicOptions,
@@ -131,7 +131,7 @@ const ReactSelect = ({
             }
             styles={customStyles}
             placeholder={placeholderName}
-            onChange={handleChange ? (e) => handleChange(name, e) : () => {}}
+            onChange={onChange ? (e) => onChange(name, e) : () => {}}
             isDisabled={isDisabled}
             className={requiredClassName}
             menuPortalTarget={document.body}

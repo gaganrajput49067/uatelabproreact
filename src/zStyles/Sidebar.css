@@ -7,7 +7,7 @@
     height: 100vh;
     background-color :rgb(65, 65, 65);
     transition: left 0.3s ease; 
-    z-index: 1000; 
+    z-index: 1; 
 
   }
   
@@ -37,6 +37,7 @@
 
   .nav-main-menu{
     width: 100%;
+    z-index: 3;
   }
 
   .navBar-menu{
