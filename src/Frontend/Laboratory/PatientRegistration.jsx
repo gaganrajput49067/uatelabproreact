@@ -23,7 +23,7 @@ import {
   getVisitType,
   getsecondDoctorSuggestion,
 } from "../../utils/NetworkApi/commonApi";
-import { axiosInstance } from "../../utils/axiosInstance";
+import { axiosInstance, axiosReport } from "../../utils/axiosInstance";
 import {
   PreventNumber,
   PreventSpecialCharacter,
@@ -41,12 +41,12 @@ import {
   PatientRegisterSchema,
 } from "../../utils/Schema";
 import RegisterationTable from "../Table/RegisterationTable";
-import SampleRemark from "../CustomModal/SampleRemark";
 import SaveSmsEmail from "../utils/SaveSmsEmail";
 import MobileDataModal from "../utils/MobileDataModal";
 import PatientRegisterModal from "../utils/PatientRegisterModal";
 import { useTranslation } from "react-i18next";
 import MedicialModal from "../utils/MedicialModal";
+import SampleRemark from "../utils/SampleRemark";
 const PatientRegistration = () => {
   const { t } = useTranslation();
   const [patientImg, setPatientImg] = useState({
@@ -2444,8 +2444,8 @@ const PatientRegistration = () => {
   };
 
   const getReceipt = (id, fullyPaid) => {
-    axiosInstance
-      .post("reports/v1/getReceipt", {
+    axiosReport
+      .post("getReceipt", {
         LedgerTransactionIDHash: id,
       })
       .then((res) => {

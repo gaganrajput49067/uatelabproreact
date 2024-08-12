@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 import { toast } from "react-toastify";
-import axios from "axios";
 import { SelectBox } from "../../components/CommonComponent/SelectBox";
 import { NoOfPricks, SampleSource } from "../../utils/Constants";
 import { getSampleType } from "../../utils/NetworkApi/commonApi";
 import { axiosInstance } from "../../utils/axiosInstance";
+import SampleRemark from "../utils/SampleRemark";
+import DOSModal from "../utils/DOSModal";
 
 function SampleCollectionTable({
   data,
@@ -154,6 +155,24 @@ function SampleCollectionTable({
 
   return (
     <>
+      {remarkShow && (
+        <SampleRemark
+          show={remarkShow}
+          PageName={data?.PricksRemarks}
+          handleShow={handleShowRemark}
+          state={data}
+          handleSave={handleSaveRemarks}
+          title={"Enter Remark"}
+        />
+      )}
+      {dos && (
+        <DOSModal
+          show={dos}
+          LTData={data}
+          onHandleShow={() => setDos(false)}
+          id={data?.InvestigationID}
+        />
+      )}
       <td className={`color-Status-${data.Status} `} data-title={"S.No"}>
         {index + 1}
         {data.StatSample == 1 ? (
@@ -285,7 +304,7 @@ function SampleCollectionTable({
         )}
       </td>
       <td data-title={"No Of Pricks"}>
-        {/* <SelectBox
+        <SelectBox
           options={NoOfPricks}
           id="NoOfPricks"
           name="NoOfPricks"
@@ -297,7 +316,7 @@ function SampleCollectionTable({
           onChange={(e) => {
             handleChange(e, index, data?.SINNo, data?.isSelected);
           }}
-        /> */}
+        />
       </td>
       <td data-title={"Remarks"}>
         {!(data.Status === 1 || data.Status === 4) ||
@@ -317,13 +336,13 @@ function SampleCollectionTable({
         )}
       </td>
       <td data-title={"SampleTypeID"}>
-        {/* <SelectBox
+        <SelectBox
           name="SampleTypeID"
           className="mt-2"
           options={sampleTypeDropdown}
           onChange={(e) => handleChange(e, index)}
           selectedValue={data?.SampleTypeID}
-        ></SelectBox> */}
+        ></SelectBox>
         &nbsp;
       </td>
       <td data-title={"Reject"}>

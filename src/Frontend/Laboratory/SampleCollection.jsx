@@ -27,33 +27,30 @@ import { axiosInstance } from "../../utils/axiosInstance";
 import DatePicker from "../../components/CommonComponent/DatePicker";
 import CustomTimePicker from "../../components/CommonComponent/TimePicker";
 import Table from "../../components/Table/Table";
-import SampleRemark from "../CustomModal/SampleRemark";
 import SampleCollectionTable from "../Table/SampleCollectionTable";
 import Loading from "../../components/Loading/Loading";
+import SampleRemark from "../utils/SampleRemark";
 const SampleCollection = () => {
   const [CentreData, setCentreData] = useState([]);
   const [toggleTable, setToggleTable] = useState(true);
-  const [RateData, setRateData] = useState([]);
   const [DepartmentData, setDepartmentData] = useState([]);
   const [payload, setPayload] = useState([]);
-  const [Identity, setIdentity] = useState([]);
   const [RateTypes, setRateTypes] = useState([]);
   const [scdata, setScData] = useState([]);
   const [searchInvdata, setSearchInvdata] = useState([]);
   const [newdata, setNewData] = useState([]);
   const [snr, setSnr] = useState([]);
-  const [load, setLoad] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [doctorSuggestion, setDoctorSuggestion] = useState([]);
   const [indexMatch, setIndexMatch] = useState(0);
   const [dropFalse, setDropFalse] = useState(true);
-  const [showFilter, setshowFilter] = useState(true);
   const [show4, setShow4] = useState({
     modal: false,
     data: "",
     index: -1,
   });
+  const [saveLoad, setSaveLoad] = useState(false);
   const [show, setShow] = useState({
     modal: false,
     data: "",
@@ -292,11 +289,13 @@ const SampleCollection = () => {
       });
 
     if (filterPayload(payload)?.length > 0) {
+      setSaveLoad(true);
       axiosInstance
         .post("SC/SampleCollection", {
           data: getTrimmedData(filterPayload(payload)),
         })
         .then((res) => {
+          setSaveLoad(false);
           toast.success(res.data.message);
           getBarcodeData(
             testidArray,
@@ -313,6 +312,7 @@ const SampleCollection = () => {
           }
         })
         .catch((err) => {
+          setSaveLoad(false);
           if (err.response.status === 504) {
             toast.error(t("Something Went Wrong"));
           }
@@ -336,11 +336,13 @@ const SampleCollection = () => {
       });
 
     if (filterPayload2(payload)?.length > 0) {
+      setSaveLoad(true);
       axiosInstance
         .post("SC/SampleSNR", {
           data: getTrimmedData(filterPayload2(payload)),
         })
         .then((res) => {
+          setSaveLoad(false);
           toast.success(res.data.message);
           getBarcodeData(
             testidArray,
@@ -357,6 +359,7 @@ const SampleCollection = () => {
           }
         })
         .catch((err) => {
+          setSaveLoad(false);
           if (err.response.status === 504) {
             toast.error(t("Something Went Wrong"));
           }
@@ -401,7 +404,6 @@ const SampleCollection = () => {
         )
         .then((res) => {
           setScData(res?.data?.message);
-          setLoad(true);
           setLoading(false);
           setToggleTable(true);
         })
@@ -438,7 +440,6 @@ const SampleCollection = () => {
           )
         );
         setToggleTable(false);
-        setLoad(true);
         setLoading(false);
       })
       .catch((err) => setLoading(false));
@@ -616,8 +617,6 @@ const SampleCollection = () => {
 
   useEffect(() => {
     getAccessCentres();
-
-    getPaymentModes("Identity", setIdentity);
   }, []);
 
   const handleShowRemark = () => {
@@ -651,7 +650,7 @@ const SampleCollection = () => {
   };
   return (
     <>
-      <PageHead name="SampleCollection" showDrop={"true"}>
+      <PageHead name="Sample Collection" showDrop={"true"}>
         <div className="card">
           <div className="row">
             <div className="col-sm-2">
@@ -926,7 +925,7 @@ const SampleCollection = () => {
                                   )
                                 }
                                 data-title={"Status"}
-                                style={{ cursor: "pointer" }}
+                                style={{ cursor: "pointer",color:"black !important" }}
                               >
                                 {data?.VisitNo}&nbsp;
                               </td>
@@ -980,6 +979,7 @@ const SampleCollection = () => {
           </>
         ) : (
           <>
+            {}
             {showRemark && (
               <SampleRemark
                 show={showRemark}
@@ -1123,6 +1123,7 @@ const SampleCollection = () => {
               </div>
             </div>
             <div>
+              {}
               {searchInvdata.length > 0 ? (
                 <div
                   className="box-body divResult boottable table-responsive"
@@ -1195,40 +1196,44 @@ const SampleCollection = () => {
               ) : (
                 "No Data Found"
               )}
-              <div className="row mt-3">
-                <div className="d-flex col-md-3 ms-auto">
-                  <button
-                    className="btn btn-info btn-sm mx-2"
-                    onClick={() => {
-                      setToggleTable(true);
-                    }}
-                  >
-                    Main List
-                  </button>
-                  &nbsp;
-                  {newdata && (
+              {saveLoad ? (
+                <Loading />
+              ) : (
+                <div className="row mt-3">
+                  <div className="d-flex col-md-3 ms-auto">
                     <button
                       className="btn btn-info btn-sm mx-2"
                       onClick={() => {
-                        SaveSampleCollection();
+                        setToggleTable(true);
                       }}
                     >
-                      {"Collect"}
+                      Main List
                     </button>
-                  )}
-                  &nbsp;
-                  {snr && (
-                    <button
-                      className="btn btn-danger btn-sm mx-2"
-                      onClick={() => {
-                        SaveSNR();
-                      }}
-                    >
-                      {"SNR"}
-                    </button>
-                  )}
+                    &nbsp;
+                    {newdata && (
+                      <button
+                        className="btn btn-info btn-sm mx-2"
+                        onClick={() => {
+                          SaveSampleCollection();
+                        }}
+                      >
+                        {"Collect"}
+                      </button>
+                    )}
+                    &nbsp;
+                    {snr && (
+                      <button
+                        className="btn btn-danger btn-sm mx-2"
+                        onClick={() => {
+                          SaveSNR();
+                        }}
+                      >
+                        {"SNR"}
+                      </button>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </>
         )}

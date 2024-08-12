@@ -23,6 +23,14 @@ export let routeDetails = [
         path: "/SampleCollection",
         element: "../Frontend/Laboratory/SampleCollection",
       },
+      {
+        path: "/DepartmentReceive",
+        element: "../Frontend/Laboratory/DepartmentReceive",
+      },
+      {
+        path: "/DispatchReport",
+        element: "../Frontend/Laboratory/DispatchReport",
+      },
       { path: "*", element: "../components/NotFound" },
     ],
   },
