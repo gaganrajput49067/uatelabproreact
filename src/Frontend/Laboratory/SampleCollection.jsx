@@ -925,7 +925,10 @@ const SampleCollection = () => {
                                   )
                                 }
                                 data-title={"Status"}
-                                style={{ cursor: "pointer",color:"black !important" }}
+                                style={{
+                                  cursor: "pointer",
+                                  color: "black !important",
+                                }}
                               >
                                 {data?.VisitNo}&nbsp;
                               </td>
@@ -1000,7 +1003,7 @@ const SampleCollection = () => {
                 title={"PricksRemarks"}
               />
             )}
-            <div className="custom-box-body">
+            <div className="custom-box-body mb-3">
               <div className="custom-row">
                 <div className="custom-col custom-col-visit">
                   <span className="fa fa-folder custom-text">

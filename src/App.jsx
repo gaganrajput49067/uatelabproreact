@@ -46,7 +46,7 @@ function App() {
   }, []);
 
   const handlePage = (e) => {
-    setPageData(e.option);
+    setPageData(e);
   };
 
   return (

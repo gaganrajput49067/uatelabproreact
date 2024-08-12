@@ -11,7 +11,7 @@ const TimePicker = (props) => {
   };
 
   return (
-    <div className={`${respclass} mb-3`} style={{ position: "relative" }}>
+    <div className={`${respclass} mb-2`} style={{ position: "relative" }}>
       <Calendar
         id={id}
         value={value}

@@ -12,7 +12,7 @@ export const SelectBox = ({
 }) => {
   return (
     <>
-      <div className="form-group selectbox mb-3 ">
+      <div className="form-group selectbox mb-2 ">
         <select
           className={`form-control input-sm ${className} m-0 mt-0`}
           value={selectedValue?.label !== "" && selectedValue}

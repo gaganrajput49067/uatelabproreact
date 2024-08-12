@@ -24,7 +24,7 @@ function DatePicker({
   };
   return (
     <>
-      <div className={`${respclass} mb-3`} style={{ position: "relative" }}>
+      <div className={`${respclass} mb-2`} style={{ position: "relative" }}>
         <div className="form-group">
           <Calendar
             inputId={id}

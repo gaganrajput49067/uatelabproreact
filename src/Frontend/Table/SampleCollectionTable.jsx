@@ -7,6 +7,7 @@ import { getSampleType } from "../../utils/NetworkApi/commonApi";
 import { axiosInstance } from "../../utils/axiosInstance";
 import SampleRemark from "../utils/SampleRemark";
 import DOSModal from "../utils/DOSModal";
+import TableSelectBox from "../../components/TableComponent/TableSelectBox";
 
 function SampleCollectionTable({
   data,
@@ -238,7 +239,6 @@ function SampleCollectionTable({
             );
           }}
         />
-        &nbsp;
       </td>
       <td
         data-title={"Barcode Print"}
@@ -257,13 +257,12 @@ function SampleCollectionTable({
         )}
       </td>
       <td data-title={"Source"}>
-        <SelectBox
-          className="mt-2"
+        <TableSelectBox
           onChange={(e) => handleChange(e, index)}
           name="Source"
           options={SampleSource}
           selectedValue={data?.Source}
-        ></SelectBox>
+        />
       </td>
       <td
         data-title={"DOS"}
@@ -275,16 +274,9 @@ function SampleCollectionTable({
         <i className="fa fa-home iconStyle" />
       </td>
 
-      <td
-        data-title={"Vial Qty"}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <td data-title={"Vial Qty"}>
         {(data.Status === 1 || data.Status === 4) && data?.SINNo !== "" ? (
-          <>
+          <div style={{ display: "flex", justifyContent: "centre" }}>
             <button
               className="btn btn-sm btn-danger"
               onClick={() => handleValQty("sub", data?.SINNo, data?.isSelected)}
@@ -298,13 +290,13 @@ function SampleCollectionTable({
             >
               +
             </button>
-          </>
+          </div>
         ) : (
           <>{data?.VialQty}</>
         )}
       </td>
       <td data-title={"No Of Pricks"}>
-        <SelectBox
+        <TableSelectBox
           options={NoOfPricks}
           id="NoOfPricks"
           name="NoOfPricks"
@@ -336,14 +328,12 @@ function SampleCollectionTable({
         )}
       </td>
       <td data-title={"SampleTypeID"}>
-        <SelectBox
+        <TableSelectBox
           name="SampleTypeID"
-          className="mt-2"
           options={sampleTypeDropdown}
           onChange={(e) => handleChange(e, index)}
           selectedValue={data?.SampleTypeID}
-        ></SelectBox>
-        &nbsp;
+        />
       </td>
       <td data-title={"Reject"}>
         {data.Approved === 0 && data.Status != 4 && (
@@ -379,7 +369,6 @@ function SampleCollectionTable({
               }}
             />
           )}
-        &nbsp;
       </td>
     </>
   );

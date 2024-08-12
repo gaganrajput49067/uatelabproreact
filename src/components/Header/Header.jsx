@@ -27,9 +27,13 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
   const [showInput, setShowInput] = useState(false);
   const [centreData, setCentreData] = useState(null);
   const [selectedMenu, setSelectedMenu] = useState(
-    menuData?.length>0 ? menuData[0]?.value : []
+    menuData?.length > 0 ? menuData[0]?.value : []
   );
-  console.log(selectedMenu)
+
+  useEffect(() => {
+    setSelectedMenu(menuData?.length > 0 ? menuData[0]?.value : []);
+  }, [menuData]);
+
   useEffect(() => {
     getCentreDetails(setCentreData);
   }, []);
@@ -73,11 +77,12 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
 
   const handleChange = (name, e) => {
     const { value } = e;
+    console.log(e);
     if (name === "centre") {
       setCentreData({ ...centreData, defaultCentreId: value });
     } else if (name === "menu") {
       setSelectedMenu(value);
-      handlePage(value);
+      handlePage(e.pageData);
     }
   };
   useEffect(() => {
@@ -151,7 +156,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
         </div>
         {/* Vsit Box */}
         <div className="header-visit ss-none">
-          <div className="maindiv " style={{ marginTop: "7px" }}>
+          <div className="maindiv " style={{ marginTop: "13px" }}>
             <Input
               type="text"
               className="form-control"

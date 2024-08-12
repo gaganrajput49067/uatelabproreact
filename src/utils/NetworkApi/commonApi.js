@@ -33,7 +33,7 @@ export const getPageData = (state, state2) => {
       let data = res?.data?.message;
       let finalData = filtermenu(data?.MenuData, data?.pageData);
       state(finalData);
-      state2(finalData[0]);
+      state2(finalData[0].pageData);
     })
     .catch((err) => {
       toast.error(

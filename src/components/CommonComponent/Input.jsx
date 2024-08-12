@@ -31,7 +31,7 @@ function Input({
 
   return (
     <>
-      <div className="custominputbox mb-3">
+      <div className="custominputbox mb-2">
         <div className="form-group">
           <input
             type={type}

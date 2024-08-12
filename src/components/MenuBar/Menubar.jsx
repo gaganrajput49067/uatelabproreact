@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 const Menubar = ({ pageData = [], handleSidebar }) => {
   const navigate = useNavigate();
   const [filterdMenu, setFilterdMenu] = useState([]);
-
+  console.log(pageData);
   useEffect(() => {
-    setFilterdMenu(pageData?.pageData ? pageData.pageData : []);
+    setFilterdMenu(pageData ? pageData : []);
   }, [pageData]);
 
+  console.log(filterdMenu);
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
 
   const handleChange = (event) => {
     const { value } = event.target;
-    let menu = pageData.pageData;
+    let menu = pageData;
     setFilterdMenu(
       menu.filter((item) =>
         item.PageName.toLowerCase().includes(value.toLowerCase())
