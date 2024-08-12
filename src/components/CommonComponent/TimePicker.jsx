@@ -2,7 +2,8 @@ import React from "react";
 import { Calendar } from "primereact/calendar";
 
 const TimePicker = (props) => {
-  const { respclass, placeholderName, value, onChange, name, lable, id } = props;
+  const { respclass, placeholderName, value, onChange, name, lable, id } =
+    props;
 
   const handleTimeChange = (e) => {
     const selectedDate = e.value;
@@ -10,7 +11,7 @@ const TimePicker = (props) => {
   };
 
   return (
-    <div className={respclass} style={{ position: "relative" }}>
+    <div className={`${respclass} mb-3`} style={{ position: "relative" }}>
       <Calendar
         id={id}
         value={value}

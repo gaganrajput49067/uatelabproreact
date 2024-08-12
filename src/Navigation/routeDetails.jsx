@@ -23,6 +23,10 @@ export let routeDetails = [
         path: "/SampleCollection",
         element: "../Frontend/Laboratory/SampleCollection",
       },
+      {
+        path: "/receiptreprint",
+        element: "../Frontend/Laboratory/ReceiptReprint",
+      },
       { path: "*", element: "../components/NotFound" },
     ],
   },
@@ -34,5 +38,4 @@ export let routeDetails = [
     path: "/ForgetPassword",
     element: "../Frontend/login/ForgetPassword",
   },
-
 ];

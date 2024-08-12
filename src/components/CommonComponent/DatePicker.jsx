@@ -15,17 +15,16 @@ function DatePicker({
   onChange,
   tabIndex,
   timeOnly,
-  
-  maxDate,
-  minDate
-}) {
 
+  maxDate,
+  minDate,
+}) {
   const handleDateChange = (e) => {
     onChange(e?.target?.value, name);
   };
   return (
     <>
-      <div className={respclass} style={{ position: "relative" }}>
+      <div className={`${respclass} mb-3`} style={{ position: "relative" }}>
         <div className="form-group">
           <Calendar
             inputId={id}
@@ -38,11 +37,11 @@ function DatePicker({
             name={name}
             onChange={handleDateChange}
             // wrapperClassName="datepicker"
-            tabIndex={tabIndex?tabIndex:"-1"}
+            tabIndex={tabIndex ? tabIndex : "-1"}
             maxDate={maxDate}
             minDate={minDate}
           />
-      
+
           <label
             htmlFor={id}
             className="label lable truncate "
