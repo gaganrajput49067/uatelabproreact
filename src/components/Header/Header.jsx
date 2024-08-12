@@ -26,8 +26,10 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
   const [showThemes, setShowThemes] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [centreData, setCentreData] = useState(null);
-  const [selectedMenu, setSelectedMenu] = useState(menuData ? menuData[0] : []);
-
+  const [selectedMenu, setSelectedMenu] = useState(
+    menuData?.length>0 ? menuData[0]?.value : []
+  );
+  console.log(selectedMenu)
   useEffect(() => {
     getCentreDetails(setCentreData);
   }, []);
@@ -69,13 +71,13 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (name, e) => {
+    const { value } = e;
     if (name === "centre") {
       setCentreData({ ...centreData, defaultCentreId: value });
     } else if (name === "menu") {
-      setSelectedMenu(e.target);
-      handlePage(e.target);
+      setSelectedMenu(value);
+      handlePage(value);
     }
   };
   useEffect(() => {
@@ -100,10 +102,10 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
         <div type="button" className="header-menu mt-2">
           <ReactSelect
             name={"menu"}
-            placeholderName="Registration"
+            placeholderName=""
             dynamicOptions={menuData}
             searchable={true}
-            value={Number(selectedMenu?.value)}
+            value={Number(selectedMenu)}
             onChange={handleChange}
           />
         </div>
@@ -111,7 +113,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
         <div type="button" className="header-centre mt-2">
           <ReactSelect
             name={"centre"}
-            placeholderName="Select Centre"
+            placeholderName=""
             dynamicOptions={centreData?.centre}
             searchable={true}
             value={Number(centreData?.defaultCentreId)}

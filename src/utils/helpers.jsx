@@ -145,3 +145,7 @@ export const Time = (date) => {
 
   return `${hours}:${minutes}:${seconds}`;
 };
+export const selectedValueCheck = (selectedState, state) => {
+  const data = selectedState.find((ele) => ele.value == state);
+  return data === undefined ? { label: "", value: "" } : data;
+};
