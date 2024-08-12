@@ -47,6 +47,7 @@ import PatientRegisterModal from "../utils/PatientRegisterModal";
 import { useTranslation } from "react-i18next";
 import MedicialModal from "../utils/MedicialModal";
 import UploadFile from "../utils/UploadFIleModal/UploadFile";
+import SampleRemark from "../utils/SampleRemark";
 const PatientRegistration = () => {
   const { t } = useTranslation();
   const [patientImg, setPatientImg] = useState({
