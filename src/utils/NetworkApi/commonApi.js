@@ -454,3 +454,28 @@ export const checkEmploypeeWiseDiscount = (data, id) => {
       });
   });
 };
+
+export const DepartmentWiseItemList = (id, name, state, autocomplete) => {
+  axiosInstance
+    .post("CommonController/DepartmentWiseItemList", {
+      DepartmentID: id,
+      TestName: name,
+    })
+    .then((res) => {
+      const data = res?.data?.message;
+      const val = data.map((ele) => {
+        return {
+          label: ele?.TestName,
+          value: ele?.TestName,
+        };
+      });
+      state(autocomplete ? val : data);
+    })
+    .catch((err) => {
+      toast.error(
+        err?.response?.data?.message
+          ? err?.response?.data?.message
+          : "Error Occured"
+      );
+    });
+};
