@@ -30,6 +30,8 @@ import Table from "../../components/Table/Table";
 import SampleCollectionTable from "../Table/SampleCollectionTable";
 import Loading from "../../components/Loading/Loading";
 import SampleRemark from "../utils/SampleRemark";
+import CustomModal from "../utils/CustomModal";
+import MedicialModal from "../utils/MedicialModal";
 const SampleCollection = () => {
   const [CentreData, setCentreData] = useState([]);
   const [toggleTable, setToggleTable] = useState(true);
@@ -650,6 +652,18 @@ const SampleCollection = () => {
   };
   return (
     <>
+      {showLog?.modal && (
+        <CustomModal
+          show={showLog?.modal}
+          visitID={showLog?.visitId}
+          onHide={() =>
+            setShowLog({
+              modal: false,
+              visitId: "",
+            })
+          }
+        />
+      )}
       <PageHead name="Sample Collection" showDrop={"true"}>
         <div className="card">
           <div className="row">
@@ -830,7 +844,6 @@ const SampleCollection = () => {
               />
             </div>
             <div className="col-sm-1">
-              {" "}
               {loading ? (
                 <Loading />
               ) : (
@@ -858,7 +871,6 @@ const SampleCollection = () => {
             {scdata.length > 0 ? (
               <Table paginate={true} data={scdata ?? []} itemsPerPage={10}>
                 {({ currentItems, finalIndex }) => {
-                  console.log(currentItems);
                   return (
                     <>
                       <thead className="cf">
@@ -878,25 +890,25 @@ const SampleCollection = () => {
                         {currentItems &&
                           currentItems?.map((data, index) => (
                             <tr key={index}>
-                              <td
-                                data-title={"S.No"}
-                                onClick={() => {
-                                  setShowLog({
-                                    modal: true,
-                                    visitId: data?.VisitNo,
-                                  });
-                                }}
-                              >
+                              <td data-title={"S.No"}>
                                 <div
                                   style={{
                                     display: "flex",
                                     justifyContent: "space-around",
-                                    gap: "0px",
                                   }}
                                 >
                                   <div>{index + finalIndex}</div>
                                   <div>
-                                    <i className="fa fa-search" />
+                                    <i
+                                      className="fa fa-search"
+                                      style={{ cursor: "pointer" }}
+                                      onClick={() => {
+                                        setShowLog({
+                                          modal: true,
+                                          visitId: data?.VisitNo,
+                                        });
+                                      }}
+                                    />
                                   </div>
                                   {data?.isUrgent === 1 && (
                                     <div>
@@ -910,7 +922,6 @@ const SampleCollection = () => {
                                     </div>
                                   )}
                                 </div>
-                                &nbsp;
                               </td>
 
                               <td data-title={"Sin No"}>{data?.SinNo}&nbsp;</td>
@@ -982,7 +993,20 @@ const SampleCollection = () => {
           </>
         ) : (
           <>
-            {}
+            {show4?.modal && (
+              <MedicialModal
+                show={show4.modal}
+                handleClose={() => {
+                  setShow4({
+                    modal: false,
+                    data: "",
+                    index: -1,
+                  });
+                }}
+                MedicalId={show4?.data}
+                handleUploadCount={handleUploadCount}
+              />
+            )}
             {showRemark && (
               <SampleRemark
                 show={showRemark}

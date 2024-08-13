@@ -24,6 +24,7 @@
     flex-direction: column;
     border: 1px solid var(--bg-subMenu);
     margin-bottom: 20px;
+    max-width: 80vw;;
 }
 
 

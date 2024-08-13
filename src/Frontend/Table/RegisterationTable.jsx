@@ -3,6 +3,8 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { number } from "yup";
 import { useLocation } from "react-router-dom";
+import DOSModal from "../utils/DOSModal";
+import TestNameModal from "../utils/TestNameModal";
 
 function RegisterationTable({
   data,
@@ -75,22 +77,22 @@ function RegisterationTable({
           LTData={LTData}
           tableData={tableData}
         />
-      )}
+      )}*/}
       {show2 && (
         <TestNameModal
           show={show2}
           onHandleShow={handleClose2}
           id={data?.InvestigationID}
         />
-      )} */}
-      {/* {dos && (
+      )}
+      {dos && (
         <DOSModal
           show={dos}
           LTData={LTData}
           onHandleShow={() => setDos(false)}
           id={data?.InvestigationID}
         />
-      )} */}
+      )}
       <td data-title="S.No">
         <div style={{ display: "flex" }}>
           {index + 1}&nbsp;
