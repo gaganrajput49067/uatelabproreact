@@ -25,7 +25,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
   const [showUserProfile, setShowUserProfile] = useState(false);
   const [showThemes, setShowThemes] = useState(false);
   const [showInput, setShowInput] = useState(false);
-  const [centreData, setCentreData] = useState(null);
+  const [centreData, setCentreData] = useState([]);
   const [selectedMenu, setSelectedMenu] = useState(
     menuData?.length > 0 ? menuData[0]?.value : []
   );
@@ -77,13 +77,29 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
 
   const handleChange = (name, e) => {
     const { value } = e;
-    console.log(e);
     if (name === "centre") {
-      setCentreData({ ...centreData, defaultCentreId: value });
+      handleChangeCentre(value)
     } else if (name === "menu") {
       setSelectedMenu(value);
       handlePage(e.pageData);
     }
+  };
+  const handleChangeCentre = (value) => {
+    axiosInstance
+      .post("Users/ChangeCentre", {
+        CentreID: value,
+      })
+      .then((res) => {
+        window.localStorage.setItem("DefaultCentre", value);
+        window.location.reload();
+      })
+      .catch((err) =>
+        toast.error(
+          err?.data?.response?.message
+            ? err?.data?.response?.message
+            : "Error Occur"
+        )
+      );
   };
   useEffect(() => {
     document.documentElement.setAttribute(
@@ -119,9 +135,10 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
           <ReactSelect
             name={"centre"}
             placeholderName=""
-            dynamicOptions={centreData?.centre}
-            searchable={true}
-            value={Number(centreData?.defaultCentreId)}
+            dynamicOptions={centreData}
+            value={window?.localStorage?.getItem(
+              "DefaultCentre"
+            )}
             onChange={handleChange}
           />
         </div>
