@@ -1,16 +1,15 @@
 import React from "react";
-import { Modal } from "react-bootstrap";
-
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useEffect } from "react";
-import axios from "axios";
 import { axiosInstance } from "../../utils/axiosInstance";
 import { SelectBox } from "../../components/CommonComponent/SelectBox";
+import Modal from "../../components/Modal/Modal";
 
 function RejectModal({ show, handleShow, data, TableData }) {
   const [dropDown, setDropDown] = useState([]);
-
+  const { t } = useTranslation();
   const [payload, setPayload] = useState({
     Reason: "",
     CustomReason: "",
@@ -66,7 +65,7 @@ function RejectModal({ show, handleShow, data, TableData }) {
 
   const handleSubmit = () => {
     if (handleReason()) {
-      axios
+      axiosInstance
         .post("SC/SampleRejection", {
           data: [
             {
@@ -99,11 +98,12 @@ function RejectModal({ show, handleShow, data, TableData }) {
   }, []);
   return (
     <Modal
+      show={show}
       title={"Select Reason to Reject Sample"}
       top={"10%"}
       handleClose={handleShow}
     >
-      <div className="modal-card">
+      <div className="modal-card" style={{ width: "500px" }}>
         <div className="row">
           <div className="col-12">
             <SelectBox
@@ -126,7 +126,6 @@ function RejectModal({ show, handleShow, data, TableData }) {
             </div>
           )}
         </div>
-
         <div className="card-body">
           <div className="row">
             <div className="col-sm-2">
@@ -135,7 +134,7 @@ function RejectModal({ show, handleShow, data, TableData }) {
                 className="btn btn-block btn-danger btn-sm "
                 onClick={handleSubmit}
               >
-                Reject
+                {t("Reject")}
               </button>
             </div>
             <div className="col-sm-2">

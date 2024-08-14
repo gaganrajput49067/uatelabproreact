@@ -58,29 +58,34 @@ function CustomModal({ visitID, show, onHide }) {
     auditApiData();
   }, [auditValue.ItemId]);
   return (
-    <Modal title={tableData[0]?.pname} handleClose={onHide}>
-      <div className="row mb-2" style={{ width: "800px !important" }}>
-        <div className="col-sm-12 w-100">
-          <select
-            className="select-input-box form-control input-sm"
-            onChange={handleChange}
-          >
-            <option value="">{t("All Test")}...</option>
-            {optionData.map((data, index) => (
-              <option value={data.ItemId} key={index}>
-                {data.ItemName}
-              </option>
-            ))}
-          </select>
+    <Modal title={tableData[0]?.pname} handleClose={onHide} top={"100px"}>
+      <div style={{ width: "800px" }}>
+        <div className="row mb-2">
+          <div className="col-sm-12 w-100">
+            <select
+              className="select-input-box form-control input-sm"
+              onChange={handleChange}
+            >
+              <option value="">{t("All Test")}...</option>
+              {optionData.map((data, index) => (
+                <option value={data.ItemId} key={index}>
+                  {data.ItemName}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-      </div>
-      <AuditTrailDataTable tableData={tableData} />
+        <AuditTrailDataTable tableData={tableData} />
 
-      <div className="row">
-        <div className="col-sm-2">
-          <button className="btn btn-block btn-danger btn-sm" onClick={onHide}>
-            {t("Close")}
-          </button>
+        <div className="row">
+          <div className="col-sm-2">
+            <button
+              className="btn btn-block btn-danger btn-sm"
+              onClick={onHide}
+            >
+              {t("Close")}
+            </button>
+          </div>
         </div>
       </div>
     </Modal>

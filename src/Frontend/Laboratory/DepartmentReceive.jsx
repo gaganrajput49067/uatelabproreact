@@ -8,7 +8,10 @@ import {
   Time,
   getTrimmedData,
 } from "../../utils/helpers";
-import { getDoctorSuggestion } from "../../utils/NetworkApi/commonApi";
+import {
+  getDoctorSuggestion,
+  getPaymentModes,
+} from "../../utils/NetworkApi/commonApi";
 import { SearchBy, stateIniti } from "../../utils/Constants";
 import { axiosInstance } from "../../utils/axiosInstance";
 import PageHead from "../../components/CommonComponent/PageHead";
@@ -19,6 +22,8 @@ import CustomTimePicker from "../../components/CommonComponent/TimePicker";
 import Loading from "../../components/Loading/Loading";
 import moment from "moment";
 import DepartmentReceiveTable from "../Table/DepartmentReceiveTable";
+import MedicialModal from "../utils/MedicialModal";
+import UploadFile from "../utils/UploadFIleModal/UploadFile";
 
 const DepartmentReceive = () => {
   const [CentreData, setCentreData] = useState([]);
@@ -32,6 +37,7 @@ const DepartmentReceive = () => {
   const [searchstatus, setSearchStatus] = useState([]);
   const [saveTestId, setSaveTestId] = useState([]);
   const [load, setLoad] = useState(false);
+  const [Identity, setIdentity] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [state, setState] = useState(stateIniti);
@@ -336,6 +342,7 @@ const DepartmentReceive = () => {
   useEffect(() => {
     getAccessCentres();
     getDepartment();
+    getPaymentModes("Identity", setIdentity);
   }, []);
   const fetchRateTypes = async (id) => {
     try {
@@ -499,7 +506,6 @@ const DepartmentReceive = () => {
                 onChange={dateSelect}
                 maxDate={new Date(formData?.ToDate)}
               />
-
             </div>
             <div className="col-sm-1">
               <CustomTimePicker
@@ -523,7 +529,6 @@ const DepartmentReceive = () => {
                 maxDate={new Date()}
                 minDate={new Date(formData?.FromDate)}
               />
-
             </div>
             <div className="col-sm-1">
               <CustomTimePicker
@@ -574,7 +579,33 @@ const DepartmentReceive = () => {
           </div>
         </div>
       </PageHead>
+      {show4?.modal && (
+        <MedicialModal
+          show={show4.modal}
+          handleClose={() => {
+            setShow4({
+              modal: false,
+              data: "",
+              index: -1,
+            });
+          }}
+          MedicalId={show4?.data}
+          handleUploadCount={handleUploadCount}
+        />
+      )}
 
+      {show?.modal && (
+        <UploadFile
+          show={show?.modal}
+          handleClose={() => {
+            setShow({ modal: false, data: "", index: -1 });
+          }}
+          options={Identity}
+          documentId={show?.data}
+          pageName="Patient Registration"
+          handleUploadCount={handleUploadCount}
+        />
+      )}
       <div className="card mt-2">
         {loading ? (
           <Loading />
@@ -582,15 +613,15 @@ const DepartmentReceive = () => {
           load && (
             <>
               <DepartmentReceiveTable
-                  drdata={drdata}
-                  setSaveTestId={setSaveTestId}
-                  saveTestId={saveTestId}
-                  show={setShow4}
-                  show2={setShow}
-                  TableData={TableData}
-                  setDrData={setDrData}
-                  pageType={pageType}
-                />
+                drdata={drdata}
+                setSaveTestId={setSaveTestId}
+                saveTestId={saveTestId}
+                show={setShow4}
+                show2={setShow}
+                TableData={TableData}
+                setDrData={setDrData}
+                pageType={pageType}
+              />
               <div className="row" style={{ float: "right" }}>
                 {drdata.length > 0 &&
                   (searchstatus == "2" || collecteddataexist) && (

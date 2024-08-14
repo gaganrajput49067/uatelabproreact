@@ -622,6 +622,7 @@ const SampleCollection = () => {
 
   useEffect(() => {
     getAccessCentres();
+    getPaymentModes("Identity", setIdentity);
   }, []);
 
   const handleShowRemark = () => {
