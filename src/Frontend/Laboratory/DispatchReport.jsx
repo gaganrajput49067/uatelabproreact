@@ -1,11 +1,29 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { getDoctorSuggestion } from "../../utils/NetworkApi/commonApi";
-
+import {
+  BindEmployeeReports,
+  DepartmentWiseItemList,
+  getDoctorSuggestion,
+} from "../../utils/NetworkApi/commonApi";
+import { axiosInstance } from "../../utils/axiosInstance";
+import {
+  AddBlankData,
+  AllDataDropDownPayload,
+  Time,
+  autocompleteOnBlur,
+  getTrimmedData,
+} from "../../utils/helpers";
+import PageHead from "../../components/CommonComponent/PageHead";
+import { SelectBox } from "../../components/CommonComponent/SelectBox";
+import Input from "../../components/CommonComponent/Input";
+import AutoComplete from "../../components/CustomComponent/AutoComplete";
+import { DateTypeSearch, SampleStatus, SearchBy } from "../../utils/Constants";
+import DatePicker from "../../components/CommonComponent/DatePicker";
+import CustomTimePicker from "../../components/CommonComponent/TimePicker";
+import Loading from "../../components/Loading/Loading";
+import DispatchReportTable from "../Table/DispatchReportTable";
 const DispatchReport = () => {
- 
   const [CentreData, setCentreData] = useState([]);
   const [RateTypes, setRateTypes] = useState([]);
   const [DepartmentData, setDepartmentData] = useState([]);
@@ -35,8 +53,8 @@ const DispatchReport = () => {
     RateID: "",
     SelectTypes: "",
     RefundFilter: null,
-    FromTime: "00:00:00",
-    ToTime: "23:59:59",
+    FromTime: new Date(),
+    ToTime: new Date(),
     DoctorReferal: "",
     DepartmentID: "",
     DoctorName: "",
@@ -47,9 +65,6 @@ const DispatchReport = () => {
     SampleStatus: "",
     IsCourier: "",
   });
-
-
-
 
   const handleIndex = (e, name) => {
     switch (name) {
@@ -173,12 +188,9 @@ const DispatchReport = () => {
         error = { ...error, ItemValue: t("Invalid Mobile Number") };
       }
     }
-  
 
     return error;
   };
-
- 
 
   const dateSelect = (value, name) => {
     setFormData({
@@ -218,8 +230,8 @@ const DispatchReport = () => {
   };
 
   const getAccessCentres = () => {
-    axios
-      .get("/api/v1/Centre/getAccessCentres")
+    axiosInstance
+      .get("Centre/getAccessCentres")
       .then((res) => {
         let data = res.data.message;
         let CentreDataValue = data.map((ele) => {
@@ -236,11 +248,9 @@ const DispatchReport = () => {
       .catch((err) => console.log(err));
   };
 
-
-
   const getDepartment = () => {
-    axios
-      .get("/api/v1/Department/getDepartment")
+    axiosInstance
+      .get("Department/getDepartment")
       .then((res) => {
         let data = res.data.message;
         let DeptDataValue = data.map((ele) => {
@@ -261,9 +271,9 @@ const DispatchReport = () => {
       const rateTypes = RateTypes.map((item) => {
         return item?.value;
       });
-      axios
+      axiosInstance
         .post(
-          "/api/v1/Dispatch/PatientLabSearch",
+          "Dispatch/PatientLabSearch",
           getTrimmedData({
             CentreID: AllDataDropDownPayload(
               formData.CentreID,
@@ -279,8 +289,8 @@ const DispatchReport = () => {
             DoctorReferal: formData.DoctorReferal,
             FromDate: moment(formData.FromDate).format("DD/MMM/YYYY"),
             ToDate: moment(formData.ToDate).format("DD/MMM/YYYY"),
-            FromTime: formData.FromTime,
-            ToTime: formData.ToTime,
+            FromTime: Time(formData.FromTime),
+            ToTime: Time(formData.ToTime),
             DepartmentID: AllDataDropDownPayload(
               formData.DepartmentID,
               DepartmentData,
@@ -348,8 +358,6 @@ const DispatchReport = () => {
   }
 
   const handleTime = (time, name) => {
-    
-
     setFormData({ ...formData, [name]: time });
   };
   useEffect(() => {
@@ -365,7 +373,7 @@ const DispatchReport = () => {
   };
   const fetchRateTypes = async (id) => {
     try {
-      const res = await axios.post("/api/v1/Centre/GetRateType", {
+      const res = await axiosInstance.post("Centre/GetRateType", {
         CentreId: id,
       });
       const list = res?.data?.message.map((item) => ({
@@ -388,8 +396,278 @@ const DispatchReport = () => {
     }
   }, [formData?.TestName]);
   return (
-    <div>DispatchReport</div>
-  )
-}
+    <>
+      <PageHead name="Dispatch Report" showDrop={"true"}>
+        <div className="card">
+          <div className="row">
+            <div className="col-sm-2">
+              <div className="d-flex" style={{ display: "flex" }}>
+                <div style={{ width: "50%" }}>
+                  <SelectBox
+                    options={SearchBy}
+                    id="SelectTypes"
+                    lable="SelectTypes"
+                    selectedValue={formData.SelectTypes}
+                    name="SelectTypes"
+                    onChange={handleSelectChange}
+                  />
+                </div>
+                <div style={{ width: "50%" }}>
+                  {formData?.SelectTypes === "Mobile" ? (
+                    <div style={{ width: "100%" }}>
+                      <Input
+                        type="number"
+                        name="ItemValue"
+                        max={10}
+                        value={formData.ItemValue}
+                        onChange={handleChange}
+                        onInput={(e) => number(e, 10)}
+                      />
+                      {errors?.ItemValue && (
+                        <div className="golbal-Error">{errors?.ItemValue}</div>
+                      )}
+                    </div>
+                  ) : (
+                    <div style={{ width: "100%" }}>
+                      <Input
+                        type="text"
+                        name="ItemValue"
+                        max={20}
+                        value={formData.ItemValue}
+                        onChange={handleChange}
+                      />
+                      {errors?.ItemValue && (
+                        <div className="golbal-Error">{errors?.ItemValue}</div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
 
-export default DispatchReport
+            <div className="col-sm-2  ">
+              <SelectBox
+                options={AddBlankData(CentreData, "All Centre")}
+                lable="Centre"
+                id="Centre"
+                name="CentreID"
+                selectedValue={formData?.CentreID}
+                onChange={handleSelectChange}
+              />
+            </div>
+
+            <div className="col-sm-2 ">
+              <SelectBox
+                options={[{ label: "All RateType", value: "" }, ...RateTypes]}
+                selectedValue={formData?.RateTypeID}
+                lable="RateType"
+                id="RateType"
+                name="RateTypeID"
+                onChange={handleSelectChange}
+              />
+            </div>
+
+            <div className="col-sm-2  ">
+              <SelectBox
+                options={AddBlankData(DepartmentData, "All Department")}
+                lable="Department"
+                id="Department"
+                selectedValue={formData.DepartmentID}
+                name="DepartmentID"
+                onChange={handleSelectChange}
+              />
+            </div>
+
+            <div className="col-sm-2  ">
+              <Input
+                type="text"
+                lable="DoctorName"
+                id="DoctorName"
+                name="DoctorName"
+                value={formData.DoctorName}
+                onChange={handleChange}
+                placeholder=" "
+                onBlur={(e) => {
+                  autocompleteOnBlur(setDoctorSuggestion);
+                  setTimeout(() => {
+                    const data = doctorSuggestion.filter(
+                      (ele) => ele?.Name === e.target.value
+                    );
+                    if (data.length === 0) {
+                      setFormData({ ...formData, DoctorName: "" });
+                    }
+                  }, 500);
+                }}
+                autoComplete="off"
+              />
+              {dropFalse && doctorSuggestion.length > 0 && (
+                <ul className="suggestion-data">
+                  {doctorSuggestion.map((data, index) => (
+                    <li
+                      onClick={() => handleListSearch(data, "DoctorName")}
+                      className={`${index === indexMatch && "matchIndex"}`}
+                      key={index}
+                    >
+                      {data?.Name}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div className="col-sm-2  ">
+              <Input
+                type="text"
+                name="TestName"
+                lable="Search By Test Name"
+                id="TestName"
+                value={formData.TestName}
+                placeholder=" "
+                onChange={handleChange}
+                onKeyDown={(e) => handleIndex(e, "TestName")}
+              />
+              {TestSuggestion.length > 0 && (
+                <AutoComplete
+                  test={TestSuggestion}
+                  handleListSearch={handleListSearch}
+                  indexMatch={indexMatch}
+                />
+              )}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-2">
+              <SelectBox
+                name="User"
+                lable="Employee"
+                id="Employee"
+                options={[{ label: "Select Employee", value: "" }, ...user]}
+                selectedValue={formData?.User}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="col-sm-2  ">
+              <SelectBox
+                options={DateTypeSearch}
+                formdata={formData?.DateTypeSearch}
+                name="DateTypeSearch"
+                lable="DateTypeSearch"
+                id="DateTypeSearch"
+                onChange={handleSelectChange}
+              />
+            </div>
+            <div className="col-sm-2">
+              <DatePicker
+                className="custom-calendar"
+                name="FromDate"
+                value={formData?.FromDate}
+                onChange={dateSelect}
+                placeholder=" "
+                id="FromDate"
+                lable="FromDate"
+                maxDate={new Date(formData?.ToDate)}
+              />
+            </div>
+            <div className="col-sm-1">
+              <CustomTimePicker
+                name="FromTime"
+                placeholder="FromTime"
+                value={formData?.FromTime}
+                id="FromTime"
+                lable="FromTime"
+                onChange={handleTime}
+              />
+            </div>
+            <div className="col-sm-2">
+              <DatePicker
+                className="custom-calendar"
+                name="ToDate"
+                value={formData?.ToDate}
+                onChange={dateSelect}
+                placeholder=" "
+                id="ToDate"
+                lable="ToDate"
+                maxDate={new Date()}
+                minDate={new Date(formData?.FromDate)}
+              />
+            </div>
+            <div className="col-sm-1">
+              <CustomTimePicker
+                name="ToTime"
+                placeholder="ToTime"
+                value={formData?.ToTime}
+                id="ToTime"
+                lable="ToTime"
+                onChange={handleTime}
+              />
+            </div>
+            <div className="col-sm-2">
+              <SelectBox
+                options={[...SampleStatus]}
+                onChange={handleSelectChange1}
+                name="SampleStatus"
+                lable="SampleStatus"
+                id="SampleStatus"
+                selectedValue={formData.SampleStatus}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-sm-1 d-flex mb-2">
+              <input
+                id="IsUrgent"
+                type="checkbox"
+                name="IsUrgent"
+                checked={formData?.IsUrgent}
+                onChange={handleSelectChange}
+              />
+              <label htmlFor="IsUrgent" className="ml-2">
+                IsUrgent
+              </label>
+            </div>
+            <div className="col-sm-1 d-flex mb-2">
+              <input
+                type="checkbox"
+                name="IsCourier"
+                id="IsCourier"
+                checked={formData?.IsCourier}
+                onChange={handleSelectChange}
+              />
+              <label htmlFor="IsCourier" className="ml-2">
+                IsCourier
+              </label>
+            </div>
+            <div className="col-sm-1">
+              <button
+                onClick={() =>
+                  TableData(document.getElementById("SampleStatus").value)
+                }
+                className="btn btn-primary btn-sm w-100"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </PageHead>
+
+      <div className="card mt-2">
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <DispatchReportTable
+              dispatchData={dispatchData}
+              show={setShow4}
+              show2={setShow}
+              handleInnerChecked={handleInnerChecked}
+            />
+          </>
+        )}
+      </div>
+    </>
+  );
+};
+
+export default DispatchReport;

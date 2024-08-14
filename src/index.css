@@ -1631,3 +1631,13 @@ td {
     margin-bottom: 20px !important;
   }
 }
+
+.round {
+  border-radius: 5px;
+  padding: 1px 4px;
+}
+
+.iconStyle {
+  font-size: 11px !important;
+  cursor: pointer;
+}

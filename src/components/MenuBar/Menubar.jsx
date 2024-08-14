@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../zStyles/menubar.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const Menubar = ({ pageData = [], handleSidebar }) => {
   const navigate = useNavigate();
   const [filterdMenu, setFilterdMenu] = useState([]);
@@ -11,7 +11,7 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
 
   console.log(filterdMenu);
   const containerRef = useRef(null);
-
+  const location = useLocation();
   useEffect(() => {
     const handleScroll = (event) => {
       if (event.deltaY !== 0) {
@@ -51,7 +51,15 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
       <div className="main-menu-container" ref={containerRef}>
         {filterdMenu.map((ele, key) => {
           return (
-            <span key={ele?.PageName} onClick={() => navigate(ele?.PageUrl)}>
+            <span
+              key={ele?.PageName}
+              onClick={() => navigate(ele?.PageUrl)}
+              className={`nav-item mx-1 ${
+                location.pathname.toLowerCase() == ele?.PageUrl.toLowerCase()
+                  ? " active-tab-menu"
+                  : "text-white"
+              }`}
+            >
               <i className="fas fa-tachometer-alt nav-icon"></i> {ele?.PageName}
             </span>
           );

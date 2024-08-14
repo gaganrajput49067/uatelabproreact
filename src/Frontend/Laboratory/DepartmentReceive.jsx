@@ -373,7 +373,6 @@ const DepartmentReceive = () => {
                   {formData?.SelectTypes === "Mobile" ? (
                     <div style={{ width: "100%" }}>
                       <Input
-                        className="select-input-box form-control input-sm"
                         type="number"
                         name="ItemValue"
                         max={10}
@@ -430,7 +429,7 @@ const DepartmentReceive = () => {
                 options={AddBlankData(DepartmentData, "All Department")}
                 lable="Department"
                 id="Department"
-                formdata={formData.DepartmentID}
+                selectedValue={formData.DepartmentID}
                 name="DepartmentID"
                 onChange={handleSelectChange}
               />
@@ -501,9 +500,6 @@ const DepartmentReceive = () => {
                 maxDate={new Date(formData?.ToDate)}
               />
 
-              {errors?.FromDate && (
-                <span className="golbal-Error">{errors?.FromDate}</span>
-              )}
             </div>
             <div className="col-sm-1">
               <CustomTimePicker
@@ -528,9 +524,6 @@ const DepartmentReceive = () => {
                 minDate={new Date(formData?.FromDate)}
               />
 
-              {errors?.ToDate && (
-                <span className="golbal-Error">{errors?.ToDate}</span>
-              )}
             </div>
             <div className="col-sm-1">
               <CustomTimePicker

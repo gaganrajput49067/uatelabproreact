@@ -24,16 +24,17 @@ export let routeDetails = [
         element: "../Frontend/Laboratory/SampleCollection",
       },
       {
-        path: "/receiptreprint",
-        element: "../Frontend/Laboratory/ReceiptReprint",
-      },
-      {
+      
         path: "/DepartmentReceive",
         element: "../Frontend/Laboratory/DepartmentReceive",
       },
       {
         path: "/DispatchReport",
         element: "../Frontend/Laboratory/DispatchReport",
+      },
+      {
+        path: "/ReceiptReprint",
+        element: "../Frontend/Laboratory/ReceiptReprint",
       },
       { path: "*", element: "../components/NotFound" },
     ],

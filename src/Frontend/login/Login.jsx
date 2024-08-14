@@ -33,6 +33,10 @@ const Login = () => {
   useEffect(() => {
     if (success) {
       window.localStorage.setItem("Username", user.Username);
+      window.localStorage.setItem(
+        "DefaultCentre",
+        user.DefaultCentreID
+      );
       navigate("/");
     }
   }, [success, navigate]);
