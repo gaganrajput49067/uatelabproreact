@@ -26,6 +26,8 @@ export let routeDetails = [
       {
         path: "/receiptreprint",
         element: "../Frontend/Laboratory/ReceiptReprint",
+      },
+      {
         path: "/DepartmentReceive",
         element: "../Frontend/Laboratory/DepartmentReceive",
       },

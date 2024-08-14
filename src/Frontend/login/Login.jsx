@@ -3,15 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Input from "../../components/CommonComponent/Input";
-import logoitdose from "../../assets/image/logoitdose.png";
+import logoitdose from "../../assets/image/logo elabpro bg.png";
 import lab from "../../assets/image/Lab.jpg";
 import "../../zStyles/login.css";
 import { signInAction } from "../../store/reducers/loginSlice/loginSlice";
+import {
+  forgetPasswordAction,
+  resetState,
+} from "../../store/reducers/forgetPasswordSlice/forgetPasswordSlice";
 
 const Login = () => {
   const [t] = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isRightPanelActive, setRightPanelActive] = useState(false);
+
+  const handleSignUpClick = () => {
+    setRightPanelActive(true);
+  };
+
+  const handleSignInClick = () => {
+    setRightPanelActive(false);
+  };
+  const IsForgot = useSelector((state) => state.forgetPasswordSlice.success);
   const { user, loading, error, success } = useSelector(
     (state) => state.loginSlice
   );
@@ -24,7 +38,12 @@ const Login = () => {
   }, [success, navigate]);
 
   const [credentials, setCredentials] = useState({
+    UserName: "",
     username: "",
+    Mobile: "",
+    OTP: "",
+    Password: "",
+    ConfirmPassword: "",
     password: "",
   });
   const [errors, setErrors] = useState({});
@@ -43,92 +62,282 @@ const Login = () => {
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCredentials({
-      ...credentials,
-      [name]: value,
-    });
+    if (name === "UserName" || name === "username") {
+      setCredentials({
+        ...credentials,
+        UserName: value,
+        username: value,
+      });
+    } else {
+      setCredentials({
+        ...credentials,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      dispatch(signInAction(credentials));
+      dispatch(
+        signInAction({
+          username: credentials.username,
+          password: credentials.password,
+        })
+      );
     }
+  };
+  const handleForget = (e) => {
+    e.preventDefault();
+    const Api = "ForgetPasswordController/ForgetPassword";
+    dispatch(forgetPasswordAction({ credentials, Api }));
   };
   const handleKeyDown = (e) => {
     if (e?.key === "Enter") {
       handleSubmit(e);
     }
   };
+
+  const handleReset = (e) => {
+    e.preventDefault();
+    const Api = "ForgetPasswordController/ResetPassword";
+    dispatch(forgetPasswordAction({ credentials, Api }));
+    navigate("/login");
+  };
+
   return (
     <div className="main-login-outer-Container">
-      <div className="main-login-inner-container">
-        <div className="login-form-container">
-          <div className="login-form">
-            <Link to="/">
-              <img className="logoStyle" src={logoitdose} alt="logo" />
-            </Link>
-            <h5 className="logo-title"> Sign in to start your session</h5>
+      <div
+        className={`container ${
+          isRightPanelActive ? "right-panel-active" : ""
+        }`}
+        id="container"
+      >
+        <div className="form-container sign-up-container">
+          {isRightPanelActive && (
+            <div className="login-form">
+              {!IsForgot ? (
+                <div className="login-form">
+                  <Link to="/">
+                    <img
+                      className="logoStyle mb-4"
+                      src={logoitdose}
+                      alt="logo"
+                    />
+                  </Link>
+                  <h5 className="logo-title"> Enter Details to get OTP</h5>
 
-            <div className="main-login-input">
-              <div className="icondiv">
-                <i className="fas fa-user-alt" />
+                  <div className="main-login-input">
+                    <div className="icondiv">
+                      <i className="fas fa-user-alt" />
+                    </div>
+                    <div className="maindiv">
+                      <Input
+                        type="text"
+                        id="username"
+                        className="form-control"
+                        name="UserName"
+                        value={credentials?.UserName}
+                        lable={t("Username")}
+                        placeholder=" "
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="main-login-input">
+                    <div className="icondiv">
+                      <i className="fas fa-lock" />
+                    </div>
+                    <div className="maindiv">
+                      <Input
+                        type="text"
+                        id="Mobile"
+                        className="form-control"
+                        name="Mobile"
+                        value={credentials?.Mobile}
+                        lable={t("Registered Mobile Number")}
+                        placeholder=" "
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="main-login-button">
+                    <button
+                      className="btn btn-sm btn-primary btn-block login-button"
+                      onClick={handleForget}
+                      disabled={loading}
+                    >
+                      Send OTP
+                    </button>
+                    <span
+                      className="forgetpassword"
+                      onClick={() => {
+                        handleSignInClick();
+                      }}
+                    >
+                      Back to login
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <div className="login-form">
+                  <Link to="/">
+                    <img
+                      className="logoStyle mb-4"
+                      src={logoitdose}
+                      alt="logo"
+                    />
+                  </Link>
+                  <h5 className="logo-title">Enter OTP and updated password</h5>
+
+                  <div className="main-login-input">
+                    <div className="icondiv">
+                      <i className="fas fa-user-alt" />
+                    </div>
+                    <div className="maindiv">
+                      <Input
+                        type="number"
+                        id="OTP"
+                        className="form-control"
+                        name="OTP"
+                        value={credentials?.OTP}
+                        lable={t("OTP")}
+                        placeholder=" "
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="main-login-input">
+                    <div className="icondiv">
+                      <i className="fas fa-lock" />
+                    </div>
+                    <div className="maindiv">
+                      <Input
+                        type="password"
+                        id="Password"
+                        className="form-control"
+                        name="Password"
+                        value={credentials?.Password}
+                        lable={t("Password")}
+                        placeholder=" "
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="main-login-input">
+                    <div className="icondiv">
+                      <i className="fas fa-lock" />
+                    </div>
+                    <div className="maindiv">
+                      <Input
+                        type="password"
+                        id="ConfirmPassword"
+                        className="form-control"
+                        name="ConfirmPassword"
+                        value={credentials?.ConfirmPassword}
+                        lable={t("ConfirmPassword")}
+                        placeholder=" "
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="main-login-button">
+                    <button
+                      className="btn btn-sm btn-primary btn-block login-button"
+                      onClick={handleReset}
+                      disabled={loading}
+                    >
+                      Change Password
+                    </button>
+                    <span
+                      className="forgetpassword"
+                      onClick={() => {
+                        handleSignInClick();
+                        dispatch(resetState());
+                      }}
+                    >
+                      Back to login
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        <div className="form-container sign-in-container">
+          {!isRightPanelActive && (
+            <div className="login-form">
+              <Link to="/">
+                <img className="logoStyle mb-4" src={logoitdose} alt="logo" />
+              </Link>
+              <h5 className="logo-title"> Sign in to start your session</h5>
+
+              <div className="main-login-input">
+                <div className="icondiv">
+                  <i className="fas fa-user-alt" />
+                </div>
+                <div className="maindiv">
+                  <Input
+                    type="text"
+                    id="username"
+                    className="form-control required-fields"
+                    name="username"
+                    value={credentials?.username}
+                    lable={t("Username")}
+                    placeholder=" "
+                    onChange={handleChange}
+                  />
+                  {errors?.username && credentials?.username?.trim() === "" && (
+                    <div className="error-message">{errors?.username}</div>
+                  )}
+                </div>
               </div>
-              <div className="maindiv">
-                <Input
-                  type="text"
-                  id="username"
-                  className="form-control required-fields"
-                  name="username"
-                  value={credentials?.username}
-                  lable={t("Username")}
-                  placeholder=" "
-                  onChange={handleChange}
-                />
-                {errors?.username && credentials?.username?.trim() === "" && (
-                  <div className="error-message">{errors?.username}</div>
-                )}
+              <div className="main-login-input">
+                <div className="icondiv">
+                  <i className="fas fa-lock" />
+                </div>
+                <div className="maindiv">
+                  <Input
+                    type="password"
+                    id="password"
+                    className="form-control required-fields"
+                    name="password"
+                    value={credentials?.password}
+                    lable={t("Password")}
+                    placeholder=" "
+                    onChange={handleChange}
+                    onKeyDown={handleKeyDown}
+                  />
+                  {errors?.password && credentials?.password?.trim() === "" && (
+                    <div className="error-message">{errors?.password}</div>
+                  )}
+                </div>
+              </div>
+              <div className="main-login-button">
+                <button
+                  className="btn btn-sm btn-primary btn-block login-button"
+                  onClick={handleSubmit}
+                >
+                  Login
+                </button>
+                <span className="forgetpassword" onClick={handleSignUpClick}>
+                  Forget Password
+                </span>
               </div>
             </div>
-            <div className="main-login-input">
-              <div className="icondiv">
-                <i className="fas fa-lock" />
-              </div>
-              <div className="maindiv">
-                <Input
-                  type="password"
-                  id="password"
-                  className="form-control required-fields"
-                  name="password"
-                  value={credentials?.password}
-                  lable={t("Password")}
-                  placeholder=" "
-                  onChange={handleChange}
-                  onKeyDown={handleKeyDown}
-                />
-                {errors?.password && credentials?.password?.trim() === "" && (
-                  <div className="error-message">{errors?.password}</div>
-                )}
-              </div>
+          )}
+        </div>
+        <div className="overlay-container">
+          <div className="overlay">
+            <div className="overlay-panel overlay-left">
+              <img className="login-form" src={lab} alt="logo" />
             </div>
-            <div className="main-login-button">
-              <button
-                className="btn btn-sm btn-primary btn-block login-button"
-                onClick={handleSubmit}
-              >
-                Login
-              </button>
-              <span
-                className="forgetpassword"
-                onClick={() => navigate("/ForgetPassword")}
-              >
-                Forget Password
-              </span>
+            <div className="overlay-panel overlay-right">
+              <img className="login-form" src={lab} alt="logo" />
             </div>
           </div>
-        </div>
-        <div className="login-style-container">
-          <img className="login-form" src={lab} alt="logo" />
         </div>
       </div>
     </div>
