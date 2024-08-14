@@ -12,6 +12,7 @@ import {
   resetState,
 } from "../../store/reducers/forgetPasswordSlice/forgetPasswordSlice";
 import OtpInput from "./OtpInput";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [t] = useTranslation();
@@ -57,6 +58,15 @@ const Login = () => {
     }
     if (!credentials?.password?.trim()) {
       newErrors.password = "Password is required";
+    }
+
+    if (
+      !credentials?.password?.trim() &&
+      !credentials?.ConfirmPassword?.trim() &&
+      credentials?.password?.trim() !== credentials?.ConfirmPassword?.trim()
+    ) {
+      toast.error("Confirm Password is not same as password");
+      newErrors.password = "Password Does not match";
     }
 
     setErrors(newErrors);
@@ -207,16 +217,6 @@ const Login = () => {
                       <i className="fas fa-user-alt" />
                     </div>
                     <div className="maindiv">
-                      {/* <Input
-                        type="number"
-                        id="OTP"
-                        className="form-control"
-                        name="OTP"
-                        value={credentials?.OTP}
-                        lable={t("OTP")}
-                        placeholder=" "
-                        onChange={handleChange}
-                      /> */}
                       <OtpInput length={6} onChange={handleOtpChange} />
                     </div>
                   </div>

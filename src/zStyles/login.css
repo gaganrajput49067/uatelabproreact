@@ -170,5 +170,68 @@
 
 
 .login-form-img{
-  width: 80%;
+  width: 80%; 
+}
+
+/* Existing styles remain unchanged */
+
+/* Responsive Design for Mobile */
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 80%;
+    min-height: 80vh;
+    overflow: hidden;
+    transform: translateX(0) !important;
+  }
+
+  .form-container {
+    width: 100%;
+    transform: translateX(0) !important;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sign-in-container{
+    width: 100%;
+    left: 0;
+    
+  }
+
+  .sign-up-container {
+    width: 100%;
+    left: 0;
+  }
+
+  .overlay-container {
+    display: none;
+  }
+
+  /* Hide the inactive panel */
+  .container:not(.right-panel-active) .sign-up-container {
+    display: none;
+  }
+
+  .container.right-panel-active .sign-in-container {
+    display: none;
+  }
+
+  .container.right-panel-active .sign-up-container {
+    display: block;
+  }
+
+  /* Adjust input fields and buttons */
+  .main-login-input {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .login-form {
+    padding: 0 20px;
+  }
+
+  .logoStyle {
+    width: 70%;
+  }
 }
