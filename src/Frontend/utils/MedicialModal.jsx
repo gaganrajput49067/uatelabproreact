@@ -12,12 +12,12 @@ const MedicialModal = ({ MedicalId, ID, handleUploadCount, handleClose }) => {
     PatientGuid: MedicalId,
     LedgerTransactionID: ID ? ID : 0,
     patientmedicalhistoryiesVM: [
-      {
-        MedicalHistory: "",
-        LedgerTransactionID: ID ? ID : 0,
-        PatientMedicalHistoryIDs: "",
-        date: new Date(),
-      },
+      // {
+      //   MedicalHistory: "",
+      //   LedgerTransactionID: ID ? ID : 0,
+      //   PatientMedicalHistoryIDs: "",
+      //   date: new Date(),
+      // },
     ],
   });
 
@@ -125,26 +125,30 @@ const MedicialModal = ({ MedicalId, ID, handleUploadCount, handleClose }) => {
           }}
         >
           <label htmlFor="allergies">Previous Medical History</label>
-          <div
-            className="d-flex"
-            style={{
-              flexDirection: "column",
-              width: "100%",
-              height: "240px",
-              overflowX: "auto",
-              padding: "5px",
-            }}
-          >
-            {data.patientmedicalhistoryiesVM.map((ele, index) => (
-              <React.Fragment key={index}>
-                <MedicalHistorySpan
-                  data={ele}
-                  index={index}
-                  handleDelete={handleDelete}
-                />
-              </React.Fragment>
-            ))}
-          </div>
+          {data.patientmedicalhistoryiesVM.length > 0 ? (
+            <div
+              className="d-flex"
+              style={{
+                flexDirection: "column",
+                width: "100%",
+                height: "240px",
+                overflowX: "auto",
+                padding: "5px",
+              }}
+            >
+              {data.patientmedicalhistoryiesVM.map((ele, index) => (
+                <React.Fragment key={index}>
+                  <MedicalHistorySpan
+                    data={ele}
+                    index={index}
+                    handleDelete={handleDelete}
+                  />
+                </React.Fragment>
+              ))}
+            </div>
+          ) : (
+            <label>No Medical History</label>
+          )}
         </div>
       </div>
     </Modal>

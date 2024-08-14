@@ -8,6 +8,7 @@ import Urgent from "../../assets/image/Urgent.gif";
 import VIP from "../../assets/image/vip.gif";
 import { dateConfig, isChecked } from "../../utils/helpers";
 import Loading from "../../components/Loading/Loading";
+import CustomModal from "../utils/CustomModal";
 function DepartmentReceiveTable({
   drdata,
   show,
@@ -132,7 +133,7 @@ function DepartmentReceiveTable({
                 data-placement="top"
                 title="Uploaded Document"
               >
-                 {"U.D"}
+                {"U.D"}
               </th>
               <th
                 data-toggle="tooltip"
@@ -290,7 +291,10 @@ function DepartmentReceiveTable({
                     className="text-primary"
                     style={{
                       cursor: "pointer",
-                      color: data?.MedicalHistoryCount > 0 ? "#4ea30c !important" : "",
+                      color:
+                        data?.MedicalHistoryCount > 0
+                          ? "#4ea30c !important"
+                          : "",
                     }}
                     onClick={() => {
                       show({
@@ -325,6 +329,13 @@ function DepartmentReceiveTable({
         <span style={{ width: "100%", textAlign: "center" }}>
           {"No Data Found"}
         </span>
+      )}
+      {modal && (
+        <CustomModal
+          show={modal}
+          visitID={visitID}
+          onHide={() => setModal(false)}
+        />
       )}
     </>
   );

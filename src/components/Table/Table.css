@@ -70,6 +70,7 @@
   background-color: var(--bg-subMenu);
   display: flex;
   justify-content: end;
+  align-items: center;
   bottom: 0;
   left: 0;
 }
@@ -233,6 +234,11 @@
 
   .simple-table td:last-child {
     border-bottom: 0;
+  }
+
+  .pagination{
+    flex-direction: row;
+
   }
 }
 

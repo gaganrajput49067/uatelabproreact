@@ -6,14 +6,17 @@ import {
   renderPaginationButtons,
   updateFixedColumns,
 } from "./tableUtils";
+import { SelectBox } from "../CommonComponent/SelectBox";
+import TableSelectBox from "../TableComponent/TableSelectBox";
 
 const Table = ({
   data = [],
   paginate = false,
-  itemsPerPage = 8,
+  itemsPerPage = 10,
   fixCol = 0,
   children,
 }) => {
+  const [itemsPerPages, setItemPerPage] = useState(itemsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -35,10 +38,10 @@ const Table = ({
     }
   };
 
-  const currentItems = getPaginatedData(data, currentPage, itemsPerPage);
-  const totalPages = calculateTotalPages(data, itemsPerPage);
-  const finalIndex = 1 + (currentPage - 1) * itemsPerPage;
-
+  const currentItems = getPaginatedData(data, currentPage, itemsPerPages);
+  const totalPages = calculateTotalPages(data, itemsPerPages);
+  const finalIndex = 1 + (currentPage - 1) * itemsPerPages;
+  console.log(itemsPerPages);
   return (
     <>
       <div className="simple-table-container">
@@ -47,8 +50,27 @@ const Table = ({
         </table>
       </div>
 
-      {data.length > itemsPerPage && (
+      {data.length > itemsPerPages && (
         <div className="pagination">
+          <span> Items Per Page</span>&nbsp;&nbsp;&nbsp;
+          <div style={{}}>
+            <TableSelectBox
+              options={[
+                { label: 5, value: 5 },
+                { label: 10, value: 10 },
+                { label: 15, value: 15 },
+                { label: 20, value: 20 },
+                { label: 30, value: 30 },
+                { label: 40, value: 40 },
+                { label: 50, value: 50 },
+              ]}
+              selectedValue={itemsPerPages}
+              name="SelectTypes"
+              id="SelectTypes"
+              lable="No of Items Per Pages"
+              onChange={(e) => setItemPerPage(e.target.value)}
+            />
+          </div>
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}

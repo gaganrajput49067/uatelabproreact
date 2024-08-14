@@ -32,11 +32,13 @@ import Loading from "../../components/Loading/Loading";
 import SampleRemark from "../utils/SampleRemark";
 import CustomModal from "../utils/CustomModal";
 import MedicialModal from "../utils/MedicialModal";
+import UploadFile from "../utils/UploadFIleModal/UploadFile";
 const SampleCollection = () => {
   const [CentreData, setCentreData] = useState([]);
   const [toggleTable, setToggleTable] = useState(true);
   const [DepartmentData, setDepartmentData] = useState([]);
   const [payload, setPayload] = useState([]);
+  const [Identity, setIdentity] = useState([]);
   const [RateTypes, setRateTypes] = useState([]);
   const [scdata, setScData] = useState([]);
   const [searchInvdata, setSearchInvdata] = useState([]);
@@ -665,6 +667,17 @@ const SampleCollection = () => {
           }
         />
       )}
+      {show?.modal && (
+        <UploadFile
+          handleClose={() => {
+            setShow({ modal: false, data: "", index: -1 });
+          }}
+          options={Identity}
+          documentId={show?.data}
+          pageName="Patient Registration"
+          handleUploadCount={handleUploadCount}
+        />
+      )}
       <PageHead name="Sample Collection" showDrop={"true"}>
         <div className="card">
           <div className="row">
@@ -1111,6 +1124,7 @@ const SampleCollection = () => {
                           ? "#4ea30c"
                           : "black !important",
                       marginRight: "10px",
+                      cursor: "pointer",
                     }}
                   >
                     <span>{searchInvdata[0]?.UploadDocumentCount}</span>
@@ -1132,6 +1146,7 @@ const SampleCollection = () => {
                           ? "#4ea30c"
                           : "black !important",
                       marginRight: "10px",
+                      cursor: "pointer",
                     }}
                   >
                     <span>{searchInvdata[0]?.MedicalHistoryCount}</span>

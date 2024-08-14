@@ -250,7 +250,7 @@ function DispatchTable({ dispatchData, show, show2, users }) {
                   </td>
 
                   <td className="w-100" data-title={"Test"}>
-                    {parse(data?.Test)}&nbsp;
+                    {parse(data?.Test)}
                   </td>
 
                   <td data-title={"Print"}>

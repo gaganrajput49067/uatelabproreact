@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import Modal from "../../components/Modal/Modal";
 import AuditTrailDataTable from "../Table/AuditTrailDataTable";
 import { axiosInstance } from "../../utils/axiosInstance";
+import { toast } from "react-toastify";
 function CustomModal({ visitID, show, onHide }) {
   const [optionData, setOptionData] = useState([]);
 
@@ -38,7 +39,13 @@ function CustomModal({ visitID, show, onHide }) {
     axiosInstance
       .post("TestData/GetAuditTrailData", auditValue)
       .then((res) => {
-        setTableData(res?.data?.message);
+        console.log(res?.data?.message.length);
+        if (res?.data?.message.length > 0) {
+          setTableData(res?.data?.message);
+        } else {
+          onHide();
+          toast.error("No Data Available");
+        }
       })
       .catch((err) => console.log(err));
   };
