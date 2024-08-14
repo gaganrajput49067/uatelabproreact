@@ -1,9 +1,21 @@
-import React from 'react'
+import React from "react";
+import PageHead from "../../components/CommonComponent/PageHead";
 
 const ReceiptReprint = () => {
   return (
-    <div>ReceiptReprint</div>
-  )
-}
+    <>
+      <PageHead name="Receipt Reprint" showDrop={"true"}>
 
-export default ReceiptReprint
+        <div className="card">
+
+        </div>
+
+      </PageHead>
+      <div className="card mt-2">
+        
+      </div>
+    </>
+  );
+};
+
+export default ReceiptReprint;

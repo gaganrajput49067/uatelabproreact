@@ -14,11 +14,7 @@ export const getCentreDetails = (state) => {
           DefaultCentreId: ele.DefaultCentreId,
         };
       });
-      let responce = {
-        defaultCentreId: value[0].DefaultCentreId,
-        centre: value,
-      };
-      state(responce);
+      state(value);
     })
     .catch((err) => {
       console.log(err);
@@ -478,4 +474,22 @@ export const DepartmentWiseItemList = (id, name, state, autocomplete) => {
           : "Error Occured"
       );
     });
+};
+export const BindEmployeeReports = (state) => {
+  axiosInstance
+    .post("Employee/getEmployeeDetails", {
+      DesignationID: "",
+      Name: "",
+    })
+    .then((res) => {
+      let data = res.data.message;
+      let EmployeeData = data.map((ele) => {
+        return {
+          value: ele?.EmployeeID,
+          label: ele?.Name,
+        };
+      });
+      state(EmployeeData);
+    })
+    .catch((err) => console.log(err));
 };
