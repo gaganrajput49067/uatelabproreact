@@ -1641,3 +1641,8 @@ td {
   font-size: 11px !important;
   cursor: pointer;
 }
+.reprintLable{
+  font-weight: bold;
+  font-size: 12px !important;
+
+}

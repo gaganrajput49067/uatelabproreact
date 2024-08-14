@@ -481,7 +481,7 @@ const DispatchReport = () => {
             <div className="col-sm-2  ">
               <Input
                 type="text"
-                lable="DoctorName"
+                lable="Refer Doctor"
                 id="DoctorName"
                 name="DoctorName"
                 value={formData.DoctorName}

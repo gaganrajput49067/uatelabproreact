@@ -20,6 +20,8 @@ import {
   getTrimmedData,
   isChecked,
 } from "../../utils/helpers";
+
+import urgentGIF from "../../assets/image/Urgent.gif";
 import { SampleStatusSearch, SearchBy } from "../../utils/Constants";
 import { SelectBox } from "../../components/CommonComponent/SelectBox";
 import Input from "../../components/CommonComponent/Input";
