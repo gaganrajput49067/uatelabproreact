@@ -11,6 +11,7 @@ import {
   forgetPasswordAction,
   resetState,
 } from "../../store/reducers/forgetPasswordSlice/forgetPasswordSlice";
+import OtpInput from "./OtpInput";
 
 const Login = () => {
   const [t] = useTranslation();
@@ -33,10 +34,7 @@ const Login = () => {
   useEffect(() => {
     if (success) {
       window.localStorage.setItem("Username", user.Username);
-      window.localStorage.setItem(
-        "DefaultCentre",
-        user.DefaultCentreID
-      );
+      window.localStorage.setItem("DefaultCentre", user.DefaultCentreID);
       navigate("/");
     }
   }, [success, navigate]);
@@ -107,6 +105,13 @@ const Login = () => {
     const Api = "ForgetPasswordController/ResetPassword";
     dispatch(forgetPasswordAction({ credentials, Api }));
     navigate("/login");
+  };
+
+  const handleOtpChange = (newOtp) => {
+    setCredentials({
+      ...credentials,
+      OTP: newOtp,
+    });
   };
 
   return (
@@ -202,7 +207,7 @@ const Login = () => {
                       <i className="fas fa-user-alt" />
                     </div>
                     <div className="maindiv">
-                      <Input
+                      {/* <Input
                         type="number"
                         id="OTP"
                         className="form-control"
@@ -211,7 +216,8 @@ const Login = () => {
                         lable={t("OTP")}
                         placeholder=" "
                         onChange={handleChange}
-                      />
+                      /> */}
+                      <OtpInput length={6} onChange={handleOtpChange} />
                     </div>
                   </div>
                   <div className="main-login-input">

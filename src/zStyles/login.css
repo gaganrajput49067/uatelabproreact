@@ -1,5 +1,7 @@
 /* Main container for the login page */
 .main-login-outer-Container {
+  background-image: url("../src/assets/image/BlueBanner.jpg");
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,7 +54,7 @@
 }
 
 .overlay {
-  background: #b6b6b6;
+  background: #e3e3e3;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;
@@ -138,6 +140,7 @@
 
 .icondiv {
   margin-right: 10px;
+  margin-top: 6px;
 }
 
 .maindiv-login {
