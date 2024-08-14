@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Input from "../../components/CommonComponent/Input";
 import logoitdose from "../../assets/image/logo elabpro bg.png";
-import lab from "../../assets/image/Lab.jpg";
+import lab from "../../assets/image/logoitdose.png";
 import "../../zStyles/login.css";
 import { signInAction } from "../../store/reducers/loginSlice/loginSlice";
 import {
@@ -125,7 +125,7 @@ const Login = () => {
                       alt="logo"
                     />
                   </Link>
-                  <h5 className="logo-title"> Enter Details to get OTP</h5>
+                  <h5 className="logo-title mb-4"> Enter Details to get OTP</h5>
 
                   <div className="main-login-input">
                     <div className="icondiv">
@@ -164,7 +164,7 @@ const Login = () => {
 
                   <div className="main-login-button">
                     <button
-                      className="btn btn-sm btn-primary btn-block login-button"
+                      className="btn btn-sm btn-primary btn-block login-button mb-3"
                       onClick={handleForget}
                       disabled={loading}
                     >
@@ -189,7 +189,9 @@ const Login = () => {
                       alt="logo"
                     />
                   </Link>
-                  <h5 className="logo-title">Enter OTP and updated password</h5>
+                  <h5 className="logo-title mb-3">
+                    Enter OTP and updated password
+                  </h5>
 
                   <div className="main-login-input">
                     <div className="icondiv">
@@ -245,7 +247,7 @@ const Login = () => {
 
                   <div className="main-login-button">
                     <button
-                      className="btn btn-sm btn-primary btn-block login-button"
+                      className="btn btn-sm btn-primary btn-block login-button mb-3"
                       onClick={handleReset}
                       disabled={loading}
                     >
@@ -272,7 +274,7 @@ const Login = () => {
               <Link to="/">
                 <img className="logoStyle mb-4" src={logoitdose} alt="logo" />
               </Link>
-              <h5 className="logo-title"> Sign in to start your session</h5>
+              <h5 className="logo-title mb-4">Sign in to start your session</h5>
 
               <div className="main-login-input">
                 <div className="icondiv">
@@ -298,7 +300,7 @@ const Login = () => {
                 <div className="icondiv">
                   <i className="fas fa-lock" />
                 </div>
-                <div className="maindiv">
+                <div className="maindiv-login">
                   <Input
                     type="password"
                     id="password"
@@ -317,7 +319,7 @@ const Login = () => {
               </div>
               <div className="main-login-button">
                 <button
-                  className="btn btn-sm btn-primary btn-block login-button"
+                  className="btn btn-sm btn-primary btn-block login-button mb-3"
                   onClick={handleSubmit}
                 >
                   Login
@@ -332,10 +334,10 @@ const Login = () => {
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
-              <img className="login-form" src={lab} alt="logo" />
+              <img className="login-form-img" src={lab} alt="logo" />
             </div>
             <div className="overlay-panel overlay-right">
-              <img className="login-form" src={lab} alt="logo" />
+              <img className="login-form-img" src={lab} alt="logo" />
             </div>
           </div>
         </div>

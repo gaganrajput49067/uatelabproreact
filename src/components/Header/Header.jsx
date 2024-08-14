@@ -156,7 +156,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
         </div>
         {/* Vsit Box */}
         <div className="header-visit ss-none">
-          <div className="maindiv " style={{ marginTop: "13px" }}>
+          <div className="maindiv " style={{ marginTop: "6px" }}>
             <Input
               type="text"
               className="form-control"
