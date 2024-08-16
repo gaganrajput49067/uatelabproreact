@@ -148,4 +148,14 @@ export const Time = (date) => {
 export const selectedValueCheck = (selectedState, state) => {
   const data = selectedState.find((ele) => ele.value == state);
   return data === undefined ? { label: "", value: "" } : data;
+};export const DyanmicStatusResponse = (state) => {
+  let status = -1;
+  for (let i = 0; i < state?.length; i++) {
+    if (state[i].isChecked === true) {
+      status = state[i].Status;
+      break;
+    }
+  }
+
+  return StatusCheck[status];
 };

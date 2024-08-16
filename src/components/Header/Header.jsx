@@ -173,11 +173,10 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
         </div>
         {/* Vsit Box */}
         <div className="header-visit ss-none">
-          <div className="maindiv " style={{ marginTop: "6px" }}>
+          <div className="maindiv" style={{ marginTop: "8px" }}>
             <Input
               type="text"
-              className="form-control"
-              id="text"
+              id="userName"
               name="userName"
               lable={"Visit No. / Barcode No."}
               placeholder=" "

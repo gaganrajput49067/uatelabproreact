@@ -33,9 +33,18 @@ export let routeDetails = [
         element: "../Frontend/Laboratory/DispatchReport",
       },
       {
+        path: "/ResultEntry",
+        element: "../Frontend/Laboratory/ResultEntry",
+      },
+      {
         path: "/ReceiptReprint",
         element: "../Frontend/Laboratory/ReceiptReprint",
       },
+      {
+        path: "/DoctorReferal",
+        element: "../Frontend/Master/DoctorMaster",
+      },
+     
       { path: "*", element: "../components/NotFound" },
     ],
   },
