@@ -24,7 +24,6 @@ export let routeDetails = [
         element: "../Frontend/Laboratory/SampleCollection",
       },
       {
-      
         path: "/DepartmentReceive",
         element: "../Frontend/Laboratory/DepartmentReceive",
       },
@@ -44,7 +43,20 @@ export let routeDetails = [
         path: "/DoctorReferal",
         element: "../Frontend/Master/DoctorMaster",
       },
-     
+      {
+        path: "/GlobalTypeMaster",
+        element: "../Frontend/Master/GlobalTypeMaster",
+      },
+      {
+        path: "/ViewGlobalMaster",
+        element: "../Frontend/Master/ViewGlobalMaster",
+      }, {
+        path: "/CentreTypeMaster",
+        element: "../Frontend/Master/CentreTypeMaster",
+      },{
+        path: "/CentrePanel",
+        element: "../Frontend/Master/CentrePanel",
+      },
       { path: "*", element: "../components/NotFound" },
     ],
   },
