@@ -51,9 +51,8 @@ const Sidebar = ({ closeSidebar, menuData }) => {
       <div className="navBar-menu">
         <div className="nav-main-menu">
           <ReactSelect
-            className="required-fields"
             name="MenuBar"
-            placeholderName="MenuBar"
+            placeholderName=""
             id="MenuBar"
             dynamicOptions={menuData}
             value={selectedMenu?.menuValue}
