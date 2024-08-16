@@ -186,7 +186,6 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
             {({ currentItems, finalIndex }) => {
               return (
                 <>
-                  {" "}
                   <thead class="cf">
                     <tr>
                       <th>{"S.No"}</th>
@@ -262,7 +261,7 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                               }
                             ></span>
                           )}
-                          &nbsp;{" "}
+                          &nbsp;
                           {data?.FirstName +
                             " " +
                             data?.MiddleName +

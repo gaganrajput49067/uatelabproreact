@@ -7,6 +7,7 @@ import { axiosReport, axiosInstance } from "../../utils/axiosInstance";
 import Table from "../../components/Table/Table";
 import { dateConfig } from "../../utils/helpers";
 import Loading from "../../components/Loading/Loading";
+import CustomModal from "../utils/CustomModal";
 function DispatchTable({ dispatchData, show, show2, users }) {
   const [modal, setModal] = useState(false);
   const [visitID, setVisitID] = useState();
@@ -377,6 +378,13 @@ function DispatchTable({ dispatchData, show, show2, users }) {
         <span style={{ width: "100%", textAlign: "center" }}>
           {"No Data Found"}
         </span>
+      )}
+      {modal && (
+        <CustomModal
+          show={modal}
+          visitID={visitID}
+          onHide={() => setModal(false)}
+        />
       )}
     </>
   );

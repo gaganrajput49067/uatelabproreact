@@ -382,7 +382,7 @@ const ReceiptReprint = () => {
               />
             </div>
           </div>
-          <div className="row">
+          <div className="row d-flex" style={{ alignItems: "center" }}>
             <div className="col-md-1">
               <CustomTimePicker
                 name="FromTime"

@@ -5,6 +5,7 @@ import {
   BindEmployeeReports,
   DepartmentWiseItemList,
   getDoctorSuggestion,
+  getPaymentModes,
 } from "../../utils/NetworkApi/commonApi";
 import { axiosInstance } from "../../utils/axiosInstance";
 import {
@@ -23,6 +24,8 @@ import DatePicker from "../../components/CommonComponent/DatePicker";
 import CustomTimePicker from "../../components/CommonComponent/TimePicker";
 import Loading from "../../components/Loading/Loading";
 import DispatchReportTable from "../Table/DispatchReportTable";
+import MedicialModal from "../utils/MedicialModal";
+import UploadFile from "../utils/UploadFIleModal/UploadFile";
 const DispatchReport = () => {
   const [CentreData, setCentreData] = useState([]);
   const [RateTypes, setRateTypes] = useState([]);
@@ -43,6 +46,7 @@ const DispatchReport = () => {
     index: -1,
   });
   const [load, setLoad] = useState(false);
+  const [Identity, setIdentity] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
@@ -364,6 +368,7 @@ const DispatchReport = () => {
     getAccessCentres();
     getDepartment();
     BindEmployeeReports(SetUser);
+    getPaymentModes("Identity", setIdentity);
   }, []);
 
   const handleSelectChange1 = (event) => {
@@ -651,6 +656,33 @@ const DispatchReport = () => {
           </div>
         </div>
       </PageHead>
+      {show4?.modal && (
+        <MedicialModal
+          show={show4.modal}
+          handleClose={() => {
+            setShow4({
+              modal: false,
+              data: "",
+              index: -1,
+            });
+          }}
+          MedicalId={show4?.data}
+          handleUploadCount={handleUploadCount}
+        />
+      )}
+
+      {show?.modal && (
+        <UploadFile
+          show={show?.modal}
+          handleClose={() => {
+            setShow({ modal: false, data: "", index: -1 });
+          }}
+          options={Identity}
+          documentId={show?.data}
+          pageName="Patient Registration"
+          handleUploadCount={handleUploadCount}
+        />
+      )}
 
       <div className="card mt-2">
         {loading ? (

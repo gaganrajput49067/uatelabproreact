@@ -48,6 +48,7 @@ import { useTranslation } from "react-i18next";
 import MedicialModal from "../utils/MedicialModal";
 import UploadFile from "../utils/UploadFIleModal/UploadFile";
 import SampleRemark from "../utils/SampleRemark";
+import SlotBookModal from "../utils/SlotBookModal";
 const PatientRegistration = () => {
   const { t } = useTranslation();
   const [patientImg, setPatientImg] = useState({
@@ -3273,6 +3274,15 @@ const PatientRegistration = () => {
   };
   return (
     <>
+      {slotOpen?.show && (
+        <SlotBookModal
+          slotOpen={slotOpen}
+          setSlotOpen={setSlotOpen}
+          handleSelectSlot={handleSelectSlot}
+          LTData={LTData}
+          tableData={tableData}
+        />
+      )}
       {show2 && (
         <UploadFile
           options={Identity}
