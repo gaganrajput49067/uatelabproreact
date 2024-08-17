@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "../../zStyles/Sidebar.css";
 import logo from "../../assets/image/logo.png";
 import ReactSelect from "../CommonComponent/ReactSelect";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ closeSidebar, menuData }) => {
   const [selectedMenu, setSelectedMenu] = useState({
@@ -20,23 +21,23 @@ const Sidebar = ({ closeSidebar, menuData }) => {
   const [originalPageData] = useState(selectedMenu?.pageData);
 
   const handleSearchPage = (value) => {
-      if (!value) {
-          setSelectedMenu({
-              ...selectedMenu,
-              pageData: originalPageData,
-          });
-          return;
-      }
-      const filteredPages = originalPageData?.filter((page) =>
-        page?.PageName?.toLowerCase()?.includes(value?.toLowerCase())
-      );
-  
+    if (!value) {
       setSelectedMenu({
         ...selectedMenu,
-        pageData: filteredPages,
+        pageData: originalPageData,
       });
+      return;
+    }
+    const filteredPages = originalPageData?.filter((page) =>
+      page?.PageName?.toLowerCase()?.includes(value?.toLowerCase())
+    );
+
+    setSelectedMenu({
+      ...selectedMenu,
+      pageData: filteredPages,
+    });
   };
-  
+
   return (
     <div className="navBar-Container">
       <div className="navBar-header">
@@ -80,7 +81,7 @@ export default Sidebar;
 function SidebarMenu(pageData = []) {
   let page = pageData.pageData || [];
   console.log(pageData.pageData);
-
+  const navigate = useNavigate();
   const divRef = useRef(null);
   useEffect(() => {
     if (divRef.current) {
@@ -93,7 +94,10 @@ function SidebarMenu(pageData = []) {
         page.length > 0 &&
         page.map((ele) => {
           return (
-            <p className="sidebar-submenu">
+            <p
+              className="sidebar-submenu"
+              onClick={() => navigate(ele?.PageUrl)}
+            >
               <i className="fa fa-bullseye" aria-hidden="true">
                 &nbsp;&nbsp;
               </i>

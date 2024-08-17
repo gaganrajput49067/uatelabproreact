@@ -38,7 +38,7 @@ const Login = () => {
       window.localStorage.setItem("DefaultCentre", user.DefaultCentreID);
       navigate("/");
     }
-  }, [success, navigate]);
+  }, [success]);
 
   const [credentials, setCredentials] = useState({
     UserName: "",

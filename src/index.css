@@ -1707,10 +1707,8 @@ td {
   box-sizing: border-box; /* Box sizing border-box */
   z-index: 1000; /* High z-index */
 }
-.thead-class {
-  position: sticky;
-  top: 0;
-}
+
+
 a {
   font-size: 13px !important;
 }

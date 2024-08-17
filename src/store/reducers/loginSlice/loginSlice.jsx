@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { setLoading } from "../loadingSlice/loadingSlice";
 import { axiosInstance } from "../../../utils/axiosInstance";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const initialState = {
   user: {},
@@ -16,9 +17,10 @@ export const signInAction = createAsyncThunk(
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await axiosInstance.post("Users/login", credentials);
+      const response = await axios.post("http://localhost:5129/api/v1/Login/Login", credentials);
       dispatch(setLoading(false));
       toast.success("Login is succeed!");
+      console.log(response)
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -57,6 +59,7 @@ export const loginSlice = createSlice({
         state.success = false;
       })
       .addCase(signInAction.fulfilled, (state, action) => {
+        console.log(action)
         state.user = action.payload.user;
         state.loading = false;
         state.success = true;
@@ -65,9 +68,8 @@ export const loginSlice = createSlice({
       })
       .addCase(signInAction.rejected, (state, error) => {
         state.loading = false;
-        state.error = error.payload.message;
+        // state.error = error.payload.data.message;
         state.success = false;
-        state.message = error.payload.message;
       });
     builder
       .addCase(logOutAction.pending, (state) => {
@@ -84,9 +86,9 @@ export const loginSlice = createSlice({
       })
       .addCase(logOutAction.rejected, (state, error) => {
         state.loading = false;
-        state.error = error.payload.message;
+        // state.error = error.payload.message;
         state.success = false;
-        state.message = error.payload.message;
+        // state.message = error.payload.message;
       });
   },
 });
