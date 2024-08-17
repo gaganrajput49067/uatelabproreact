@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { SelectBox } from "../../ChildComponents/SelectBox";
-import DatePicker from "../Components/DatePicker";
-import Loading from "./Loading";
 import moment from "moment";
 import { toast } from "react-toastify";
 import Modal from "../../components/Modal/Modal";
 import { axiosInstance } from "../../utils/axiosInstance";
+import { SelectBox } from "../../components/CommonComponent/SelectBox";
+import DatePicker from "../../components/CommonComponent/DatePicker";
+import Loading from "../../components/Loading/Loading";
 const SlotBookModal = ({
   slotOpen,
   setSlotOpen,

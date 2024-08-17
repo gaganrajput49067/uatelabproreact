@@ -493,3 +493,20 @@ export const BindEmployeeReports = (state) => {
     })
     .catch((err) => console.log(err));
 };
+export const BindFieldType = (state) => {
+  axiosInstance
+    .get("Global/BindFieldType")
+    .then((res) => {
+      const data = res.data?.message;
+      const val = data.map((ele) => {
+        return {
+          label: ele?.FieldType,
+          value: ele?.FieldType,
+        };
+      });
+      state(val);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
