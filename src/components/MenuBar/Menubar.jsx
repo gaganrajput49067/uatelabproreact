@@ -4,12 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Menubar = ({ pageData = [], handleSidebar }) => {
   const navigate = useNavigate();
   const [filterdMenu, setFilterdMenu] = useState([]);
-  console.log(pageData);
   useEffect(() => {
     setFilterdMenu(pageData ? pageData : []);
   }, [pageData]);
 
-  console.log(filterdMenu);
   const containerRef = useRef(null);
   const location = useLocation();
   useEffect(() => {

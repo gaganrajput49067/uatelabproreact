@@ -540,7 +540,7 @@ const DispatchReport = () => {
               )}
             </div>
           </div>
-          <div class    Name="row">
+          <div className="row">
             <div className="col-sm-2">
               <SelectBox
                 name="User"

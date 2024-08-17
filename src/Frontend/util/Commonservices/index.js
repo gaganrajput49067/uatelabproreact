@@ -87,3 +87,21 @@ export function getGreeting(type) {
     return moment(now).format("dddd");
   }
 }
+
+export const isChecked = (name, state, value, id) => {
+  if (id) {
+    const data = state?.map((ele) => {
+      if (ele?.TestID === id) {
+        return ele[name] === value ? true : false;
+      } else {
+        return ele;
+      }
+    });
+    return data;
+  } else {
+    const data = state?.map((ele) => {
+      return ele[name] == value ? true : false;
+    });
+    return data;
+  }
+};

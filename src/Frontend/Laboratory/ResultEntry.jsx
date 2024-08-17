@@ -15,6 +15,7 @@ import {
   DyanmicStatusResponse,
   Time,
   autocompleteOnBlur,
+  dateConfig,
   getTrimmedData,
 } from "../../utils/helpers";
 import AutoComplete from "../../components/CustomComponent/AutoComplete";
@@ -27,7 +28,19 @@ import {
 import { useNavigate } from "react-router-dom";
 import DatePicker from "../../components/CommonComponent/DatePicker";
 import CustomTimePicker from "../../components/CommonComponent/TimePicker";
+import { toast } from "react-toastify";
+import moment from "moment";
+import Loading from "../../components/Loading/Loading";
+import RETable from "../Table/BootTable";
+import UploadFile from "../utils/UploadFIleModal/UploadFile";
+import MedicialModal from "../utils/MedicialModal";
+import RSadvanceFilter from "../utils/RSadvanceFilter";
+import Modal from "../../components/Modal/Modal";
+import { useTranslation } from "react-i18next";
+import { isChecked } from "../util/Commonservices";
+import Table from "../../components/Table/Table";
 const ResultEntry = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [TestSuggestion, setTestSuggestion] = useState([]);
   const [CentreData, setCentreData] = useState([]);
@@ -340,7 +353,7 @@ const ResultEntry = () => {
   const dateSelect = (value, name) => {
     setFormData({
       ...formData,
-      [value]: date,
+      [name]: value,
     });
   };
 
@@ -1204,8 +1217,8 @@ const ResultEntry = () => {
     });
 
     setPrintReportLoading(true);
-    axiosInstance
-      .post(`/reports/v1/commonReports/GetLabReport`, {
+    axiosReport
+      .post(`commonReports/GetLabReport`, {
         TestIDHash: TestIDHash,
         PrintColour: "0",
       })
@@ -1230,7 +1243,7 @@ const ResultEntry = () => {
 
   const getButtondata = () => {
     axiosInstance
-      .get("api/v1/RE/EmployeeAccessDetails")
+      .get("RE/EmployeeAccessDetails")
       .then((res) => {
         setButtonsData(res.data.message);
       })
@@ -1414,262 +1427,1930 @@ const ResultEntry = () => {
     setResultData(newResultData);
   };
 
+  const totalPatient = () => {
+    const visitNos = redata.map((item) => item.VisitNo);
+    const uniqueVisitNos = new Set(visitNos);
+    return uniqueVisitNos.size;
+  };
+
+  const prop = () => {
+    const uniqueTestIDs = new Set();
+    redata.forEach((item) => {
+      const testIDs = item.TestID.split(",").map((id) => id.trim());
+      testIDs.forEach((id) => uniqueTestIDs.add(id));
+    });
+    return uniqueTestIDs.size;
+  };
+
+  const closeAModal = () => {
+    setshowApprove({ ...approve, show: false });
+  };
+
   return (
-    <PageHead name="Result Entry" showDrop={"true"}>
-      <div className="card">
-        <div className="row">
-          <div className="col-sm-2">
-            <div className="d-flex" style={{ display: "flex" }}>
-              <div style={{ width: "50%" }}>
-                <SelectBox
-                  options={SearchBy}
-                  id="SelectTypes"
-                  lable="SelectTypes"
-                  selectedValue={formData.SelectTypes}
-                  name="SelectTypes"
-                  onChange={handleSelectChange}
-                />
+    <>
+      {approve?.show && (
+        <Modal title={""} handleClose={closeAModal}>
+          <div
+            className="box-success"
+            style={{ marginTop: "200px", backgroundColor: "transparent" }}
+          >
+            <div className="box-body">
+              <div className="row">
+                <label className="col-sm-10" htmlFor="PreBooking ID">
+                  <span>{approve?.msg}</span>
+                </label>
+                <div className="col-sm-1">
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-success"
+                    onClick={handleApifromModal}
+                  >
+                    Yes
+                  </button>
+                </div>
+                <div className="col-sm-1">
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-danger"
+                    onClick={() => {
+                      setshowApprove({ ...approve, show: false });
+                    }}
+                  >
+                    No
+                  </button>
+                </div>
               </div>
-              <div style={{ width: "50%" }}>
-                {formData?.SelectTypes === "Mobile" ? (
-                  <div style={{ width: "100%" }}>
-                    <Input
-                      type="number"
-                      name="ItemValue"
-                      max={10}
-                      value={formData.ItemValue}
-                      onChange={handleChange}
-                      onInput={(e) => number(e, 10)}
+            </div>
+          </div>
+        </Modal>
+      )}
+      {showPH && (
+        <PatientDetailModal
+          showPH={showPH}
+          setShowPH={setShowPH}
+          ResultData={ResultData}
+        />
+      )}
+      {ResultData.length === 0 ? (
+        <>
+          {show4?.modal && (
+            <MedicialModal
+              show={show4.modal}
+              handleClose={() => {
+                setShow4({
+                  modal: false,
+                  data: "",
+                  index: -1,
+                });
+              }}
+              MedicalId={show4?.data}
+              handleUploadCount={handleUploadCount}
+            />
+          )}
+
+          {show6?.modal && (
+            <UploadFile
+              show={show6?.modal}
+              handleClose={() => {
+                setShow6({ modal: false, data: "", index: -1 });
+              }}
+              options={Identity}
+              documentId={show6?.data}
+              pageName="Patient Registration"
+              handleUploadCount={handleUploadCount}
+              formData={formData}
+            />
+          )}
+          {showAdvanceFilter.show && (
+            <RSadvanceFilter
+              show={showAdvanceFilter.show}
+              handleShow={() => {
+                setShowAdvanceFilter({ show: false, data: "" });
+                setFormData((data) => ({
+                  ...data,
+                  parameterId: "",
+                  valueCheck: "=",
+                  valueToSearch: "",
+                  valueRangeFrom: "",
+                  valueRangeTo: "",
+                  moreFilter: 0,
+                }));
+              }}
+              handleFilterChange={handleChange}
+              data={formData}
+              handleAdvSearch={() => {
+                setFormData((data) => ({
+                  ...data,
+                  moreFilter: 1,
+                }));
+                TableData(document.getElementById("SampleStatus").value);
+              }}
+            />
+          )}
+          <PageHead name="Result Entry" showDrop={"true"}>
+            <div className="card">
+              <div className="row">
+                <div className="col-sm-2">
+                  <div className="d-flex" style={{ display: "flex" }}>
+                    <div style={{ width: "50%" }}>
+                      <SelectBox
+                        options={SearchBy}
+                        id="SelectTypes"
+                        lable="SelectTypes"
+                        selectedValue={formData.SelectTypes}
+                        name="SelectTypes"
+                        onChange={handleSelectChange}
+                      />
+                    </div>
+                    <div style={{ width: "50%" }}>
+                      {formData?.SelectTypes === "Mobile" ? (
+                        <div style={{ width: "100%" }}>
+                          <Input
+                            type="number"
+                            name="ItemValue"
+                            max={10}
+                            value={formData.ItemValue}
+                            onChange={handleChange}
+                            onInput={(e) => number(e, 10)}
+                          />
+                          {errors?.ItemValue && (
+                            <div className="golbal-Error">
+                              {errors?.ItemValue}
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <div style={{ width: "100%" }}>
+                          <Input
+                            type="text"
+                            name="ItemValue"
+                            max={20}
+                            value={formData.ItemValue}
+                            onChange={handleChange}
+                          />
+                          {errors?.ItemValue && (
+                            <div className="golbal-Error">
+                              {errors?.ItemValue}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-sm-2  ">
+                  <SelectBox
+                    options={AddBlankData(CentreData, "All Centre")}
+                    lable="Centre"
+                    id="Centre"
+                    name="CentreID"
+                    selectedValue={formData?.CentreID}
+                    onChange={handleSelectChange}
+                  />
+                </div>
+
+                <div className="col-sm-2 ">
+                  <SelectBox
+                    options={[
+                      { label: "All RateType", value: "" },
+                      ...RateTypes,
+                    ]}
+                    selectedValue={formData?.RateTypeID}
+                    lable="RateType"
+                    id="RateType"
+                    name="RateTypeID"
+                    onChange={handleSelectChange}
+                  />
+                </div>
+
+                <div className="col-sm-2  ">
+                  <SelectBox
+                    options={AddBlankData(DepartmentData, "All Department")}
+                    lable="Department"
+                    id="Department"
+                    selectedValue={formData.DepartmentID}
+                    name="DepartmentID"
+                    onChange={handleSelectChange}
+                  />
+                </div>
+
+                <div className="col-sm-2  ">
+                  <Input
+                    type="text"
+                    lable="Refer Doctor"
+                    id="DoctorName"
+                    name="DoctorName"
+                    value={formData.DoctorName}
+                    onChange={handleChange}
+                    placeholder=" "
+                    onBlur={(e) => {
+                      autocompleteOnBlur(setDoctorSuggestion);
+                      setTimeout(() => {
+                        const data = doctorSuggestion.filter(
+                          (ele) => ele?.Name === e.target.value
+                        );
+                        if (data.length === 0) {
+                          setFormData({ ...formData, DoctorName: "" });
+                        }
+                      }, 500);
+                    }}
+                    autoComplete="off"
+                  />
+                  {dropFalse && doctorSuggestion.length > 0 && (
+                    <ul className="suggestion-data">
+                      {doctorSuggestion.map((data, index) => (
+                        <li
+                          onClick={() => handleListSearch(data, "DoctorName")}
+                          className={`${index === indexMatch && "matchIndex"}`}
+                          key={index}
+                        >
+                          {data?.Name}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
+                <div className="col-sm-2  ">
+                  <Input
+                    type="text"
+                    name="TestName"
+                    lable="Search By Test Name"
+                    id="TestName"
+                    value={formData.TestName}
+                    placeholder=" "
+                    onChange={handleChange}
+                    onKeyDown={(e) => handleIndex(e, "TestName")}
+                  />
+                  {TestSuggestion.length > 0 && (
+                    <AutoComplete
+                      test={TestSuggestion}
+                      handleListSearch={handleListSearch}
+                      indexMatch={indexMatch}
                     />
-                    {errors?.ItemValue && (
-                      <div className="golbal-Error">{errors?.ItemValue}</div>
-                    )}
+                  )}
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-2">
+                  <SelectBox
+                    options={[
+                      { label: "Registration Date", value: "Date" },
+                      ...DateTypeSearch,
+                    ]}
+                    selectedValue={formData?.DateTypeSearch}
+                    name="DateTypeSearch"
+                    onChange={handleSelectChange}
+                  />
+                </div>
+                <div className="col-sm-2">
+                  <DatePicker
+                    className="custom-calendar"
+                    name="FromDate"
+                    value={formData?.FromDate}
+                    onChange={dateSelect}
+                    placeholder=" "
+                    id="FromDate"
+                    lable="FromDate"
+                    maxDate={new Date(formData?.ToDate)}
+                  />
+                </div>
+                <div className="col-sm-1">
+                  <CustomTimePicker
+                    name="FromTime"
+                    placeholder="FromTime"
+                    value={formData?.FromTime}
+                    id="FromTime"
+                    lable="FromTime"
+                    onChange={handleTime}
+                  />
+                </div>
+                <div className="col-sm-2">
+                  <DatePicker
+                    className="custom-calendar"
+                    name="ToDate"
+                    value={formData?.ToDate}
+                    onChange={dateSelect}
+                    placeholder=" "
+                    id="ToDate"
+                    lable="ToDate"
+                    maxDate={new Date()}
+                    minDate={new Date(formData?.FromDate)}
+                  />
+                </div>
+                <div className="col-sm-1">
+                  <CustomTimePicker
+                    name="ToTime"
+                    placeholder="ToTime"
+                    value={formData?.ToTime}
+                    id="ToTime"
+                    lable="ToTime"
+                    onChange={handleTime}
+                  />
+                </div>
+                <div className="col-sm-2">
+                  <SelectBox
+                    options={[...SampleStatus]}
+                    onChange={handleSelectChange1}
+                    name="SampleStatus"
+                    lable="SampleStatus"
+                    id="SampleStatus"
+                    selectedValue={formData.SampleStatus}
+                  />
+                </div>
+                <div className="col-sm-2   ">
+                  <SelectBox
+                    options={machineId ?? []}
+                    selectedValue={formData?.MachineID}
+                    className="input-sm"
+                    lable="MachineID"
+                    id="MachineID"
+                    name="MachineID"
+                    onChange={handleSelectChange}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-2   ">
+                  <SelectBox
+                    options={[
+                      { label: "TAT Report - All", value: 0 },
+                      { label: "In TAT", value: 1 },
+                      { label: "Out TAT", value: 2 },
+                    ]}
+                    selectedValue={formData?.IsTat}
+                    lable="IsTat"
+                    id="IsTat"
+                    name="IsTat"
+                    onChange={handleSelectChange}
+                  />
+                </div>
+                <div className="col-sm-2">
+                  <SelectBox
+                    options={[{ label: "Select Flag", value: "" }, ...Flag]}
+                    name="Flag"
+                    lable="Flag"
+                    id="Flag"
+                    onChange={handleSelectChange}
+                    selectedValue={formData?.Flag}
+                  />
+                </div>
+                <div className="col-sm-1">
+                  <SelectBox
+                    options={[{ label: "Select Order", value: "" }, ...Order]}
+                    name="Order"
+                    lable="Order"
+                    id="Order"
+                    onChange={handleSelectChange}
+                    selectedValue={formData?.Order}
+                  />
+                </div>
+                <div className="col-sm-1 d-flex align-items-center">
+                  <input
+                    id="IsUrgent"
+                    type="checkbox"
+                    name="IsUrgent"
+                    checked={formData?.IsUrgent}
+                    onChange={handleSelectChange}
+                  />
+                  <label htmlFor="IsUrgent">&nbsp;&nbsp;IsUrgent</label>
+                </div>
+                <div className="col-sm-1 d-flex align-items-center">
+                  <button
+                    onClick={() =>
+                      TableData(document.getElementById("SampleStatus").value)
+                    }
+                    className="btn btn-primary btn-sm w-100"
+                  >
+                    Search
+                  </button>
+                </div>
+                <div className="col-sm-1 d-flex align-items-center">
+                  <button
+                    onClick={() => {
+                      setShowAdvanceFilter({ show: true, data: formData });
+                    }}
+                    className="btn btn-success btn-sm w-100"
+                  >
+                    More Filter
+                  </button>
+                </div>
+              </div>
+            </div>
+          </PageHead>
+          {loading ? (
+            <Loading />
+          ) : (
+            load && (
+              <div className="box mb-4">
+                <div
+                  className="box-header with-border"
+                  style={{ display: "none" }}
+                >
+                  <div className="row">
+                    <div
+                      className="col-sm-3"
+                      style={{
+                        background: "#605ca8",
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                      }}
+                    >
+                      <span
+                        style={{
+                          color: "white",
+                          padding: "3px",
+                          borderRadius: "3px",
+                          textAlign: "center",
+                          fontWeight: "bold",
+                          fontSize: "15px",
+                        }}
+                      >
+                        {`Total Patient : ${totalPatient()}`}
+                      </span>
+                      <span
+                        style={{
+                          color: "white",
+                          padding: "3px",
+                          borderRadius: "3px",
+                          textAlign: "center",
+                          fontWeight: "bold",
+                          fontSize: "15px",
+                        }}
+                      >
+                        {`Total Test Count : ${prop()}`}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="card">
+                  <RETable
+                    redata={redata}
+                    GetResultEntry={GetResultEntry}
+                    show={setShow4}
+                    show2={setShow6}
+                    handleInnerChecked={handleInnerChecked}
+                  />
+                </div>
+              </div>
+            )
+          )}
+        </>
+      ) : (
+        <div className="container-fluid" style={{ padding: "10px" }}>
+          {showOldReportModal.show && (
+            <OldReportModal
+              show={showOldReportModal.show}
+              value={showOldReportModal.data}
+              handleClose={() => {
+                setShowOldReportModal({ show: false, data: "" });
+              }}
+            />
+          )}
+          {show.moadal && (
+            <ResultEntryEditModal
+              show={show}
+              handleClose={() => {
+                setShow({ moadal: false, data: {} });
+              }}
+              handleSave={handleSave}
+            />
+          )}
+          {show2.moadal && (
+            <ResultEditAddModal
+              show={show2}
+              handleClose={() => {
+                setShow2({ moadal: false, data: {} });
+              }}
+              handleSave={handleSave}
+            />
+          )}
+          {show3?.modal && (
+            <TemplateMasterModal
+              show={show3}
+              handleClose={() => {
+                setShow3({ modal: false, data: {} });
+              }}
+              handleSave={handleSave}
+            />
+          )}
+          {show7?.modal && (
+            <RerunResultEntryModal
+              show={show7?.modal}
+              data={show7?.data}
+              handleClose={() => {
+                setShow7({ modal: false, data: {} });
+              }}
+            />
+          )}
+          {reason?.HoldShow && (
+            <Reason
+              show={reason?.HoldShow}
+              reason={reason}
+              setReason={setReason}
+              handleNotApproveRemark={handleNotApproveRemark}
+              handleResultSubmit={handleResultSubmit}
+            />
+          )}
+          {show5?.modal && (
+            <UploadFile
+              show={show5?.modal}
+              handleClose={(data) => {
+                setShow5({ modal: false, data: "", pageName: "" });
+                printHeader(data, show5.data);
+              }}
+              documentId={show5.data}
+              pageName={show5?.pageName}
+              formData={formData}
+              isPrintHeader={show5?.Printwithhead}
+            />
+          )}
+          {showRemark && (
+            <SampleRemark
+              show={showRemark}
+              handleShow={handleShowRemark}
+              state={handleShowRemark}
+              PageName={ResultTestData[0]?.Remarks}
+              handleSave={handleShowRemark}
+              title={"Remarks"}
+            />
+          )}{" "}
+          {showPrickRemark && (
+            <SampleRemark
+              show={showPrickRemark}
+              handleShow={handleShowPrickRemarks}
+              state={handleShowPrickRemarks}
+              PageName={ResultTestData[0]?.PricksRemarks}
+              handleSave={handleShowRemark}
+              title={"PricksRemarks"}
+            />
+          )}
+          {showAuditTrail.show && (
+            <AuditTrailMoadal
+              show={showAuditTrail.show}
+              data={showAuditTrail.data}
+              testname={showAuditTrail?.testname}
+              handleClose={handleAuditTrailModal}
+            />
+          )}
+          {/* <div className={`custom-box-body ${getGradientClass()}`}>
+            <div className="custom-row">
+              <div className="custom-col custom-col-visit">
+                <span className="fa fa-folder custom-text">
+                  &nbsp; {ResultData[0]?.LedgerTransactionNo}
+                </span>
+              </div>
+              <div className="custom-col custom-col-visit">
+                <span className="fa fa-user-md custom-text">
+                  &nbsp; {ResultData[0]?.PName}
+                </span>
+              </div>
+              <div className="custom-col custom-col-visit">
+                <span className="fa fa-book custom-text">
+                  &nbsp; {ResultData[0]?.PatientCode}
+                </span>
+              </div>
+              <div className="custom-col custom-col-visit">
+                <span className="fa fa-calendar-check-o custom-text">
+                  &nbsp; {ResultData[0]?.Age}
+                </span>
+              </div>
+              <div className="custom-col custom-col-visit">
+                <span className="fa fa-book custom-text">
+                  &nbsp; {ResultData[0]?.Gender}
+                </span>
+              </div>
+              <div className="custom-col custom-col-visit">
+                <span className="fa fa-h-square custom-text">
+                  &nbsp; {ResultData[0]?.Centre}
+                </span>
+              </div>
+              <div className="custom-col custom-col-visit">
+                <span className="fa fa-user-md custom-text">
+                  &nbsp; {ResultData[0]?.ReferDoctor}
+                </span>
+              </div>
+              <div
+                className="custom-col custom-col-visit"
+                style={{ width: "300px" }}
+              >
+                <span
+                  className="fa fa-calendar-check-o custom-text"
+                  style={{ width: "150px" }}
+                >
+                  &nbsp; {dateConfig(ResultData[0]?.RegDate)}
+                </span>
+              </div>
+              <div className="custom-col custom-col-visit custom-text">
+                <span className="fa fa-plus-square">
+                  &nbsp; {ResultData[0]?.RateType}
+                </span>
+              </div>
+
+              <div className="custom-col custom-end">
+                <span
+                  className="fa fa-comment custom-icon-large"
+                  title="Remarks"
+                  onClick={() => setShowRemark(true)}
+                  style={{ marginRight: "10px" }}
+                ></span>
+                <span
+                  className="fa fa-eyedropper custom-icon-large"
+                  title="Prickremarks"
+                  onClick={() => setShowPrickRemark(true)}
+                ></span>
+              </div>
+            </div>
+            <div className="row" style={{ margin: 0, padding: 0 }}>
+              <div className="d-flex my" style={{ margin: 0, padding: 0 }}>
+                {ResultTestData?.map((data, index) => (
+                  <div
+                    key={index}
+                    style={{ cursor: "pointer" }}
+                    className={` round font-weight-bold mx-2 my-2 px-3 py-2  Status-${data.Status}`}
+                    onMouseEnter={() => {
+                      setTestHeaderHover({
+                        index: index,
+                        data: [],
+                      });
+                      TestHeaderResponce(data);
+                    }}
+                    onMouseLeave={() => {
+                      setTestHeaderHover({
+                        index: -1,
+                        data: [],
+                      });
+                      setHeaderTestResult([]);
+                    }}
+                  >
+                    {data?.PackageName}
+                    {testHeaderHover?.index === index &&
+                      headerTestResult.length > 0 && (
+                        <div
+                          style={{
+                            position: "absolute",
+                            width: "650px",
+                            left: "60px",
+                            zIndex: 1,
+                            height: "auto",
+                          }}
+                          className="resultEntryCssTable"
+                        >
+                          <table
+                            className="table table-bordered table-hover table-striped tbRecord"
+                            cellPadding="{0}"
+                            cellSpacing="{0}"
+                          >
+                            <thead className="cf">
+                              <tr>
+                                <th>Test</th>
+                                <th>Value</th>
+                                <th>Unit</th>
+                                <th>Min</th>
+                                <th>Max</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {headerTestResult.map((ele, index) => (
+                                <tr
+                                  key={index}
+                                  style={{
+                                    background:
+                                      ele?.Flag === "High"
+                                        ? "red"
+                                        : ele?.Flag === "Low"
+                                        ? "yellow"
+                                        : "skyblue",
+                                  }}
+                                >
+                                  <td data-title="LabObservationName">
+                                    {ele?.LabObservationName
+                                      ? ele?.LabObservationName
+                                      : "-"}
+                                  </td>
+                                  <td data-title="Value">
+                                    {ele?.Value ? ele?.Value : "-"}
+                                  </td>
+                                  <td data-title="ReadingFormat">
+                                    {ele?.ReadingFormat
+                                      ? ele?.ReadingFormat
+                                      : "-"}
+                                  </td>
+                                  <td data-title="MinValue">
+                                    {ele?.MinValue ? ele?.MinValue : "-"}
+                                  </td>
+                                  <td data-title="MaxValue">
+                                    {ele?.MaxValue ? ele?.MaxValue : "-"}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div> */}
+          <div className="custom-box-body mb-3">
+            <div className="custom-row">
+              <div className="custom-col custom-col-visit">
+                <span className="fa fa-folder custom-text">
+                  &nbsp; <span>{ResultData[0]?.LedgerTransactionNo}</span>
+                </span>
+              </div>
+
+              <div className="custom-col">
+                <span className="fa fa-user custom-text">
+                  &nbsp; <span>{ResultData[0]?.PName}</span>
+                </span>
+              </div>
+
+              <div className="custom-col">
+                <span className="fa fa-book custom-text">
+                  &nbsp;<span>{ResultData[0]?.PatientCode}</span>
+                </span>
+              </div>
+
+              <div className="custom-col custom-col-age-gender">
+                <span className="fa fa-calendar-check-o custom-text">
+                  &nbsp;<span> {ResultData[0]?.Age}</span>
+                </span>
+                <span className="fa fa-street-view custom-text">
+                  &nbsp; <span> {ResultData[0]?.Gender}</span>
+                </span>
+              </div>
+
+              <div className="custom-col">
+                <span className="fa fa-h-square custom-text">
+                  &nbsp; <span>{ResultData[0]?.Centre}</span>
+                </span>
+              </div>
+
+              <div className="custom-col">
+                <span className="fa fa-user-md custom-text">
+                  &nbsp; <span> {ResultData[0]?.Referdoctor}</span>
+                </span>
+              </div>
+
+              <div className="custom-col">
+                <span className="fa fa-plus-square custom-text">
+                  &nbsp;<span> {ResultData[0]?.RateType} </span>
+                </span>
+              </div>
+
+              <div className="custom-col custom-col-regdate">
+                <span className="fa fa-calendar custom-text">
+                  &nbsp; <span> {dateConfig(ResultData[0]?.RegDate)}</span>
+                </span>
+              </div>
+
+              <div className="custom-col custom-end">
+                <span
+                  className="fa fa-cloud-upload custom-text"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Upload Document"
+                  onClick={() => {
+                    setShow({
+                      modal: true,
+                      data: ResultData[0]?.PatientGuid,
+                    });
+                  }}
+                  style={{
+                    color:
+                      ResultData[0]?.UploadDocumentCount > 0
+                        ? "#4ea30c"
+                        : "black !important",
+                    marginRight: "10px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <span>{ResultData[0]?.UploadDocumentCount}</span>
+                </span>
+                <span
+                  className="fa fa-history custom-text"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Medical History"
+                  onClick={() => {
+                    setShow4({
+                      modal: true,
+                      data: ResultData[0]?.PatientGuid,
+                    });
+                  }}
+                  style={{
+                    color:
+                      ResultData[0]?.MedicalHistoryCount > 0
+                        ? "#4ea30c"
+                        : "black !important",
+                    marginRight: "10px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <span>{ResultData[0]?.MedicalHistoryCount}</span>
+                </span>
+                <span
+                  className="fa fa-comment custom-icon-large"
+                  title="Remarks"
+                  onClick={() => setShowRemark(true)}
+                  style={{ marginRight: "10px" }}
+                ></span>
+                <span
+                  className="fa fa-eyedropper custom-icon-large"
+                  title="Prickremarks"
+                  onClick={() => setShowPrickRemark(true)}
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div className="box mb-4">
+            <div
+              className=" box-body divResult boottable table-responsive"
+              id="no-more-tables"
+            >
+              <Table>
+                <thead class="cf">
+                  <tr>
+                    <th>{t("#")}</th>
+                    <th>{t("TestName")}</th>
+                    {isPreviousResultAvailable && <th>{t("Pre. Value")}</th>}
+                    <th style={{ width: "150px" }}>{t("Value")}</th>
+                    <th>{t("Comment")}</th>
+                    <th>{t("Flag")}</th>
+                    <th>{t("Omit")}</th>
+                    <th>{t("Critical")}</th>
+                    <th>{t("Mac Reading")}</th>
+                    <th>{t("MachineName")}</th>
+                    <th>{t("Reading 1")}</th>
+                    <th>{t("Reading 2")}</th>
+                    <th>{t("Method Name")}</th>
+                    <th>{t("Ref Range")}</th>
+                    <th>{t("Unit")}</th>
+                    <th>{t("Action")}</th>
+                    <th>{t("Rerun")}</th>
+                    <th>{t("AuditTrail")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ResultTestData?.map((Hdata, Hindex) => (
+                    <>
+                      <tr key={Hindex} style={{ backgroundColor: "lightgrey" }}>
+                        <td data-title={t("#")}>
+                          <input
+                            type="checkbox"
+                            onChange={(e) =>
+                              handleCheckbox(e, -1, Hdata.TestID)
+                            }
+                            checked={
+                              ResultData?.length > 0
+                                ? isChecked(
+                                    "isChecked",
+                                    ResultData,
+                                    true,
+                                    Hdata.TestID
+                                  ).includes(false)
+                                  ? false
+                                  : true
+                                : false
+                            }
+                            disabled={Hdata?.Status === 5 ? true : false}
+                            name="isChecked"
+                          />
+                        </td>
+                        <td
+                          colSpan={`${isPreviousResultAvailable ? 1 : 4}`}
+                          data-title={t("TestName")}
+                        >
+                          <span className="invName">{Hdata?.PackageName}</span>
+                        </td>
+                        {isPreviousResultAvailable && (
+                          <td colSpan={4} data-title={t("Previous Test Date")}>
+                            <b>{Hdata.OldValueDate}</b>
+                          </td>
+                        )}
+                        <td data-title={t("Value")} colSpan={3}>
+                          <span className="fa fa-barcode">&nbsp;</span>
+                          <b>{Hdata?.SINNO}</b>
+                        </td>
+                        <td colSpan="7" data-title={t("Comment")}>
+                          <div className="d-flex justify-content-start">
+                            {(Hdata?.Status === 3 ||
+                              Hdata.Status === 10 ||
+                              Hdata?.Status === 14) && (
+                              <>
+                                <div className="col-sm-2 m-0 p-0">
+                                  <button
+                                    className="btn btn-primary btn-sm"
+                                    disabled={!Hdata?.isChecked}
+                                    onClick={() => {
+                                      setShow5({
+                                        modal: true,
+                                        data: Hdata?.TestIDHash,
+                                        pageName: "Add Report",
+                                        Printwithhead: Hdata?.Printwithhead,
+                                      });
+                                    }}
+                                  >
+                                    {t("Add Report")}
+                                  </button>
+                                </div>
+                                &nbsp;
+                                <div className="col-sm-2 m-0 p-0">
+                                  <button
+                                    className="btn btn-primary btn-sm"
+                                    disabled={!Hdata?.isChecked}
+                                    onClick={() => {
+                                      setShow5({
+                                        modal: true,
+                                        data: Hdata?.TestIDHash,
+                                        pageName: "Add Attachment",
+                                      });
+                                    }}
+                                  >
+                                    {t("Add Attachment")}
+                                  </button>
+                                </div>
+                                &nbsp;
+                                {Hdata?.datatype === "Profile" && (
+                                  <div className="col-sm-2 m-0 p-0">
+                                    <button
+                                      className="btn btn-primary btn-sm"
+                                      disabled={!Hdata?.isChecked}
+                                      onClick={() =>
+                                        setShow2({
+                                          moadal: true,
+                                          data: { ...Hdata, pageName: "All" },
+                                        })
+                                      }
+                                    >
+                                      {t("Add Comment")}
+                                    </button>
+                                  </div>
+                                )}
+                                &nbsp;
+                              </>
+                            )}
+                            {[5, 6].includes(Hdata?.Status) &&
+                              buttonsData?.map(
+                                (ele, index) =>
+                                  ele?.AccessBy === "Not Approved" && (
+                                    <>
+                                      <div className="col-sm-2 m-0 p-0">
+                                        <button
+                                          className="btn btn-primary btn-sm"
+                                          disabled={!Hdata?.isChecked}
+                                          onClick={() => {
+                                            setShow5({
+                                              modal: true,
+                                              data: Hdata?.TestIDHash,
+                                              pageName: "Add Report",
+                                              Printwithhead:
+                                                Hdata?.Printwithhead,
+                                            });
+                                          }}
+                                        >
+                                          {Hdata?.Status === 5
+                                            ? t("Show Report")
+                                            : t("Add Report")}
+                                        </button>
+                                      </div>
+                                      &nbsp;
+                                      <div className="col-sm-2 m-0 p-0">
+                                        <button
+                                          className="btn btn-primary btn-sm"
+                                          disabled={!Hdata?.isChecked}
+                                          onClick={() => {
+                                            setShow5({
+                                              modal: true,
+                                              data: Hdata?.TestIDHash,
+                                              pageName: "Add Attachment",
+                                            });
+                                          }}
+                                        >
+                                          {Hdata?.Status === 5
+                                            ? t("Show Attachment")
+                                            : t("Add Attachment")}
+                                        </button>
+                                      </div>
+                                      &nbsp; &nbsp;
+                                      {loading ? (
+                                        <Loading />
+                                      ) : (
+                                        <div className="col-sm-2 m-0 p-0">
+                                          <button
+                                            className="btn btn-success btn-sm"
+                                            type="button"
+                                            disabled={!Hdata?.isChecked}
+                                            id="btnMainList"
+                                            key={index}
+                                            onClick={() => {
+                                              setReason({
+                                                ...reason,
+                                                HoldShow: true,
+                                                Hdata: Hdata,
+                                                type: "Not Approved",
+                                              });
+                                            }}
+                                          >
+                                            {ele?.AccessBy}
+                                          </button>
+                                        </div>
+                                      )}
+                                    </>
+                                  )
+                              )}
+                            &nbsp;
+                            {Hdata?.Status === 11 &&
+                              buttonsData?.map(
+                                (ele, index) =>
+                                  ele?.AccessBy === "Unhold" && (
+                                    <>
+                                      {loading ? (
+                                        <Loading />
+                                      ) : (
+                                        <div className="col-sm-2 m-0 p-0">
+                                          <button
+                                            className="btn btn-success"
+                                            type="button"
+                                            id="btnMainList"
+                                            disabled={!Hdata?.isChecked}
+                                            key={index}
+                                            onClick={() =>
+                                              handleResultSubmit(
+                                                ele?.AccessBy,
+                                                Hdata
+                                              )
+                                            }
+                                          >
+                                            {ele?.AccessBy}
+                                          </button>
+                                        </div>
+                                      )}
+                                    </>
+                                  )
+                              )}
+                            {Hdata?.IsDLCCheck == 1 && (
+                              <>
+                                <Input
+                                  type="checkbox"
+                                  checked={DlcCheckChecked}
+                                  onChange={(e) => {
+                                    setDlcCheckChecked(e?.target?.checked);
+                                  }}
+                                />
+                                <label style={{ alignSelf: "flex-end" }}>
+                                  {t("DLC Check")}
+                                </label>
+                              </>
+                            )}
+                            {![11, 5, 6].includes(Hdata?.Status) &&
+                              buttonsData?.map(
+                                (ele, index) =>
+                                  ele?.AccessBy === "Hold" && (
+                                    <>
+                                      {loading ? (
+                                        <Loading />
+                                      ) : (
+                                        <button
+                                          className="btn btn-success btn-sm col-sm-1"
+                                          type="button"
+                                          id="btnMainList"
+                                          key={index}
+                                          disabled={!Hdata?.isChecked}
+                                          onClick={() => {
+                                            setReason({
+                                              ...reason,
+                                              HoldShow: true,
+                                              Hdata: Hdata,
+                                              type: "Hold",
+                                            });
+                                          }}
+                                        >
+                                          {ele?.AccessBy}
+                                        </button>
+                                      )}
+                                    </>
+                                  )
+                              )}
+                          </div>
+                        </td>
+                        <td data-title={t("Flag")}>
+                          {[3, 13, 14, 10].includes(Hdata.Status) && (
+                            <button
+                              className="btn btn-sm btn-primary"
+                              disabled={!Hdata?.isChecked}
+                              onClick={() =>
+                                setShow7({ modal: true, data: Hdata })
+                              }
+                            >
+                              Rerun
+                            </button>
+                          )}
+                        </td>
+                        <td
+                          data-title={t("Audit Trail")}
+                          style={{
+                            cursor: "pointer",
+                            textDecoration: "underline",
+                          }}
+                          className="text-center text-primary"
+                        >
+                          <span
+                            onClick={() => {
+                              AuditTrailResponce(Hdata);
+                            }}
+                          >
+                            View
+                          </span>
+                        </td>
+                      </tr>
+                      {ResultData?.map((datanew, index) => (
+                        <>
+                          {Hdata.TestID === datanew.TestID && (
+                            <tr
+                              key={index}
+                              style={{
+                                backgroundColor:
+                                  datanew?.IsLabOutSource == "True"
+                                    ? "pink"
+                                    : "",
+                              }}
+                            >
+                              <td data-title={t("#")}>
+                                <Input
+                                  type="checkbox"
+                                  checked={datanew?.isChecked}
+                                  onChange={(e) => handleCheckbox(e, index)}
+                                  name="isChecked"
+                                  disabled={true}
+                                />
+                              </td>
+                              <td data-title={t("TestName")}>
+                                <span
+                                  style={{ cursor: "pointer" }}
+                                  data-toggle="tooltip"
+                                  data-placement="top"
+                                  title={
+                                    datanew?.isMandatory === 1
+                                      ? "Required Field"
+                                      : datanew?.dlcCheck === 1
+                                      ? "DLC Parameter"
+                                      : datanew?.Formula != ""
+                                      ? "Calculated Field"
+                                      : ""
+                                  }
+                                  className={`${
+                                    datanew?.isMandatory === 1 && "required "
+                                  } ${
+                                    datanew?.dlcCheck === 1 && "bg-yellow-new "
+                                  }`}
+                                >
+                                  <span
+                                    className={`${
+                                      datanew?.Formula != "" && "Formula"
+                                    } `}
+                                  >
+                                    {datanew?.TestName}
+                                  </span>
+                                </span>
+                              </td>
+                              {isPreviousResultAvailable && (
+                                <td data-title={t("Previous Value")}>
+                                  {datanew.OldValue}
+                                </td>
+                              )}
+                              {datanew?.Header === 0 ? (
+                                <>
+                                  {["2", "3"].includes(datanew?.ReportType) ? (
+                                    <td
+                                      style={{
+                                        fontSize: "15px",
+                                        cursor: "pointer",
+                                      }}
+                                      onClick={() =>
+                                        setShow3({
+                                          modal: true,
+                                          data: datanew,
+                                        })
+                                      }
+                                      data-title={t("Action")}
+                                    >
+                                      +
+                                    </td>
+                                  ) : datanew?.dlcCheck === 1 ? (
+                                    datanew?.IsHelpMenu === 0 ? (
+                                      <td data-title={t("Value")}>
+                                        <input
+                                          type="text"
+                                          className={`form-control input-sm ${
+                                            (datanew?.MaxValue != "0" ||
+                                              datanew?.MinValue != "0") &&
+                                            parseFloat(datanew?.Value) >
+                                              parseFloat(datanew?.MaxValue)
+                                              ? "high"
+                                              : parseFloat(datanew?.Value) <
+                                                parseFloat(datanew?.MinValue)
+                                              ? "low"
+                                              : ""
+                                          } `}
+                                          name="Value"
+                                          autoComplete="off"
+                                          disabled={
+                                            datanew?.CanSaveAmendment
+                                              ? false
+                                              : datanew?.MacReading
+                                              ? true
+                                              : false
+                                          }
+                                          value={datanew?.Value}
+                                          onChange={(e) =>
+                                            handleCheckbox(
+                                              e,
+                                              index,
+                                              datanew?.TestID,
+                                              datanew?.MinValue,
+                                              datanew?.MaxValue
+                                            )
+                                          }
+                                          onKeyUp={(e) =>
+                                            handleKeyUp(
+                                              e,
+
+                                              myRefs.current[
+                                                index === ResultData.length - 1
+                                                  ? 0
+                                                  : index + 1
+                                              ],
+                                              index
+                                            )
+                                          }
+                                          ref={(el) =>
+                                            (myRefs.current[index] = el)
+                                          }
+                                        />
+                                      </td>
+                                    ) : (
+                                      <td data-title={t("Value")}>
+                                        <input
+                                          type="text"
+                                          className={`form-control input-sm ${
+                                            (datanew?.MaxValue != "0" ||
+                                              datanew?.MinValue != "0") &&
+                                            parseFloat(datanew?.Value) >
+                                              parseFloat(datanew?.MaxValue)
+                                              ? "high"
+                                              : parseFloat(datanew?.Value) <
+                                                parseFloat(datanew?.MinValue)
+                                              ? "low"
+                                              : ""
+                                          }`}
+                                          name="Value"
+                                          value={datanew?.Value}
+                                          disabled={
+                                            datanew?.CanSaveAmendment
+                                              ? false
+                                              : datanew?.MacReading
+                                              ? true
+                                              : false
+                                          }
+                                          onChange={(e) =>
+                                            handleCheckbox(
+                                              e,
+                                              index,
+                                              datanew?.TestID,
+                                              datanew?.MinValue,
+                                              datanew?.MaxValue
+                                            )
+                                          }
+                                          onKeyUp={(e) =>
+                                            handleKeyUp(
+                                              e,
+                                              myRefs.current[
+                                                index === ResultData.length - 1
+                                                  ? 0
+                                                  : index + 1
+                                              ],
+                                              index
+                                            )
+                                          }
+                                          autoComplete="off"
+                                          ref={(el) =>
+                                            (myRefs.current[index] = el)
+                                          }
+                                        />
+                                      </td>
+                                    )
+                                  ) : datanew?.IsHelpMenu === 0 ? (
+                                    <td data-title={t("Value")}>
+                                      <input
+                                        type="text"
+                                        className={`form-control input-sm ${
+                                          (datanew?.MaxValue != "0" ||
+                                            datanew?.MinValue != "0") &&
+                                          parseFloat(datanew?.Value) >
+                                            parseFloat(datanew?.MaxValue)
+                                            ? "high"
+                                            : parseFloat(datanew?.Value) <
+                                              parseFloat(datanew?.MinValue)
+                                            ? "low"
+                                            : ""
+                                        }`}
+                                        name="Value"
+                                        disabled={
+                                          datanew?.CanSaveAmendment
+                                            ? false
+                                            : datanew?.MacReading
+                                            ? true
+                                            : false
+                                        }
+                                        value={datanew?.Value}
+                                        onChange={(e) =>
+                                          handleCheckbox(
+                                            e,
+                                            index,
+                                            datanew?.TestID,
+                                            datanew?.MinValue,
+                                            datanew?.MaxValue
+                                          )
+                                        }
+                                        onKeyUp={(e) =>
+                                          handleKeyUp(
+                                            e,
+                                            myRefs.current[
+                                              index === ResultData.length - 1
+                                                ? 0
+                                                : index + 1
+                                            ],
+                                            index
+                                          )
+                                        }
+                                        autoComplete="off"
+                                        ref={(el) =>
+                                          (myRefs.current[index] = el)
+                                        }
+                                      />
+                                    </td>
+                                  ) : (
+                                    <td data-title={t("Value")}>
+                                      <div style={{ position: "relative" }}>
+                                        <input
+                                          type="text"
+                                          className={`form-control input-sm ${
+                                            (datanew?.MaxValue != "0" ||
+                                              datanew?.MinValue != "0") &&
+                                            parseFloat(datanew?.Value) >
+                                              parseFloat(datanew?.MaxValue)
+                                              ? "high"
+                                              : parseFloat(datanew?.Value) <
+                                                parseFloat(datanew?.MinValue)
+                                              ? "low"
+                                              : ""
+                                          }`}
+                                          name="Value"
+                                          autoComplete="off"
+                                          disabled={
+                                            datanew?.CanSaveAmendment
+                                              ? false
+                                              : datanew?.MacReading
+                                              ? true
+                                              : false
+                                          }
+                                          value={datanew?.Value}
+                                          onChange={(e) =>
+                                            handleCheckbox(
+                                              e,
+                                              index,
+                                              datanew?.TestID,
+                                              datanew?.MinValue,
+                                              datanew?.MaxValue
+                                            )
+                                          }
+                                          onKeyDown={(e) => {
+                                            getHelpMenuData(
+                                              e,
+                                              datanew?.labObservationID
+                                            );
+                                            handleIndex(e, index);
+                                          }}
+                                          onKeyUp={(e) =>
+                                            handleKeyUp(
+                                              e,
+                                              myRefs.current[
+                                                index === ResultData.length - 1
+                                                  ? 0
+                                                  : index + 1
+                                              ],
+                                              index
+                                            )
+                                          }
+                                          ref={(el) =>
+                                            (myRefs.current[index] = el)
+                                          }
+                                          onBlur={() =>
+                                            setTimeout(() => {
+                                              setHiddenDropDownHelpMenu(false);
+                                            }, [1000])
+                                          }
+                                        />
+
+                                        {helpmenu.length > 0 &&
+                                          helpmenu[0]?.Value ==
+                                            datanew?.labObservationID &&
+                                          HiddenDropDownHelpMenu && (
+                                            <ul
+                                              className="suggestion-data"
+                                              style={{
+                                                width: "100%",
+                                                right: "0px",
+                                                border: "1px solid #dddfeb",
+                                              }}
+                                            >
+                                              {helpmenu.map(
+                                                (data, helpmenuindex) => (
+                                                  <li
+                                                    onClick={() =>
+                                                      handleListSearch(
+                                                        data,
+                                                        "Value",
+                                                        index
+                                                      )
+                                                    }
+                                                    key={helpmenuindex}
+                                                    className={`${
+                                                      helpmenuindex ===
+                                                        indexMatch &&
+                                                      "matchIndex"
+                                                    }`}
+                                                  >
+                                                    {data?.label}
+                                                  </li>
+                                                )
+                                              )}
+                                            </ul>
+                                          )}
+                                      </div>
+                                    </td>
+                                  )}
+                                  {["2", "3"].includes(datanew?.ReportType) ? (
+                                    <td></td>
+                                  ) : (
+                                    <td
+                                      style={{ position: "relative" }}
+                                      data-title={t("Action")}
+                                    >
+                                      <div className="d-flex align-items-center">
+                                        <div
+                                          className="mx-2"
+                                          style={{
+                                            cursor: "pointer",
+                                            fontSize: "15px",
+                                          }}
+                                          onClick={() =>
+                                            setShow2({
+                                              moadal: true,
+                                              data: {
+                                                ...datanew,
+                                                pageName: "Single",
+                                              },
+                                            })
+                                          }
+                                        >
+                                          +
+                                        </div>
+                                        <span
+                                          className="fa fa-exclamation-triangle mx-2"
+                                          aria-hidden="true"
+                                          style={{
+                                            cursor: "pointer",
+                                            fontSize: "15px",
+                                            width: "35px",
+                                            padding: "5px 10px",
+                                          }}
+                                          onMouseEnter={() => {
+                                            setMouseHover({
+                                              index: index,
+                                              data: [],
+                                            });
+                                            DeltaResponse(datanew);
+                                          }}
+                                          onMouseLeave={() => {
+                                            setMouseHover({
+                                              index: -1,
+                                              data: [],
+                                            });
+                                            setPreviousTestResult([]);
+                                          }}
+                                        >
+                                          {mouseHover?.index === index &&
+                                            PreviousTestResult.length > 0 && (
+                                              <div
+                                                style={{
+                                                  position: "absolute",
+                                                  width: "650px",
+                                                  left: "60px",
+                                                  zIndex: 1,
+                                                  height: "auto",
+                                                }}
+                                                className="resultEntryCssTable"
+                                              >
+                                                <Table>
+                                                  <thead className="cf">
+                                                    <tr>
+                                                      <th>Booking Date</th>
+                                                      <th>Test</th>
+                                                      <th>Value</th>
+                                                      <th>Unit</th>
+                                                      <th>Min</th>
+                                                      <th>Max</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                    {PreviousTestResult.map(
+                                                      (ele, index) => (
+                                                        <tr
+                                                          key={index}
+                                                          style={{
+                                                            background:
+                                                              "skyBlue",
+                                                          }}
+                                                        >
+                                                          <td
+                                                            data-title="BookingDate"
+                                                            style={{
+                                                              width: "120px",
+                                                            }}
+                                                          >
+                                                            {dateConfig(
+                                                              ele?.BookingDate
+                                                            )}
+                                                          </td>
+                                                          <td data-title="LabObservationName">
+                                                            {ele?.LabObservationName
+                                                              ? ele?.LabObservationName
+                                                              : "-"}
+                                                          </td>
+                                                          <td data-title="Value">
+                                                            {ele?.Value
+                                                              ? ele?.Value
+                                                              : "-"}
+                                                          </td>
+                                                          <td data-title="ReadingFormat">
+                                                            {ele?.ReadingFormat
+                                                              ? ele?.ReadingFormat
+                                                              : "-"}
+                                                          </td>
+                                                          <td data-title="MinValue">
+                                                            {ele?.MinValue
+                                                              ? ele?.MinValue
+                                                              : "-"}
+                                                          </td>
+                                                          <td data-title="MaxValue">
+                                                            {ele?.MaxValue
+                                                              ? ele?.MaxValue
+                                                              : "-"}
+                                                          </td>
+                                                        </tr>
+                                                      )
+                                                    )}
+                                                  </tbody>
+                                                </Table>
+                                              </div>
+                                            )}
+                                        </span>
+                                      </div>
+                                    </td>
+                                  )}
+                                  {["2", "3"].includes(datanew?.ReportType) ? (
+                                    <td> &nbsp;</td>
+                                  ) : (
+                                    <td
+                                      className="w-50p"
+                                      data-title={t("Flag")}
+                                    >
+                                      <select value={datanew?.Flag} disabled>
+                                        <option hidden></option>
+                                        <option value="Normal">Normal</option>
+                                        <option value="High">High</option>
+                                        <option value="Low">Low</option>
+                                      </select>
+                                    </td>
+                                  )}
+                                  <td data-title={t("Omit")}>
+                                    <Input
+                                      type="checkbox"
+                                      checked={datanew?.isOmit}
+                                      onChange={(e) => handleCheckbox(e, index)}
+                                      name="isOmit"
+                                      // disabled={true}
+                                    />
+                                  </td>
+                                  <td data-title={t("Critical")}>
+                                    <Input
+                                      type="checkbox"
+                                      checked={datanew?.IsCriticalCheck}
+                                      onChange={(e) => handleCheckbox(e, index)}
+                                      name="IsCriticalCheck"
+                                      // disabled={true}
+                                    />
+                                  </td>
+                                  <td
+                                    data-title={t("Mac Reading")}
+                                    className={`Status-${datanew?.Status}`}
+                                  >
+                                    {" "}
+                                    {datanew?.MacReading}&nbsp;
+                                  </td>
+                                  <td data-title={t("MachineName")}>
+                                    {" "}
+                                    {datanew?.machinename}&nbsp;
+                                  </td>
+                                  <td data-title={t("Reading 1")}>
+                                    {datanew?.Reading1} &nbsp;
+                                  </td>
+                                  <td data-title={t("Reading 2")}>
+                                    {datanew?.Reading2} &nbsp;
+                                  </td>
+
+                                  {["2", "3"].includes(datanew?.ReportType) ? (
+                                    <td data-title=""> &nbsp;</td>
+                                  ) : (
+                                    <td data-title={t("Method Name")}>
+                                      {datanew?.MethodName} &nbsp;
+                                    </td>
+                                  )}
+                                  {["2", "3"].includes(datanew?.ReportType) ? (
+                                    <td data-title=""> &nbsp;</td>
+                                  ) : (
+                                    <td data-title="DisplayReading">
+                                      {datanew?.DisplayReading} &nbsp;
+                                    </td>
+                                  )}
+                                  {["2", "3"].includes(datanew?.ReportType) ? (
+                                    <td data-title=""> &nbsp;</td>
+                                  ) : (
+                                    <td data-title={t("ReadingFormat")}>
+                                      {datanew?.ReadingFormat} &nbsp;
+                                    </td>
+                                  )}
+                                  {["2", "3"].includes(datanew?.ReportType) ? (
+                                    <td data-title=""> &nbsp;</td>
+                                  ) : (
+                                    <td data-title={t("Edit")} colSpan={2}>
+                                      <div
+                                        className="text-primary"
+                                        style={{
+                                          cursor: "pointer",
+                                          textDecoration: "underline",
+                                        }}
+                                        onClick={() =>
+                                          setShow({
+                                            moadal: true,
+                                            data: datanew,
+                                          })
+                                        }
+                                      >
+                                        {t("Edit")}
+                                      </div>
+                                    </td>
+                                  )}
+                                </>
+                              ) : (
+                                <td colSpan="10" data-title="">
+                                  {" "}
+                                  &nbsp;
+                                </td>
+                              )}
+                              <td colSpan="10" data-title="">
+                                {" "}
+                                &nbsp;
+                              </td>
+                            </tr>
+                          )}
+                        </>
+                      ))}
+                    </>
+                  ))}
+                </tbody>
+              </Table>
+
+              <div className="row mt-3" style={{ textWrap: "avoid" }}>
+                {loading ? (
+                  <div className="mx-3">
+                    <Loading />
                   </div>
                 ) : (
-                  <div style={{ width: "100%" }}>
-                    <Input
-                      type="text"
-                      name="ItemValue"
-                      max={20}
-                      value={formData.ItemValue}
-                      onChange={handleChange}
-                    />
-                    {errors?.ItemValue && (
-                      <div className="golbal-Error">{errors?.ItemValue}</div>
-                    )}
-                  </div>
+                  <>
+                    <div className="col-sm-1">
+                      <button
+                        className="previous roundarrow btn-success mx-2"
+                        onClick={() => {
+                          ResultData.length > 0 &&
+                            GetResultEntry(
+                              {
+                                TestID:
+                                  redata[ResultData[0]?.currentIndex - 1]
+                                    ?.TestID,
+                                LedgerTransactionID: "",
+                                DepartmentID: "",
+                                symbol: "",
+                                Mobile:
+                                  redata[ResultData[0]?.currentIndex - 1]
+                                    ?.Mobile,
+                                VisitNo:
+                                  redata[ResultData[0]?.currentIndex - 1]
+                                    ?.VisitNo,
+                                PEmail:
+                                  redata[ResultData[0]?.currentIndex - 1]
+                                    ?.PEmail,
+                                MacID: "",
+                              },
+                              ResultData[0]?.currentIndex - 1
+                            );
+                        }}
+                        disabled={
+                          ResultData[0]?.currentIndex === 0 ? true : false
+                        }
+                      >
+                        ‹
+                      </button>
+                      <button
+                        className="next roundarrow btn-success mx-2"
+                        onClick={() => {
+                          ResultData.length > 0 &&
+                            GetResultEntry(
+                              {
+                                TestID:
+                                  redata[ResultData[0]?.currentIndex + 1]
+                                    ?.TestID,
+                                LedgerTransactionID: "",
+                                DepartmentID: "",
+                                symbol: "",
+
+                                Mobile:
+                                  redata[ResultData[0]?.currentIndex + 1]
+                                    ?.Mobile,
+                                VisitNo:
+                                  redata[ResultData[0]?.currentIndex + 1]
+                                    ?.VisitNo,
+                                PEmail:
+                                  redata[ResultData[0]?.currentIndex + 1]
+                                    ?.PEmail,
+                                MacID: "",
+                              },
+                              ResultData[0]?.currentIndex + 1
+                            );
+                        }}
+                        disabled={
+                          ResultData[0]?.currentIndex === redata.length - 1
+                            ? true
+                            : false
+                        }
+                      >
+                        ›
+                      </button>
+                    </div>
+                    <div className="col-sm-1">
+                      {["", 3, 10, 11, 13, 14, 15].includes(statusValue) && (
+                        <button
+                          className="btn btn-primary mx-2 my-1 my btn-sm"
+                          onClick={() => handleResultSubmit("Save")}
+                        >
+                          save
+                        </button>
+                      )}
+                    </div>
+                    <div className="col-sm-1">
+                      <button
+                        className="btn btn-primary mx-2 my-1 my btn-sm"
+                        type="button"
+                        id="btnMainList"
+                        onClick={() => {
+                          setResultData([]);
+                          setResultTestData([]);
+                        }}
+                      >
+                        {t("Main List")}
+                      </button>
+                    </div>
+                    <div className="col-sm-2">
+                      <SelectBox
+                        options={doctorAdmin}
+                        id="ApprovedBy"
+                        lable="Doctor"
+                        selectedValue={formData.SelectTypes}
+                        name="ApprovedBy"
+                        onChange={handleDoctorName}
+                      />
+                    </div>
+                    <div className="col-sm-2 ">
+                      <SelectBox
+                        options={machine}
+                        id="Machine"
+                        name="Machine"
+                        selectedValue={ResultData[0]?.MachineId}
+                        onChange={(e) =>
+                          GetResultEntry(
+                            {
+                              TestID:
+                                redata[ResultData[0]?.currentIndex]?.TestID,
+                              LedgerTransactionID: "",
+                              DepartmentID: "",
+                              symbol: "",
+                              Mobile:
+                                redata[ResultData[0]?.currentIndex]?.Mobile,
+                              VisitNo:
+                                redata[ResultData[0]?.currentIndex]?.VisitNo,
+                              PEmail:
+                                redata[ResultData[0]?.currentIndex]?.PEmail,
+                              MacID: e?.target?.value,
+                            },
+                            ResultData[0]?.currentIndex
+                          )
+                        }
+                        lable={"Machine"}
+                      />
+                    </div>
+                    <div className="col-sm-1">
+                      {PrintReportLoading ? (
+                        <Loading />
+                      ) : (
+                        <button
+                          className="btn btn-success btn-sm mx-2 my-1 my"
+                          type="button"
+                          id="btnMainList"
+                          onClick={() => handleReport("no", "")}
+                        >
+                          {t("Preview")}
+                        </button>
+                      )}
+                    </div>
+                    <div className="col-sm-1">
+                      {buttonsData?.map(
+                        (ele, index) =>
+                          ele?.AccessBy !== "Not Approved" &&
+                          ele?.AccessBy !== "Unhold" &&
+                          ele?.AccessBy !== "Discount Approval" &&
+                          ele?.AccessBy !== "Hold" && (
+                            <button
+                              className="btn btn-success btn-sm mx-2 my-1 my"
+                              type="button"
+                              id="btnMainList"
+                              key={index}
+                              onClick={() => handleResultSubmit(ele?.AccessBy)}
+                            >
+                              {ele?.AccessBy === "Approved"
+                                ? t("Approve")
+                                : ele?.AccessBy}
+                            </button>
+                          )
+                      )}
+                    </div>
+                    <div className="col-sm-1">
+                      <button
+                        className="btn btn-success btn-sm mx-2 my-1"
+                        type="button"
+                        id="btnMainList"
+                        onClick={() => handleDeltaCheckReport(ResultTestData)}
+                      >
+                        DeltaCheck
+                      </button>
+                    </div>
+                    <div className="col-sm-1">
+                      <button
+                        className="btn btn-success mx-2 btn-sm my-1 my"
+                        onClick={() => {
+                          setShowPH(true);
+                        }}
+                      >
+                        {t("Patient Details")}
+                      </button>
+                    </div>
+                    <div className="col-sm-1">
+                      <button
+                        className="btn btn-success btn-sm mx-2 my-1"
+                        type="button"
+                        id="btnMainList"
+                        onClick={() =>
+                          setShowOldReportModal({
+                            show: true,
+                            data: ResultData[0]?.PatientCode,
+                          })
+                        }
+                      >
+                        Old Report
+                      </button>
+                    </div>
+                  </>
                 )}
               </div>
             </div>
           </div>
-
-          <div className="col-sm-2  ">
-            <SelectBox
-              options={AddBlankData(CentreData, "All Centre")}
-              lable="Centre"
-              id="Centre"
-              name="CentreID"
-              selectedValue={formData?.CentreID}
-              onChange={handleSelectChange}
-            />
-          </div>
-
-          <div className="col-sm-2 ">
-            <SelectBox
-              options={[{ label: "All RateType", value: "" }, ...RateTypes]}
-              selectedValue={formData?.RateTypeID}
-              lable="RateType"
-              id="RateType"
-              name="RateTypeID"
-              onChange={handleSelectChange}
-            />
-          </div>
-
-          <div className="col-sm-2  ">
-            <SelectBox
-              options={AddBlankData(DepartmentData, "All Department")}
-              lable="Department"
-              id="Department"
-              selectedValue={formData.DepartmentID}
-              name="DepartmentID"
-              onChange={handleSelectChange}
-            />
-          </div>
-
-          <div className="col-sm-2  ">
-            <Input
-              type="text"
-              lable="Refer Doctor"
-              id="DoctorName"
-              name="DoctorName"
-              value={formData.DoctorName}
-              onChange={handleChange}
-              placeholder=" "
-              onBlur={(e) => {
-                autocompleteOnBlur(setDoctorSuggestion);
-                setTimeout(() => {
-                  const data = doctorSuggestion.filter(
-                    (ele) => ele?.Name === e.target.value
-                  );
-                  if (data.length === 0) {
-                    setFormData({ ...formData, DoctorName: "" });
-                  }
-                }, 500);
-              }}
-              autoComplete="off"
-            />
-            {dropFalse && doctorSuggestion.length > 0 && (
-              <ul className="suggestion-data">
-                {doctorSuggestion.map((data, index) => (
-                  <li
-                    onClick={() => handleListSearch(data, "DoctorName")}
-                    className={`${index === indexMatch && "matchIndex"}`}
-                    key={index}
-                  >
-                    {data?.Name}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-
-          <div className="col-sm-2  ">
-            <Input
-              type="text"
-              name="TestName"
-              lable="Search By Test Name"
-              id="TestName"
-              value={formData.TestName}
-              placeholder=" "
-              onChange={handleChange}
-              onKeyDown={(e) => handleIndex(e, "TestName")}
-            />
-            {TestSuggestion.length > 0 && (
-              <AutoComplete
-                test={TestSuggestion}
-                handleListSearch={handleListSearch}
-                indexMatch={indexMatch}
-              />
-            )}
-          </div>
         </div>
-        <div className="row">
-          <div className="col-sm-2">
-            <SelectBox
-              options={[
-                { label: "Registration Date", value: "Date" },
-                ...DateTypeSearch,
-              ]}
-              selectedValue={formData?.DateTypeSearch}
-              name="DateTypeSearch"
-              onChange={handleSelectChange}
-            />
-          </div>
-          <div className="col-sm-2">
-            <DatePicker
-              className="custom-calendar"
-              name="FromDate"
-              value={formData?.FromDate}
-              onChange={dateSelect}
-              placeholder=" "
-              id="FromDate"
-              lable="FromDate"
-              maxDate={new Date(formData?.ToDate)}
-            />
-          </div>
-          <div className="col-sm-1">
-            <CustomTimePicker
-              name="FromTime"
-              placeholder="FromTime"
-              value={formData?.FromTime}
-              id="FromTime"
-              lable="FromTime"
-              onChange={handleTime}
-            />
-          </div>
-          <div className="col-sm-2">
-            <DatePicker
-              className="custom-calendar"
-              name="ToDate"
-              value={formData?.ToDate}
-              onChange={dateSelect}
-              placeholder=" "
-              id="ToDate"
-              lable="ToDate"
-              maxDate={new Date()}
-              minDate={new Date(formData?.FromDate)}
-            />
-          </div>
-          <div className="col-sm-1">
-            <CustomTimePicker
-              name="ToTime"
-              placeholder="ToTime"
-              value={formData?.ToTime}
-              id="ToTime"
-              lable="ToTime"
-              onChange={handleTime}
-            />
-          </div>
-          <div className="col-sm-2">
-            <SelectBox
-              options={[...SampleStatus]}
-              onChange={handleSelectChange1}
-              name="SampleStatus"
-              lable="SampleStatus"
-              id="SampleStatus"
-              selectedValue={formData.SampleStatus}
-            />
-          </div>
-          <div className="col-sm-2   ">
-            <SelectBox
-              options={machineId ?? []}
-              selectedValue={formData?.MachineID}
-              className="input-sm"
-              lable="MachineID"
-              id="MachineID"
-              name="MachineID"
-              onChange={handleSelectChange}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-sm-2   ">
-            <SelectBox
-              options={[
-                { label: "TAT Report - All", value: 0 },
-                { label: "In TAT", value: 1 },
-                { label: "Out TAT", value: 2 },
-              ]}
-              selectedValue={formData?.IsTat}
-              lable="IsTat"
-              id="IsTat"
-              name="IsTat"
-              onChange={handleSelectChange}
-            />
-          </div>
-          <div className="col-sm-2">
-            <SelectBox
-              options={[{ label: "Select Flag", value: "" }, ...Flag]}
-              name="Flag"
-              lable="Flag"
-              id="Flag"
-              onChange={handleSelectChange}
-              selectedValue={formData?.Flag}
-            />
-          </div>
-          <div className="col-sm-2">
-            <SelectBox
-              options={[{ label: "Select Order", value: "" }, ...Order]}
-              name="Order"
-              lable="Order"
-              id="Order"
-              onChange={handleSelectChange}
-              selectedValue={formData?.Order}
-            />
-          </div>
-        </div>
-      </div>
-    </PageHead>
+      )}
+    </>
   );
 };
 
