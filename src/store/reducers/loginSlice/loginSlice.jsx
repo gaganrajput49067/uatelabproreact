@@ -17,10 +17,10 @@ export const signInAction = createAsyncThunk(
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await axios.post("http://localhost:5129/api/v1/Login/Login", credentials);
+      const response = await axiosInstance.post("Users/Login", credentials);
       dispatch(setLoading(false));
       toast.success("Login is succeed!");
-      console.log(response)
+      console.log(response);
       return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -59,7 +59,7 @@ export const loginSlice = createSlice({
         state.success = false;
       })
       .addCase(signInAction.fulfilled, (state, action) => {
-        console.log(action)
+        console.log(action);
         state.user = action.payload.user;
         state.loading = false;
         state.success = true;
