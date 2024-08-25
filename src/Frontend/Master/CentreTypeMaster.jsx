@@ -114,7 +114,12 @@ const CentreTypeMaster = () => {
     axiosInstance
       .get("Centre/GetCentreTypeData")
       .then((res) => {
-        setTableData(res?.data?.message);
+        if (res?.data.success) {
+          setTableData(res?.data?.message);
+        } else {
+          setTableData([]);
+          toast.error(res?.data?.message);
+        }
       })
       .catch((err) => {
         console.log(err?.response?.data?.message);

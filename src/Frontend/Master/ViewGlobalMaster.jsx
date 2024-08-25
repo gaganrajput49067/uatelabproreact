@@ -29,7 +29,11 @@ const ViewGlobalMaster = () => {
       axiosInstance
         .post("Global/getGlobalDataByFieldType", type)
         .then((res) => {
-          setTableData(res?.data?.message);
+          if (res?.data?.success) {
+            setTableData(res?.data?.message);
+          } else {
+            toast.error(res?.data?.message);
+          }
           setLoad(false);
         })
         .catch((err) => {

@@ -782,10 +782,12 @@ const PatientRegistration = () => {
 
   const handleDOBCalculation = (e) => {
     const { name, value } = e.target;
+    
     let diff = {};
     let subtractType = getSubtractType(name);
 
     if (name === "AgeYear") {
+    
       diff = moment().subtract(value, subtractType);
       setDateData({
         ...DateData,
@@ -794,6 +796,7 @@ const PatientRegistration = () => {
     }
 
     if (name === "AgeMonth") {
+  
       diff = moment(DateData?.AgeYear || new Date().now).subtract(
         value,
         subtractType
@@ -805,6 +808,7 @@ const PatientRegistration = () => {
     }
 
     if (name === "AgeDays") {
+      
       diff = moment(DateData?.AgeMonth || new Date().now).subtract(
         value,
         subtractType
@@ -814,12 +818,6 @@ const PatientRegistration = () => {
         AgeDays: diff?._d,
       });
     }
-
-    var Newdiff = moment(moment(), "milliseconds").diff(
-      moment(diff?._d).format("YYYY-MM-DD")
-    );
-
-    var duration = moment.duration(Newdiff);
 
     var startDate = moment(diff._d);
     var endDate = moment();
@@ -831,7 +829,6 @@ const PatientRegistration = () => {
     startDate.add(monthsDiff, "months");
 
     var daysDiff = endDate.diff(startDate, "days");
-
     setState({
       ...state,
       [name]: value,
@@ -840,12 +837,12 @@ const PatientRegistration = () => {
         diff?._d,
         "days"
       ),
-      Age: `${yearsDiff} Y ${monthsDiff} M ${daysDiff} D`,
+      Age: `${state?.AgeYear} Y ${state?.AgeMonth} M ${state?.AgeDays} D`,
     });
 
     setLTData({
       ...LTData,
-      Age: `${yearsDiff} Y ${monthsDiff} M ${daysDiff} D`,
+      Age: `${state?.AgeYear} Y ${state?.AgeMonth} M ${state?.AgeDays} D`,
     });
 
     setTableData([]);
@@ -1160,7 +1157,7 @@ const PatientRegistration = () => {
   const calculateTotalNumberOfDays = (value) => {
     return moment(moment().format("YYYY-MM-DD")).diff(value, "days");
   };
-
+console.log(state)
   const dateSelect = (value, name) => {
     const { years, months, days } = calculateDOB(value);
     setState({

@@ -42,6 +42,7 @@ const GlobalTypeMaster = () => {
     return err;
   };
 
+  
   const handleSubmit = () => {
     const generated = validations(getTrimmedData(payload));
     if (generated === "") {

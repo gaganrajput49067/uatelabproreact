@@ -296,17 +296,17 @@ const SlotBookModal = ({
     }
   };
 
-  const dateSelect = (date, name) => {
+  const dateSelect = (value, name) => {
     setPayload({
       ...payload,
-      [name]: date,
+      [name]: value,
     });
 
     GetInvestigationTimeSlot(
       payload?.ShiftName,
       payload?.ModalityId,
       payload?.ModalityName,
-      date
+      value
     );
   };
   return (
@@ -321,67 +321,53 @@ const SlotBookModal = ({
         }
       >
         <div
-          className="box-success"
+          className="card"
           style={{
             backgroundColor: "transparent",
             maxHeight: "600px",
             overflowY: "auto",
           }}
         >
-          <div className="box-body ">
+       
             <div className="row">
-              <label
-                className="col-md-2"
-                style={{ textAlign: "end" }}
-                htmlFor="Investigation Date"
-              >
-                {t("Investigation Date")} :
-              </label>
-              <div className="col-md-2">
+              <div className="col-md-4">
                 <DatePicker
                   name="InvestigationDate"
                   minDate={new Date()}
+                  placeholder=" "
+                  id="InvestigationDate"
+                  lable="InvestigationDate"
                   onChange={dateSelect}
-                  className="select-input-box form-control input-sm required"
-                  date={payload?.InvestigationDate}
+                  className="custom-calendar"
+                  value={payload?.InvestigationDate}
                 />
               </div>
-              <label
-                className="col-md-2"
-                htmlFor="Modality "
-                style={{ textAlign: "end" }}
-              >
-                {t("Modality")} :
-              </label>
-              <div className="col-md-2">
+
+              <div className="col-md-4">
                 <SelectBox
                   name="ModalityId"
                   options={modality}
-                  className="select-input-box form-control input-sm required"
+                  lable="ModalityId"
+                  id="ModalityId"
                   selectedValue={payload?.ModalityId}
                   onChange={handleChange}
                 />
               </div>
-              <label
-                className="col-md-2"
-                htmlFor="ShiftName "
-                style={{ textAlign: "end" }}
-              >
-                {t("ShiftName")} :
-              </label>
-              <div className="col-md-2">
+
+              <div className="col-md-4">
                 <SelectBox
                   name="ShiftName"
                   options={shift}
-                  className="select-input-box form-control input-sm required"
+                  lable="ShiftName"
+                  id="ShiftName"
                   selectedValue={payload?.ShiftName}
                   onChange={handleChange}
                 />
               </div>
             </div>
-          </div>
-          <div className="box">
-            <div className="box-body">
+         
+          <div className="card-body">
+           
               <div className="row">
                 <label className="col-md-2" htmlFor="Investigation Date">
                   {payload?.ShiftName}
@@ -427,13 +413,7 @@ const SlotBookModal = ({
                             }}
                             title={ele?.status == 0 && "Double Click to Select"}
                             onClick={() => handleSingleClick(ele, index)}
-                            // onDoubleClick={() => {
-                            //   setSlotOpen({
-                            //     ...slotOpen,
-                            //     show: false,
-                            //   });
-                            //   handleSelectSlot(payload, ele, slotOpen?.data);
-                            // }}
+                          
                             onDoubleClick={() =>
                               IshandleBookedSlot(payload, ele, slotOpen?.data)
                             }
@@ -462,10 +442,10 @@ const SlotBookModal = ({
                   </label>
                 </div>
               )}
-            </div>
+          
           </div>
 
-          <div className="box-body">
+          <div className="card-body">
             <div
               style={{
                 display: "flex",
