@@ -14,7 +14,11 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
     const handleScroll = (event) => {
       if (event.deltaY !== 0) {
         event.preventDefault(); // Prevent vertical scrolling
-        containerRef.current.scrollLeft += event.deltaY; // Scroll horizontally
+        containerRef.current.scrollLeft += event.deltaY;
+        // containerRef.current.scrollBy({
+        //   left: event.deltaY, // Scroll horizontally based on the vertical delta
+        //   behavior: 'smooth', // Enable smooth scrolling
+        // });
       }
     };
 
@@ -40,11 +44,33 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
     );
   };
 
+  const handleScrollLeft = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        left: -100, // Adjust scroll distance as needed
+        behavior: "smooth", // Smooth scrolling
+      });
+    }
+  };
+
+  const handleScrollRight = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        left: 100, // Adjust scroll distance as needed
+        behavior: "smooth", // Smooth scrolling
+      });
+    }
+  };
+
   return (
     <div className="menubar-main-container ss-none">
       <i
         className="fa fa-bars mr-2 pointer menubar-navbar"
         onClick={handleSidebar}
+      ></i>
+      <i
+        className="fa fa-angle-left px-1 pointer"
+        onClick={handleScrollLeft}
       ></i>
       <div className="main-menu-container" ref={containerRef}>
         {filterdMenu.map((ele, key) => {
@@ -54,7 +80,7 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
               onClick={() => navigate(ele?.PageUrl)}
               className={`nav-item mx-1 ${
                 location.pathname.toLowerCase() == ele?.PageUrl.toLowerCase()
-                  ? " active-tab-menu"
+                  ? "active-tab-menu"
                   : "text-white"
               }`}
             >
@@ -63,6 +89,10 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
           );
         })}
       </div>
+      <i
+        className="fa fa-angle-right mr-2 px-1 pointer"
+        onClick={handleScrollRight}
+      ></i>
       <div className="search-container">
         <input
           className="search-menu-container"

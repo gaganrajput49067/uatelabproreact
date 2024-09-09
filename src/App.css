@@ -20,6 +20,15 @@ h6 {
   padding: 0;
 }
 
+.blinking {
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
 
 @media (max-width: 900px) {
   .ss-none {

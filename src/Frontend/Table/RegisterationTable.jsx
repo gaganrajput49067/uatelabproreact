@@ -5,6 +5,7 @@ import { number } from "yup";
 import { useLocation } from "react-router-dom";
 import DOSModal from "../utils/DOSModal";
 import TestNameModal from "../utils/TestNameModal";
+import CloseButton from "../../components/CommonComponent/CloseButton";
 
 function RegisterationTable({
   data,
@@ -94,29 +95,8 @@ function RegisterationTable({
         />
       )}
       <td data-title="S.No">
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", alignItems: "center" }}>
           {index + 1}&nbsp;
-          {location.pathname === "/EditPatientDetails" ? (
-            data?.isPrimary && (
-              <button
-                className="btn btn-danger btn-sm"
-                onClick={() => {
-                  handleFilter(data);
-                }}
-              >
-                X
-              </button>
-            )
-          ) : (
-            <button
-              className="btn btn-danger btn-sm"
-              onClick={() => {
-                handleFilter(data);
-              }}
-            >
-              X
-            </button>
-          )}
         </div>
       </td>
       <td data-title="Slot">
@@ -168,7 +148,7 @@ function RegisterationTable({
           )}
           {data?.TestName}
         </div>
-        <small className="text-danger">
+        <small className="text-danger" style={{ fontWeight: "bold" }}>
           {data?.RequiredAttachment !== "" &&
             data?.RequiredAttachment + " Req."}
         </small>
@@ -251,6 +231,15 @@ function RegisterationTable({
             handleChangeDelieveryDate(e, index, data);
           }}
         />
+      </td>
+      <td>
+        {location.pathname === "/EditPatientDetails" ? (
+          data?.isPrimary && (
+            <CloseButton handleClose={() => handleFilter(data)} />
+          )
+        ) : (
+          <CloseButton handleClose={() => handleFilter(data)} />
+        )}
       </td>
     </>
   );

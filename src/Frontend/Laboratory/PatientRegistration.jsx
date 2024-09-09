@@ -49,6 +49,9 @@ import MedicialModal from "../utils/MedicialModal";
 import UploadFile from "../utils/UploadFIleModal/UploadFile";
 import SampleRemark from "../utils/SampleRemark";
 import SlotBookModal from "../utils/SlotBookModal";
+import SubPageHead from "../../components/CommonComponent/SubPageHead";
+import CloseButton from "../../components/CommonComponent/CloseButton";
+import Tooltip from "../../components/CommonComponent/Tooltip";
 const PatientRegistration = () => {
   const { t } = useTranslation();
   const [patientImg, setPatientImg] = useState({
@@ -3272,6 +3275,7 @@ const PatientRegistration = () => {
     setLTData({ ...LTData, Remarks: payload });
     handleShowRemark();
   };
+
   return (
     <>
       {slotOpen?.show && (
@@ -3329,64 +3333,146 @@ const PatientRegistration = () => {
           handleUploadCount={handleUploadCount}
         />
       )}
-      <PageHead name="PatientRegistration">
-        <div className="card">
-          <div className="patent-register-outlet">
-            <div className="patent-register-details">
-              <div className="row">
-                <div className="col-sm-2">
-                  <SelectBox
-                    options={CentreData}
-                    name="CentreID"
-                    lable="Centre"
-                    selectedValue={LTData?.CentreID}
-                    onChange={handleSelectChange}
-                  />
-                </div>
-                <div className="col-sm-2">
-                  <SelectBox
-                    options={RateType}
-                    name="RateID"
-                    lable="RateType"
-                    selectedValue={state?.RateID}
-                    onChange={handleSelectChange}
-                  />
-                </div>
-                <div className="col-sm-1">
-                  <SelectBox
-                    name="VisitType"
-                    options={VisitType}
-                    lable="VisitType"
-                    selectedValue={LTData?.VisitType}
-                    onChange={handleSelectChange}
-                  />
-                </div>
-                <div className="col-sm-2">
-                  <Input
-                    type="text"
-                    lable="UHID"
-                    max={15}
-                    disabled={state?.Mobile}
-                    value={state?.PatientCode}
-                    name="PatientCode"
-                    onInput={(e) => number(e, 15)}
-                    onKeyDown={(e) => handlePatientData(e, "PatientCode")}
-                    placeholder=" "
-                    id="PatientCode"
-                    onChange={handleMainChange}
-                  />
-                </div>
-                <div className="col-sm-2">
-                  <Input
-                    type="text"
-                    lable="PreBookingNo"
-                    disabled={true}
-                    name="PreBookingNo"
-                    placeholder=" "
-                    id="PreBookingNo"
-                  />
-                </div>
-                <div className="col-sm-2">
+      <PageHead name="PatientRegistration" showbtn={true} drop={false}>
+        <>
+          <Tooltip label={"Patient Report Delivery Method"}>
+            <button
+              className="btn btn-warning btn-block w-100 btn-sm  mx-2"
+              id="PRDM"
+              onClick={() => {
+                setSaveSmsEmail({
+                  ...saveSmsEmail,
+                  IsActiveEmailToClient:
+                    saveSmsEmail?.IsActiveEmailToClient !== ""
+                      ? saveSmsEmail?.IsActiveEmailToClient
+                      : saveSmsEmail?.EmailToClient != ""
+                      ? 1
+                      : state?.RateTypeEmail != ""
+                      ? 1
+                      : 0,
+                  IsActiveSmsToDoctor:
+                    saveSmsEmail?.IsActiveSmsToDoctor !== ""
+                      ? saveSmsEmail?.IsActiveSmsToDoctor
+                      : saveSmsEmail?.SmsToDoctor != ""
+                      ? 1
+                      : LTData?.DoctorMobile != ""
+                      ? 1
+                      : 0,
+                  IsActiveEmailToDoctor:
+                    saveSmsEmail?.IsActiveEmailToDoctor !== ""
+                      ? saveSmsEmail?.IsActiveEmailToDoctor
+                      : saveSmsEmail?.EmailToDoctor != ""
+                      ? 1
+                      : LTData?.DoctorEmail != ""
+                      ? 1
+                      : 0,
+                  IsActiveEmailToPatient:
+                    saveSmsEmail?.IsActiveEmailToPatient !== ""
+                      ? saveSmsEmail?.IsActiveEmailToPatient
+                      : saveSmsEmail?.EmailToPatient != ""
+                      ? 1
+                      : state?.Email != ""
+                      ? 1
+                      : 0,
+                  IsActiveSmsToPatient:
+                    saveSmsEmail?.IsActiveSmsToPatient !== ""
+                      ? saveSmsEmail?.IsActiveSmsToPatient
+                      : saveSmsEmail?.SmsToPatient != ""
+                      ? 1
+                      : state?.Mobile != ""
+                      ? 1
+                      : 0,
+                  IsActiveSmsToClient:
+                    saveSmsEmail?.IsActiveSmsToClient !== ""
+                      ? saveSmsEmail?.IsActiveSmsToClient
+                      : saveSmsEmail?.SmsToClient != ""
+                      ? 1
+                      : state?.RateTypePhone != ""
+                      ? 1
+                      : 0,
+                  IsWhatsappRequired: saveSmsEmail?.IsWhatsappRequired
+                    ? saveSmsEmail?.IsWhatsappRequired
+                    : 0,
+                });
+
+                setShow6(true);
+              }}
+            >
+              PRDM
+            </button>
+          </Tooltip>
+          {state?.Gender == "Female" && (
+            <button
+              className={`btn  btn-warning w-100 btn-sm  mx-2 ${
+                Pndt?.PNDT ? " btn-success" : "btn-primary"
+              }`}
+              id="PNDT"
+              disabled={state?.Gender == "Female" ? false : true}
+              onClick={handlePNDT}
+            >
+              PNDT
+            </button>
+          )}
+        </>
+      </PageHead>
+      <div className="card">
+        <div className="patent-register-outlet">
+          <div className="patent-register-details">
+            <div className="row">
+              <div className="col-sm-2">
+                <SelectBox
+                  options={CentreData}
+                  name="CentreID"
+                  lable="Centre"
+                  selectedValue={LTData?.CentreID}
+                  onChange={handleSelectChange}
+                />
+              </div>
+              <div className="col-sm-2">
+                <SelectBox
+                  options={RateType}
+                  name="RateID"
+                  lable="RateType"
+                  selectedValue={state?.RateID}
+                  onChange={handleSelectChange}
+                />
+              </div>
+              <div className="col-sm-2">
+                <SelectBox
+                  name="VisitType"
+                  options={VisitType}
+                  lable="VisitType"
+                  selectedValue={LTData?.VisitType}
+                  onChange={handleSelectChange}
+                />
+              </div>
+              <div className="col-sm-2">
+                <Input
+                  type="text"
+                  lable="UHID"
+                  max={15}
+                  disabled={state?.Mobile}
+                  value={state?.PatientCode}
+                  name="PatientCode"
+                  onInput={(e) => number(e, 15)}
+                  onKeyDown={(e) => handlePatientData(e, "PatientCode")}
+                  placeholder=" "
+                  id="PatientCode"
+                  onChange={handleMainChange}
+                />
+              </div>
+              <div className="col-sm-2">
+                <Input
+                  type="text"
+                  lable="PreBookingNo"
+                  disabled={true}
+                  name="PreBookingNo"
+                  placeholder=" "
+                  id="PreBookingNo"
+                />
+              </div>
+              <div className="col-sm-2">
+                <div className="p-inputgroup flex-1">
                   <Input
                     type="text"
                     lable="Membership Number"
@@ -3400,14 +3486,29 @@ const PatientRegistration = () => {
                       setmembershipnum(e?.target?.value);
                     }}
                   />
+                  {throughMemberData ? (
+                    <Button
+                      icon="fa fa-close"
+                      className="iconSize"
+                      onClick={handleMembershipcancel}
+                    />
+                  ) : (
+                    <Button
+                      icon="pi pi-plus"
+                      className="iconSize"
+                      onClick={() => {
+                        Navigate("/MembershipCardMaster");
+                      }}
+                    />
+                  )}
                 </div>
-                <div className="col-sm-1">
+              </div>
+              {/* <div className="col-sm-1">
                   {throughMemberData ? (
                     <button
                       id="btndeleterow"
                       disabled={!throughMemberData}
                       className="btn btn-danger btn-block btn-sm "
-                      onClick={handleMembershipcancel}
                     >
                       Cancel
                     </button>
@@ -3415,984 +3516,877 @@ const PatientRegistration = () => {
                     <button
                       className="btn btn-primary btn-block btn-sm"
                       id="Membership"
-                      onClick={() => {
-                        Navigate("/MembershipCardMaster");
-                      }}
                     >
                       Create
                     </button>
                   )}
-                </div>
+                </div> */}
+            </div>
+            <div className="row">
+              <div className="col-sm-2">
+                <Input
+                  // className="select-input-box form-control input-sm required"
+                  name="Mobile"
+                  id="Mobile"
+                  onInput={(e) => number(e, 10)}
+                  onKeyDown={(e) => handlePatientData(e, "Mobile")}
+                  value={state.Mobile}
+                  disabled={throughMobileData || throughMemberData}
+                  onChange={handleMainChange}
+                  type="number"
+                  lable="Mobile Number"
+                  placeholder=" "
+                />
+                <Button
+                  icon="pi pi-search"
+                  className="iconSize ls-none"
+                  onClick={handleShowMobile}
+                />
+
+                {!err?.Mobile && !err?.Mobiles && errors?.Mobile && (
+                  <div className="error-message">{errors?.Mobile}</div>
+                )}
+
+                {state.Mobile == "" && (
+                  <div className="error-message">{err?.Mobile}</div>
+                )}
+                {state.Mobile != "" && state?.Mobile.length < 10 && (
+                  <div className="error-message">{err?.Mobiles}</div>
+                )}
               </div>
-              <div className="row">
-                <div className="col-sm-2">
-                  <Input
-                    // className="select-input-box form-control input-sm required"
-                    name="Mobile"
-                    id="Mobile"
-                    onInput={(e) => number(e, 10)}
-                    onKeyDown={(e) => handlePatientData(e, "Mobile")}
-                    value={state.Mobile}
-                    disabled={throughMobileData || throughMemberData}
-                    onChange={handleMainChange}
-                    type="number"
-                    lable="Mobile Number"
-                    placeholder=" "
-                  />
-                  <Button
-                    icon="pi pi-search"
-                    className="iconSize ls-none"
-                    onClick={handleShowMobile}
-                  />
 
-                  {!err?.Mobile && !err?.Mobiles && errors?.Mobile && (
-                    <div className="error-message">{errors?.Mobile}</div>
-                  )}
+              <div className="col-sm-3">
+                <div className="d-flex">
+                  <div style={{ width: "30%" }}>
+                    <SelectBox
+                      options={Title}
+                      name="Title"
+                      id="Title"
+                      lable="Title"
+                      isDisabled={throughMobileData || throughMemberData}
+                      selectedValue={state?.Title}
+                      onChange={handleMainChange}
+                    />
+                  </div>
+                  <div style={{ width: "70%" }}>
+                    <Input
+                      onKeyDown={(e) =>
+                        someMethodWithoutAccessToEvent(e, "MiddleName")
+                      }
+                      max={35}
+                      name="FirstName"
+                      type="text"
+                      id="FirstName"
+                      lable="First Name"
+                      placeholder=" "
+                      disabled={throughMobileData || throughMemberData}
+                      value={state?.FirstName}
+                      onChange={handleMainChange}
+                    />
 
-                  {state.Mobile == "" && (
-                    <div className="error-message">{err?.Mobile}</div>
-                  )}
-                  {state.Mobile != "" && state?.Mobile.length < 10 && (
-                    <div className="error-message">{err?.Mobiles}</div>
-                  )}
-                </div>
-
-                <div className="col-sm-3">
-                  <div className="d-flex">
-                    <div style={{ width: "30%" }}>
-                      <SelectBox
-                        options={Title}
-                        name="Title"
-                        id="Title"
-                        lable="Title"
-                        isDisabled={throughMobileData || throughMemberData}
-                        selectedValue={state?.Title}
-                        onChange={handleMainChange}
-                      />
-                    </div>
-                    <div style={{ width: "70%" }}>
-                      <Input
-                        onKeyDown={(e) =>
-                          someMethodWithoutAccessToEvent(e, "MiddleName")
-                        }
-                        max={35}
-                        name="FirstName"
-                        type="text"
-                        id="FirstName"
-                        lable="First Name"
-                        placeholder=" "
-                        disabled={throughMobileData || throughMemberData}
-                        value={state?.FirstName}
-                        onChange={handleMainChange}
-                      />
-
-                      {!err?.FirstName &&
-                        !err?.FirstNames &&
-                        errors?.FirstName && (
-                          <div className="error-message">
-                            {errors?.FirstName}
-                          </div>
-                        )}
-
-                      {state.FirstName == "" && (
-                        <div className="error-message">{err?.FirstName}</div>
+                    {!err?.FirstName &&
+                      !err?.FirstNames &&
+                      errors?.FirstName && (
+                        <div className="error-message">{errors?.FirstName}</div>
                       )}
 
-                      {state?.FirstName != "" &&
-                        state?.FirstName.trim().length < 3 && (
-                          <div className="error-message">{err?.FirstNames}</div>
-                        )}
-                    </div>
+                    {state.FirstName == "" && (
+                      <div className="error-message">{err?.FirstName}</div>
+                    )}
+
+                    {state?.FirstName != "" &&
+                      state?.FirstName.trim().length < 3 && (
+                        <div className="error-message">{err?.FirstNames}</div>
+                      )}
                   </div>
                 </div>
-                <div className="col-sm-2">
-                  <Input
-                    type="text"
-                    lable="Middle Name"
-                    name="MiddleName"
-                    placeholder=" "
-                    id="MiddleName"
-                    value={state?.MiddleName}
-                    onKeyDown={(e) =>
-                      someMethodWithoutAccessToEvent(e, "LastName")
-                    }
-                    disabled={throughMobileData || throughMemberData}
-                    max={35}
-                    onChange={handleMainChange}
-                  />
-                </div>
-                <div className="col-sm-2">
-                  <Input
-                    type="text"
-                    lable="Last Name"
-                    name="LastName"
-                    placeholder=" "
-                    id="LastName"
-                    value={state?.LastName}
-                    disabled={throughMobileData || throughMemberData}
-                    onChange={handleMainChange}
-                  />
-                </div>
+              </div>
+              <div className="col-sm-2">
+                <Input
+                  type="text"
+                  lable="Middle Name"
+                  name="MiddleName"
+                  placeholder=" "
+                  id="MiddleName"
+                  value={state?.MiddleName}
+                  onKeyDown={(e) =>
+                    someMethodWithoutAccessToEvent(e, "LastName")
+                  }
+                  disabled={throughMobileData || throughMemberData}
+                  max={35}
+                  onChange={handleMainChange}
+                />
+              </div>
+              <div className="col-sm-2">
+                <Input
+                  type="text"
+                  lable="Last Name"
+                  name="LastName"
+                  placeholder=" "
+                  id="LastName"
+                  value={state?.LastName}
+                  disabled={throughMobileData || throughMemberData}
+                  onChange={handleMainChange}
+                />
+              </div>
 
-                <div className="col-sm-2">
-                  <SelectBox
-                    options={Gender}
-                    name="Gender"
-                    id="Gender"
-                    lable="Gender"
-                    isDisabled={
-                      ["Baby"].includes(state?.Title)
-                        ? false
-                        : state?.Title || state?.Title == ""
-                        ? true
-                        : false
-                    }
-                    selectedValue={state?.Gender}
-                    onChange={handleMainChange}
-                  />
-                </div>
-
-                <div className="col-sm-1">
-                  <button
-                    className="btn btn-primary btn-block btn-sm"
-                    id="PRDM"
-                    onClick={() => {
-                      setSaveSmsEmail({
-                        ...saveSmsEmail,
-                        IsActiveEmailToClient:
-                          saveSmsEmail?.IsActiveEmailToClient !== ""
-                            ? saveSmsEmail?.IsActiveEmailToClient
-                            : saveSmsEmail?.EmailToClient != ""
-                            ? 1
-                            : state?.RateTypeEmail != ""
-                            ? 1
-                            : 0,
-                        IsActiveSmsToDoctor:
-                          saveSmsEmail?.IsActiveSmsToDoctor !== ""
-                            ? saveSmsEmail?.IsActiveSmsToDoctor
-                            : saveSmsEmail?.SmsToDoctor != ""
-                            ? 1
-                            : LTData?.DoctorMobile != ""
-                            ? 1
-                            : 0,
-                        IsActiveEmailToDoctor:
-                          saveSmsEmail?.IsActiveEmailToDoctor !== ""
-                            ? saveSmsEmail?.IsActiveEmailToDoctor
-                            : saveSmsEmail?.EmailToDoctor != ""
-                            ? 1
-                            : LTData?.DoctorEmail != ""
-                            ? 1
-                            : 0,
-                        IsActiveEmailToPatient:
-                          saveSmsEmail?.IsActiveEmailToPatient !== ""
-                            ? saveSmsEmail?.IsActiveEmailToPatient
-                            : saveSmsEmail?.EmailToPatient != ""
-                            ? 1
-                            : state?.Email != ""
-                            ? 1
-                            : 0,
-                        IsActiveSmsToPatient:
-                          saveSmsEmail?.IsActiveSmsToPatient !== ""
-                            ? saveSmsEmail?.IsActiveSmsToPatient
-                            : saveSmsEmail?.SmsToPatient != ""
-                            ? 1
-                            : state?.Mobile != ""
-                            ? 1
-                            : 0,
-                        IsActiveSmsToClient:
-                          saveSmsEmail?.IsActiveSmsToClient !== ""
-                            ? saveSmsEmail?.IsActiveSmsToClient
-                            : saveSmsEmail?.SmsToClient != ""
-                            ? 1
-                            : state?.RateTypePhone != ""
-                            ? 1
-                            : 0,
-                        IsWhatsappRequired: saveSmsEmail?.IsWhatsappRequired
-                          ? saveSmsEmail?.IsWhatsappRequired
-                          : 0,
+              <div className="col-sm-1">
+                <SelectBox
+                  options={Gender}
+                  name="Gender"
+                  id="Gender"
+                  lable="Gender"
+                  isDisabled={
+                    ["Baby"].includes(state?.Title)
+                      ? false
+                      : state?.Title || state?.Title == ""
+                      ? true
+                      : false
+                  }
+                  selectedValue={state?.Gender}
+                  onChange={handleMainChange}
+                />
+              </div>
+              <div className="col-sm-2">
+                <div className="p-inputgroup flex-1">
+                  <Input
+                    id="DoctorName"
+                    name="DoctorName"
+                    lable="Referred Doctor"
+                    onChange={(e) => {
+                      setFormData({
+                        ...formData,
+                        DoctorName: e.target.value,
                       });
-
-                      setShow6(true);
+                      setDropFalse(true);
                     }}
-                  >
-                    PRDM
-                  </button>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-2">
-                  <DatePicker
-                    value={state?.DOB}
-                    className="custom-calendar"
-                    name="DOB"
-                    disabled={throughMobileData || throughMemberData}
-                    placeholder=" "
-                    id="DOB"
-                    lable="DOB"
-                    maxDate={new Date()}
-                    onChange={dateSelect}
-                  />
-                  {!err?.DOB && errors?.DOB && (
-                    <div className="error-message">{errors?.DOB}</div>
-                  )}
-
-                  {state.DOB == "" && (
-                    <div className="error-message">{err?.DOB}</div>
-                  )}
-                </div>
-                <div className="col-sm-3">
-                  <div className="p-inputgroup flex-1">
-                    <Input
-                      placeholder=" "
-                      type="text"
-                      id="Y"
-                      name="AgeYear"
-                      value={state?.AgeYear}
-                      onInput={(e) => number(e, 3, 120)}
-                      disabled={throughMemberData || throughMobileData}
-                      onChange={handleDOBCalculation}
-                    />
-                    <span className="p-inputgroup-addon iconSizeAge">Y</span>
-
-                    <Input
-                      placeholder=" "
-                      type="text"
-                      id="M"
-                      name="AgeMonth"
-                      value={state?.AgeMonth}
-                      onInput={(e) => number(e, 2, 12)}
-                      disabled={throughMemberData || throughMobileData}
-                      onChange={handleDOBCalculation}
-                    />
-                    <span className="p-inputgroup-addon iconSizeAge">M</span>
-                    <Input
-                      placeholder=" "
-                      type="text"
-                      id="D"
-                      name="AgeDays"
-                      value={state?.AgeDays}
-                      onInput={(e) => number(e, 2, 31)}
-                      disabled={throughMemberData || throughMobileData}
-                      onChange={handleDOBCalculation}
-                    />
-                    <span className="p-inputgroup-addon iconSizeAge">D</span>
-                  </div>
-                </div>
-
-                <div className="col-sm-2">
-                  <div className="p-inputgroup flex-1">
-                    <Input
-                      id="DoctorName"
-                      name="DoctorName"
-                      lable="Referred Doctor"
-                      onChange={(e) => {
-                        setFormData({
-                          ...formData,
-                          DoctorName: e.target.value,
-                        });
-                        setDropFalse(true);
-                      }}
-                      value={formData?.DoctorName}
-                      onBlur={(e) => {
-                        autocompleteOnBlur(setDoctorSuggestion);
-                        setTimeout(() => {
-                          const data = doctorSuggestion.filter(
-                            (ele) => ele?.Name === e.target.value
-                          );
-                          if (data.length === 0) {
-                            setFormData({ ...formData, DoctorName: "" });
-                          }
-                        }, 500);
-                      }}
-                      onKeyDown={handleIndex}
-                      placeholder=" "
-                      type="text"
-                    />
-                    {dropFalse && doctorSuggestion.length > 0 && (
-                      <ul className="suggestion-data">
-                        {doctorSuggestion.map((data, index) => (
-                          <li
-                            onClick={() => handleListSearch(data, "DoctorName")}
-                            className={`${
-                              index === indexMatch && "matchIndex"
-                            }`}
-                            key={index}
-                          >
-                            {data?.Name}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                    <Button
-                      icon="pi pi-plus"
-                      className="iconSize"
-                      onClick={handleShow}
-                    />
-                  </div>
-                  {!err?.DoctorName &&
-                    !err?.DoctorID &&
-                    (errors?.DoctorID || errors?.DoctorName) &&
-                    (touched?.DoctorID || touched?.DoctorName) && (
-                      <div className="error-message">
-                        {errors?.DoctorID || errors?.DoctorName}
-                      </div>
-                    )}
-
-                  {formData.DoctorName == "" && (
-                    <div className="error-message">{err?.DoctorName}</div>
-                  )}
-
-                  {formData.DoctorName != "" && formData?.DoctorID == "" && (
-                    <div className="error-message">{err?.DoctorID}</div>
-                  )}
-                </div>
-                <div className="col-sm-2">
-                  <div className="p-inputgroup flex-1">
-                    <Input
-                      id="SecondReferDoctor"
-                      name="SecondReferDoctor"
-                      lable="Second Ref. Doctor"
-                      placeholder=" "
-                      type="text"
-                      value={formData?.SecondReferDoctor}
-                      onChange={(e) => {
-                        setFormData({
-                          ...formData,
-                          SecondReferDoctor: e.target.value,
-                        });
-                        setSecondDropFalse(true);
-                      }}
-                      onBlur={(e) => {
-                        autocompleteOnBlur(setseconddoctorSuggestion);
-                        setTimeout(() => {
-                          const data = seconddoctorSuggestion.filter(
-                            (ele) => ele?.Name === e.target.value
-                          );
-                          if (data.length === 0) {
-                            setFormData({
-                              ...formData,
-                              SecondReferDoctor: "",
-                            });
-                          }
-                        }, 500);
-                      }}
-                      onKeyDown={handleIndex}
-                    />
-                    {secondDropFalse && seconddoctorSuggestion.length > 0 && (
-                      <ul className="suggestion-data">
-                        {seconddoctorSuggestion.map((data, index) => (
-                          <li
-                            onClick={() =>
-                              handleListSearch(data, "SecondReferDoctor")
-                            }
-                            className={`${
-                              index === indexMatch && "matchIndex"
-                            }`}
-                            key={index}
-                          >
-                            {data?.Name}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                    <Button icon="pi pi-plus" className="iconSize" />
-                  </div>
-                </div>
-                <div className="col-sm-2">
-                  <SelectBox
-                    name="CollectionBoyId"
-                    options={[
-                      { label: "Select Collection Boy", value: "" },
-                      ...CollectionBoy,
-                    ]}
-                    lable="Collection Boy"
-                    isDisabled={true}
-                    selectedValue={LTData?.CollectionBoyId}
-                    onChange={handleSelectChange}
-                  />
-                </div>
-                <div className="col-sm-1">
-                  <button
-                    className={`btn  btn-block btn-sm ${
-                      Pndt?.PNDT ? " btn-success" : "btn-primary"
-                    }`}
-                    id="PNDT"
-                    disabled={state?.Gender == "Female" ? false : true}
-                    onClick={handlePNDT}
-                  >
-                    PNDT
-                  </button>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-2">
-                  <Input
-                    type="text"
-                    lable="Email"
-                    name="Email"
-                    placeholder=" "
-                    id="Email"
-                    value={state?.Email}
-                    onChange={handleMainChange}
-                  />
-                  {errors?.Email && (
-                    <div className="error-message">{errors?.Email}</div>
-                  )}
-                </div>
-                <div className="col-sm-3">
-                  <div className="d-flex">
-                    <div style={{ width: "40%" }}>
-                      <SelectBox
-                        name="PatientIDProof"
-                        options={[
-                          { label: "Choose ID", value: "" },
-                          ...Identity,
-                        ]}
-                        id="IdType"
-                        lable="Id Type"
-                        onChange={handleSelectChange}
-                      />
-                    </div>
-                    <div style={{ width: "60%" }}>
-                      <Input
-                        name="PatientIDProofNo"
-                        type="text"
-                        max={20}
-                        onChange={handleLTData}
-                        disabled={LTData?.PatientIDProof === "" ? true : false}
-                        value={LTData?.PatientIDProofNo}
-                        id="PatientIDProofNo"
-                        lable="Patient ID Proof Number"
-                        placeholder=" "
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm-2">
-                  <Input
-                    lable="Address"
-                    type="text"
-                    name="HouseNo"
-                    max={100}
-                    placeholder=" "
-                    id="Address"
-                    value={state?.HouseNo}
-                    onChange={handleMainChange}
-                  />
-                </div>
-                <div className="col-sm-2">
-                  <Input
-                    lable="Pincode"
-                    type="number"
-                    name="PinCode"
-                    placeholder=" "
-                    onInput={(e) => number(e, 6)}
-                    id="PinCode"
-                    value={state?.PinCode}
-                    onChange={handleMainChange}
-                  />
-                </div>
-                <div className="col-sm-2">
-                  <Input
-                    lable="Locality"
-                    max={30}
-                    type="text"
-                    value={state?.Locality}
-                    onChange={handleMainChange}
-                    name="Locality"
-                    placeholder=" "
-                    id="Locality"
-                  />
-                </div>
-                <div className="col-sm-1">
-                  <button
-                    className="btn btn-primary btn-block btn-sm"
-                    id="Remarks"
-                    onClick={() => {
-                      setShowRemark(true);
-                    }}
-                  >
-                    Remarks
-                  </button>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-2">
-                  <Input
-                    max={30}
-                    type="text"
-                    value={state?.City}
-                    onChange={handleMainChange}
-                    lable="City"
-                    name="City"
-                    placeholder=" "
-                    id="City"
-                  />
-                </div>
-                <div className="col-sm-2">
-                  <Input
-                    type="text"
-                    lable="State"
-                    name="State"
-                    placeholder=" "
-                    id="State"
-                    max={30}
-                    value={state?.State}
-                    onChange={handleMainChange}
-                  />
-                </div>
-                <div className="col-sm-2">
-                  <Input
-                    max={30}
-                    value={state?.Country}
-                    type="text"
-                    onChange={handleMainChange}
-                    lable="Country"
-                    name="Country"
-                    placeholder=" "
-                    id="Country"
-                  />
-                </div>
-                <div className="col-sm-2">
-                  <SelectBox
-                    options={[{ label: "Select", value: "" }, ...proEmplyee]}
-                    name="ProEmployee"
-                    lable="Pro Employee"
-                    selectedValue={state?.ProEmployee}
-                    onChange={handleMainChange}
-                    isDisabled={state?.ProEmployee != "" ? true : false}
-                  />
-                </div>
-                <div className="col-sm-4">
-                  <div className="d-flex">
-                    <div style={{ width: "60%" }}>
-                      <DatePicker
-                        className="custom-calendar"
-                        name="RegistrationDate"
-                        value={LTData?.RegistrationDate}
-                        placeholder=" "
-                        id="RegistrationDate"
-                        lable="Registration Date"
-                        onChange={dateregselecect}
-                      />
-                    </div>
-                    <div style={{ width: "40%" }}>
-                      <div className="d-flex">
-                        <Input
-                          type="text"
-                          placeholder=" "
-                          lable="H"
-                          id="H"
-                          value={time?.Hour}
-                          name="Hour"
-                          onChange={handleTimeChange}
-                        />
-                        <Input
-                          type="text"
-                          value={time?.Minute}
-                          name="Minute"
-                          onChange={handleTimeChange}
-                          lable="M"
-                          id="M"
-                          placeholder=" "
-                        />
-                        <Input
-                          type="text"
-                          value={time?.Second}
-                          name="Second"
-                          onChange={handleTimeChange}
-                          lable="S"
-                          id="S"
-                          placeholder=" "
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>{" "}
-              {Pndt?.PNDT && (
-                <>
-                  <div className="row">
-                    <div className="col-md-2">
-                      <Input
-                        id="NoOfChildren"
-                        name="NoOfChildren"
-                        lable="Number Of Children"
-                        placeholder=" "
-                        type="number"
-                        onInput={(e) => number(e, 3)}
-                        value={Pndt?.NoOfChildren}
-                        onChange={handlePNDTChange}
-                      />
-                      {Pndt.NoOfChildren === "" && (
-                        <div className="error-message">
-                          {errors?.NoOfChildren}
-                        </div>
-                      )}
-                    </div>
-                    <div className="col-md-2">
-                      <Input
-                        name="NoOfSon"
-                        id="NoOfSon"
-                        lable="Number Of Son"
-                        placeholder=" "
-                        type="number"
-                        value={Pndt?.NoOfSon}
-                        onInput={(e) => number(e, 3)}
-                        onChange={handlePNDTChange}
-                      />
-                      {Pndt.NoOfSon === "" && (
-                        <div className="error-message">{errors?.NoOfSon}</div>
-                      )}
-                    </div>
-                    <div className="col-md-2">
-                      <Input
-                        id="NoOfDaughter"
-                        lable="Number Of Daughter"
-                        placeholder=" "
-                        name="NoOfDaughter"
-                        type="number"
-                        value={Pndt?.NoOfDaughter}
-                        onInput={(e) => number(e, 3)}
-                        onChange={handlePNDTChange}
-                      />
-                      {Pndt.NoOfDaughter === "" && (
-                        <div className="error-message">
-                          {errors?.NoOfDaughter}
-                        </div>
-                      )}
-                    </div>
-                    <div className="col-md-2">
-                      <DatePicker
-                        name="Pregnancy"
-                        id="Pregnancy"
-                        lable="Pregnancy"
-                        placeholder=" "
-                        value={Pndt?.Pregnancy}
-                        maxDate={new Date()}
-                        onChange={handleDatePNDT}
-                      />
-                      {Pndt.Pregnancy === "" && (
-                        <div className="error-message">{errors?.Pregnancy}</div>
-                      )}
-                    </div>
-                    <div className="col-md-2">
-                      <Input
-                        name="AgeOfSon"
-                        lable="Age Of Son"
-                        id="AgeOfSon"
-                        placeholder=" "
-                        type="number"
-                        value={Pndt?.AgeOfSon}
-                        onInput={(e) => number(e, 3)}
-                        onChange={handlePNDTChange}
-                      />
-                      {Pndt.AgeOfSon === "" && (
-                        <div className="error-message">{errors?.AgeOfSon}</div>
-                      )}
-                    </div>
-                    <div className="col-md-2">
-                      <Input
-                        className="form-control input-sm"
-                        name="AgeOfDaughter"
-                        type="number"
-                        id="AgeOfDaughter"
-                        lable="Age Of Daughter"
-                        placeholder=" "
-                        value={Pndt?.AgeOfDaughter}
-                        onInput={(e) => number(e, 3)}
-                        onChange={handlePNDTChange}
-                      />
-                      {Pndt.AgeOfDaughter === "" && (
-                        <div className="error-message">
-                          {errors?.AgeOfDaughter}
-                        </div>
-                      )}
-                    </div>
-                  </div>{" "}
-                </>
-              )}
-              <div className="row">
-                {Pndt?.PNDT && (
-                  <>
-                    <div className="col-md-2">
-                      <SelectBox
-                        className="form-control input-sm"
-                        name="PNDTDoctor"
-                        id="PNDTDoctor"
-                        lable="PNDT Doctor"
-                        placeholder="PNDT Doctor"
-                        options={DoctorData}
-                        selectedValue={Pndt?.PNDTDoctor}
-                        onChange={handlePNDTChange}
-                      />
-                      {Pndt.PNDTDoctor === "" && (
-                        <div className="error-message">
-                          {errors?.PNDTDoctor}
-                        </div>
-                      )}
-                    </div>
-                    <div className="col-md-2">
-                      <Input
-                        className="form-control input-sm"
-                        name="Husband"
-                        lable="Husband"
-                        placeholder=" "
-                        id="Husband"
-                        value={Pndt?.Husband}
-                        onChange={handlePNDTChange}
-                      />
-                      {Pndt.Husband === "" && (
-                        <div className="error-message">{errors?.Husband}</div>
-                      )}
-                    </div>
-                  </>
-                )}
-                {checkCovid() && (
-                  <>
-                    <div className="col-md-2 ">
-                      <Input
-                        id="SrfId"
-                        placeholder=" "
-                        name="SrfId"
-                        lable="Srf Id"
-                        type="text"
-                        value={LTData?.SrfId}
-                        onChange={handleSelectChange}
-                      />
-                    </div>
-
-                    <div className="col-md-2 ">
-                      <Input
-                        id="IcmrId"
-                        placeholder=" "
-                        name="IcmrId"
-                        lable="Icmr Id"
-                        type="text"
-                        value={LTData?.IcmrId}
-                        onChange={handleSelectChange}
-                      />
-                    </div>
-                  </>
-                )}
-                {visibleFields?.map(
-                  (data, index) =>
-                    data?.IsVisible == 1 && (
-                      <>
-                        <div
-                          className="col-md-2"
-                          style={{ marginBottom: "5px" }}
-                          key={index}
-                        >
-                          {[
-                            "PatientSource",
-                            "PatientType",
-                            "HLMPatientType",
-                            "Source",
-                          ].includes(data?.FieldType) ? (
-                            <SelectBox
-                              className={`${
-                                data?.IsMandatory === 1 && "required"
-                              }`}
-                              options={
-                                data?.FieldType === "PatientSource"
-                                  ? [
-                                      { label: "Select", value: "" },
-                                      ...PatientSource,
-                                    ]
-                                  : data?.FieldType === "PatientType"
-                                  ? [
-                                      { label: "Select", value: "" },
-                                      ...PatientType,
-                                    ]
-                                  : data?.FieldType === "HLMPatientType"
-                                  ? HLMPatientType
-                                  : data?.FieldType === "Source"
-                                  ? SourceType
-                                  : []
-                              }
-                              id={data?.FieldType}
-                              placeholder={data?.FieldType}
-                              lable={data?.FieldType}
-                              selectedValue={LTData[data?.FieldType]}
-                              name={data?.FieldType}
-                              onChange={handleSelectNew}
-                            />
-                          ) : (
-                            <Input
-                              className={`select-input-box form-control input-sm ${
-                                data?.IsMandatory === 1 && "required"
-                              }`}
-                              max={30}
-                              name={data?.FieldType}
-                              id={data?.FieldType}
-                              placeholder=" "
-                              lable={data?.FieldType}
-                              value={LTData[data?.FieldType]}
-                              onChange={handleLTData}
-                              type="text"
-                            />
-                          )}
-                          {data?.isError && (
-                            <div className="error-message">{data?.message}</div>
-                          )}
-                        </div>
-                      </>
-                    )
-                )}
-              </div>
-            </div>
-            <div className="patent-register-image">
-              <Image
-                src={MyImage}
-                alt="Image"
-                width="115"
-                height="130"
-                margin="0"
-                padding="0"
-                preview
-              />
-              <button
-                className={`btn ${
-                  LTData?.UploadDocumentCount === 0 ? "btn-info" : "btn-success"
-                } w-100 btn-sm p-0`}
-                id="Upload Document"
-                onClick={() => {
-                  setShow2(true);
-                }}
-              >
-                {t("Upload Document")}
-                <span id="spnCount"> ({LTData?.UploadDocumentCount})</span>
-              </button>
-              <button
-                className={`btn   ${
-                  LTData?.MedicalHistoryCount === 0 ? "btn-info" : "btn-success"
-                } w-100 btn-sm `}
-                id="Medical History"
-                onClick={() => {
-                  handleClose3();
-                }}
-              >
-                {t("Medical History")}&nbsp;
-                <span id="spnMedicalCount">
-                  ({LTData?.MedicalHistoryCount})
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="patient-register-other">
-          <div className="">
-            <div className="card">
-              <div className="row">
-                <div className="col-sm-5">
-                  <Input
-                    name="TestName"
-                    lable={
-                      searchTest == "TestName"
-                        ? "Type TestName For Add Test"
-                        : "Type TestCode For Add Test"
-                    }
-                    type="text"
-                    placeholder=" "
-                    max={30}
-                    id="testSearch"
-                    onChange={handleChange}
-                    onBlur={() => {
-                      autocompleteOnBlur(setSuggestion);
+                    value={formData?.DoctorName}
+                    onBlur={(e) => {
+                      autocompleteOnBlur(setDoctorSuggestion);
                       setTimeout(() => {
-                        document.getElementById("testSearch").value = "";
+                        const data = doctorSuggestion.filter(
+                          (ele) => ele?.Name === e.target.value
+                        );
+                        if (data.length === 0) {
+                          setFormData({ ...formData, DoctorName: "" });
+                        }
                       }, 500);
                     }}
                     onKeyDown={handleIndex}
+                    placeholder=" "
+                    type="text"
                   />
-                  {suggestion.length > 0 && (
-                    <ul className="suggestion-data" style={{ zIndex: 99 }}>
-                      {suggestion.map((data, index) => (
+                  {dropFalse && doctorSuggestion.length > 0 && (
+                    <ul className="suggestion-data">
+                      {doctorSuggestion.map((data, index) => (
                         <li
-                          onClick={() => handleListSearch(data, "TestName")}
-                          key={index}
+                          onClick={() => handleListSearch(data, "DoctorName")}
                           className={`${index === indexMatch && "matchIndex"}`}
+                          key={index}
                         >
-                          {data.TestName}
+                          {data?.Name}
                         </li>
                       ))}
                     </ul>
                   )}
+                  <Button
+                    icon="pi pi-plus"
+                    className="iconSize"
+                    onClick={handleShow}
+                  />
                 </div>
-                <div className="col-sm-7">
-                  <div className="flex flex-wrap gap-3">
-                    <div className="flex ">
-                      <input
-                        type="radio"
-                        id="TestName"
-                        name="TestName"
-                        value="TestName"
-                        checked={searchTest == "TestName"}
-                        onChange={(e) => {
-                          setSearchTest(e.target.value);
-                        }}
-                      />
-                      <label htmlFor="TestName" className="ml-2">
-                        By TestName
-                      </label>
+                {!err?.DoctorName &&
+                  !err?.DoctorID &&
+                  (errors?.DoctorID || errors?.DoctorName) &&
+                  (touched?.DoctorID || touched?.DoctorName) && (
+                    <div className="error-message">
+                      {errors?.DoctorID || errors?.DoctorName}
                     </div>
-                    <div className="flex ">
-                      <input
-                        type="radio"
-                        id="TestCode"
-                        name="TestCode"
-                        value="TestCode"
-                        checked={searchTest == "TestCode"}
-                        onChange={(e) => {
-                          setSearchTest(e.target.value);
-                        }}
-                      />
-                      <label htmlFor="TestCode" className="ml-2">
-                        By TestCode
-                      </label>
-                    </div>
-                    <div className="flex ml-3">
-                      <input
-                        type="checkbox"
-                        name="isVIP"
-                        id="isVIP"
-                        checked={state?.isVIP}
-                        onChange={handleMainChange}
-                        value={state?.isVIP === 1 ? true : false}
-                      />
-                      <label htmlFor="isVIP" className="ml-2">
-                        VIP
-                      </label>
-                    </div>
+                  )}
 
-                    {state?.isVIP === 1 && (
-                      <>
-                        <div className="flex align-items-left">
-                          <input
-                            type="checkbox"
-                            name="IsMask"
-                            id="IsMask"
-                            checked={state?.IsMask}
-                            onChange={handleMainChange}
-                            value={state?.IsMask === 1 ? true : false}
-                          />
-                        </div>
+                {formData.DoctorName == "" && (
+                  <div className="error-message">{err?.DoctorName}</div>
+                )}
 
-                        <label htmlFor="IsMask" className="ml-1">
-                          MASK
-                        </label>
-                      </>
-                    )}
-                  </div>
+                {formData.DoctorName != "" && formData?.DoctorID == "" && (
+                  <div className="error-message">{err?.DoctorID}</div>
+                )}
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-2">
+                <DatePicker
+                  value={state?.DOB}
+                  className="custom-calendar"
+                  name="DOB"
+                  disabled={throughMobileData || throughMemberData}
+                  placeholder=" "
+                  id="DOB"
+                  lable="DOB"
+                  maxDate={new Date()}
+                  onChange={dateSelect}
+                />
+                {!err?.DOB && errors?.DOB && (
+                  <div className="error-message">{errors?.DOB}</div>
+                )}
+
+                {state.DOB == "" && (
+                  <div className="error-message">{err?.DOB}</div>
+                )}
+              </div>
+              <div className="col-sm-3">
+                <div className="p-inputgroup flex-1">
+                  <Input
+                    placeholder=" "
+                    type="text"
+                    id="Y"
+                    name="AgeYear"
+                    value={state?.AgeYear}
+                    onInput={(e) => number(e, 3, 120)}
+                    disabled={throughMemberData || throughMobileData}
+                    onChange={handleDOBCalculation}
+                  />
+                  <span className="p-inputgroup-addon iconSizeAge">Y</span>
+
+                  <Input
+                    placeholder=" "
+                    type="text"
+                    id="M"
+                    name="AgeMonth"
+                    value={state?.AgeMonth}
+                    onInput={(e) => number(e, 2, 12)}
+                    disabled={throughMemberData || throughMobileData}
+                    onChange={handleDOBCalculation}
+                  />
+                  <span className="p-inputgroup-addon iconSizeAge">M</span>
+                  <Input
+                    placeholder=" "
+                    type="text"
+                    id="D"
+                    name="AgeDays"
+                    value={state?.AgeDays}
+                    onInput={(e) => number(e, 2, 31)}
+                    disabled={throughMemberData || throughMobileData}
+                    onChange={handleDOBCalculation}
+                  />
+                  <span className="p-inputgroup-addon iconSizeAge">D</span>
                 </div>
               </div>
 
+              <div className="col-sm-2">
+                <SelectBox
+                  name="CollectionBoyId"
+                  options={[
+                    { label: "Select Collection Boy", value: "" },
+                    ...CollectionBoy,
+                  ]}
+                  lable="Collection Boy"
+                  isDisabled={true}
+                  selectedValue={LTData?.CollectionBoyId}
+                  onChange={handleSelectChange}
+                />
+              </div>
+              <div className="col-sm-3">
+                <div className="d-flex">
+                  <div style={{ width: "40%" }}>
+                    <SelectBox
+                      name="PatientIDProof"
+                      options={[{ label: "Choose ID", value: "" }, ...Identity]}
+                      id="IdType"
+                      lable="Id Type"
+                      onChange={handleSelectChange}
+                    />
+                  </div>
+                  <div style={{ width: "60%" }}>
+                    <Input
+                      name="PatientIDProofNo"
+                      type="text"
+                      max={20}
+                      onChange={handleLTData}
+                      disabled={LTData?.PatientIDProof === "" ? true : false}
+                      value={LTData?.PatientIDProofNo}
+                      id="PatientIDProofNo"
+                      lable="Patient ID Proof Number"
+                      placeholder=" "
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="col-sm-2">
+                <div className="p-inputgroup flex-1">
+                  <Input
+                    id="SecondReferDoctor"
+                    name="SecondReferDoctor"
+                    lable="Second Ref. Doctor"
+                    placeholder=" "
+                    type="text"
+                    value={formData?.SecondReferDoctor}
+                    onChange={(e) => {
+                      setFormData({
+                        ...formData,
+                        SecondReferDoctor: e.target.value,
+                      });
+                      setSecondDropFalse(true);
+                    }}
+                    onBlur={(e) => {
+                      autocompleteOnBlur(setseconddoctorSuggestion);
+                      setTimeout(() => {
+                        const data = seconddoctorSuggestion.filter(
+                          (ele) => ele?.Name === e.target.value
+                        );
+                        if (data.length === 0) {
+                          setFormData({
+                            ...formData,
+                            SecondReferDoctor: "",
+                          });
+                        }
+                      }, 500);
+                    }}
+                    onKeyDown={handleIndex}
+                  />
+                  {secondDropFalse && seconddoctorSuggestion.length > 0 && (
+                    <ul className="suggestion-data">
+                      {seconddoctorSuggestion.map((data, index) => (
+                        <li
+                          onClick={() =>
+                            handleListSearch(data, "SecondReferDoctor")
+                          }
+                          className={`${index === indexMatch && "matchIndex"}`}
+                          key={index}
+                        >
+                          {data?.Name}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <Button icon="pi pi-plus" className="iconSize" />
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-2">
+                <Input
+                  type="text"
+                  lable="Email"
+                  name="Email"
+                  placeholder=" "
+                  id="Email"
+                  value={state?.Email}
+                  onChange={handleMainChange}
+                />
+                {errors?.Email && (
+                  <div className="error-message">{errors?.Email}</div>
+                )}
+              </div>
+
+              <div className="col-sm-2">
+                <Input
+                  lable="Address"
+                  type="text"
+                  name="HouseNo"
+                  max={100}
+                  placeholder=" "
+                  id="Address"
+                  value={state?.HouseNo}
+                  onChange={handleMainChange}
+                />
+              </div>
+              <div className="col-sm-1">
+                <Input
+                  lable="Pincode"
+                  type="number"
+                  name="PinCode"
+                  placeholder=" "
+                  onInput={(e) => number(e, 6)}
+                  id="PinCode"
+                  value={state?.PinCode}
+                  onChange={handleMainChange}
+                />
+              </div>
+              <div className="col-sm-2">
+                <Input
+                  lable="Locality"
+                  max={30}
+                  type="text"
+                  value={state?.Locality}
+                  onChange={handleMainChange}
+                  name="Locality"
+                  placeholder=" "
+                  id="Locality"
+                />
+              </div>
+              <div className="col-sm-2">
+                <Input
+                  max={30}
+                  type="text"
+                  value={state?.City}
+                  onChange={handleMainChange}
+                  lable="City"
+                  name="City"
+                  placeholder=" "
+                  id="City"
+                />
+              </div>
+              <div className="col-sm-2">
+                <Input
+                  type="text"
+                  lable="State"
+                  name="State"
+                  placeholder=" "
+                  id="State"
+                  max={30}
+                  value={state?.State}
+                  onChange={handleMainChange}
+                />
+              </div>
+              <div className="col-sm-1">
+                <Input
+                  max={30}
+                  value={state?.Country}
+                  type="text"
+                  onChange={handleMainChange}
+                  lable="Country"
+                  name="Country"
+                  placeholder=" "
+                  id="Country"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-2">
+                <SelectBox
+                  options={[{ label: "Select", value: "" }, ...proEmplyee]}
+                  name="ProEmployee"
+                  lable="Pro Employee"
+                  selectedValue={state?.ProEmployee}
+                  onChange={handleMainChange}
+                  isDisabled={state?.ProEmployee != "" ? true : false}
+                />
+              </div>
+              <div className="col-sm-3">
+                <div className="d-flex">
+                  <div style={{ width: "60%" }}>
+                    <DatePicker
+                      className="custom-calendar"
+                      name="RegistrationDate"
+                      value={LTData?.RegistrationDate}
+                      placeholder=" "
+                      id="RegistrationDate"
+                      lable="Registration Date"
+                      onChange={dateregselecect}
+                    />
+                  </div>
+                  <div style={{ width: "40%" }}>
+                    <div className="d-flex">
+                      <Input
+                        type="text"
+                        placeholder=" "
+                        lable="H"
+                        id="H"
+                        value={time?.Hour}
+                        name="Hour"
+                        onChange={handleTimeChange}
+                      />
+                      <Input
+                        type="text"
+                        value={time?.Minute}
+                        name="Minute"
+                        onChange={handleTimeChange}
+                        lable="M"
+                        id="M"
+                        placeholder=" "
+                      />
+                      <Input
+                        type="text"
+                        value={time?.Second}
+                        name="Second"
+                        onChange={handleTimeChange}
+                        lable="S"
+                        id="S"
+                        placeholder=" "
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {visibleFields?.map(
+                (data, index) =>
+                  data?.IsVisible == 1 && (
+                    <>
+                      <div
+                        className="col-md-2"
+                        style={{ marginBottom: "5px" }}
+                        key={index}
+                      >
+                        {[
+                          "PatientSource",
+                          "PatientType",
+                          "HLMPatientType",
+                          "Source",
+                        ].includes(data?.FieldType) ? (
+                          <SelectBox
+                            className={`${
+                              data?.IsMandatory === 1 && "required"
+                            }`}
+                            options={
+                              data?.FieldType === "PatientSource"
+                                ? [
+                                    { label: "Select", value: "" },
+                                    ...PatientSource,
+                                  ]
+                                : data?.FieldType === "PatientType"
+                                ? [
+                                    { label: "Select", value: "" },
+                                    ...PatientType,
+                                  ]
+                                : data?.FieldType === "HLMPatientType"
+                                ? HLMPatientType
+                                : data?.FieldType === "Source"
+                                ? SourceType
+                                : []
+                            }
+                            id={data?.FieldType}
+                            placeholder={data?.FieldType}
+                            lable={data?.FieldType}
+                            selectedValue={LTData[data?.FieldType]}
+                            name={data?.FieldType}
+                            onChange={handleSelectNew}
+                          />
+                        ) : (
+                          <Input
+                            className={`select-input-box form-control input-sm ${
+                              data?.IsMandatory === 1 && "required"
+                            }`}
+                            max={30}
+                            name={data?.FieldType}
+                            id={data?.FieldType}
+                            placeholder=" "
+                            lable={data?.FieldType}
+                            value={LTData[data?.FieldType]}
+                            onChange={handleLTData}
+                            type="text"
+                          />
+                        )}
+                        {data?.isError && (
+                          <div className="error-message">{data?.message}</div>
+                        )}
+                      </div>
+                    </>
+                  )
+              )}
+              {checkCovid() && (
+                <>
+                  <div className="col-md-2 ">
+                    <Input
+                      id="SrfId"
+                      placeholder=" "
+                      name="SrfId"
+                      lable="Srf Id"
+                      type="text"
+                      value={LTData?.SrfId}
+                      onChange={handleSelectChange}
+                    />
+                  </div>
+
+                  <div className="col-md-2 ">
+                    <Input
+                      id="IcmrId"
+                      placeholder=" "
+                      name="IcmrId"
+                      lable="Icmr Id"
+                      type="text"
+                      value={LTData?.IcmrId}
+                      onChange={handleSelectChange}
+                    />
+                  </div>
+                </>
+              )}
+            </div>
+            <div></div>
+          </div>
+          <div className="patent-register-image">
+            <Image
+              src={MyImage}
+              alt="Image"
+              width="115"
+              height="130"
+              margin="0"
+              padding="0"
+              preview
+            />
+            <button
+              className={`btn ${
+                LTData?.UploadDocumentCount === 0 ? "btn-info" : "btn-success"
+              } w-100 btn-sm p-0`}
+              id="Upload Document"
+              onClick={() => {
+                setShow2(true);
+              }}
+            >
+              {t("Upload Document")}
+              <span id="spnCount"> ({LTData?.UploadDocumentCount})</span>
+            </button>
+            <button
+              className={`btn   ${
+                LTData?.MedicalHistoryCount === 0 ? "btn-info" : "btn-success"
+              } w-100 btn-sm `}
+              id="Medical History"
+              onClick={() => {
+                handleClose3();
+              }}
+            >
+              {t("Medical History")}&nbsp;
+              <span id="spnMedicalCount">({LTData?.MedicalHistoryCount})</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      {Pndt?.PNDT && (
+        <SubPageHead
+          // className="card"
+          title={"Pre-Natal Diagnostic Techniques"}
+        >
+          <div className="card">
+            <div className="row mt-2">
+              <div className="col-md-2">
+                <Input
+                  id="NoOfChildren"
+                  name="NoOfChildren"
+                  lable="Number Of Children"
+                  placeholder=" "
+                  type="number"
+                  onInput={(e) => number(e, 3)}
+                  value={Pndt?.NoOfChildren}
+                  onChange={handlePNDTChange}
+                />
+                {Pndt.NoOfChildren === "" && (
+                  <div className="error-message">{errors?.NoOfChildren}</div>
+                )}
+              </div>
+              <div className="col-md-2">
+                <Input
+                  name="NoOfSon"
+                  id="NoOfSon"
+                  lable="Number Of Son"
+                  placeholder=" "
+                  type="number"
+                  value={Pndt?.NoOfSon}
+                  onInput={(e) => number(e, 3)}
+                  onChange={handlePNDTChange}
+                />
+                {Pndt.NoOfSon === "" && (
+                  <div className="error-message">{errors?.NoOfSon}</div>
+                )}
+              </div>
+              <div className="col-md-2">
+                <Input
+                  id="NoOfDaughter"
+                  lable="Number Of Daughter"
+                  placeholder=" "
+                  name="NoOfDaughter"
+                  type="number"
+                  value={Pndt?.NoOfDaughter}
+                  onInput={(e) => number(e, 3)}
+                  onChange={handlePNDTChange}
+                />
+                {Pndt.NoOfDaughter === "" && (
+                  <div className="error-message">{errors?.NoOfDaughter}</div>
+                )}
+              </div>
+              <div className="col-md-2 ">
+                <DatePicker
+                  name="Pregnancy"
+                  className="custom-calendar"
+                  id="Pregnancy"
+                  lable="Pregnancy"
+                  placeholder=" "
+                  value={Pndt?.Pregnancy}
+                  maxDate={new Date()}
+                  onChange={handleDatePNDT}
+                />
+                {Pndt.Pregnancy === "" && (
+                  <div className="error-message">{errors?.Pregnancy}</div>
+                )}
+              </div>
+              <div className="col-md-1">
+                <Input
+                  name="AgeOfSon"
+                  lable="Son's Age"
+                  id="AgeOfSon"
+                  placeholder=" "
+                  type="number"
+                  value={Pndt?.AgeOfSon}
+                  onInput={(e) => number(e, 3)}
+                  onChange={handlePNDTChange}
+                />
+                {Pndt.AgeOfSon === "" && (
+                  <div className="error-message">{errors?.AgeOfSon}</div>
+                )}
+              </div>
+              <div className="col-md-1">
+                <Input
+                  className="form-control input-sm"
+                  name="AgeOfDaughter"
+                  type="number"
+                  id="AgeOfDaughter"
+                  lable="Daughter's Age"
+                  placeholder=" "
+                  value={Pndt?.AgeOfDaughter}
+                  onInput={(e) => number(e, 3)}
+                  onChange={handlePNDTChange}
+                />
+                {Pndt.AgeOfDaughter === "" && (
+                  <div className="error-message">{errors?.AgeOfDaughter}</div>
+                )}
+              </div>
+              <div className="col-md-1">
+                <SelectBox
+                  className="form-control input-sm"
+                  name="PNDTDoctor"
+                  id="PNDTDoctor"
+                  lable="PNDT Doctor"
+                  placeholder="PNDT Doctor"
+                  options={DoctorData}
+                  selectedValue={Pndt?.PNDTDoctor}
+                  onChange={handlePNDTChange}
+                />
+                {Pndt.PNDTDoctor === "" && (
+                  <div className="error-message">{errors?.PNDTDoctor}</div>
+                )}
+              </div>
+              <div className="col-md-1 m-0 p-0">
+                <Input
+                  className="form-control input-sm"
+                  name="Husband"
+                  lable="Husband"
+                  placeholder=" "
+                  id="Husband"
+                  value={Pndt?.Husband}
+                  onChange={handlePNDTChange}
+                />
+                {Pndt.Husband === "" && (
+                  <div className="error-message">{errors?.Husband}</div>
+                )}
+              </div>
+            </div>
+          </div>{" "}
+        </SubPageHead>
+      )}
+      <div className="patient-register-other">
+        <div className="">
+          <div className="card">
+            <div className="row">
+              <div className="col-sm-5">
+                <Input
+                  name="TestName"
+                  lable={
+                    searchTest == "TestName"
+                      ? "Type TestName For Add Test"
+                      : "Type TestCode For Add Test"
+                  }
+                  type="text"
+                  placeholder=" "
+                  max={30}
+                  id="testSearch"
+                  onChange={handleChange}
+                  onBlur={() => {
+                    autocompleteOnBlur(setSuggestion);
+                    setTimeout(() => {
+                      document.getElementById("testSearch").value = "";
+                    }, 500);
+                  }}
+                  onKeyDown={handleIndex}
+                />
+                {suggestion.length > 0 && (
+                  <ul className="suggestion-data" style={{ zIndex: 99 }}>
+                    {suggestion.map((data, index) => (
+                      <li
+                        onClick={() => handleListSearch(data, "TestName")}
+                        key={index}
+                        className={`${index === indexMatch && "matchIndex"}`}
+                      >
+                        {data.TestName}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              <div className="col-sm-4">
+                <div className="flex flex-wrap gap-3">
+                  <div className="flex ">
+                    <input
+                      type="radio"
+                      id="TestName"
+                      name="TestName"
+                      value="TestName"
+                      checked={searchTest == "TestName"}
+                      onChange={(e) => {
+                        setSearchTest(e.target.value);
+                      }}
+                    />
+                    <label htmlFor="TestName" className="ml-2">
+                      By TestName
+                    </label>
+                  </div>
+                  <div className="flex ">
+                    <input
+                      type="radio"
+                      id="TestCode"
+                      name="TestCode"
+                      value="TestCode"
+                      checked={searchTest == "TestCode"}
+                      onChange={(e) => {
+                        setSearchTest(e.target.value);
+                      }}
+                    />
+                    <label htmlFor="TestCode" className="ml-2">
+                      By TestCode
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div className="col-sm-3 ">
+                <div className="flex flex-wrap gap-2 justify-content-end">
+                  <div className="flex ml-3">
+                    <input
+                      type="checkbox"
+                      name="isVIP"
+                      id="isVIP"
+                      checked={state?.isVIP}
+                      onChange={handleMainChange}
+                      value={state?.isVIP === 1 ? true : false}
+                    />
+                    <label htmlFor="isVIP" className="ml-2">
+                      VIP
+                    </label>
+                  </div>
+
+                  {state?.isVIP === 1 && (
+                    <>
+                      <div className="flex align-items-left">
+                        <input
+                          type="checkbox"
+                          name="IsMask"
+                          id="IsMask"
+                          checked={state?.IsMask}
+                          onChange={handleMainChange}
+                          value={state?.IsMask === 1 ? true : false}
+                        />
+                      </div>
+
+                      <label htmlFor="IsMask" className="ml-1">
+                        MASK
+                      </label>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div style={{ maxHeight: "250px", overflowX: "auto" }}>
               <Table paginate={false}>
                 <thead>
                   <tr>
-                    <th>{"S.No"}</th>
+                    <th className="text-center">{"#"}</th>
                     <th>{"Slot"}</th>
                     <th>{"Code"}</th>
                     <th
@@ -4411,8 +4405,18 @@ const PatientRegistration = () => {
                     <th>{"Amt"}</th>
                     <th>{"D.Date"}</th>
                     <th>{"SC"}</th>
-                    <th>
-                      <img src={Urgent} title="Is Urgent"></img>
+                    <th className="text-center">
+                      <Tooltip label={"Urgen Delivery"}>
+                        {/* <span class="blinking"> */}
+                        <i
+                          className="fa fa-hourglass-start fa-spin blinking"
+                          style={{ color: "red" }}
+                        ></i>
+                        {/* </span> */}
+                      </Tooltip>
+                    </th>
+                    <th className="text-center">
+                      <i class="fa fa-trash"></i>
                     </th>
                   </tr>
                 </thead>{" "}
@@ -4453,324 +4457,322 @@ const PatientRegistration = () => {
               </Table>
             </div>
           </div>
-          <div className="">
-            <div className="card">
-              <div className="row">
-                <div className="col-sm-3">
-                  <Input
-                    className="select-input-box form-control input-sm currency"
-                    data-val="false"
-                    placeholder=" "
-                    lable=" Total Amount"
-                    id="Total_Amount"
-                    name="Total_Amount"
-                    disabled={true}
-                    value={Number(LTData?.NetAmount).toFixed(2)}
-                    type="text"
-                    readOnly="readonly"
-                  />
-                </div>
-                <div className="col-sm-3">
-                  <Input
-                    className="select-input-box form-control input-sm currency"
-                    id="Paid_Amount"
-                    lable="Paid Amount"
-                    placeholder=" "
-                    name="Paid_Amount"
-                    type="number"
-                    value={Number(paid).toFixed(2)}
-                    readOnly="readonly"
-                  />
-                </div>
-                <div className="col-sm-3">
-                  <Input
-                    className="select-input-box form-control input-sm currency"
-                    data-val="false"
-                    placeholder=" "
-                    id="DiscountAmt"
-                    lable="Discount Amount"
-                    disabled={
-                      tableData?.length > 0
-                        ? LTData?.DiscountId != ""
-                          ? true
-                          : handleRateTypePaymode === "Credit"
-                          ? true
-                          : LTData?.DiscountApprovedBy != ""
-                          ? true
-                          : false
-                        : true
-                    }
-                    value={disAmt}
-                    name="disAmt"
-                    onChange={(e) => {
-                      let match = Match();
+        </div>
+        <div className="">
+          <div className="card">
+            <div className="row">
+              <div className="col-sm-3">
+                <Input
+                  className="select-input-box form-control input-sm currency"
+                  data-val="false"
+                  placeholder=" "
+                  lable=" Total Amount"
+                  id="Total_Amount"
+                  name="Total_Amount"
+                  disabled={true}
+                  value={Number(LTData?.NetAmount).toFixed(2)}
+                  type="text"
+                  readOnly="readonly"
+                />
+              </div>
+              <div className="col-sm-3">
+                <Input
+                  className="select-input-box form-control input-sm currency"
+                  id="Paid_Amount"
+                  lable="Paid Amount"
+                  placeholder=" "
+                  name="Paid_Amount"
+                  type="number"
+                  value={Number(paid).toFixed(2)}
+                  readOnly="readonly"
+                />
+              </div>
+              <div className="col-sm-3">
+                <Input
+                  className="select-input-box form-control input-sm currency"
+                  data-val="false"
+                  placeholder=" "
+                  id="DiscountAmt"
+                  lable="Discount Amount"
+                  disabled={
+                    tableData?.length > 0
+                      ? LTData?.DiscountId != ""
+                        ? true
+                        : handleRateTypePaymode === "Credit"
+                        ? true
+                        : LTData?.DiscountApprovedBy != ""
+                        ? true
+                        : false
+                      : true
+                  }
+                  value={disAmt}
+                  name="disAmt"
+                  onChange={(e) => {
+                    let match = Match();
 
-                      if (coupon?.field == true) {
-                        toast.error("Remove Coupon First");
-                      } else {
-                        if (discountPercentage === "" && !match) {
-                          if (LTData?.GrossAmount < Number(e.target.value)) {
-                            toast.error("please Enter Valid Discount");
-                          } else {
-                            const val = e.target.value;
-                            const isValidInput =
-                              /^\d+(\.\d{0,2})?$/.test(val) &&
-                              parseFloat(val) >= 0 &&
-                              parseFloat(val) <= 99999999999;
-                            setdisAmt(
-                              isValidInput || val === "" ? val : disAmt
-                            );
-                            setLTData({
-                              ...LTData,
-                              DiscountOnTotal:
-                                isValidInput || val === ""
-                                  ? val
-                                  : LTData.DiscountOnTotal,
-                            });
-
-                            const findPercentageDiscount =
-                              (val / LTData?.GrossAmount) * 100;
-
-                            const data = PLO.map((ele, index) => {
-                              const finalDiscountamont =
-                                handleDiscountLastIndex(
-                                  ele,
-                                  index,
-                                  findPercentageDiscount,
-                                  val
-                                );
-
-                              return {
-                                ...ele,
-                                Amount:
-                                  tableData?.length > 1
-                                    ? ele.Rate - finalDiscountamont
-                                    : ele?.Rate - val,
-                                DiscountAmt:
-                                  tableData?.length > 1
-                                    ? finalDiscountamont
-                                    : val,
-                              };
-                            });
-                            setPLO(data);
-                          }
+                    if (coupon?.field == true) {
+                      toast.error("Remove Coupon First");
+                    } else {
+                      if (discountPercentage === "" && !match) {
+                        if (LTData?.GrossAmount < Number(e.target.value)) {
+                          toast.error("please Enter Valid Discount");
                         } else {
-                          toast.error("Discount already Given");
-                        }
-                      }
-                    }}
-                  />
-                </div>
-                <div className="col-sm-3">
-                  <Input
-                    className="select-input-box form-control input-sm currency"
-                    id="DiscountPer"
-                    lable="Discount Percentage"
-                    value={discountPercentage}
-                    name="DiscountPer"
-                    disabled={
-                      tableData?.length > 0
-                        ? LTData?.DiscountId != ""
-                          ? true
-                          : handleRateTypePaymode === "Credit"
-                          ? true
-                          : LTData?.DiscountApprovedBy != ""
-                          ? true
-                          : false
-                        : true
-                    }
-                    placeholder=" "
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      const isValidInput =
-                        /^\d+(\.\d{0,2})?$/.test(val) &&
-                        parseFloat(val) >= 0 &&
-                        parseFloat(val) <= 100;
-                      let match = Match();
+                          const val = e.target.value;
+                          const isValidInput =
+                            /^\d+(\.\d{0,2})?$/.test(val) &&
+                            parseFloat(val) >= 0 &&
+                            parseFloat(val) <= 99999999999;
+                          setdisAmt(isValidInput || val === "" ? val : disAmt);
+                          setLTData({
+                            ...LTData,
+                            DiscountOnTotal:
+                              isValidInput || val === ""
+                                ? val
+                                : LTData.DiscountOnTotal,
+                          });
 
-                      if (coupon?.field == true) {
-                        toast.error("Remove Coupon First");
+                          const findPercentageDiscount =
+                            (val / LTData?.GrossAmount) * 100;
+
+                          const data = PLO.map((ele, index) => {
+                            const finalDiscountamont = handleDiscountLastIndex(
+                              ele,
+                              index,
+                              findPercentageDiscount,
+                              val
+                            );
+
+                            return {
+                              ...ele,
+                              Amount:
+                                tableData?.length > 1
+                                  ? ele.Rate - finalDiscountamont
+                                  : ele?.Rate - val,
+                              DiscountAmt:
+                                tableData?.length > 1
+                                  ? finalDiscountamont
+                                  : val,
+                            };
+                          });
+                          setPLO(data);
+                        }
                       } else {
+                        toast.error("Discount already Given");
+                      }
+                    }
+                  }}
+                />
+              </div>
+              <div className="col-sm-3 pr-0">
+                <Input
+                  className="select-input-box form-control input-sm currency"
+                  id="DiscountPer"
+                  lable="Discount Percentage"
+                  value={discountPercentage}
+                  name="DiscountPer"
+                  disabled={
+                    tableData?.length > 0
+                      ? LTData?.DiscountId != ""
+                        ? true
+                        : handleRateTypePaymode === "Credit"
+                        ? true
+                        : LTData?.DiscountApprovedBy != ""
+                        ? true
+                        : false
+                      : true
+                  }
+                  placeholder=" "
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    const isValidInput =
+                      /^\d+(\.\d{0,2})?$/.test(val) &&
+                      parseFloat(val) >= 0 &&
+                      parseFloat(val) <= 100;
+                    let match = Match();
+
+                    if (coupon?.field == true) {
+                      toast.error("Remove Coupon First");
+                    } else {
+                      if (disAmt === "" && !match) {
+                        setDiscountPercentage(
+                          isValidInput || val === "" ? val : discountPercentage
+                        );
+                      } else {
+                        toast.error("Discount Already Given");
+                      }
+                    }
+                  }}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-3">
+                <SelectBox
+                  options={PaymentMode}
+                  selectedValue={RcData[RcData.length - 1].PaymentModeID}
+                  onChange={handlePaymentChange}
+                  isDisabled={
+                    tableData?.length > 0
+                      ? handleRateTypePaymode === "Credit"
+                        ? true
+                        : false
+                      : true
+                  }
+                />
+              </div>
+              <div className="col-sm-3">
+                <SelectBox
+                  options={DISCOUNT_TYPE}
+                  selectedValue={LTData?.DiscountType}
+                  onChange={handleSelectChange}
+                  name={"DiscountType"}
+                  isDisabled={
+                    tableData?.length > 0 && !coupon.field ? false : true
+                  }
+                />
+              </div>
+              <div className="col-sm-3">
+                {LTData?.DiscountType === 1 ? (
+                  <SelectBox
+                    options={BindDiscApproval}
+                    name="DiscountApprovedBy"
+                    selectedValue={LTData?.DiscountApprovedBy}
+                    onChange={handleSelectChange}
+                    isDisabled={
+                      coupon?.field
+                        ? true
+                        : LTData?.DiscountId != ""
+                        ? true
+                        : LTData?.DiscountOnTotal === "" ||
+                          LTData?.DiscountOnTotal == 0
+                        ? true
+                        : false
+                    }
+                  />
+                ) : (
+                  AgeWiseDiscountDropdown.length > 0 && (
+                    <SelectBox
+                      options={AgeWiseDiscountDropdown}
+                      selectedValue={LTData?.DiscountId}
+                      name="DiscountId"
+                      onChange={(e) => {
+                        let match = Match();
                         if (disAmt === "" && !match) {
-                          setDiscountPercentage(
-                            isValidInput || val === ""
-                              ? val
-                              : discountPercentage
+                          const data = AgeWiseDiscountDropdown.find(
+                            (ele) => ele?.value == e.target.value
                           );
+
+                          setDiscountPercentage(data?.perCentage);
+                          setLTData({
+                            ...LTData,
+                            DiscountId: e.target.value,
+                            DiscountApprovedBy: "",
+                            DiscountReason: "",
+                          });
                         } else {
                           toast.error("Discount Already Given");
                         }
-                      }
-                    }}
-                  />
-                </div>
+                      }}
+                    />
+                  )
+                )}
               </div>
-              <div className="row">
-                <div className="col-sm-3">
+              <div className="col-sm-3 pr-0">
+                {LTData?.DiscountId === "" ? (
                   <SelectBox
-                    options={PaymentMode}
-                    selectedValue={RcData[RcData.length - 1].PaymentModeID}
-                    onChange={handlePaymentChange}
-                    isDisabled={
-                      tableData?.length > 0
-                        ? handleRateTypePaymode === "Credit"
-                          ? true
-                          : false
-                        : true
-                    }
-                  />
-                </div>
-                <div className="col-sm-3">
-                  <SelectBox
-                    options={DISCOUNT_TYPE}
-                    selectedValue={LTData?.DiscountType}
+                    options={BindDiscReason}
+                    name="DiscountReason"
+                    selectedValue={LTData?.DiscountReason}
                     onChange={handleSelectChange}
-                    name={"DiscountType"}
                     isDisabled={
-                      tableData?.length > 0 && !coupon.field ? false : true
+                      coupon?.field
+                        ? true
+                        : LTData?.DiscountId != ""
+                        ? true
+                        : LTData?.DiscountOnTotal === "" ||
+                          LTData?.DiscountOnTotal == 0
+                        ? true
+                        : false
                     }
                   />
-                </div>
-                <div className="col-sm-3">
-                  {LTData?.DiscountType === 1 ? (
-                    <SelectBox
-                      options={BindDiscApproval}
-                      name="DiscountApprovedBy"
-                      selectedValue={LTData?.DiscountApprovedBy}
-                      onChange={handleSelectChange}
-                      isDisabled={
-                        coupon?.field
-                          ? true
-                          : LTData?.DiscountId != ""
-                          ? true
-                          : LTData?.DiscountOnTotal === "" ||
-                            LTData?.DiscountOnTotal == 0
-                          ? true
-                          : false
-                      }
-                    />
-                  ) : (
-                    AgeWiseDiscountDropdown.length > 0 && (
-                      <SelectBox
-                        options={AgeWiseDiscountDropdown}
-                        selectedValue={LTData?.DiscountId}
-                        name="DiscountId"
-                        onChange={(e) => {
-                          let match = Match();
-                          if (disAmt === "" && !match) {
-                            const data = AgeWiseDiscountDropdown.find(
-                              (ele) => ele?.value == e.target.value
-                            );
-
-                            setDiscountPercentage(data?.perCentage);
-                            setLTData({
-                              ...LTData,
-                              DiscountId: e.target.value,
-                              DiscountApprovedBy: "",
-                              DiscountReason: "",
-                            });
-                          } else {
-                            toast.error("Discount Already Given");
-                          }
-                        }}
-                      />
-                    )
-                  )}
-                </div>
-                <div className="col-sm-3">
-                  {LTData?.DiscountId === "" ? (
-                    <SelectBox
-                      options={BindDiscReason}
-                      name="DiscountReason"
-                      selectedValue={LTData?.DiscountReason}
-                      onChange={handleSelectChange}
-                      isDisabled={
-                        coupon?.field
-                          ? true
-                          : LTData?.DiscountId != ""
-                          ? true
-                          : LTData?.DiscountOnTotal === "" ||
-                            LTData?.DiscountOnTotal == 0
-                          ? true
-                          : false
-                      }
-                    />
-                  ) : (
-                    <Input
-                      name="DiscountReason"
-                      lable="Discount Reason"
-                      placeholder=" "
-                      value={LTData?.DiscountReason}
-                      onChange={handleSelectChange}
-                    />
-                  )}
-                </div>
+                ) : (
+                  <Input
+                    name="DiscountReason"
+                    lable="Discount Reason"
+                    placeholder=" "
+                    value={LTData?.DiscountReason}
+                    onChange={handleSelectChange}
+                  />
+                )}
               </div>
-              <div className="row">
-                <div className="col-sm-4">
-                  <div className="d-flex">
-                    <div style={{ width: "87%" }}>
-                      <Input
-                        id="CouponCode"
-                        lable="Enter Your Coupon Code"
-                        type="text"
-                        value={coupon.code}
-                        max={30}
-                        placeholder={" "}
-                        disabled={coupon.field}
-                        onChange={(e) =>
-                          setCoupon({
-                            ...coupon,
-                            code: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-4">
+                <div className="d-flex">
+                  <div style={{ width: "87%" }}>
+                    <Input
+                      id="CouponCode"
+                      lable="Enter Your Coupon Code"
+                      type="text"
+                      value={coupon.code}
+                      max={30}
+                      placeholder={" "}
+                      disabled={coupon.field}
+                      onChange={(e) =>
+                        setCoupon({
+                          ...coupon,
+                          code: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
 
-                    <div style={{ width: "13%" }}>
-                      <button
-                        className="btn btn-primary btn-sm"
-                        id="NewReferDoc"
-                        type="button"
-                        onClick={handleCouponDetailsModal}
-                        style={{ borderRadius: "0px !important" }}
-                      >
-                        <i
-                          className="fa fa-search coloricon"
-                          style={{ cursor: "pointer" }}
-                        ></i>
-                      </button>
-                    </div>
+                  <div style={{ width: "13%" }}>
+                    <button
+                      className="btn btn-primary btn-sm"
+                      id="NewReferDoc"
+                      type="button"
+                      onClick={handleCouponDetailsModal}
+                      style={{ borderRadius: "0px !important" }}
+                    >
+                      <i
+                        className="fa fa-search coloricon"
+                        style={{ cursor: "pointer" }}
+                      ></i>
+                    </button>
                   </div>
                 </div>
-                <div className="col-sm-2">
-                  {coupon?.load ? (
-                    <Loading />
-                  ) : (
-                    <button
-                      className="btn btn-success btn-block btn-sm"
-                      onClick={handleCouponValidate}
-                      disabled={coupon.field}
-                    >
-                      {"Validate"}
-                    </button>
-                  )}
-                </div>
-                <div className="col-sm-2">
-                  <button
-                    id="btndeleterow"
-                    className="btn btn-danger btn-block btn-sm"
-                    onClick={handleCouponCancel}
-                  >
-                    {"Cancel"}
-                  </button>
-                </div>
               </div>
-
+              <div className="col-sm-2">
+                {coupon?.load ? (
+                  <Loading />
+                ) : (
+                  <button
+                    className="btn btn-success btn-block btn-sm"
+                    onClick={handleCouponValidate}
+                    disabled={coupon.field}
+                  >
+                    {"Validate"}
+                  </button>
+                )}
+              </div>
+              <div className="col-sm-2">
+                <button
+                  id="btndeleterow"
+                  className="btn btn-danger btn-block btn-sm"
+                  onClick={handleCouponCancel}
+                >
+                  {"Cancel"}
+                </button>
+              </div>
+            </div>
+            <div style={{ maxHeight: "150px", overflowX: "auto" }}>
               <Table paginate={false}>
                 <thead className="cf">
                   <tr>
-                    <th>{"Action"}</th>
+                    <th className="text-center">
+                      <i class="fa fa-trash"></i>
+                    </th>
                     <th>{"Mode"}</th>
                     <th>{"Paid Amount"}</th>
                     <th>{"Currency"}</th>
@@ -4784,12 +4786,9 @@ const PatientRegistration = () => {
                   {RcData?.map((data, index) => (
                     <tr key={index}>
                       <td data-label={"Action"}>
-                        <button
-                          className="btn btn-danger"
-                          onClick={() => handleFilterPayment(index)}
-                        >
-                          X
-                        </button>
+                        <CloseButton
+                          handleClick={() => handleFilterPayment(index)}
+                        />
                       </td>
                       <td data-label={"Mode"}>
                         <span id="SpanPaymentMode">
@@ -4915,50 +4914,61 @@ const PatientRegistration = () => {
                   ))}
                 </tbody>
               </Table>
-
-              <div className="row">
-                <div className="col-md-2">
-                  {(isSubmit?.isLoading && isSubmit?.type === "Success") ||
-                  isRazorPayOpen ? (
-                    <Loading />
-                  ) : (
-                    <button
-                      type="submit"
-                      id="btnSave"
-                      disabled={handleLockRegistation}
-                      className="btn btn-success w-100 btn-sm"
-                      onClick={() => {
-                        handleSubmit();
-                        window.scrollTo(0, 0);
-                      }}
-                    >
-                      {"Submit"}
-                    </button>
-                  )}
+            </div>
+            <div className="row p-0 ml-0 mr-0 alig-item-center">
+              <div className="col-md-2 m-0 p-0">
+                {(isSubmit?.isLoading && isSubmit?.type === "Success") ||
+                isRazorPayOpen ? (
+                  <Loading />
+                ) : (
+                  <button
+                    type="submit"
+                    id="btnSave"
+                    disabled={handleLockRegistation}
+                    className="btn btn-success w-100 btn-sm"
+                    onClick={() => {
+                      handleSubmit();
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    {"Submit"}
+                  </button>
+                )}
+              </div>
+              {state?.HideAmount != 1 && (
+                <div
+                  className="col-sm-3"
+                  style={{ fontSize: "18px !important", fontWeight: "bold" }}
+                >
+                  {"Due Amount"} : {Number(LTData?.NetAmount - paid).toFixed(2)}
                 </div>
-                {state?.HideAmount != 1 && (
-                  <div className="col-md-3">
-                    <small>
-                      {"Due Amount"} :{" "}
-                      {Number(LTData?.NetAmount - paid).toFixed(2)}
-                    </small>
-                  </div>
-                )}
-                {state?.HideAmount != 1 && (
-                  <div className="col-md-4">
-                    <small>
-                      {"Total Discount Amount"} :
-                      {LTData?.DiscountOnTotal
-                        ? parseFloat(LTData?.DiscountOnTotal).toFixed(2)
-                        : " 0"}
-                    </small>
-                  </div>
-                )}
+              )}
+              {state?.HideAmount != 1 && (
+                <div
+                  className="col-sm-4"
+                  style={{ fontSize: "18px !important", fontWeight: "bold" }}
+                >
+                  {"Total Discount Amount"} :
+                  {LTData?.DiscountOnTotal
+                    ? parseFloat(LTData?.DiscountOnTotal).toFixed(2)
+                    : " 0"}
+                </div>
+              )}
+              <div className="col-sm-3 m-0 p-0 ml-2">
+                <button
+                  className="btn btn-warning btn-block btn-sm"
+                  id="Remarks"
+                  onClick={() => {
+                    setShowRemark(true);
+                  }}
+                >
+                  Billing Remarks
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </PageHead>
+      </div>
     </>
   );
 };
