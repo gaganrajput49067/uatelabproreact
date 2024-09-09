@@ -37,7 +37,11 @@ export function useClickOutside(ref, handleClose, active) {
     };
   }, [ref, handleClose, active]);
 }
-
+export const changeDarkMode = () => {
+  document.documentElement.getAttribute("data-theme") == "DarkMode"
+    ? document.documentElement.removeAttribute("data-theme")
+    : document.documentElement.setAttribute("data-theme", "DarkMode");
+};
 export const useLocalStorage = (key, type, valueToStore) => {
   if (type === "set") {
     window.localStorage.setItem(key, JSON.stringify(valueToStore));
@@ -148,7 +152,8 @@ export const Time = (date) => {
 export const selectedValueCheck = (selectedState, state) => {
   const data = selectedState.find((ele) => ele.value == state);
   return data === undefined ? { label: "", value: "" } : data;
-};export const DyanmicStatusResponse = (state) => {
+};
+export const DyanmicStatusResponse = (state) => {
   let status = -1;
   for (let i = 0; i < state?.length; i++) {
     if (state[i].isChecked === true) {

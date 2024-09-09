@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "../../zStyles/Header.css";
 import defaultUserImg from "../../assets/image/user.png";
 import {
+  changeDarkMode,
   getCookie,
   toggleFullScreen,
   useClickOutside,
@@ -199,13 +200,16 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
           )}
         </div>
         {/* Home */}
-        <i className="fa fa-home mr-3 pointer ss-none"></i>
+        <i className="fa fa-home mr-3 pointer ss-none" onClick={()=>navigate("/Dashboard")}></i>
+        <i className="pi pi-moon mr-3 pointer ss-none" 
+          onClick={changeDarkMode}></i>
         {/* full Screen */}
         <i
           className="fa fa-expand mr-3 pointer ss-none"
           aria-hidden="true"
           onClick={toggleFullScreen}
         ></i>
+        
         {/* User Profile */}
         <div
           className="user-Info-container"

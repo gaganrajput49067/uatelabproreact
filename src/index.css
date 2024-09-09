@@ -14,7 +14,7 @@
   font-family: "Source Sans Pro", sans-serif !important;
 }
 
-:root {
+ :root {
   --bg-color: #0382bd;
   --bg-subMenu: #03a0e7;
   --subMenuText-color: rgb(255, 255, 255);
@@ -29,6 +29,18 @@
     rgba(85, 82, 153, 1) 0%,
     rgba(145, 142, 205, 1) 57%,
     rgba(255, 255, 255, 1) 91%
+  );
+} 
+
+[data-theme="DarkMode"] {
+  --bg-color: #121212; 
+  --bg-subMenu: #1f1f1f; 
+  --subMenuText-color: rgb(255, 255, 255); 
+  --gradient: linear-gradient(
+    90deg,
+    rgba(34, 34, 34, 1) 0%, 
+    rgba(85, 85, 85, 1) 57%, 
+    rgba(170, 170, 170, 1) 91% 
   );
 }
 
@@ -163,7 +175,7 @@
 
 .lable {
   position: absolute;
-  top: 3px;
+  top: 4px;
   left: 4px;
   font-size: 13px;
   font-weight: 500 !important;
@@ -177,10 +189,10 @@
 }
 #search:focus-within + .lable,
 #search input[type="text"]:not(:placeholder-shown) + .lable {
-  top: -8px;
+  top: -9px;
   left: 2;
-  background-color: #fff;
-  background-image: linear-gradient(#f4f6f9, #fff) !important;
+  background-color: white;
+  background-image: linear-gradient(white, white) !important;
   padding: 0px 5px !important;
   font-size: 10px !important;
   font-weight: 600 !important;
@@ -190,10 +202,10 @@
 }
 
 #searchtest > .p-inputwrapper-filled + .lable {
-  top: -8px;
+  top: -9px;
   left: 2;
-  background-color: #fff;
-  background-image: linear-gradient(#f4f6f9, #fff) !important;
+  background-color: white;
+  background-image: linear-gradient(white, white) !important;
   padding: 0px 5px !important;
   font-size: 10px !important;
   font-weight: 600 !important;
@@ -207,30 +219,29 @@
   font-size: 10px !important;
   /* color: #777; */
   position: absolute;
-  top: -8px;
+  top: -9px;
   left: 7px;
-  background-color: #fff;
-  background-image: linear-gradient(#446faf03, #446faf03) !important;
+  background-color: white;
+  background-image: linear-gradient(white, white) !important;
   padding: 0px 5px;
   transition: top 0.1s ease-out, left 0.1s ease-out, font-size 0.1s ease-out;
 }
 .form-control:focus + label,
 .form-control:not(:placeholder-shown) + label {
-  top: -8px;
+  top: -9px;
   left: 0px !important;
-  background-color: #fff;
-  background-image: linear-gradient(#446faf03, #446faf03) !important;
+  background-color: white;
+  background-image: linear-gradient(white, white) !important;
   padding: 0px 5px;
   font-size: 10px !important;
   /* color: #007bff; */
   font-weight: 600 !important;
-  outline: 0;
 }
 .form-control:not(:placeholder-shown) + label {
-  top: -8px;
+  top: -9px;
   left: 7px;
-  background-color: #fff;
-  background-image: linear-gradient(#446faf03, #446faf03) !important;
+  background-color: white;
+  background-image: linear-gradient(white, white) !important;
   padding: 0px 5px;
   font-size: 10px !important;
   font-weight: 600 !important;
@@ -249,8 +260,14 @@
 }
 
 input:focus {
-  outline: 0;
-  box-shadow: none;
+  outline: 0 !important;
+  box-shadow: none !important;
+  border-color: none !important;
+}
+select:focus {
+  outline: 0 !important;
+  box-shadow: none !important;
+  border-color: none !important;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -283,6 +300,11 @@ textarea {
   position: absolute;
   right: 6px;
   top: 7px;
+}
+.selectbox select {
+  appearance: auto !important;
+  -webkit-appearance: auto !important; 
+  -moz-appearance: auto !important; 
 }
 
 .truncate {

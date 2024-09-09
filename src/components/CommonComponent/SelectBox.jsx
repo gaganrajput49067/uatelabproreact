@@ -41,7 +41,6 @@ export const SelectBox = ({
             {lable}
           </label>
         )}
-        <i className="fa fa-angle-down "></i>
       </div>
     </>
   );
