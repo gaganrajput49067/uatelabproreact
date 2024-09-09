@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 
-const SubPageHead = ({title, children, drop = true }) => {
+const SubPageHead = ({ title, children, drop = true, smallHeignt = false }) => {
   const [showContent, setShowContent] = useState(true);
   return (
     <>
-      <div className="main-subpage-heading mt-2">
+      <div
+        className="main-subpage-heading mt-2"
+        // style={{ height: smallHeignt ? "20px" : "50px" }}
+      >
         <h6 className="mb-0">{title}</h6>
         <div className="main-heading-content ">
           {drop && (

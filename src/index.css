@@ -1515,7 +1515,8 @@ input::placeholder {
 .custom-box-body {
   height: auto;
   font-size: 13px;
-  color: var(--bg-subMenu);
+  background-color: var(--bg-subMenu);
+  color: var(--subMenuText-color);
   font-weight: bold;
   padding: 5px 5px 2px 5px;
   padding: 5px 5px 2px 5px;
@@ -1534,7 +1535,7 @@ input::placeholder {
 .custom-col {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin-right: 10px;
   margin-left: 2px;
   padding-top: 5px;
@@ -1556,7 +1557,7 @@ input::placeholder {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #4a4a4a;
+  color: var(--subMenuText-color);
 }
 .custom-icon[data-toggle="tooltip"]:hover::after,
 .custom-icon-large[data-toggle="tooltip"]:hover::after {
@@ -1591,7 +1592,7 @@ input::placeholder {
   cursor: pointer;
   font-size: 14px !important;
   margin-right: 10px;
-  color: #666; /* Subtle color for large icons */
+  color: var(--subMenuText-color) /* Subtle color for large icons */
 }
 
 /* Patient Register */

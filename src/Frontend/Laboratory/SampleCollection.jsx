@@ -35,6 +35,7 @@ import SampleRemark from "../utils/SampleRemark";
 import CustomModal from "../utils/CustomModal";
 import MedicialModal from "../utils/MedicialModal";
 import UploadFile from "../utils/UploadFIleModal/UploadFile";
+import Tooltip from "../../components/CommonComponent/Tooltip";
 const SampleCollection = () => {
   const [CentreData, setCentreData] = useState([]);
   const [toggleTable, setToggleTable] = useState(true);
@@ -918,7 +919,10 @@ const SampleCollection = () => {
                                   <div>
                                     <i
                                       className="fa fa-search"
-                                      style={{ cursor: "pointer" }}
+                                      style={{
+                                        cursor: "pointer",
+                                        color: "red",
+                                      }}
                                       onClick={() => {
                                         setShowLog({
                                           modal: true,
@@ -1085,7 +1089,7 @@ const SampleCollection = () => {
                   </span>
                 </div>
 
-                <div className="custom-col">
+                <div className="custom-col justify-content-center">
                   <span className="fa fa-h-square custom-text">
                     &nbsp; <span>{searchInvdata[0]?.Centre}</span>
                   </span>
@@ -1110,61 +1114,61 @@ const SampleCollection = () => {
                 </div>
 
                 <div className="custom-col custom-end">
-                  <span
-                    className="fa fa-cloud-upload custom-text"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="Upload Document"
-                    onClick={() => {
-                      setShow({
-                        modal: true,
-                        data: searchInvdata[0]?.PatientGuid,
-                      });
-                    }}
-                    style={{
-                      color:
-                        searchInvdata[0]?.UploadDocumentCount > 0
-                          ? "#4ea30c"
-                          : "black !important",
-                      marginRight: "10px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <span>{searchInvdata[0]?.UploadDocumentCount}</span>
-                  </span>
-                  <span
-                    className="fa fa-history custom-text"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="Medical History"
-                    onClick={() => {
-                      setShow4({
-                        modal: true,
-                        data: searchInvdata[0]?.PatientGuid,
-                      });
-                    }}
-                    style={{
-                      color:
-                        searchInvdata[0]?.MedicalHistoryCount > 0
-                          ? "#4ea30c"
-                          : "black !important",
-                      marginRight: "10px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <span>{searchInvdata[0]?.MedicalHistoryCount}</span>
-                  </span>
-                  <span
-                    className="fa fa-comment custom-icon-large"
-                    title="Remarks"
-                    onClick={() => setShowRemark(true)}
-                    style={{ marginRight: "10px" }}
-                  ></span>
-                  <span
-                    className="fa fa-eyedropper custom-icon-large"
-                    title="Prickremarks"
-                    onClick={() => setShowPrickRemark(true)}
-                  ></span>
+                  <Tooltip label={"Uploaded Document"}>
+                    <span
+                      className="fa fa-cloud-upload custom-text"
+                      onClick={() => {
+                        setShow({
+                          modal: true,
+                          data: searchInvdata[0]?.PatientGuid,
+                        });
+                      }}
+                      style={{
+                        color:
+                          searchInvdata[0]?.UploadDocumentCount > 0
+                            ? "#4ea30c"
+                            : "black !important",
+                        marginRight: "10px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      &nbsp;<span>{searchInvdata[0]?.UploadDocumentCount}</span>
+                    </span>
+                  </Tooltip>
+                  <Tooltip label={"Medical History"}>
+                    <span
+                      className="fa fa-history custom-text"
+                      onClick={() => {
+                        setShow4({
+                          modal: true,
+                          data: searchInvdata[0]?.PatientGuid,
+                        });
+                      }}
+                      style={{
+                        color:
+                          searchInvdata[0]?.MedicalHistoryCount > 0
+                            ? "#4ea30c"
+                            : "black !important",
+                        marginRight: "10px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      &nbsp;<span>{searchInvdata[0]?.MedicalHistoryCount}</span>
+                    </span>
+                  </Tooltip>
+                  <Tooltip label={"Remark"}>
+                    <span
+                      className="fa fa-comment custom-icon-large"
+                      onClick={() => setShowRemark(true)}
+                      style={{ marginRight: "10px" }}
+                    ></span>
+                  </Tooltip>
+                  <Tooltip label={"Pricks Remark"}>
+                    <span
+                      className="fa fa-eyedropper custom-icon-large"
+                      onClick={() => setShowPrickRemark(true)}
+                    ></span>{" "}
+                  </Tooltip>
                 </div>
               </div>
             </div>

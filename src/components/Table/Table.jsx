@@ -18,6 +18,7 @@ const Table = ({
 }) => {
   const [itemsPerPages, setItemPerPage] = useState(itemsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
+  const [nowFixed, setNowFixed] = useState(false);
 
   useEffect(() => {
     updateFixedColumns(fixCol);
@@ -62,10 +63,10 @@ const Table = ({
         </table>
       </div>
 
-      {data.length > itemsPerPages && (
+      {(data.length > itemsPerPages || nowFixed) && (
         <div className="pagination">
-          <span> Items Per Page</span>&nbsp;&nbsp;&nbsp;
-          <div style={{}}>
+          <span className="fw-bold"> Items Per Page</span>&nbsp;&nbsp;&nbsp;
+          <div style={{ display: "flex", alignItems: "center" }}>
             <TableSelectBox
               options={[
                 { label: 5, value: 5 },
@@ -80,8 +81,12 @@ const Table = ({
               name="SelectTypes"
               id="SelectTypes"
               lable="No of Items Per Pages"
-              onChange={(e) => setItemPerPage(e.target.value)}
+              onChange={(e) => {
+                setItemPerPage(e.target.value);
+                setNowFixed(true);
+              }}
             />
+            <span className="fw-bold">&nbsp;&nbsp;/{data.length}</span>
           </div>
           <button
             onClick={() => handlePageChange(currentPage - 1)}

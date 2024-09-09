@@ -6,6 +6,8 @@ const PageHead = ({
   drop = true,
   name,
   border = true,
+  showbtn = false,
+  content,
 }) => {
   const [showContent, setShowContent] = useState(true);
   return (
@@ -16,6 +18,7 @@ const PageHead = ({
       <div className="main-page-heading">
         <h6 className="mb-0">{name}</h6>
         <div className="main-heading-content ">
+          {showbtn && children}
           {showDrop && (
             <i
               className={`fa ${
