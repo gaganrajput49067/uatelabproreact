@@ -7,6 +7,8 @@ import VIP from "../../assets/image/vip.gif";
 import { dateConfig } from "../../utils/helpers";
 import Loading from "../../components/Loading/Loading";
 import { Link } from "react-router-dom";
+import CustomModal from "../utils/CustomModal";
+import SendEmailModalReprint from "../utils/SendEmailModalReprint";
 const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
   const [modal, setModal] = useState(false);
   const [visitID, setVisitID] = useState();
@@ -182,6 +184,13 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
     <>
       {receiptData?.length > 0 ? (
         <>
+          {showEmail?.modal && (
+            <SendEmailModalReprint
+              show={showEmail?.modal}
+              data={showEmail?.patientData}
+              handleClose={handleClose}
+            />
+          )}
           <Table paginate={true} data={receiptData ?? []} itemsPerPage={10}>
             {({ currentItems, finalIndex }) => {
               return (
@@ -361,9 +370,9 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                           <i className="fa fa-search" />
                         </td>
 
-                        <td data-title={"Send Email"}>
+                        <td data-title={"Send Email"} className="text-centre">
                           <i
-                            className="fa fa-envelope-o iconStyle"
+                            className="pi pi-envelope"
                             onClick={() =>
                               setShowEmail({
                                 ...showEmail,
@@ -390,7 +399,7 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                             }}
                           >
                             <i className="fa fa-cloud-upload">
-                              ({data?.UploadDocumentCount})
+                              &nbsp;{data?.UploadDocumentCount}
                             </i>
                           </div>
                         </td>
@@ -411,7 +420,7 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                             }}
                           >
                             <i className="fa fa-history">
-                              ({data?.MedicalHistoryCount})
+                              &nbsp;{data?.MedicalHistoryCount}
                             </i>
                           </div>
                         </td>
@@ -422,6 +431,13 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
               );
             }}
           </Table>
+          {modal && (
+            <CustomModal
+              show={modal}
+              visitID={visitID}
+              onHide={() => setModal(false)}
+            />
+          )}{" "}
         </>
       ) : (
         <span style={{ width: "100%", textAlign: "center" }}>

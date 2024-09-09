@@ -95,7 +95,6 @@ export const getAccessCentres = (
     .get("Centre/getAccessCentres")
     .then((res) => {
       let data = res.data.message;
-      console.log(data);
       let CentreDataValue = data.map((ele) => {
         return {
           value: ele.CentreID,
@@ -137,7 +136,6 @@ export const getAccessDataRate = (state, centerID) => {
       })
       .then((res) => {
         const data = res?.data?.message;
-        console.log(data);
         const val = data.map((ele) => {
           return {
             value: ele?.RateTypeID,
@@ -326,7 +324,7 @@ export const getVisitType = (state) => {
     .catch((err) => console.log(err));
 };
 export const getsecondDoctorSuggestion = (formData, state, setFormData) => {
-  if (formData.DoctorName.length >= 1) {
+  if (formData.SecondReferDoctor.length >= 1) {
     axiosInstance
       .post("DoctorReferal/getSecondaryDoctorData", {
         DoctorName: formData.SecondReferDoctor,

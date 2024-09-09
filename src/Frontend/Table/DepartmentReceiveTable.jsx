@@ -295,7 +295,7 @@ function DepartmentReceiveTable({
 
                       <td data-title={"File Count"}>
                         <div
-                          className="text-primary"
+                          className="text-primary "
                           style={{
                             cursor: "pointer",
                             color:
@@ -309,8 +309,8 @@ function DepartmentReceiveTable({
                             });
                           }}
                         >
-                          <i className="fa fa-cloud-upload">
-                            ({data?.UploadDocumentCount})
+                          <i className="fa fa-cloud-upload IconClass">
+                            &nbsp;{data?.UploadDocumentCount}
                           </i>
                         </div>
                       </td>
@@ -333,8 +333,8 @@ function DepartmentReceiveTable({
                             });
                           }}
                         >
-                          <i className="fa fa-history">
-                            ({data?.MedicalHistoryCount})
+                          <i className="fa fa-history IconClass">
+                          &nbsp;{data?.MedicalHistoryCount}
                           </i>
                         </div>
                       </td>

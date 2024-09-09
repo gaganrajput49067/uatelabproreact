@@ -235,10 +235,10 @@ function RegisterationTable({
       <td>
         {location.pathname === "/EditPatientDetails" ? (
           data?.isPrimary && (
-            <CloseButton handleClose={() => handleFilter(data)} />
+            <CloseButton handleClick={() => handleFilter(data)} />
           )
         ) : (
-          <CloseButton handleClose={() => handleFilter(data)} />
+          <CloseButton handleClick={() => handleFilter(data)} />
         )}
       </td>
     </>

@@ -64,7 +64,7 @@ const Sidebar = ({ closeSidebar, menuData }) => {
         <input
           type="text"
           className="nav-main-menu-input"
-          placeholder="Search Menu"
+          placeholder="Search Page"
           onChange={(e) => handleSearchPage(e?.target?.value)}
         />
       </div>

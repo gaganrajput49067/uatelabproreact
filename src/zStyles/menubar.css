@@ -70,3 +70,19 @@
   margin-top: 2px;
   color: var(--bg-color) !important;
 }
+
+.icon-3d {
+  display: inline-block;
+  padding: 3px;
+  margin-right: 3px;
+  margin-left: 1px;
+  color: black;
+  background-color: #f0f0f0;
+  border-radius: 81%;
+  transform: perspective(200px) rotateX(10deg) rotateY(10deg);
+  transition: all 0.3s ease;
+}
+.icon-3d:hover {
+  transform: perspective(200px) rotateX(0deg) rotateY(0deg);
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.4), -3px -3px 7px rgba(255, 255, 255, 0.7);
+}

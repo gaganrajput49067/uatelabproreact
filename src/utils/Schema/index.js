@@ -70,3 +70,46 @@ const conditionalRequired = (message) => Yup.string().test(
     }
     return err;
   };
+  export const DoctorSchema = Yup.object({
+    Name: Yup.string().min(3).max(25).required("Please Enter Your Name"),
+    Mobile: Yup.string()
+      .typeError("That doesn't look like a phone number")
+      .required("Phone number is required!")
+      .min(10)
+      .max(10),
+  });
+  
+  export const ReportEmailValidation = (formData) => {
+    let err = "";
+   
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  
+    const validateEmails = (emails) => {
+      const emailArray = emails.split(',').map(email => email.trim());
+      for (const email of emailArray) {
+        if (!emailRegex.test(email)) {
+          return false;
+        }
+      }
+      return true;
+    };
+  
+    if (!validateEmails(formData?.To)) {
+      err = { ...err, To: "Please enter valid email addresses separated by commas" };
+    }
+  
+    if (
+      formData?.CC.trim().length > 0 &&
+      !validateEmails(formData?.CC)
+    ) {
+      err = { ...err, CC: "Please enter valid email addresses separated by commas" };
+    }
+  
+    if (
+      formData?.BCC.trim().length > 0 &&
+      !validateEmails(formData?.BCC)
+    ) {
+      err = { ...err, BCC: "Please enter valid email addresses separated by commas" };
+    }
+    return err;
+  };

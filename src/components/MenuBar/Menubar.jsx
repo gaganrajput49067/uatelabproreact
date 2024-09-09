@@ -69,7 +69,7 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
         onClick={handleSidebar}
       ></i>
       <i
-        className="fa fa-angle-left px-1 pointer"
+        className="fa fa-angle-left px-1 pointer icon-3d"
         onClick={handleScrollLeft}
       ></i>
       <div className="main-menu-container" ref={containerRef}>
@@ -90,7 +90,7 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
         })}
       </div>
       <i
-        className="fa fa-angle-right mr-2 px-1 pointer"
+        className="fa fa-angle-right mr-2 px-1 pointer icon-3d"
         onClick={handleScrollRight}
       ></i>
       <div className="search-container">

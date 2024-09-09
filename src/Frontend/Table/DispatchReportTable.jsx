@@ -339,7 +339,7 @@ function DispatchTable({ dispatchData, show, show2, users }) {
                                 data?.UploadDocumentCount > 0 ? "#4ea30c" : "",
                             }}
                           >
-                            ({data?.UploadDocumentCount})
+                            &nbsp;{data?.UploadDocumentCount}
                           </i>
                         </div>
                       </td>
@@ -363,7 +363,7 @@ function DispatchTable({ dispatchData, show, show2, users }) {
                                 data?.MedicalHistoryCount > 0 ? "#4ea30c" : "",
                             }}
                           >
-                            ({data?.MedicalHistoryCount})
+                            &nbsp;{data?.MedicalHistoryCount}
                           </i>
                         </div>
                       </td>

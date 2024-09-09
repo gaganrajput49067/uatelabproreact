@@ -327,7 +327,7 @@ function RETable({ redata, GetResultEntry, show, show2 }) {
                       });
                     }}
                   >
-                    &nbsp; ({data?.UploadDocumentCount})
+                    &nbsp; {data?.UploadDocumentCount}
                   </i>
                 </td>
 
@@ -346,7 +346,7 @@ function RETable({ redata, GetResultEntry, show, show2 }) {
                       });
                     }}
                   >
-                    &nbsp; ({data?.MedicalHistoryCount})
+                    &nbsp; &nbsp;{data?.MedicalHistoryCount}
                   </i>
                 </td>
                 <td data-title={t("Customize Date")}>

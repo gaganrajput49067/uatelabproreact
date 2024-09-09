@@ -6,20 +6,24 @@ import Modal from "../../components/Modal/Modal";
 import Input from "../../components/CommonComponent/Input";
 import { number } from "../../utils/helpers";
 import { axiosInstance } from "../../utils/axiosInstance";
+import { DoctorSchema } from "../../utils/Schema";
 
 const initialValues = {
   Name: "",
   Mobile: "",
-  // DoctorCode: "",
 };
 
-const PatientRegisterModal = ({ handleClose }) => {
+const PatientRegisterModal = ({ handleClose, Type }) => {
   const { values, errors, handleChange, touched, handleSubmit } = useFormik({
     initialValues: initialValues,
-    // validationSchema: DoctorSchema,
+    validationSchema: DoctorSchema,
     onSubmit: (values, { resetForm }) => {
+      const Url =
+        Type == "Secondary"
+          ? "DoctorReferal/InsertSecondDoctorReferal"
+          : "DoctorReferal/InsertDoctorReferal";
       axiosInstance
-        .post("DoctorReferal/InsertDoctorReferal", values)
+        .post(Url, values)
         .then((res) => {
           toast.success(res?.data?.message);
           handleClose();
@@ -32,7 +36,7 @@ const PatientRegisterModal = ({ handleClose }) => {
 
   return (
     <>
-      <Modal title={"Add Doctor"} handleClose={handleClose} top={"25%"}>
+      <Modal title={t(`${Type} Doctor`)} handleClose={handleClose} top={"25%"}>
         <div
           className="d-flex"
           style={{
@@ -43,19 +47,6 @@ const PatientRegisterModal = ({ handleClose }) => {
           }}
         >
           <form onSubmit={handleSubmit}>
-            {/* <div className="row">
-              <div className="col-sm-12">
-                      className="select-input-box form-control input-sm"
-                      placeholder={t("Doctor Code")}
-                      type="number"
-                      name="DoctorCode"
-                      value={values.DoctorCode}
-                      onChange={handleChange}
-                    />
-                    {errors?.DoctorCode && touched?.DoctorCode && (
-                      <span className="golbal-Error">{errors?.DoctorCode}</span>
-                  </div>
-            </div> */}
             <div className="w-100">
               <div className="col-sm-12 w-100">
                 <Input
@@ -67,7 +58,7 @@ const PatientRegisterModal = ({ handleClose }) => {
                   onChange={handleChange}
                 />
                 {errors?.Name && touched?.Name && (
-                  <span className="golbal-Error">{errors?.Name}</span>
+                  <span className="error-message">{errors?.Name}</span>
                 )}
               </div>
 
@@ -83,7 +74,7 @@ const PatientRegisterModal = ({ handleClose }) => {
                   required
                 />
                 {errors?.Mobile && touched?.Mobile && (
-                  <span className="golbal-Error">{errors?.Mobile}</span>
+                  <span className="error-message">{errors?.Mobile}</span>
                 )}
               </div>
             </div>

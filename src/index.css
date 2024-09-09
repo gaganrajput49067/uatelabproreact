@@ -14,7 +14,7 @@
   font-family: "Source Sans Pro", sans-serif !important;
 }
 
- :root {
+:root {
   --bg-color: #0382bd;
   --bg-subMenu: #03a0e7;
   --subMenuText-color: rgb(255, 255, 255);
@@ -30,17 +30,17 @@
     rgba(145, 142, 205, 1) 57%,
     rgba(255, 255, 255, 1) 91%
   );
-} 
+}
 
 [data-theme="DarkMode"] {
-  --bg-color: #121212; 
-  --bg-subMenu: #1f1f1f; 
-  --subMenuText-color: rgb(255, 255, 255); 
+  --bg-color: #121212;
+  --bg-subMenu: #1f1f1f;
+  --subMenuText-color: rgb(255, 255, 255);
   --gradient: linear-gradient(
     90deg,
-    rgba(34, 34, 34, 1) 0%, 
-    rgba(85, 85, 85, 1) 57%, 
-    rgba(170, 170, 170, 1) 91% 
+    rgba(34, 34, 34, 1) 0%,
+    rgba(85, 85, 85, 1) 57%,
+    rgba(170, 170, 170, 1) 91%
   );
 }
 
@@ -105,8 +105,8 @@
 }
 
 [data-theme="green"] {
-  --bg-color: #3cbc67  ; /* Changed from #36c099 */
-  --bg-subMenu: #3ecc6d ; /* Changed from #68f0d2 */
+  --bg-color: #3cbc67; /* Changed from #36c099 */
+  --bg-subMenu: #3ecc6d; /* Changed from #68f0d2 */
   --subMenuText-color: #fff7e6; /* Changed from #ffffff */
   --gradient: linear-gradient(
     90deg,
@@ -116,12 +116,65 @@
   );
 }
 
-.row {
-  margin-top: 4px !important;
-  width: 100%;
-  display: flex;
+@media only screen and (max-width: 574) {
+  .row {
+    margin-top: 6px !important;
+    width: 100%;
+    display: flex;
+  }
 }
-
+/* @media only screen and (max-width: 574) {
+  .col-lg-1,
+  .col-lg-10,
+  .col-lg-11,
+  .col-lg-12,
+  .col-lg-2,
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5,
+  .col-lg-6,
+  .col-lg-7,
+  .col-lg-8,
+  .col-lg-9,
+  .col-md-1,
+  .col-md-10,
+  .col-md-11,
+  .col-md-12,
+  .col-md-2,
+  .col-md-3,
+  .col-md-4,
+  .col-md-5,
+  .col-md-6,
+  .col-md-7,
+  .col-md-8,
+  .col-md-9,
+  .col-sm-1,
+  .col-sm-10,
+  .col-sm-11,
+  .col-sm-12,
+  .col-sm-2,
+  .col-sm-3,
+  .col-sm-4,
+  .col-sm-5,
+  .col-sm-6,
+  .col-sm-7,
+  .col-sm-8,
+  .col-sm-9,
+  .col-xs-1,
+  .col-xs-10,
+  .col-xs-11,
+  .col-xs-12,
+  .col-xs-2,
+  .col-xs-3,
+  .col-xs-4,
+  .col-xs-5,
+  .col-xs-6,
+  .col-xs-7,
+  .col-xs-8,
+  .col-xs-9 {
+    margin-top: 6px !important;
+  }
+} */
 .btn {
   width: 100%;
 }
@@ -151,7 +204,7 @@
   border: 1px solid #ced4da;
   height: 26px !important;
   box-shadow: none;
-  padding: .3rem .75rem !important;
+  padding: 0.3rem 0.75rem !important;
 }
 .form-control-txtarea {
   border: 1px solid #ced4da;
@@ -303,8 +356,8 @@ textarea {
 }
 .selectbox select {
   appearance: auto !important;
-  -webkit-appearance: auto !important; 
-  -moz-appearance: auto !important; 
+  -webkit-appearance: auto !important;
+  -moz-appearance: auto !important;
 }
 
 .truncate {
@@ -809,16 +862,13 @@ input.form-control {
 .p-datepicker-calendar th,
 td {
   padding: 0 !important;
-  
 }
-.p-datepicker-calendar th
- {
+.p-datepicker-calendar th {
   padding: 0 !important;
   color: var(--bg-subMenu) !important;
   text-align: center;
   font-weight: 500 !important;
   background-color: #dff7f1 !important;
-  
 }
 .p-datepicker .p-yearpicker .p-yearpicker-year {
   padding: 0.5rem !important;
@@ -832,7 +882,6 @@ td {
 }
 .p-datepicker-calendar th > span {
   font-size: 12px;
-  
 }
 
 .p-datepicker-calendar td > span {
@@ -871,7 +920,8 @@ td {
 .p-datepicker.p-datepicker-timeonly .p-timepicker {
   border-top: 0 none;
 }
-.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year, .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
   color: #4b5563;
   transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
   font-weight: 600;
@@ -1199,9 +1249,6 @@ input::placeholder {
   width: 218px !important;
   max-width: 100% !important;
 }
-
-
-
 
 .label {
   top: -4px;
@@ -1592,7 +1639,7 @@ input::placeholder {
   cursor: pointer;
   font-size: 14px !important;
   margin-right: 10px;
-  color: var(--subMenuText-color) /* Subtle color for large icons */
+  color: var(--subMenuText-color); /* Subtle color for large icons */
 }
 
 /* Patient Register */
@@ -1721,12 +1768,12 @@ input::placeholder {
 a {
   font-size: 13px !important;
 }
-.btn-class{
+.btn-class {
   width: auto !important;
 }
 .card-title {
   display: inline-block;
-  font-size: 14px !important; 
+  font-size: 14px !important;
   margin: 0;
   line-height: 1;
 }
@@ -1735,7 +1782,7 @@ hr {
   color: inherit;
   border: 0;
   border-top: var(--bs-border-width) solid;
-  opacity: .25;
+  opacity: 0.25;
 }
 .minicircle {
   background: blue;
@@ -1756,4 +1803,8 @@ hr {
   font-weight: bold;
   cursor: pointer;
   color: white;
+}
+.IconClass{
+  font-size: 11px !important;
+  font-weight: bold !important;
 }

@@ -40,6 +40,14 @@ export let routeDetails = [
         element: "../Frontend/Laboratory/ReceiptReprint",
       },
       {
+        path: "/EditPatientInfo",
+        element: "../Frontend/Laboratory/EditPatientInfo",
+      },
+      {
+        path: "/EditPatientDetails",
+        element: "../Frontend/Laboratory/EditPatientDetails",
+      },
+      {
         path: "/DoctorReferal",
         element: "../Frontend/Master/DoctorMaster",
       },

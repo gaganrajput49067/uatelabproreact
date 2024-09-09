@@ -58,7 +58,6 @@ const PatientRegistration = () => {
     img: MyImage,
     show: false,
   });
-  const [RadioDefaultSelect, setRadioDefaultSelect] = useState("Age");
   const [AgeWiseDiscountDropdown, setAgeWiseDiscountDropdown] = useState([]);
   const [Gender, setGender] = useState([]);
   const [Title, setTitle] = useState([]);
@@ -106,7 +105,10 @@ const PatientRegistration = () => {
   const [dropFalse, setDropFalse] = useState(false);
   const [secondDropFalse, setSecondDropFalse] = useState(false);
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState({
+    show: false,
+    Type: "",
+  });
 
   const [tableData, setTableData] = useState([]);
   const [indexMatch, setIndexMatch] = useState(0);
@@ -273,6 +275,10 @@ const PatientRegistration = () => {
     handleSubmitFinalBooking(data);
   };
   const handleSubmitFinalBooking = (data) => {
+    setIsSubmit({
+      type: "Success",
+      isLoading: true,
+    });
     axiosInstance
       .post("PatientRegistration/SaveData", {
         PatientData: getTrimmedData({
@@ -288,6 +294,7 @@ const PatientRegistration = () => {
           FamilyMemberIsPrimary: Memberdetails?.FamilyMemberIsPrimary
             ? Memberdetails?.FamilyMemberIsPrimary
             : 0,
+          Age: `${state?.AgeYear} Y ${state?.AgeMonth} M ${state?.AgeDays} D`,
         }),
 
         LTData: getTrimmedData({
@@ -312,6 +319,7 @@ const PatientRegistration = () => {
           // IsPndt: 1,
           IsPndtForm: checkPndt(),
           IsConcern: checkConcent(),
+          Age: `${state?.AgeYear} Y ${state?.AgeMonth} M ${state?.AgeDays} D`,
         }),
         PLO: PLO.map((ploItem) => ({
           ...getTrimmedData(ploItem),
@@ -785,12 +793,11 @@ const PatientRegistration = () => {
 
   const handleDOBCalculation = (e) => {
     const { name, value } = e.target;
-    
+
     let diff = {};
     let subtractType = getSubtractType(name);
 
     if (name === "AgeYear") {
-    
       diff = moment().subtract(value, subtractType);
       setDateData({
         ...DateData,
@@ -799,7 +806,6 @@ const PatientRegistration = () => {
     }
 
     if (name === "AgeMonth") {
-  
       diff = moment(DateData?.AgeYear || new Date().now).subtract(
         value,
         subtractType
@@ -811,7 +817,6 @@ const PatientRegistration = () => {
     }
 
     if (name === "AgeDays") {
-      
       diff = moment(DateData?.AgeMonth || new Date().now).subtract(
         value,
         subtractType
@@ -840,12 +845,10 @@ const PatientRegistration = () => {
         diff?._d,
         "days"
       ),
-      Age: `${state?.AgeYear} Y ${state?.AgeMonth} M ${state?.AgeDays} D`,
     });
 
     setLTData({
       ...LTData,
-      Age: `${state?.AgeYear} Y ${state?.AgeMonth} M ${state?.AgeDays} D`,
     });
 
     setTableData([]);
@@ -920,7 +923,7 @@ const PatientRegistration = () => {
       toast.error("Remove Discount Amount or Discount Percentage to Add");
       return;
     }
-    if (!state?.Age) {
+    if (!state?.DOB) {
       toast.error("Please choose DOB || Age");
     } else {
       if (LTData?.CentreID) {
@@ -1160,7 +1163,7 @@ const PatientRegistration = () => {
   const calculateTotalNumberOfDays = (value) => {
     return moment(moment().format("YYYY-MM-DD")).diff(value, "days");
   };
-console.log(state)
+  console.log(state);
   const dateSelect = (value, name) => {
     const { years, months, days } = calculateDOB(value);
     setState({
@@ -1170,7 +1173,6 @@ console.log(state)
       AgeMonth: months,
       AgeDays: days,
       TotalAgeInDays: calculateTotalNumberOfDays(value),
-      Age: `${years} Y ${months} M ${days} D`,
     });
     const dateForFields = handleDateFunction({
       year: years,
@@ -1182,10 +1184,7 @@ console.log(state)
       AgeMonth: dateForFields?.AgeMonth,
       AgeDays: dateForFields?.AgeDays,
     });
-    setLTData({
-      ...LTData,
-      Age: `${years} Y ${months} M ${days} D`,
-    });
+
     setTableData([]);
     setSuggestionData((ele) => ({
       ...ele,
@@ -1896,12 +1895,19 @@ console.log(state)
 
   //Modal show
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () =>
+    setShow({
+      Type: "",
+      show: false,
+    });
+  const handleShow = (Type) =>
+    setShow({
+      Type: Type,
+      show: true,
+    });
   const handleShowMobile = () => {
-    if (state?.Mobile?.length === 10) {
-      getDataByMobileNo("Mobile");
-    }
+    getDataByMobileNo("Mobile");
+
     // setShow4(true)
   };
 
@@ -2073,11 +2079,8 @@ console.log(state)
   }, []);
 
   useEffect(() => {
-    if (
-      (!isSubmit?.isLoading && isSubmit?.type === "Success") ||
-      !throughMemberData
-    ) {
-      if (LTData?.CentreID) {
+    if (!isSubmit?.isLoading && isSubmit?.type === "Success") {
+      if (LTData?.CentreID || !throughMemberData) {
         getAccessDataRate(setRateType, LTData?.CentreID).then((res) => {
           handleCityState(
             res[0]?.value,
@@ -2218,6 +2221,8 @@ console.log(state)
                 : "Error Occured"
             );
           });
+      } else {
+        toast.error("Mobile Number Length Must Be 10");
       }
     } else {
       if (state?.PatientCode.length >= 3) {
@@ -2398,7 +2403,6 @@ console.log(state)
       MiddleName: data?.MiddleName,
       Gender: data?.Gender,
       DOB: new Date(data?.DOB),
-      Age: data?.Age,
       PatientCode: data?.PatientCode,
       Email: data?.Email == null ? "" : data?.Email,
       PinCode: data?.Pincode,
@@ -2694,7 +2698,6 @@ console.log(state)
     enableReinitialize: true,
     validationSchema: PatientRegisterSchema,
     onSubmit: (values) => {
-      debugger;
       const data = DynamicFieldValidations();
       setVisibleFields(data);
       const flag = data.filter((ele) => ele?.isError === true);
@@ -2797,34 +2800,6 @@ console.log(state)
     });
     setPLO(data);
   }, [LTData?.DiscountReason, LTData?.DiscountApprovedBy]);
-
-  const handleRequiredModal = () => {
-    if (tableData.length > 0) {
-      let val = "";
-      for (let i = 0; i < tableData.length; i++) {
-        val =
-          val === ""
-            ? `${tableData[i].InvestigationID}`
-            : `${val},${tableData[i].InvestigationID}`;
-      }
-
-      return new Promise((resolve, reject) => {
-        axiosInstance
-          .post("TestData/GetFieldIds", {
-            invIds: "3306,2",
-            isEditPage: false,
-          })
-          .then((res) => {
-            resolve(res?.data?.message[0]);
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      });
-    } else {
-      toast.error("please Select one Test");
-    }
-  };
 
   useEffect(() => {
     if (tableData?.length === 0) {
@@ -3295,7 +3270,13 @@ console.log(state)
           getDocumentType={getDocumentType}
         />
       )}
-      {show && <PatientRegisterModal handleClose={handleClose} />}
+      {show?.show && (
+        <PatientRegisterModal
+          show={show?.show}
+          handleClose={handleClose}
+          Type={show?.Type}
+        />
+      )}
       {showRemark && (
         <SampleRemark
           show={showRemark}
@@ -3491,7 +3472,7 @@ console.log(state)
                     />
                   ) : (
                     <Button
-                      icon="pi pi-plus"
+                      icon="pi pi-external-link"
                       className="iconSize"
                       onClick={() => {
                         Navigate("/MembershipCardMaster");
@@ -3521,25 +3502,25 @@ console.log(state)
             </div>
             <div className="row">
               <div className="col-sm-2">
-                <Input
-                  // className="select-input-box form-control input-sm required"
-                  name="Mobile"
-                  id="Mobile"
-                  onInput={(e) => number(e, 10)}
-                  onKeyDown={(e) => handlePatientData(e, "Mobile")}
-                  value={state.Mobile}
-                  disabled={throughMobileData || throughMemberData}
-                  onChange={handleMainChange}
-                  type="number"
-                  lable="Mobile Number"
-                  placeholder=" "
-                />
-                <Button
-                  icon="pi pi-search"
-                  className="iconSize ls-none"
-                  onClick={handleShowMobile}
-                />
-
+                <div className="p-inputgroup flex-1">
+                  <Input
+                    name="Mobile"
+                    id="Mobile"
+                    onInput={(e) => number(e, 10)}
+                    onKeyDown={(e) => handlePatientData(e, "Mobile")}
+                    value={state.Mobile}
+                    disabled={throughMobileData || throughMemberData}
+                    onChange={handleMainChange}
+                    type="number"
+                    lable="Mobile Number"
+                    placeholder=" "
+                  />
+                  <Button
+                    icon="pi pi-search"
+                    className="iconSize"
+                    onClick={handleShowMobile}
+                  />
+                </div>
                 {!err?.Mobile && !err?.Mobiles && errors?.Mobile && (
                   <div className="error-message">{errors?.Mobile}</div>
                 )}
@@ -3689,7 +3670,7 @@ console.log(state)
                   <Button
                     icon="pi pi-plus"
                     className="iconSize"
-                    onClick={handleShow}
+                    onClick={() => handleShow("Refer")}
                   />
                 </div>
                 {!err?.DoctorName &&
@@ -3789,6 +3770,7 @@ console.log(state)
                     <SelectBox
                       name="PatientIDProof"
                       options={[{ label: "Choose ID", value: "" }, ...Identity]}
+                      selectedValue={LTData?.PatientIDProof}
                       id="IdType"
                       lable="Id Type"
                       onChange={handleSelectChange}
@@ -3856,7 +3838,11 @@ console.log(state)
                       ))}
                     </ul>
                   )}
-                  <Button icon="pi pi-plus" className="iconSize" />
+                  <Button
+                    icon="pi pi-plus"
+                    className="iconSize"
+                    onClick={() => handleShow("Secondary")}
+                  />
                 </div>
               </div>
             </div>
@@ -3949,7 +3935,7 @@ console.log(state)
                 />
               </div>
             </div>
-            <div className="row">
+            <div className="row mt-2">
               <div className="col-sm-2">
                 <SelectBox
                   options={[{ label: "Select", value: "" }, ...proEmplyee]}
@@ -4006,72 +3992,66 @@ console.log(state)
                   </div>
                 </div>
               </div>
-              {visibleFields?.map(
-                (data, index) =>
-                  data?.IsVisible == 1 && (
-                    <>
-                      <div
-                        className="col-md-2"
-                        style={{ marginBottom: "5px" }}
-                        key={index}
-                      >
-                        {[
-                          "PatientSource",
-                          "PatientType",
-                          "HLMPatientType",
-                          "Source",
-                        ].includes(data?.FieldType) ? (
-                          <SelectBox
-                            className={`${
-                              data?.IsMandatory === 1 && "required"
-                            }`}
-                            options={
-                              data?.FieldType === "PatientSource"
-                                ? [
-                                    { label: "Select", value: "" },
-                                    ...PatientSource,
-                                  ]
-                                : data?.FieldType === "PatientType"
-                                ? [
-                                    { label: "Select", value: "" },
-                                    ...PatientType,
-                                  ]
-                                : data?.FieldType === "HLMPatientType"
-                                ? HLMPatientType
-                                : data?.FieldType === "Source"
-                                ? SourceType
-                                : []
-                            }
-                            id={data?.FieldType}
-                            placeholder={data?.FieldType}
-                            lable={data?.FieldType}
-                            selectedValue={LTData[data?.FieldType]}
-                            name={data?.FieldType}
-                            onChange={handleSelectNew}
-                          />
-                        ) : (
-                          <Input
-                            className={`select-input-box form-control input-sm ${
-                              data?.IsMandatory === 1 && "required"
-                            }`}
-                            max={30}
-                            name={data?.FieldType}
-                            id={data?.FieldType}
-                            placeholder=" "
-                            lable={data?.FieldType}
-                            value={LTData[data?.FieldType]}
-                            onChange={handleLTData}
-                            type="text"
-                          />
-                        )}
-                        {data?.isError && (
-                          <div className="error-message">{data?.message}</div>
-                        )}
-                      </div>
-                    </>
-                  )
+              {visibleFields?.map((data, index) =>
+                data?.IsVisible == 1 ? (
+                  <>
+                    <div
+                      className="col-sm-2"
+                      style={{ marginBottom: "5px" }}
+                      key={index}
+                    >
+                      {[
+                        "PatientSource",
+                        "PatientType",
+                        "HLMPatientType",
+                        "Source",
+                      ].includes(data?.FieldType) ? (
+                        <SelectBox
+                          className={`${data?.IsMandatory === 1 && "required"}`}
+                          options={
+                            data?.FieldType === "PatientSource"
+                              ? [
+                                  { label: "Select", value: "" },
+                                  ...PatientSource,
+                                ]
+                              : data?.FieldType === "PatientType"
+                              ? [{ label: "Select", value: "" }, ...PatientType]
+                              : data?.FieldType === "HLMPatientType"
+                              ? HLMPatientType
+                              : data?.FieldType === "Source"
+                              ? SourceType
+                              : []
+                          }
+                          id={data?.FieldType}
+                          placeholder={data?.FieldType}
+                          lable={data?.FieldType}
+                          selectedValue={LTData[data?.FieldType]}
+                          name={data?.FieldType}
+                          onChange={handleSelectNew}
+                        />
+                      ) : (
+                        <Input
+                          className={`${data?.IsMandatory === 1 && "required"}`}
+                          max={30}
+                          name={data?.FieldType}
+                          id={data?.FieldType}
+                          placeholder=" "
+                          lable={data?.FieldType}
+                          value={LTData[data?.FieldType]}
+                          onChange={handleLTData}
+                          type="text"
+                        />
+                      )}
+                      {data?.isError && (
+                        <div className="error-message">{data?.message}</div>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  ""
+                )
               )}
-              {checkCovid() && (
+              {checkCovid() ? (
                 <>
                   <div className="col-md-2 ">
                     <Input
@@ -4097,44 +4077,53 @@ console.log(state)
                     />
                   </div>
                 </>
+              ) : (
+                ""
               )}
             </div>
-            <div></div>
           </div>
-          <div className="patent-register-image">
-            <Image
-              src={MyImage}
-              alt="Image"
-              width="115"
-              height="130"
-              margin="0"
-              padding="0"
-              preview
-            />
-            <button
-              className={`btn ${
-                LTData?.UploadDocumentCount === 0 ? "btn-info" : "btn-success"
-              } w-100 btn-sm p-0`}
-              id="Upload Document"
-              onClick={() => {
-                setShow2(true);
-              }}
-            >
-              {t("Upload Document")}
-              <span id="spnCount"> ({LTData?.UploadDocumentCount})</span>
-            </button>
-            <button
-              className={`btn   ${
-                LTData?.MedicalHistoryCount === 0 ? "btn-info" : "btn-success"
-              } w-100 btn-sm `}
-              id="Medical History"
-              onClick={() => {
-                handleClose3();
-              }}
-            >
-              {t("Medical History")}&nbsp;
-              <span id="spnMedicalCount">({LTData?.MedicalHistoryCount})</span>
-            </button>
+          <div className="row patent-register-image">
+            <div>
+              <Image
+                src={MyImage}
+                alt="Image"
+                width="115"
+                height="130"
+                margin="0"
+                padding="0"
+                preview
+              />
+            </div>
+            <div>
+              <button
+                className={`btn ${
+                  LTData?.UploadDocumentCount === 0 ? "btn-info" : "btn-success"
+                } w-100 btn-sm p-0`}
+                id="Upload Document"
+                onClick={() => {
+                  setShow2(true);
+                }}
+              >
+                {t("Upload Document")}
+                <span id="spnCount"> ({LTData?.UploadDocumentCount})</span>
+              </button>
+            </div>
+            <div>
+              <button
+                className={`btn   ${
+                  LTData?.MedicalHistoryCount === 0 ? "btn-info" : "btn-success"
+                } w-100 btn-sm `}
+                id="Medical History"
+                onClick={() => {
+                  handleClose3();
+                }}
+              >
+                {t("Medical History")}&nbsp;
+                <span id="spnMedicalCount">
+                  ({LTData?.MedicalHistoryCount})
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -4402,7 +4391,7 @@ console.log(state)
                     <th>{"Amt"}</th>
                     <th>{"D.Date"}</th>
                     <th>{"SC"}</th>
-                    <th className="text-center">
+                    <th>
                       <Tooltip label={"Urgen Delivery"}>
                         {/* <span class="blinking"> */}
                         <i
