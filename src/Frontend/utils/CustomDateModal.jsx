@@ -8,6 +8,7 @@ import DatePicker2 from "../../components/CommonComponent/DatePickerwithindex";
 import Input from "../../components/CommonComponent/Input";
 import Loading from "../../components/Loading/Loading";
 import { isChecked } from "../util/Commonservices";
+import Table from "../../components/Table/Table";
 
 function CustomDateModal({ show, data, onHide }) {
   const { t } = useTranslation();
@@ -331,11 +332,7 @@ function CustomDateModal({ show, data, onHide }) {
                 className=" box-body divResult table-responsive mt-4"
                 id="no-more-tables"
               >
-                <table
-                  className="table table-bordered table-hover table-striped tbRecord"
-                  cellPadding="{0}"
-                  cellSpacing="{0}"
-                >
+                <Table>
                   <thead>
                     <tr>
                       <th>{t("S.No")}</th>
@@ -343,9 +340,7 @@ function CustomDateModal({ show, data, onHide }) {
                       <th>{t("Test Name")}</th>
                       <th>{t("Registration Date and Time")}&nbsp;</th>
                       <th>{t("Sample Collection Date and Time")}&nbsp;</th>
-
                       <th>{t("Approval Date and Time")}</th>
-
                       <th>
                         {t("Update")}
                         <br></br>
@@ -496,7 +491,7 @@ function CustomDateModal({ show, data, onHide }) {
                       </tr>
                     ))}
                   </tbody>
-                </table>
+                </Table>
                 {loading.update && <Loading />}
                 {!loading.update &&
                   tableData.some((item) => item.isActive == "1") && (

@@ -39,6 +39,12 @@ import Modal from "../../components/Modal/Modal";
 import { useTranslation } from "react-i18next";
 import { isChecked } from "../util/Commonservices";
 import Table from "../../components/Table/Table";
+import OldReportModal from "../utils/OldReportModal";
+import PatientDetailModal from "../utils/PatientDetailModal";
+import ResultEntryEditModal from "../utils/ResultEntryEditModal";
+import RerunResultEntryModal from "../utils/RerunResultEntryModal";
+import Reason from "../utils/Reason";
+import ResultEditAddModal from "../utils/ResultEditAddModal";
 const ResultEntry = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -1487,7 +1493,10 @@ const ResultEntry = () => {
       {showPH && (
         <PatientDetailModal
           showPH={showPH}
-          setShowPH={setShowPH}
+          setShowPH={(data) => {
+            setShowPH(false);
+            console.log("object");
+          }}
           ResultData={ResultData}
         />
       )}

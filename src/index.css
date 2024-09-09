@@ -1515,7 +1515,7 @@ input::placeholder {
 .custom-box-body {
   height: auto;
   font-size: 13px;
-  background-color: var(--bg-subMenu);
+  background-color: var(--bg-color);
   color: var(--subMenuText-color);
   font-weight: bold;
   padding: 5px 5px 2px 5px;
@@ -1756,4 +1756,16 @@ hr {
   font-weight: bold;
   cursor: pointer;
   color: white;
+}
+
+.no-record-found{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-record-found img{
+width: 400px;
+height: 300px;
 }

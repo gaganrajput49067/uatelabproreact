@@ -170,13 +170,13 @@ function RETable({ redata, GetResultEntry, show, show2 }) {
               <th>{t("Centre")}</th>
               <th>{t("Dep. Receive Time")}</th>
               <th>{t("Remarks")} </th>
-              <th className="text-centre">
+              <th className="text-center">
                 <i class="fa fa-file"></i>
               </th>
-              <th className="text-centre">
+              <th className="text-center">
                 <i class="fa fa-h-square"></i>
               </th>
-              <th>
+              <th className="text-center">
                 <i class="fa fa-calendar"></i>
               </th>
             </tr>

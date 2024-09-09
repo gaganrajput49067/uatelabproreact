@@ -161,6 +161,5 @@ export const DyanmicStatusResponse = (state) => {
       break;
     }
   }
-
   return StatusCheck[status];
 };
