@@ -18,6 +18,7 @@
   --bg-color: #0382bd;
   --bg-subMenu: #03a0e7;
   --subMenuText-color: rgb(255, 255, 255);
+  --darkMode-color:white;
   --gradient: linear-gradient(
     90deg,
     rgba(85, 82, 153, 1) 0%,
@@ -34,8 +35,9 @@
 
 [data-theme="DarkMode"] {
   --bg-color: #121212;
-  --bg-subMenu: #1f1f1f;
+  --bg-subMenu: #383737;
   --subMenuText-color: rgb(255, 255, 255);
+  --darkMode-color:rgb(95 94 94 / 97%) !important;
   --gradient: linear-gradient(
     90deg,
     rgba(34, 34, 34, 1) 0%,
@@ -48,6 +50,7 @@
   --bg-color: #5e5c5c; /* Changed from #686666 */
   --bg-subMenu: #9a9a9a; /* Changed from #b0b0b0 */
   --subMenuText-color: #e6e6e6; /* Changed from #ffffff */
+  --darkMode-color:white;
   --gradient: linear-gradient(
     90deg,
     rgba(94, 92, 92, 1) 0%,
@@ -60,6 +63,7 @@
   --bg-color: #2a91bd; /* Changed from #32a1d1 */
   --bg-subMenu: #85bcd5; /* Changed from #95c6db */
   --subMenuText-color: #e6f7ff; /* Changed from #ffffff */
+  --darkMode-color:white;
   --gradient: linear-gradient(
     90deg,
     rgba(42, 145, 189, 1) 0%,
@@ -72,6 +76,7 @@
   --bg-color: #a52a2a; /* Changed from #c43333 */
   --bg-subMenu: #d05050; /* Changed from #e05c5c */
   --subMenuText-color: #f9f9f9; /* Changed from #ffffff */
+  --darkMode-color:white;
   --gradient: linear-gradient(
     90deg,
     rgba(165, 42, 42, 1) 0%,
@@ -84,6 +89,7 @@
   --bg-color: #bc3c8b; /* Changed from #f1368d */
   --bg-subMenu: #ee94cb; /* Changed from #f86da7 */
   --subMenuText-color: #000000; /* Changed from #ffffff */
+  --darkMode-color:white;
   --gradient: linear-gradient(
     90deg,
     rgba(188, 60, 139, 1) 0%,
@@ -96,6 +102,7 @@
   --bg-color: #bc8f3c; /* Changed from #e9b74b */
   --bg-subMenu: #f3ba74; /* Changed from #f3ba74 */
   --subMenuText-color: #fff7e6; /* Changed from #ffffff */
+  --darkMode-color:white;
   --gradient: linear-gradient(
     90deg,
     rgba(188, 143, 60, 1) 0%,
@@ -108,6 +115,7 @@
   --bg-color: #3cbc67; /* Changed from #36c099 */
   --bg-subMenu: #3ecc6d; /* Changed from #68f0d2 */
   --subMenuText-color: #fff7e6; /* Changed from #ffffff */
+  --darkMode-color:white;
   --gradient: linear-gradient(
     90deg,
     rgba(54, 192, 153, 1) 0%,
@@ -389,7 +397,7 @@ input.form-control {
   padding: 10px 10px;
   font-size: 13px;
   margin-bottom: 2px !important;
-  background-color: white !important;
+  background-color: var(--darkMode-color) !important;
 }
 
 .card-center {

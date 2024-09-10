@@ -92,8 +92,8 @@ const SaveSmsEmail = ({
         IsPatientEmail: newSaveSmsEmail?.EmailToPatient,
         IsDoctorSMS: newSaveSmsEmail?.SmsToDoctor,
         IsDoctorEmail: newSaveSmsEmail?.EmailToDoctor,
-        IsDoctorSMS: newSaveSmsEmail?.SmsToClient,
-        IsDoctorEmail: newSaveSmsEmail?.EmailToClient,
+        IsClientSMS: newSaveSmsEmail?.SmsToClient,
+        IsClientEmail: newSaveSmsEmail?.EmailToClient,
         IsCourier: newSaveSmsEmail?.IsCourier,
         IsWhatsappRequired: newSaveSmsEmail?.IsWhatsappRequired,
       }).some((value) => value != "") &&
