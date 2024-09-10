@@ -33,29 +33,30 @@
 }
 
 .user-info-image{
-    width: 25px;
-    height: 25px;
+    width: 22px;
+    height: 22px;
 }
 
 .header-visit{
     margin: 0;
     padding: 0;
     margin-right: 5px;
-    width: 15vw;
+    width: 10vw;
+    height: 32px;
 }
 
 .header-centre{
     margin: 0;
     padding: 0;
     margin-right: 5px;
-    width: 15vw;
+    width: 13vw;
 }
 
 .header-menu{
     margin: 0;
     padding: 0;
     margin-right: 5px;
-    width: 15vw;
+    width: 13vw;
 }
 
 .header-dropDown-menu{
@@ -85,6 +86,10 @@
     align-items: center;
     padding: 1rem 0.5rem;
     width: 180px;
+}
+
+.header-user-dropDown .row{
+width: 100%;
 }
 
 .user-dropdown-info-image{
@@ -165,6 +170,17 @@
     font-size: 1.3vw;
     font-weight: 600;
     color: rgb(255, 255, 255);
+}
+
+.company-info img{
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.company-info span{
+    font-size: 1.7rem !important;
 }
 
 .header-show-menu{

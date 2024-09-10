@@ -3465,19 +3465,23 @@ const PatientRegistration = () => {
                     }}
                   />
                   {throughMemberData ? (
-                    <Button
-                      icon="fa fa-close"
-                      className="iconSize"
-                      onClick={handleMembershipcancel}
-                    />
+                    <Tooltip label={"Remove Membership"}>
+                      <Button
+                        icon="fa fa-close"
+                        className="iconSize"
+                        onClick={handleMembershipcancel}
+                      />
+                    </Tooltip>
                   ) : (
-                    <Button
-                      icon="pi pi-external-link"
-                      className="iconSize"
-                      onClick={() => {
-                        Navigate("/MembershipCardMaster");
-                      }}
-                    />
+                    <Tooltip label={"Create New Membership Card"}>
+                      <Button
+                        icon="pi pi-external-link"
+                        className="iconSize m-0 p-0"
+                        onClick={() => {
+                          Navigate("/MembershipCardMaster");
+                        }}
+                      />
+                    </Tooltip>
                   )}
                 </div>
               </div>
