@@ -65,11 +65,11 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
   return (
     <div className="menubar-main-container ss-none">
       <i
-        className="fa fa-bars mr-2 pointer menubar-navbar"
+        className="fa fa-bars mr-2 pointer menubar-navbar fw-bold"
         onClick={handleSidebar}
       ></i>
       <i
-        className="fa fa-angle-left px-1 pointer icon-3d"
+        className="fa fa-angle-left px-1 pointer mr-2"
         onClick={handleScrollLeft}
       ></i>
       <div className="main-menu-container" ref={containerRef}>
@@ -78,7 +78,7 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
             <span
               key={ele?.PageName}
               onClick={() => navigate(ele?.PageUrl)}
-              className={`nav-item mx-1 ${
+              className={`nav-item mr-1 fw-normal ${
                 location.pathname.toLowerCase() == ele?.PageUrl.toLowerCase()
                   ? "active-tab-menu"
                   : "text-white"
@@ -90,7 +90,7 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
         })}
       </div>
       <i
-        className="fa fa-angle-right mr-2 px-1 pointer icon-3d"
+        className="fa fa-angle-right mr-2 px-1 pointer"
         onClick={handleScrollRight}
       ></i>
       <div className="search-container">

@@ -25,15 +25,18 @@ const OtpInput = ({ length, onChange }) => {
   return (
     <div className="otp-container">
       {Array.from({ length }).map((_, index) => (
-        <input
-          key={index}
-          type="text"
-          maxLength="1"
-          ref={(el) => (inputsRef.current[index] = el)}
-          onChange={(e) => handleChange(e, index)}
-          onKeyDown={(e) => handleKeyDown(e, index)}
-          className="otp-input"
-        />
+        <>
+          <input
+            key={index}
+            type="text"
+            maxLength="1"
+            ref={(el) => (inputsRef.current[index] = el)}
+            onChange={(e) => handleChange(e, index)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
+            className="otp-input"
+          />
+          {index < length - 1 && <span className="fw-bold">&#8212;</span>}
+        </>
       ))}
     </div>
   );

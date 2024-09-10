@@ -79,7 +79,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
   const handleChange = (name, e) => {
     const { value } = e;
     if (name === "centre") {
-      handleChangeCentre(value)
+      handleChangeCentre(value);
     } else if (name === "menu") {
       setSelectedMenu(value);
       handlePage(e.pageData);
@@ -111,6 +111,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
   return (
     <div className="header-main-container">
       <div className="company-info">
+        <img src={defaultUserImg} alt="" />
         <span className="ss-none ml-2">&nbsp;Itdose Infosystem</span>
         <div className="header-show-menu ls-none" onClick={handleSidebar}>
           <i className="fa fa-bars m-2" aria-hidden="true"></i>
@@ -137,9 +138,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
             name={"centre"}
             placeholderName=""
             dynamicOptions={centreData}
-            value={window?.localStorage?.getItem(
-              "DefaultCentre"
-            )}
+            value={window?.localStorage?.getItem("DefaultCentre")}
             onChange={handleChange}
           />
         </div>
@@ -173,18 +172,16 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
           )}
         </div>
         {/* Vsit Box */}
-        <div className="header-visit ss-none">
-          <div className="maindiv" style={{ marginTop: "8px" }}>
-            <Input
-              type="text"
-              id="userName"
-              name="userName"
-              lable={"Visit No. / Barcode No."}
-              placeholder=" "
-              // value={payload?.userName}
-              // onChange={handleChange}
-            />
-          </div>
+        <div className="header-visit ss-none " style={{ marginTop: "8px" }}>
+          <Input
+            type="text"
+            id="userName"
+            name="userName"
+            lable={"Visit No. / Barcode No."}
+            placeholder=" "
+            // value={payload?.userName}
+            // onChange={handleChange}
+          />
         </div>
         {/* theme */}
         <div
@@ -192,7 +189,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
           onClick={() => setShowThemes(!showThemes)}
           ref={themeProfile}
         >
-          <i className="fas fa-palette mr-3 ml-2 pointer ss-none"></i>
+          <i className="fas fa-palette mr-3 ml-2 mt-2 pointer ss-none"></i>
           {showThemes && (
             <div className="header-theme-menu">
               <ToggleTheme />
@@ -200,16 +197,21 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
           )}
         </div>
         {/* Home */}
-        <i className="fa fa-home mr-3 pointer ss-none" onClick={()=>navigate("/Dashboard")}></i>
-        <i className="pi pi-moon mr-3 pointer ss-none" 
-          onClick={changeDarkMode}></i>
+        <i
+          className="fa fa-home mr-3 pointer ss-none"
+          onClick={() => navigate("/Dashboard")}
+        ></i>
+        <i
+          className="pi pi-moon mr-3 pointer ss-none"
+          onClick={changeDarkMode}
+        ></i>
         {/* full Screen */}
         <i
           className="fa fa-expand mr-3 pointer ss-none"
           aria-hidden="true"
           onClick={toggleFullScreen}
         ></i>
-        
+
         {/* User Profile */}
         <div
           className="user-Info-container"
@@ -243,7 +245,7 @@ export default Header;
 
 function UserHeader({ handleThemeChange, handleLogout }) {
   return (
-    <div className="header-user-dropDown ">
+    <div className="header-user-dropDown">
       <img src={defaultUserImg} alt="" className="user-dropdown-info-image" />
       <div className="row pt-2">
         <button className="btn btn-sm btn-light text-left">

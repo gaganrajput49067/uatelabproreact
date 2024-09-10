@@ -169,8 +169,8 @@
 }
 
 
-.login-form-img{
-  width: 80%; 
+.login-form-img {
+  width: 80%;
 }
 
 /* Existing styles remain unchanged */
@@ -179,9 +179,14 @@
 @media only screen and (max-width: 768px) {
   .container {
     width: 80%;
-    min-height: 80vh;
+    min-height: 60vh;
     overflow: hidden;
     transform: translateX(0) !important;
+    padding: 10px;
+    transition: 2ms ease-in-out;
+  }
+  .login-form{
+    padding: 0;
   }
 
   .form-container {
@@ -193,15 +198,16 @@
     align-items: center;
   }
 
-  .sign-in-container{
+  .sign-in-container {
     width: 100%;
     left: 0;
-    
+    transition: 2ms ease-in-out;
   }
 
   .sign-up-container {
     width: 100%;
     left: 0;
+    transition: 2ms ease-in-out;
   }
 
   .overlay-container {
@@ -228,7 +234,11 @@
   }
 
   .login-form {
-    padding: 0 20px;
+    padding: 0 10px;
+  }
+
+  .login-form img {
+    margin-bottom: 100px;
   }
 
   .logoStyle {

@@ -214,10 +214,13 @@ const Login = () => {
 
                   <div className="main-login-input">
                     <div className="icondiv">
-                      <i className="fas fa-user-alt" />
+                      <i
+                        className="fas fa-key mt-2"
+                        style={{ rotate: "135deg", transform: "scale(1,-1)" }}
+                      />
                     </div>
                     <div className="maindiv">
-                      <OtpInput length={6} onChange={handleOtpChange} />
+                      <OtpInput length={4} onChange={handleOtpChange} />
                     </div>
                   </div>
                   <div className="main-login-input">
