@@ -388,9 +388,14 @@ input.form-control {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px 10px;
   font-size: 13px;
-
   margin-bottom: 2px !important;
   background-color: white !important;
+}
+
+.card-center {
+  display: flex;
+justify-content: center;
+align-items: center;
 }
 
 .card-header {
@@ -1562,7 +1567,7 @@ input::placeholder {
 .custom-box-body {
   height: auto;
   font-size: 13px;
-  background-color: var(--bg-subMenu);
+  background-color: var(--bg-color);
   color: var(--subMenuText-color);
   font-weight: bold;
   padding: 5px 5px 2px 5px;
@@ -1807,4 +1812,15 @@ hr {
 .IconClass{
   font-size: 11px !important;
   font-weight: bold !important;
+}
+.no-record-found{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-record-found img{
+width: 400px;
+height: 300px;
 }

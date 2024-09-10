@@ -23,6 +23,9 @@ h6 {
 .blinking {
   animation: blink 1s step-start infinite;
 }
+.jodit-status-bar-link {
+  display: none !important;
+}
 
 @keyframes blink {
   50% {
