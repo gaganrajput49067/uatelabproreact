@@ -116,13 +116,13 @@
   );
 }
 
-@media only screen and (max-width: 574) {
+
   .row {
     margin-top: 6px !important;
     width: 100%;
     display: flex;
   }
-}
+
 /* @media only screen and (max-width: 574) {
   .col-lg-1,
   .col-lg-10,
