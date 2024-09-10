@@ -4092,6 +4092,9 @@ const PatientRegistration = () => {
                 margin="0"
                 padding="0"
                 preview
+                onDoubleClick={() => {
+                  setPatientImg({ ...patientImg, show: true });
+                }}
               />
             </div>
             <div>
