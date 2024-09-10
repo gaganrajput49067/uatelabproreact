@@ -36,6 +36,7 @@ import CustomModal from "../utils/CustomModal";
 import MedicialModal from "../utils/MedicialModal";
 import UploadFile from "../utils/UploadFIleModal/UploadFile";
 import Tooltip from "../../components/CommonComponent/Tooltip";
+import NoRecordFound from "../../components/CommonComponent/NoRecordFound";
 const SampleCollection = () => {
   const [CentreData, setCentreData] = useState([]);
   const [toggleTable, setToggleTable] = useState(true);
@@ -1007,9 +1008,7 @@ const SampleCollection = () => {
                 }}
               </Table>
             ) : (
-              <span style={{ width: "100%", textAlign: "center" }}>
-                {"No Data Found"}
-              </span>
+              <NoRecordFound />
             )}
           </>
         ) : (

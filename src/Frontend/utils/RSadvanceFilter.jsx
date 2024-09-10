@@ -41,8 +41,12 @@ function RSadvanceFilter({
     return handleFilterChange(e);
   };
   return (
-    <Modal title={"Advance FIlter"} handleClose={handleShow}>
-      <div className="row" style={{ height: "350px", maxWidth: "400px" }}>
+    <Modal
+      title={"Advance FIlter"}
+      handleClose={handleShow}
+      className={"table-md"}
+    >
+      <div className="card">
         <div className="row">
           <label className="col-sm-4">Parameter Name</label>
           <div className="col-sm-8">

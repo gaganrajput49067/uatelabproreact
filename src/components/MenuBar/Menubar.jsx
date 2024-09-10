@@ -69,7 +69,7 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
         onClick={handleSidebar}
       ></i>
       <i
-        className="fa fa-angle-left px-1 pointer mr-2"
+        className="fa fa-angle-left px-1 pointer mr-2 text-white"
         onClick={handleScrollLeft}
       ></i>
       <div className="main-menu-container" ref={containerRef}>
@@ -81,7 +81,7 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
               className={`nav-item mr-1 fw-normal ${
                 location.pathname.toLowerCase() == ele?.PageUrl.toLowerCase()
                   ? "active-tab-menu"
-                  : "text-white"
+                  : ""
               }`}
             >
               <i className="fas fa-tachometer-alt nav-icon"></i> {ele?.PageName}
@@ -90,7 +90,7 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
         })}
       </div>
       <i
-        className="fa fa-angle-right mr-2 px-1 pointer"
+        className="fa fa-angle-right mr-2 px-1 pointer text-white"
         onClick={handleScrollRight}
       ></i>
       <div className="search-container">

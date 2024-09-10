@@ -8,6 +8,7 @@ import Table from "../../components/Table/Table";
 import Loading from "../../components/Loading/Loading";
 import CustomModal from "../utils/CustomModal";
 import CustomDateModal from "../utils/CustomDateModal";
+import NoRecordFound from "../../components/CommonComponent/NoRecordFound";
 function RETable({ redata, GetResultEntry, show, show2 }) {
   const [modal, setModal] = useState(false);
   const [datemodal, showDatemodal] = useState(false);
@@ -364,7 +365,7 @@ function RETable({ redata, GetResultEntry, show, show2 }) {
           </tbody>
         </Table>
       ) : (
-        t("No Data Found")
+        <NoRecordFound />
       )}
       {modal && (
         <CustomModal

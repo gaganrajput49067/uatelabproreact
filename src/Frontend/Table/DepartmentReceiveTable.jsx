@@ -12,6 +12,7 @@ import CustomModal from "../utils/CustomModal";
 import RejectModal from "../utils/RejectModal";
 import HoldReason from "../utils/HoldReason";
 import { axiosInstance } from "../../utils/axiosInstance";
+import NoRecordFound from "../../components/CommonComponent/NoRecordFound";
 function DepartmentReceiveTable({
   drdata,
   show,
@@ -334,7 +335,7 @@ function DepartmentReceiveTable({
                           }}
                         >
                           <i className="fa fa-history IconClass">
-                          &nbsp;{data?.MedicalHistoryCount}
+                            &nbsp;{data?.MedicalHistoryCount}
                           </i>
                         </div>
                       </td>
@@ -358,9 +359,7 @@ function DepartmentReceiveTable({
           }}
         </Table>
       ) : (
-        <span style={{ width: "100%", textAlign: "center" }}>
-          {"No Data Found"}
-        </span>
+        <NoRecordFound />
       )}
       {modal && (
         <CustomModal

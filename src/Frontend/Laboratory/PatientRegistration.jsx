@@ -3311,7 +3311,7 @@ const PatientRegistration = () => {
           handleUploadCount={handleUploadCount}
         />
       )}
-      <PageHead name="PatientRegistration" showbtn={true} drop={false}>
+      <PageHead name="Patient Registration" showbtn={true} drop={false}>
         <>
           <Tooltip label={"Patient Report Delivery Method"}>
             <button
