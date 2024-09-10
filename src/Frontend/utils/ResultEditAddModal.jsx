@@ -47,33 +47,27 @@ function ResultEditAddModal({ show, handleClose, handleSave }) {
 
   return (
     <Modal handleClose={handleClose}>
-      <div className="card">
-        <div className="row">
-          <div className="col-12">
-            <div className="mb-3">
-              <label>{t("Select Comment")}:</label>
-              <select
-                className="select-input-box form-control input-sm"
-                onChange={handleDropdown}
-              >
-                <option>{t("Select")}</option>
-                {SelectedBox?.map((ele) => (
-                  <option value={ele?.TemplateText}>{ele?.Template}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="col-12">
-            <TextEditor
-              value={EditData?.COMMENT}
-              EditTable={EditTable}
-              setEditTable={setEditTable}
-              setValue={handleChange}
-            />
+      <div className="card card-center">
+        <div className="row mb-3">
+          <label className="col-sm-2">{t("Select Comment")}:</label>
+          <div className="col-sm-10 m-0 p-0 ">
+            <select
+              className="select-input-box form-control input-sm "
+              onChange={handleDropdown}
+            >
+              <option>{t("Select")}</option>
+              {SelectedBox?.map((ele) => (
+                <option value={ele?.TemplateText}>{ele?.Template}</option>
+              ))}
+            </select>
           </div>
         </div>
-      </div>
-      <div className="box-body">
+        <TextEditor
+          value={EditData?.COMMENT}
+          EditTable={EditTable}
+          setEditTable={setEditTable}
+          setValue={handleChange}
+        />
         <div className="row">
           <div className="col-sm-2">
             <button

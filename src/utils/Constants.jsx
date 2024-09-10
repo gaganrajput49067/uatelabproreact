@@ -169,20 +169,28 @@ export const SampleStatus = [
   { label: "All", value: "", status: true },
 ];
 export const ActiveDoctor = [
-    {
-      label: "Active",
-      value: "1",
-    },
-    {
-      label: "In-Active",
-      value: "0",
-    },
-  ];export const Flag = [
-    {label:"Normal",value:"Normal"},
-    {label:"Abnormal",value:"Abnormal"},
-  ]
-  
-  export const Order = [
-    {label:"DESC",value:"DESC"},
-    {label:"ASC",value:"ASC"},
-  ]
+  {
+    label: "Active",
+    value: "1",
+  },
+  {
+    label: "In-Active",
+    value: "0",
+  },
+];
+export const Flag = [
+  { label: "Normal", value: "Normal" },
+  { label: "Abnormal", value: "Abnormal" },
+];
+
+export const Order = [
+  { label: "DESC", value: "DESC" },
+  { label: "ASC", value: "ASC" },
+];
+
+export const StatusCheck = {
+  10: "Save",
+  5: "Approve",
+  11: "Hold",
+  6: "Approve",
+};
