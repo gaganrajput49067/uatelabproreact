@@ -16,9 +16,12 @@ const Sidebar = ({ closeSidebar, menuData }) => {
         menuValue: value,
         pageData: pageData,
       });
+      setOriginalPageData(pageData);
     }
   };
-  const [originalPageData] = useState(selectedMenu?.pageData);
+  const [originalPageData, setOriginalPageData] = useState(
+    selectedMenu?.pageData
+  );
 
   const handleSearchPage = (value) => {
     if (!value) {
