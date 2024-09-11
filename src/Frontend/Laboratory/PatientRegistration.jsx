@@ -2508,8 +2508,8 @@ const PatientRegistration = () => {
   };
   const getReceiptTRF = (id, TRF, DepartmentSlip) => {
     if (TRF == 1) {
-      axiosInstance
-        .post("/reports/v1/getTRF", {
+      axiosReport
+        .post("getTRF", {
           LedgerTransactionIDHash: id,
         })
         .then((res) => {
@@ -2524,8 +2524,8 @@ const PatientRegistration = () => {
         });
     }
     if (DepartmentSlip == 1) {
-      axiosInstance
-        .post("/reports/v1/getDepartment", {
+      axiosReport
+        .post("getDepartment", {
           LedgerTransactionIDHash: id,
         })
         .then((res) => {
@@ -3671,11 +3671,13 @@ const PatientRegistration = () => {
                       ))}
                     </ul>
                   )}
-                  <Button
-                    icon="pi pi-plus"
-                    className="iconSize"
-                    onClick={() => handleShow("Refer")}
-                  />
+                  <Tooltip label={"Add Referred Doctor"}>
+                    <Button
+                      icon="pi pi-plus"
+                      className="iconSize"
+                      onClick={() => handleShow("Refer")}
+                    />{" "}
+                  </Tooltip>
                 </div>
                 {!err?.DoctorName &&
                   !err?.DoctorID &&
@@ -3842,11 +3844,14 @@ const PatientRegistration = () => {
                       ))}
                     </ul>
                   )}
-                  <Button
-                    icon="pi pi-plus"
-                    className="iconSize"
-                    onClick={() => handleShow("Secondary")}
-                  />
+                  <Tooltip label={"Add Secondary Referred Doctor"}>
+                    {" "}
+                    <Button
+                      icon="pi pi-plus"
+                      className="iconSize"
+                      onClick={() => handleShow("Secondary")}
+                    />
+                  </Tooltip>
                 </div>
               </div>
             </div>

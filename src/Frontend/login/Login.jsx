@@ -284,9 +284,9 @@ const Login = () => {
         <div className="form-container sign-in-container">
           {!isRightPanelActive && (
             <div className="login-form">
-              <Link to="/">
+             
                 <img className="logoStyle mb-4" src={logoitdose} alt="logo" />
-              </Link>
+           
               <h5 className="logo-title mb-4">Sign in to start your session</h5>
 
               <div className="main-login-input">
