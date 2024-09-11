@@ -11,6 +11,7 @@ import CustomModal from "../utils/CustomModal";
 import SendEmailModalReprint from "../utils/SendEmailModalReprint";
 import NoRecordFound from "../../components/CommonComponent/NoRecordFound";
 import Tooltip from "../../components/CommonComponent/Tooltip";
+import { toast } from "react-toastify";
 const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
   const [modal, setModal] = useState(false);
   const [visitID, setVisitID] = useState();
@@ -219,14 +220,14 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                       <th>{"Edit Info"}</th>
                       <th>{"Cash Receipt"}</th>
                       <th>{"FullyPaid"}</th>
-                      <th>
-                        <Tooltip label={"skjfnsnnkjferf"}>
+                      {/* <th>
+                        <Tooltip label={"Concent form"}>
                           {"Concent form"}
                         </Tooltip>
-                      </th>
+                      </th> */}
                       <th className="text-center">
                         &nbsp;
-                        <Tooltip title="View details" position="bottom">
+                        <Tooltip label="View details" position="bottom">
                           <i class="fa fa-info-circle" aria-hidden="true"></i>
                         </Tooltip>
                         &nbsp;
@@ -387,12 +388,12 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                             )
                           )}
                         </td>
-
+{/* 
                         <td data-title={"Concent form"} className="text-center">
                           <Tooltip label={"Concent Form"}>
-                            <span>-dsfs</span>
+                            <span>-</span>
                           </Tooltip>
-                        </td>
+                        </td> */}
                         <td
                           data-title={"View Details"}
                           onClick={() => {
