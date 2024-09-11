@@ -26,13 +26,7 @@ const Table = ({
 
   if (!paginate) {
     return (
-      <div
-        className="simple-table-container"
-        style={{
-          maxHeight: "400px",
-          overflowY: "auto",
-        }}
-      >
+      <div className="simple-table-container">
         <table className="simple-table">{children}</table>
       </div>
     );
@@ -51,13 +45,7 @@ const Table = ({
   console.log(itemsPerPages);
   return (
     <>
-      <div
-        className="simple-table-container"
-        style={{
-          maxHeight: "400px",
-          overflowY: "auto",
-        }}
-      >
+      <div className="simple-table-container">
         <table className="simple-table">
           {children({ currentItems, finalIndex })}
         </table>
