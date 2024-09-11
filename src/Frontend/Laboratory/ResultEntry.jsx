@@ -3121,7 +3121,7 @@ const ResultEntry = () => {
                 </>
               ))}
             </tbody>
-          </Table></div>
+          </Table>
           <div className="card m-0 p-0 pb-2">
             <div className="row mt-3" style={{ textWrap: "avoid" }}>
               {loading ? (
