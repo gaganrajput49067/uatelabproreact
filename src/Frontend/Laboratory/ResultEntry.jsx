@@ -2165,211 +2165,211 @@ const ResultEntry = () => {
             </div>
           </div> */}
           {/* <div className="card pb-0"> */}
-          <SubPageHead title={"Result Entry"}>
-            <div className="custom-box-body mb-3 mt-3">
-              <div className="custom-row">
-                <div className="custom-col custom-col-visit">
-                  <span className="fa fa-folder custom-text">
-                    &nbsp; <span>{ResultData[0]?.LedgerTransactionNo}</span>
-                  </span>
-                </div>
-
-                <div className="custom-col">
-                  <span className="fa fa-user custom-text">
-                    &nbsp; <span>{ResultData[0]?.PName}</span>
-                  </span>
-                </div>
-
-                <div className="custom-col">
-                  <span className="fa fa-book custom-text">
-                    &nbsp;<span>{ResultData[0]?.PatientCode}</span>
-                  </span>
-                </div>
-
-                <div className="custom-col custom-col-age-gender">
-                  <span className="fa fa-calendar-check-o custom-text">
-                    &nbsp;<span> {ResultData[0]?.Age}</span>
-                  </span>
-                  <span className="fa fa-street-view custom-text">
-                    &nbsp; <span> {ResultData[0]?.Gender}</span>
-                  </span>
-                </div>
-
-                <div className="custom-col">
-                  <span className="fa fa-h-square custom-text">
-                    &nbsp; <span>{ResultData[0]?.Centre}</span>
-                  </span>
-                </div>
-
-                <div className="custom-col">
-                  <span className="fa fa-user-md custom-text">
-                    &nbsp; <span> {ResultData[0]?.Referdoctor}</span>
-                  </span>
-                </div>
-
-                <div className="custom-col">
-                  <span className="fa fa-plus-square custom-text">
-                    &nbsp;<span> {ResultData[0]?.RateType} </span>
-                  </span>
-                </div>
-
-                <div className="custom-col custom-col-regdate">
-                  <span className="fa fa-calendar custom-text">
-                    &nbsp; <span> {dateConfig(ResultData[0]?.RegDate)}</span>
-                  </span>
-                </div>
-
-                <div className="custom-col custom-end">
-                  <span
-                    className="fa fa-cloud-upload custom-text"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="Upload Document"
-                    onClick={() => {
-                      setShow({
-                        modal: true,
-                        data: ResultData[0]?.PatientGuid,
-                      });
-                    }}
-                    style={{
-                      color:
-                        ResultData[0]?.UploadDocumentCount > 0
-                          ? "#4ea30c"
-                          : "black !important",
-                      marginRight: "10px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <span>{ResultData[0]?.UploadDocumentCount}</span>
-                  </span>
-                  <span
-                    className="fa fa-history custom-text"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="Medical History"
-                    onClick={() => {
-                      setShow4({
-                        modal: true,
-                        data: ResultData[0]?.PatientGuid,
-                      });
-                    }}
-                    style={{
-                      color:
-                        ResultData[0]?.MedicalHistoryCount > 0
-                          ? "#4ea30c"
-                          : "black !important",
-                      marginRight: "10px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <span>{ResultData[0]?.MedicalHistoryCount}</span>
-                  </span>
-                  <span
-                    className="fa fa-comment custom-icon-large"
-                    title="Remarks"
-                    onClick={() => setShowRemark(true)}
-                    style={{ marginRight: "10px" }}
-                  ></span>
-                  <span
-                    className="fa fa-eyedropper custom-icon-large"
-                    title="Prickremarks"
-                    onClick={() => setShowPrickRemark(true)}
-                  ></span>
-                </div>
+          {/* <SubPageHead title={"Result Entry"}> */}
+          <div className="custom-box-body mb-3 mt-3">
+            <div className="custom-row">
+              <div className="custom-col custom-col-visit">
+                <span className="fa fa-folder custom-text">
+                  &nbsp; <span>{ResultData[0]?.LedgerTransactionNo}</span>
+                </span>
               </div>
-              <div className="custom-row">
-                {ResultTestData?.map((data, index) => (
-                  <div
-                    key={index}
-                    style={{ cursor: "pointer" }}
-                    className={` round font-weight-bold mx-2 mt-1 Status-${data.Status}`}
-                    onMouseEnter={() => {
-                      setTestHeaderHover({
-                        index: index,
-                        data: [],
-                      });
-                      TestHeaderResponce(data);
-                    }}
-                    onMouseLeave={() => {
-                      setTestHeaderHover({
-                        index: -1,
-                        data: [],
-                      });
-                      setHeaderTestResult([]);
-                    }}
-                  >
-                    {data?.PackageName}
-                    {testHeaderHover?.index === index &&
-                      headerTestResult.length > 0 && (
-                        <div
-                          style={{
-                            position: "absolute",
-                            width: "650px",
-                            left: "60px",
-                            zIndex: 1,
-                            height: "auto",
-                          }}
-                          className="resultEntryCssTable"
-                        >
-                          <table
-                            className="table table-bordered table-hover table-striped tbRecord"
-                            cellPadding="{0}"
-                            cellSpacing="{0}"
-                          >
-                            <thead className="cf">
-                              <tr>
-                                <th>Test</th>
-                                <th>Value</th>
-                                <th>Unit</th>
-                                <th>Min</th>
-                                <th>Max</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {headerTestResult.map((ele, index) => (
-                                <tr
-                                  key={index}
-                                  style={{
-                                    background:
-                                      ele?.Flag === "High"
-                                        ? "red"
-                                        : ele?.Flag === "Low"
-                                        ? "yellow"
-                                        : "skyblue",
-                                  }}
-                                >
-                                  <td data-title="LabObservationName">
-                                    {ele?.LabObservationName
-                                      ? ele?.LabObservationName
-                                      : "-"}
-                                  </td>
-                                  <td data-title="Value">
-                                    {ele?.Value ? ele?.Value : "-"}
-                                  </td>
-                                  <td data-title="ReadingFormat">
-                                    {ele?.ReadingFormat
-                                      ? ele?.ReadingFormat
-                                      : "-"}
-                                  </td>
-                                  <td data-title="MinValue">
-                                    {ele?.MinValue ? ele?.MinValue : "-"}
-                                  </td>
-                                  <td data-title="MaxValue">
-                                    {ele?.MaxValue ? ele?.MaxValue : "-"}
-                                  </td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      )}
-                  </div>
-                ))}
+
+              <div className="custom-col">
+                <span className="fa fa-user custom-text">
+                  &nbsp; <span>{ResultData[0]?.PName}</span>
+                </span>
+              </div>
+
+              <div className="custom-col">
+                <span className="fa fa-book custom-text">
+                  &nbsp;<span>{ResultData[0]?.PatientCode}</span>
+                </span>
+              </div>
+
+              <div className="custom-col custom-col-age-gender">
+                <span className="fa fa-calendar-check-o custom-text">
+                  &nbsp;<span> {ResultData[0]?.Age}</span>
+                </span>
+                <span className="fa fa-street-view custom-text">
+                  &nbsp; <span> {ResultData[0]?.Gender}</span>
+                </span>
+              </div>
+
+              <div className="custom-col">
+                <span className="fa fa-h-square custom-text">
+                  &nbsp; <span>{ResultData[0]?.Centre}</span>
+                </span>
+              </div>
+
+              <div className="custom-col">
+                <span className="fa fa-user-md custom-text">
+                  &nbsp; <span> {ResultData[0]?.Referdoctor}</span>
+                </span>
+              </div>
+
+              <div className="custom-col">
+                <span className="fa fa-plus-square custom-text">
+                  &nbsp;<span> {ResultData[0]?.RateType} </span>
+                </span>
+              </div>
+
+              <div className="custom-col custom-col-regdate">
+                <span className="fa fa-calendar custom-text">
+                  &nbsp; <span> {dateConfig(ResultData[0]?.RegDate)}</span>
+                </span>
+              </div>
+
+              <div className="custom-col custom-end">
+                <span
+                  className="fa fa-cloud-upload custom-text"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Upload Document"
+                  onClick={() => {
+                    setShow({
+                      modal: true,
+                      data: ResultData[0]?.PatientGuid,
+                    });
+                  }}
+                  style={{
+                    color:
+                      ResultData[0]?.UploadDocumentCount > 0
+                        ? "#4ea30c"
+                        : "black !important",
+                    marginRight: "10px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <span>{ResultData[0]?.UploadDocumentCount}</span>
+                </span>
+                <span
+                  className="fa fa-history custom-text"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Medical History"
+                  onClick={() => {
+                    setShow4({
+                      modal: true,
+                      data: ResultData[0]?.PatientGuid,
+                    });
+                  }}
+                  style={{
+                    color:
+                      ResultData[0]?.MedicalHistoryCount > 0
+                        ? "#4ea30c"
+                        : "black !important",
+                    marginRight: "10px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <span>{ResultData[0]?.MedicalHistoryCount}</span>
+                </span>
+                <span
+                  className="fa fa-comment custom-icon-large"
+                  title="Remarks"
+                  onClick={() => setShowRemark(true)}
+                  style={{ marginRight: "10px" }}
+                ></span>
+                <span
+                  className="fa fa-eyedropper custom-icon-large"
+                  title="Prickremarks"
+                  onClick={() => setShowPrickRemark(true)}
+                ></span>
               </div>
             </div>
-          </SubPageHead>
+            <div className="custom-row">
+              {ResultTestData?.map((data, index) => (
+                <div
+                  key={index}
+                  style={{ cursor: "pointer" }}
+                  className={` round font-weight-bold mx-2 mt-1 Status-${data.Status}`}
+                  onMouseEnter={() => {
+                    setTestHeaderHover({
+                      index: index,
+                      data: [],
+                    });
+                    TestHeaderResponce(data);
+                  }}
+                  onMouseLeave={() => {
+                    setTestHeaderHover({
+                      index: -1,
+                      data: [],
+                    });
+                    setHeaderTestResult([]);
+                  }}
+                >
+                  {data?.PackageName}
+                  {testHeaderHover?.index === index &&
+                    headerTestResult.length > 0 && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          width: "650px",
+                          left: "60px",
+                          zIndex: 1,
+                          height: "auto",
+                        }}
+                        className="resultEntryCssTable"
+                      >
+                        <table
+                          className="table table-bordered table-hover table-striped tbRecord"
+                          cellPadding="{0}"
+                          cellSpacing="{0}"
+                        >
+                          <thead className="cf">
+                            <tr>
+                              <th>Test</th>
+                              <th>Value</th>
+                              <th>Unit</th>
+                              <th>Min</th>
+                              <th>Max</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {headerTestResult.map((ele, index) => (
+                              <tr
+                                key={index}
+                                style={{
+                                  background:
+                                    ele?.Flag === "High"
+                                      ? "red"
+                                      : ele?.Flag === "Low"
+                                      ? "yellow"
+                                      : "skyblue",
+                                }}
+                              >
+                                <td data-title="LabObservationName">
+                                  {ele?.LabObservationName
+                                    ? ele?.LabObservationName
+                                    : "-"}
+                                </td>
+                                <td data-title="Value">
+                                  {ele?.Value ? ele?.Value : "-"}
+                                </td>
+                                <td data-title="ReadingFormat">
+                                  {ele?.ReadingFormat
+                                    ? ele?.ReadingFormat
+                                    : "-"}
+                                </td>
+                                <td data-title="MinValue">
+                                  {ele?.MinValue ? ele?.MinValue : "-"}
+                                </td>
+                                <td data-title="MaxValue">
+                                  {ele?.MaxValue ? ele?.MaxValue : "-"}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* </SubPageHead> */}
           {/* </div> */}
-          <Table>
+          <Table overflow={true}>
             <thead class="cf">
               <tr>
                 <th>{t("#")}</th>
@@ -2513,7 +2513,7 @@ const ResultEntry = () => {
                                     </button>
                                   </div>
                                   &nbsp;
-                                  <div className="col-sm-2 m-0 p-0">
+                                  <div className="col-sm-3 m-0 p-0">
                                     <button
                                       className="btn btn-primary btn-sm"
                                       disabled={!Hdata?.isChecked}
