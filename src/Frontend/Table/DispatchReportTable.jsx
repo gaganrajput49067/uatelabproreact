@@ -8,6 +8,7 @@ import Table from "../../components/Table/Table";
 import { dateConfig } from "../../utils/helpers";
 import Loading from "../../components/Loading/Loading";
 import CustomModal from "../utils/CustomModal";
+import NoRecordFound from "../../components/CommonComponent/NoRecordFound";
 function DispatchTable({ dispatchData, show, show2, users }) {
   const [modal, setModal] = useState(false);
   const [visitID, setVisitID] = useState();
@@ -375,9 +376,7 @@ function DispatchTable({ dispatchData, show, show2, users }) {
           </div>
         </Table>
       ) : (
-        <span style={{ width: "100%", textAlign: "center" }}>
-          {"No Data Found"}
-        </span>
+        <NoRecordFound />
       )}
       {modal && (
         <CustomModal

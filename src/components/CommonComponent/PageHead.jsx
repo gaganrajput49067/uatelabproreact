@@ -16,7 +16,9 @@ const PageHead = ({
       style={border ? { border: "0px" } : {}}
     >
       <div className="main-page-heading">
-        <h6 className="mb-0">{name}</h6>
+        <h6 className="mb-0 fw-bold" style={{ letterSpacing: "0px" }}>
+          {name}
+        </h6>
         <div className="main-heading-content ">
           {showbtn && children}
           {showDrop && (

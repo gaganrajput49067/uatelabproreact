@@ -337,7 +337,7 @@ function ToggleTheme() {
     {
       Name: "Pale Pink",
       value: "palePink",
-      color: "#bc3c8b",
+      color: "#f78e8e",
     },
     {
       Name: "Peach",

@@ -124,7 +124,10 @@ const SaveSmsEmail = ({
               <label>Patient</label>
             </td>
             <td>
-              <div className="row d-flex">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <div className="col-sm-1">
                   <input
                     type="checkbox"
@@ -153,7 +156,10 @@ const SaveSmsEmail = ({
               </div>
             </td>
             <td>
-              <div className="row">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <div className="col-sm-1">
                   <input
                     type="checkbox"
@@ -187,7 +193,10 @@ const SaveSmsEmail = ({
               <label>Doctor</label>
             </td>
             <td>
-              <div className="row">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <div className="col-sm-1">
                   <input
                     type="checkbox"
@@ -213,7 +222,10 @@ const SaveSmsEmail = ({
               </div>
             </td>
             <td>
-              <div className="row">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <div className="col-sm-1">
                   <input
                     type="checkbox"
@@ -244,7 +256,10 @@ const SaveSmsEmail = ({
               <label>Client</label>
             </td>
             <td>
-              <div className="row">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <div className="col-sm-1">
                   <input
                     type="checkbox"
@@ -270,7 +285,10 @@ const SaveSmsEmail = ({
               </div>
             </td>
             <td>
-              <div className="row">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <div className="col-sm-1">
                   <input
                     type="checkbox"

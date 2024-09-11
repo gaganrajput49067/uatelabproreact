@@ -9,6 +9,8 @@ import Loading from "../../components/Loading/Loading";
 import { Link } from "react-router-dom";
 import CustomModal from "../utils/CustomModal";
 import SendEmailModalReprint from "../utils/SendEmailModalReprint";
+import NoRecordFound from "../../components/CommonComponent/NoRecordFound";
+import Tooltip from "../../components/CommonComponent/Tooltip";
 const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
   const [modal, setModal] = useState(false);
   const [visitID, setVisitID] = useState();
@@ -217,22 +219,38 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                       <th>{"Edit Info"}</th>
                       <th>{"Cash Receipt"}</th>
                       <th>{"FullyPaid"}</th>
-                      <th>{"Concent form"}</th>
-                      <th>{"View Details"}</th>
-                      <th>{"Send Email"}</th>
+                      <th>
+                        <Tooltip label={"skjfnsnnkjferf"}>
+                          {"Concent form"}
+                        </Tooltip>
+                      </th>
+                      <th className="text-center">
+                        &nbsp;
+                        <Tooltip title="View details" position="bottom">
+                          <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </Tooltip>
+                        &nbsp;
+                      </th>
+                      <th className="text-center">
+                        &nbsp;{" "}
+                        <i class="fa fa-envelope-open" aria-hidden="true"></i>
+                        &nbsp;
+                      </th>
                       <th
                         data-toggle="tooltip"
                         data-placement="top"
                         title="Uploaded Document"
+                        className="text-center"
                       >
-                        {"U.D"}
+                        <i class="fa fa-file" aria-hidden="true"></i>
                       </th>
                       <th
                         data-toggle="tooltip"
                         data-placement="top"
                         title="Medical History"
+                        className="text-center"
                       >
-                        {"M.H"}
+                        <i class="fa fa-medkit" aria-hidden="true"></i>
                       </th>
                     </tr>
                   </thead>
@@ -244,7 +262,7 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                           backgroundColor: getColor(data?.reportStatus),
                         }}
                       >
-                        <td data-title={"S.No"}>
+                        <td data-title={"S.No"} className="text-center">
                           {index + finalIndex}
 
                           {data?.isUrgent === 1 && <img src={urgentGIF}></img>}
@@ -258,7 +276,10 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                         <td data-title={"Visit No"}>
                           {data?.LedgerTransactionNo}
                         </td>
-                        <td data-title={"Patient Name"} className="d-flex">
+                        <td
+                          data-title={"Patient Name"}
+                          className="d-flex align-items-center"
+                        >
                           {showPatientImage.loading &&
                           index == showPatientImage.index ? (
                             <Loading />
@@ -270,12 +291,14 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                               }
                             ></span>
                           )}
-                          &nbsp;
-                          {data?.FirstName +
-                            " " +
-                            data?.MiddleName +
-                            " " +
-                            data?.LastName}
+                          &nbsp;&nbsp;&nbsp;
+                          <span>
+                            {data?.FirstName +
+                              " " +
+                              data?.MiddleName +
+                              " " +
+                              data?.LastName}
+                          </span>
                         </td>
 
                         <td data-title={"Remarks"}>{data?.Remarks}</td>
@@ -299,13 +322,19 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                         <td data-title={"Centre"}>{data?.Centre}</td>
                         <td data-title={"Doctor"}>{data?.DoctorName}</td>
                         <td data-title={"User"}>{data?.CreatedByName}</td>
-                        <td data-title={"Edit Info"}>
+                        <td data-title={"Edit Info"} className="text-center">
                           {
                             <Link
                               to={`/EditPatientDetails`}
                               state={{ data: data?.LedgerTransactionNo }}
                             >
-                              {"Edit"}
+                              <Tooltip label={"Edit Patient Info"}>
+                                <i
+                                  title="Edit Patient Info"
+                                  class="fa fa-pencil-square "
+                                  aria-hidden="true"
+                                ></i>
+                              </Tooltip>
                             </Link>
                           }
                         </td>
@@ -320,7 +349,7 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                           }
                         </td>
 
-                        <td data-title={"Cash Receipt"}>
+                        <td data-title={"Cash Receipt"} className="text-center">
                           {printLoading.loading &&
                           printLoading.index === index ? (
                             <Loading />
@@ -339,7 +368,7 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                             )
                           )}
                         </td>
-                        <td data-title={"FullyPaid"}>
+                        <td data-title={"FullyPaid"} className="text-center">
                           {printLoadingFP.loading &&
                           printLoadingFP.index === index ? (
                             <Loading />
@@ -359,7 +388,11 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                           )}
                         </td>
 
-                        <td data-title={"Concent form"}>-</td>
+                        <td data-title={"Concent form"} className="text-center">
+                          <Tooltip label={"Concent Form"}>
+                            <span>-dsfs</span>
+                          </Tooltip>
+                        </td>
                         <td
                           data-title={"View Details"}
                           onClick={() => {
@@ -367,10 +400,12 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                             setVisitID(data?.LedgerTransactionNo);
                           }}
                         >
-                          <i className="fa fa-search" />
+                          &nbsp; <i className="fa fa-search" />
+                          &nbsp;
                         </td>
 
                         <td data-title={"Send Email"} className="text-centre">
+                          &nbsp;{" "}
                           <i
                             className="pi pi-envelope"
                             onClick={() =>
@@ -381,6 +416,7 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                               })
                             }
                           />
+                          &nbsp;
                         </td>
                         <td data-title={"UploadDocumentCount"}>
                           <div
@@ -398,9 +434,11 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                               });
                             }}
                           >
+                            &nbsp;
                             <i className="fa fa-cloud-upload">
                               &nbsp;{data?.UploadDocumentCount}
                             </i>
+                            &nbsp;
                           </div>
                         </td>
                         <td data-title={"Medical History"}>
@@ -419,9 +457,11 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                               });
                             }}
                           >
+                            &nbsp;
                             <i className="fa fa-history">
                               &nbsp;{data?.MedicalHistoryCount}
                             </i>
+                            &nbsp;
                           </div>
                         </td>
                       </tr>
@@ -440,9 +480,7 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
           )}{" "}
         </>
       ) : (
-        <span style={{ width: "100%", textAlign: "center" }}>
-          {"No Data Found"}
-        </span>
+        <NoRecordFound />
       )}
     </>
   );

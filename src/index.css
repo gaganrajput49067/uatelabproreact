@@ -15,8 +15,8 @@
 }
 
 :root {
-  --bg-color: #0382bd;
-  --bg-subMenu: #03a0e7;
+  --bg-color: #555299;
+  --bg-subMenu: #9390d9;
   --subMenuText-color: rgb(255, 255, 255);
   --gradient: linear-gradient(
     90deg,
@@ -47,7 +47,8 @@
 [data-theme="grey"] {
   --bg-color: #5e5c5c; /* Changed from #686666 */
   --bg-subMenu: #9a9a9a; /* Changed from #b0b0b0 */
-  --subMenuText-color: #e6e6e6; /* Changed from #ffffff */
+  --subMenuText-color: #ffffff; /* Changed from #ffffff */
+  --darkMode-color:white;
   --gradient: linear-gradient(
     90deg,
     rgba(94, 92, 92, 1) 0%,
@@ -81,9 +82,10 @@
 }
 
 [data-theme="palePink"] {
-  --bg-color: #bc3c8b; /* Changed from #f1368d */
-  --bg-subMenu: #ee94cb; /* Changed from #f86da7 */
-  --subMenuText-color: #000000; /* Changed from #ffffff */
+  --bg-color: #f78e8e; /* Changed from #f1368d */
+  --bg-subMenu: #ffc5c5; /* Changed from #f86da7 */
+  --subMenuText-color: #000000 !important; /* Changed from #ffffff */
+  --darkMode-color:white;
   --gradient: linear-gradient(
     90deg,
     rgba(188, 60, 139, 1) 0%,
@@ -105,9 +107,10 @@
 }
 
 [data-theme="green"] {
-  --bg-color: #3cbc67; /* Changed from #36c099 */
-  --bg-subMenu: #3ecc6d; /* Changed from #68f0d2 */
-  --subMenuText-color: #fff7e6; /* Changed from #ffffff */
+  --bg-color: #08d4a1; /* Changed from #36c099 */
+  --bg-subMenu:  #21fac0 !important; /* Changed from #68f0d2 */
+  --subMenuText-color: black !important; /* Changed from #ffffff */
+  --darkMode-color:white;
   --gradient: linear-gradient(
     90deg,
     rgba(54, 192, 153, 1) 0%,
@@ -419,7 +422,7 @@ align-items: center;
 
 /* Additional custom styles */
 .text-white {
-  color: #fff;
+  color: var(--subMenuText-color) !important;
 }
 
 .bg-success {
@@ -787,7 +790,7 @@ align-items: center;
   justify-content: space-between;
   align-items: center;
   align-content: center;
-  padding: 0.5rem;
+  padding: 0.4rem 0.5rem;
   width: 100%;
   border-radius: 0.3rem;
   background-color: var(--bg-color);

@@ -369,6 +369,8 @@ const ReceiptReprint = () => {
                 onChange={handleSelectChange}
               />
             </div>
+          </div>
+          <div className="row d-flex" style={{ alignItems: "center" }}>
             <div className="col-md-2">
               <DatePicker
                 className="custom-calendar"
@@ -381,8 +383,6 @@ const ReceiptReprint = () => {
                 maxDate={new Date(formData?.ToDate)}
               />
             </div>
-          </div>
-          <div className="row d-flex" style={{ alignItems: "center" }}>
             <div className="col-md-1">
               <CustomTimePicker
                 name="FromTime"
