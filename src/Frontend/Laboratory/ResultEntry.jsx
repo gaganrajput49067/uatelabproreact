@@ -2277,6 +2277,95 @@ const ResultEntry = () => {
                   ></span>
                 </div>
               </div>
+              <div className="custom-row">
+                {ResultTestData?.map((data, index) => (
+                  <div
+                    key={index}
+                    style={{ cursor: "pointer" }}
+                    className={` round font-weight-bold mx-2 mt-1 Status-${data.Status}`}
+                    onMouseEnter={() => {
+                      setTestHeaderHover({
+                        index: index,
+                        data: [],
+                      });
+                      TestHeaderResponce(data);
+                    }}
+                    onMouseLeave={() => {
+                      setTestHeaderHover({
+                        index: -1,
+                        data: [],
+                      });
+                      setHeaderTestResult([]);
+                    }}
+                  >
+                    {data?.PackageName}
+                    {testHeaderHover?.index === index &&
+                      headerTestResult.length > 0 && (
+                        <div
+                          style={{
+                            position: "absolute",
+                            width: "650px",
+                            left: "60px",
+                            zIndex: 1,
+                            height: "auto",
+                          }}
+                          className="resultEntryCssTable"
+                        >
+                          <table
+                            className="table table-bordered table-hover table-striped tbRecord"
+                            cellPadding="{0}"
+                            cellSpacing="{0}"
+                          >
+                            <thead className="cf">
+                              <tr>
+                                <th>Test</th>
+                                <th>Value</th>
+                                <th>Unit</th>
+                                <th>Min</th>
+                                <th>Max</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {headerTestResult.map((ele, index) => (
+                                <tr
+                                  key={index}
+                                  style={{
+                                    background:
+                                      ele?.Flag === "High"
+                                        ? "red"
+                                        : ele?.Flag === "Low"
+                                        ? "yellow"
+                                        : "skyblue",
+                                  }}
+                                >
+                                  <td data-title="LabObservationName">
+                                    {ele?.LabObservationName
+                                      ? ele?.LabObservationName
+                                      : "-"}
+                                  </td>
+                                  <td data-title="Value">
+                                    {ele?.Value ? ele?.Value : "-"}
+                                  </td>
+                                  <td data-title="ReadingFormat">
+                                    {ele?.ReadingFormat
+                                      ? ele?.ReadingFormat
+                                      : "-"}
+                                  </td>
+                                  <td data-title="MinValue">
+                                    {ele?.MinValue ? ele?.MinValue : "-"}
+                                  </td>
+                                  <td data-title="MaxValue">
+                                    {ele?.MaxValue ? ele?.MaxValue : "-"}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+                  </div>
+                ))}
+              </div>
             </div>
           </SubPageHead>
           {/* </div> */}
