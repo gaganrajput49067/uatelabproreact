@@ -1,8 +1,17 @@
 .simple-table-container {
   width: 100%;
   position: relative;
-  max-height: auto;
+  max-height: 450px;
   overflow: auto;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.simple-table-container-overflow {
+  width: 100%;
+  position: relative;
+  max-height: 450px;
+  overflow: visible;
   margin-bottom: 5px;
   margin-top: 5px;
   z-index: 1;
@@ -103,8 +112,12 @@
   opacity: 0.5;
 }
 
-/* Responsive styles */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1100px) {
+  .simple-table-container-overflow {
+    overflow: auto;
+  }
+}
+@media screen and (max-width: 768px) {
   .simple-table {
     border: 0;
     width: 100%;
