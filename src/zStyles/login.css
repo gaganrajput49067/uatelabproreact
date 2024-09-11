@@ -143,6 +143,10 @@
   margin-top: 6px;
 }
 
+.maindiv{
+  position: relative;
+}
+
 .maindiv-login {
   width: 150%;
   position: relative;

@@ -57,8 +57,8 @@ const MainDaashBoard = () => {
     <>
       <div className="header-main-menu-container m-2">
         <span className="header-dashboard">DashBoard</span>
-        <div className="header-option row">
-          <div className="col-sm-4 mt-1">
+        <div className="header-option">
+          <div className="col-sm-3 mt-1">
             <SelectBox
               className="required-fields"
               placeholderName="Select Centre"
@@ -71,7 +71,7 @@ const MainDaashBoard = () => {
               lable="Centre"
             />
           </div>
-          <div className="col-sm-4 mt-1">
+          <div className="col-sm-3 mt-1">
             <DatePicker
               className="custom-calendar"
               name="DOB"
@@ -81,7 +81,7 @@ const MainDaashBoard = () => {
               lable="From Date"
             />
           </div>
-          <div className="col-sm-4 mt-1">
+          <div className="col-sm-3 mt-1">
             <DatePicker
               className="custom-calendar"
               name="To Date"

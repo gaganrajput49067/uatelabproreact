@@ -20,6 +20,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const [isRightPanelActive, setRightPanelActive] = useState(false);
   const [showPass, setShowPass] = useState(false);
+  const [cShowPass, setCShowPass] = useState(false);
   const handleSignUpClick = () => {
     setRightPanelActive(true);
   };
@@ -229,7 +230,7 @@ const Login = () => {
                     </div>
                     <div className="maindiv">
                       <Input
-                        type="password"
+                        type={showPass ? "test" : "password"}
                         id="Password"
                         className="form-control"
                         name="Password"
@@ -238,6 +239,12 @@ const Login = () => {
                         placeholder=" "
                         onChange={handleChange}
                       />
+                      <i
+                        class={`fa ${
+                          showPass ? "fa-eye" : "fa-eye-slash"
+                        } key-icon`}
+                        onClick={() => setShowPass(!showPass)}
+                      ></i>
                     </div>
                   </div>
                   <div className="main-login-input">
@@ -246,7 +253,7 @@ const Login = () => {
                     </div>
                     <div className="maindiv">
                       <Input
-                        type="password"
+                        type={cShowPass ? "test" : "password"}
                         id="ConfirmPassword"
                         className="form-control"
                         name="ConfirmPassword"
@@ -255,6 +262,12 @@ const Login = () => {
                         placeholder=" "
                         onChange={handleChange}
                       />
+                      <i
+                        class={`fa ${
+                          cShowPass ? "fa-eye" : "fa-eye-slash"
+                        } key-icon`}
+                        onClick={() => setCShowPass(!cShowPass)}
+                      ></i>
                     </div>
                   </div>
 
@@ -284,9 +297,8 @@ const Login = () => {
         <div className="form-container sign-in-container">
           {!isRightPanelActive && (
             <div className="login-form">
-             
-                <img className="logoStyle mb-4" src={logoitdose} alt="logo" />
-           
+              <img className="logoStyle mb-4" src={logoitdose} alt="logo" />
+
               <h5 className="logo-title mb-4">Sign in to start your session</h5>
 
               <div className="main-login-input">

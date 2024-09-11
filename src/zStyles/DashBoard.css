@@ -183,7 +183,8 @@ border-radius: .3rem .3rem .3rem .3rem ;
 .header-option{
     display: flex;
     flex-direction: row;
-    width: 50%;
+    justify-content: end;
+    width: 80%;
 }
 
 
@@ -213,14 +214,18 @@ flex-direction: column;
     }
 
     .header-main-menu-container{
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
+        flex-direction: row;
+        justify-content: center;
+        align-items: space-between; 
+        flex-wrap: nowrap;
+    }
+    .header-dashboard{
+        width: 30%;
     }
 
     .header-option{
         display: flex;
         flex-direction: row;
-        width: 100%;
+        width: 60%;
     }
 }

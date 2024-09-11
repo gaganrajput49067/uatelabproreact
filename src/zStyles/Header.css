@@ -156,7 +156,7 @@ width: 100%;
 }
 
 .company-info{
-    width: 20vw;
+    width: 400px;
     position: relative;
     display: flex;
     flex-direction: row;
