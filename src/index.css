@@ -1367,7 +1367,7 @@ input::placeholder {
 .suggestion-data {
   position: absolute;
   top: 24px;
-  z-index: 999;
+  z-index: 9999;
   width: 86%;
   right: 17px;
   background-color: white;

@@ -37,6 +37,7 @@ const Login = () => {
     if (success) {
       window.localStorage.setItem("Username", user.Username);
       window.localStorage.setItem("DefaultCentre", user.DefaultCentreID);
+      window.localStorage.setItem("ModifyRegDate", user.ModifiedRegDate);
       navigate("/");
     }
   }, [success]);
