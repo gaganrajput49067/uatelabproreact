@@ -1,8 +1,10 @@
 .simple-table-container {
   width: 100%;
   position: relative;
-  overflow-x: auto;
-  
+max-height: 450px;
+  overflow: visible;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .simple-table-container::-webkit-scrollbar {

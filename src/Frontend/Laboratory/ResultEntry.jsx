@@ -45,6 +45,7 @@ import ResultEntryEditModal from "../utils/ResultEntryEditModal";
 import RerunResultEntryModal from "../utils/RerunResultEntryModal";
 import Reason from "../utils/Reason";
 import ResultEditAddModal from "../utils/ResultEditAddModal";
+import SubPageHead from "../../components/CommonComponent/SubPageHead";
 const ResultEntry = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -2163,8 +2164,9 @@ const ResultEntry = () => {
               </div>
             </div>
           </div> */}
-          <div className="card">
-            <div className="custom-box-body mb-3">
+          {/* <div className="card pb-0"> */}
+          <SubPageHead title={"Result Entry"}>
+            <div className="custom-box-body mb-3 mt-3">
               <div className="custom-row">
                 <div className="custom-col custom-col-visit">
                   <span className="fa fa-folder custom-text">
@@ -2276,7 +2278,8 @@ const ResultEntry = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </SubPageHead>
+          {/* </div> */}
           <Table>
             <thead class="cf">
               <tr>
@@ -2579,7 +2582,7 @@ const ResultEntry = () => {
                           }}
                         >
                           <td data-title={t("#")}>
-                            <Input
+                            <input
                               type="checkbox"
                               checked={datanew?.isChecked}
                               onChange={(e) => handleCheckbox(e, index)}
