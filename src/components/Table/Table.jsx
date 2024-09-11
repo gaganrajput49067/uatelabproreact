@@ -15,6 +15,7 @@ const Table = ({
   itemsPerPage = 10,
   fixCol = 0,
   children,
+  overflow = true,
 }) => {
   const [itemsPerPages, setItemPerPage] = useState(itemsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +27,13 @@ const Table = ({
 
   if (!paginate) {
     return (
-      <div className="simple-table-container tableStructure">
+      <div
+        className={`${
+          overflow
+            ? "simple-table-container-overflow"
+            : "simple-table-container"
+        }`}
+      >
         <table className="simple-table">{children}</table>
       </div>
     );
@@ -45,7 +52,7 @@ const Table = ({
   console.log(itemsPerPages);
   return (
     <>
-      <div className="simple-table-container tableStructure">
+      <div className="simple-table-container">
         <table className="simple-table">
           {children({ currentItems, finalIndex })}
         </table>
