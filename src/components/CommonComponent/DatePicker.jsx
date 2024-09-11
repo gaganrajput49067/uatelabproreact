@@ -30,13 +30,12 @@ function DatePicker({
             inputId={id}
             id={id}
             showIcon
-            placeholder={placeholder}
+            placeholder="DD/MM/YYYY"
             className={className}
             dateFormat="dd-MM-yy"
             value={value}
             name={name}
             onChange={handleDateChange}
-            // wrapperClassName="datepicker"
             tabIndex={tabIndex ? tabIndex : "-1"}
             maxDate={maxDate}
             minDate={minDate}

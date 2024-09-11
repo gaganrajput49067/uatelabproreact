@@ -42,7 +42,7 @@ const ReceiptReprint = () => {
     index: -1,
   });
   const navigate = useNavigate();
-
+  const today = new Date();
   const [formData, setFormData] = useState({
     FromDate: new Date(),
     ToDate: new Date(),
@@ -50,8 +50,8 @@ const ReceiptReprint = () => {
     ItemValue: "",
     RateTypeID: "",
     SelectTypes: "",
-    FromTime: new Date(),
-    ToTime: new Date(),
+    FromTime: new Date(today.setHours(0, 0, 0, 0)),
+    ToTime: new Date(today.setHours(23, 59, 59, 999)),
     DoctorReferal: "",
     DoctorName: "",
     User: "",

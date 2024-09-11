@@ -140,7 +140,7 @@ const ResultEntry = () => {
     index: -1,
   });
   const [showFilter, setshowFilter] = useState(true);
-
+  const today = new Date();
   const [formData, setFormData] = useState({
     FromDate: new Date(),
     ToDate: new Date(),
@@ -149,8 +149,8 @@ const ResultEntry = () => {
     RateTypeID: "",
     SelectTypes: "",
     RefundFilter: null,
-    FromTime: new Date(),
-    ToTime: new Date(),
+    FromTime: new Date(today.setHours(0, 0, 0, 0)),
+    ToTime: new Date(today.setHours(23, 59, 59, 999)),
     DoctorReferal: "",
     DepartmentID: "",
     DoctorName: "",
@@ -2277,6 +2277,7 @@ const ResultEntry = () => {
               </div>
             </div>
           </div>
+          <div className="card">
           <Table>
             <thead class="cf">
               <tr>
@@ -2497,7 +2498,7 @@ const ResultEntry = () => {
                           )}
                         {Hdata?.IsDLCCheck == 1 && (
                           <>
-                            <Input
+                            <input
                               type="checkbox"
                               checked={DlcCheckChecked}
                               onChange={(e) => {
@@ -2579,7 +2580,7 @@ const ResultEntry = () => {
                           }}
                         >
                           <td data-title={t("#")}>
-                            <Input
+                            <input
                               type="checkbox"
                               checked={datanew?.isChecked}
                               onChange={(e) => handleCheckbox(e, index)}
@@ -2640,7 +2641,7 @@ const ResultEntry = () => {
                               ) : datanew?.dlcCheck === 1 ? (
                                 datanew?.IsHelpMenu === 0 ? (
                                   <td data-title={t("Value")}>
-                                    <input
+                                    <Input
                                       type="text"
                                       className={`form-control input-sm ${
                                         (datanew?.MaxValue != "0" ||
@@ -2689,7 +2690,7 @@ const ResultEntry = () => {
                                   </td>
                                 ) : (
                                   <td data-title={t("Value")}>
-                                    <input
+                                    <Input
                                       type="text"
                                       className={`form-control input-sm ${
                                         (datanew?.MaxValue != "0" ||
@@ -2738,7 +2739,7 @@ const ResultEntry = () => {
                                 )
                               ) : datanew?.IsHelpMenu === 0 ? (
                                 <td data-title={t("Value")}>
-                                  <input
+                                  <Input
                                     type="text"
                                     className={`form-control input-sm ${
                                       (datanew?.MaxValue != "0" ||
@@ -2787,7 +2788,7 @@ const ResultEntry = () => {
                               ) : (
                                 <td data-title={t("Value")}>
                                   <div style={{ position: "relative" }}>
-                                    <input
+                                    <Input
                                       type="text"
                                       className={`form-control input-sm ${
                                         (datanew?.MaxValue != "0" ||
@@ -3023,7 +3024,7 @@ const ResultEntry = () => {
                                 </td>
                               )}
                               <td data-title={t("Omit")}>
-                                <Input
+                                <input
                                   type="checkbox"
                                   checked={datanew?.isOmit}
                                   onChange={(e) => handleCheckbox(e, index)}
@@ -3032,7 +3033,7 @@ const ResultEntry = () => {
                                 />
                               </td>
                               <td data-title={t("Critical")}>
-                                <Input
+                                <indexnput
                                   type="checkbox"
                                   checked={datanew?.IsCriticalCheck}
                                   onChange={(e) => handleCheckbox(e, index)}
@@ -3118,7 +3119,7 @@ const ResultEntry = () => {
                 </>
               ))}
             </tbody>
-          </Table>
+          </Table></div>
           <div className="card m-0 p-0 pb-2">
             <div className="row mt-3" style={{ textWrap: "avoid" }}>
               {loading ? (
