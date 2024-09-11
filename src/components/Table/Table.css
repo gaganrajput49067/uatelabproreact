@@ -44,6 +44,7 @@
   table-layout: auto;
   border-radius: 1rem;
   border: 1px solid var(--bg-subMenu);
+  overflow: auto;
 }
 
 .simple-table tr {

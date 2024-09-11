@@ -901,8 +901,11 @@ const SampleCollection = () => {
                           <th>{"UHID"}</th>
                           <th>{"Name"} </th>
                           <th>{"Remarks"} </th>
-                          <th>{"Barcode"} </th>
+                          <th className="text-center">
+                            <i title="Barcode" class="fa fa-barcode"></i>{" "}
+                          </th>
                           <th>{"Age"}</th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -914,24 +917,11 @@ const SampleCollection = () => {
                                   style={{
                                     display: "flex",
                                     justifyContent: "space-around",
+                                    margin: "0",
                                   }}
                                 >
-                                  <div>{index + finalIndex}</div>
-                                  <div>
-                                    <i
-                                      className="fa fa-search"
-                                      style={{
-                                        cursor: "pointer",
-                                        color: "red",
-                                      }}
-                                      onClick={() => {
-                                        setShowLog({
-                                          modal: true,
-                                          visitId: data?.VisitNo,
-                                        });
-                                      }}
-                                    />
-                                  </div>
+                                  {index + finalIndex}
+
                                   {data?.isUrgent === 1 && (
                                     <div>
                                       <img src={urgentGIF}></img>
@@ -951,7 +941,7 @@ const SampleCollection = () => {
                                 {dateConfig(data.Date)}&nbsp;
                               </td>
                               <td
-                                className={`color-Status-${data.Status} text-info`}
+                                className={`color-Status-${data.Status} `}
                                 onClick={() =>
                                   SearchInvestigationData(
                                     data.LedgerTransactionID
@@ -977,9 +967,12 @@ const SampleCollection = () => {
                               <td data-title={"Remarks"}>
                                 {data?.Remarks}&nbsp;
                               </td>
-                              <td data-title={"Barcode Print"}>
+                              <td
+                                data-title={"Barcode Print"}
+                                className="text-center"
+                              >
                                 <div
-                                  className="text-info"
+                                  className="text"
                                   style={{ cursor: "pointer" }}
                                 >
                                   {data?.Status == 2 || data?.Status == 3 ? (
@@ -999,6 +992,21 @@ const SampleCollection = () => {
                               </td>
                               <td data-title={"Gender"}>
                                 {data?.Age}/{data?.Gender}&nbsp;
+                              </td>
+                              <td className="text-center">
+                                <i
+                                  className="fa fa-search"
+                                  style={{
+                                    cursor: "pointer",
+                                    color: "red",
+                                  }}
+                                  onClick={() => {
+                                    setShowLog({
+                                      modal: true,
+                                      visitId: data?.VisitNo,
+                                    });
+                                  }}
+                                />
                               </td>
                             </tr>
                           ))}
@@ -1113,7 +1121,7 @@ const SampleCollection = () => {
                 </div>
 
                 <div className="custom-col custom-end">
-                  <Tooltip label={"Uploaded Document"}>
+                  <Tooltip label={"Uploaded Document"} className={"d-flex"}>
                     <span
                       className="fa fa-cloud-upload custom-text"
                       onClick={() => {
@@ -1134,7 +1142,7 @@ const SampleCollection = () => {
                       &nbsp;<span>{searchInvdata[0]?.UploadDocumentCount}</span>
                     </span>
                   </Tooltip>
-                  <Tooltip label={"Medical History"}>
+                  <Tooltip label={"Medical History"} className={"d-flex"}>
                     <span
                       className="fa fa-history custom-text"
                       onClick={() => {
@@ -1192,7 +1200,7 @@ const SampleCollection = () => {
                         <th>{"Prick Remarks"}</th>
                         <th>{"SampleTypeName"}</th>
                         <th>{"Reject"}</th>
-                        <th>
+                        <th className="text-center">
                           {handleCheckboxCondition(searchInvdata) && (
                             <input
                               type="checkbox"

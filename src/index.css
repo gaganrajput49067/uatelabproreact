@@ -48,7 +48,7 @@
   --bg-color: #5e5c5c; /* Changed from #686666 */
   --bg-subMenu: #9a9a9a; /* Changed from #b0b0b0 */
   --subMenuText-color: #ffffff; /* Changed from #ffffff */
-  --darkMode-color:white;
+  --darkMode-color: white;
   --gradient: linear-gradient(
     90deg,
     rgba(94, 92, 92, 1) 0%,
@@ -85,7 +85,7 @@
   --bg-color: #f78e8e; /* Changed from #f1368d */
   --bg-subMenu: #ffc5c5; /* Changed from #f86da7 */
   --subMenuText-color: #000000 !important; /* Changed from #ffffff */
-  --darkMode-color:white;
+  --darkMode-color: white;
   --gradient: linear-gradient(
     90deg,
     rgba(188, 60, 139, 1) 0%,
@@ -108,9 +108,9 @@
 
 [data-theme="green"] {
   --bg-color: #08d4a1; /* Changed from #36c099 */
-  --bg-subMenu:  #21fac0 !important; /* Changed from #68f0d2 */
+  --bg-subMenu: #21fac0 !important; /* Changed from #68f0d2 */
   --subMenuText-color: black !important; /* Changed from #ffffff */
-  --darkMode-color:white;
+  --darkMode-color: white;
   --gradient: linear-gradient(
     90deg,
     rgba(54, 192, 153, 1) 0%,
@@ -119,12 +119,11 @@
   );
 }
 
-
-  .row {
-    margin-top: 6px !important;
-    width: 100%;
-    display: flex;
-  }
+.row {
+  margin-top: 6px !important;
+  width: 100%;
+  display: flex;
+}
 
 /* @media only screen and (max-width: 574) {
   .col-lg-1,
@@ -397,8 +396,8 @@ input.form-control {
 
 .card-center {
   display: flex;
-justify-content: center;
-align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-header {
@@ -1334,7 +1333,7 @@ input::placeholder {
 .iconSize {
   height: 25px;
   border-radius: 4px;
-  background-color: var(--bg-subMenu);
+  background-color: var(--bg-color);
   border: none;
 }
 .iconSizeAge {
@@ -1812,18 +1811,18 @@ hr {
   cursor: pointer;
   color: white;
 }
-.IconClass{
+.IconClass {
   font-size: 11px !important;
   font-weight: bold !important;
 }
-.no-record-found{
+.no-record-found {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.no-record-found img{
-width: 400px;
-height: 300px;
+.no-record-found img {
+  width: 400px;
+  height: 300px;
 }
