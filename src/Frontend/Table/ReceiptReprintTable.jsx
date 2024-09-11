@@ -219,10 +219,16 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                       <th>{"Edit Info"}</th>
                       <th>{"Cash Receipt"}</th>
                       <th>{"FullyPaid"}</th>
-                      <th>{"Concent form"}</th>
+                      <th>
+                        <Tooltip label={"skjfnsnnkjferf"}>
+                          {"Concent form"}
+                        </Tooltip>
+                      </th>
                       <th className="text-center">
                         &nbsp;
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        <Tooltip title="View details" position="bottom">
+                          <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </Tooltip>
                         &nbsp;
                       </th>
                       <th className="text-center">
@@ -343,7 +349,7 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                           }
                         </td>
 
-                        <td data-title={"Cash Receipt"}>
+                        <td data-title={"Cash Receipt"} className="text-center">
                           {printLoading.loading &&
                           printLoading.index === index ? (
                             <Loading />
@@ -362,7 +368,7 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                             )
                           )}
                         </td>
-                        <td data-title={"FullyPaid"}>
+                        <td data-title={"FullyPaid"} className="text-center">
                           {printLoadingFP.loading &&
                           printLoadingFP.index === index ? (
                             <Loading />
@@ -382,7 +388,11 @@ const ReceiptReprintTable = ({ receiptData, show, show2 }) => {
                           )}
                         </td>
 
-                        <td data-title={"Concent form"}>-</td>
+                        <td data-title={"Concent form"} className="text-center">
+                          <Tooltip label={"Concent Form"}>
+                            <span>-dsfs</span>
+                          </Tooltip>
+                        </td>
                         <td
                           data-title={"View Details"}
                           onClick={() => {

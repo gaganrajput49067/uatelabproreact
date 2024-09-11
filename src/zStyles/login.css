@@ -145,7 +145,17 @@
 
 .maindiv-login {
   width: 150%;
+  position: relative;
 }
+
+.key-icon{
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  cursor: pointer;
+}
+
+
 
 .main-login-button {
   margin-top: 10px;

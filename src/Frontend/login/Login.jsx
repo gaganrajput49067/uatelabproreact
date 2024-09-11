@@ -19,7 +19,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isRightPanelActive, setRightPanelActive] = useState(false);
-
+  const [showPass, setShowPass] = useState(false);
   const handleSignUpClick = () => {
     setRightPanelActive(true);
   };
@@ -315,7 +315,7 @@ const Login = () => {
                 </div>
                 <div className="maindiv-login">
                   <Input
-                    type="password"
+                    type={showPass ? "test" : "password"}
                     id="password"
                     className="form-control required-fields"
                     name="password"
@@ -325,6 +325,12 @@ const Login = () => {
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
                   />
+                  <i
+                    class={`fa ${
+                      showPass ? "fa-eye" : "fa-eye-slash"
+                    } key-icon`}
+                    onClick={() => setShowPass(!showPass)}
+                  ></i>
                   {errors?.password && credentials?.password?.trim() === "" && (
                     <div className="error-message">{errors?.password}</div>
                   )}
