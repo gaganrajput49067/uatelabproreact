@@ -8,6 +8,7 @@ import { axiosInstance } from "../../utils/axiosInstance";
 import SampleRemark from "../utils/SampleRemark";
 import DOSModal from "../utils/DOSModal";
 import TableSelectBox from "../../components/TableComponent/TableSelectBox";
+import RejectModal from "../utils/RejectModal";
 
 function SampleCollectionTable({
   data,
@@ -172,6 +173,14 @@ function SampleCollectionTable({
           LTData={data}
           onHandleShow={() => setDos(false)}
           id={data?.InvestigationID}
+        />
+      )}
+        {show && (
+        <RejectModal
+          show={show}
+          handleShow={handleShow}
+          data={data}
+          TableData={TableData}
         />
       )}
       <td className={`color-Status-${data.Status} `} data-title={"S.No"}>

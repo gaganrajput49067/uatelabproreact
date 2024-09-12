@@ -1,9 +1,18 @@
 import "./Modal.css";
 
+import { useRef } from "react";
 const Modal = ({ title, children, handleClose, top, className }) => {
+  const modalBoxRef = useRef(null);
+
+  const handleClickOutside = (e) => {
+    if (modalBoxRef.current && !modalBoxRef.current.contains(e.target)) {
+      handleClose();
+    }
+  };
   return (
-    <div className="Main-Modal-Container">
+    <div className="Main-Modal-Container" onClick={handleClickOutside}>
       <div
+        ref={modalBoxRef}
         className={`main-modal-box ${className}`}
         style={top && top !== "" ? { position: "absolute", top: top } : {}}
       >

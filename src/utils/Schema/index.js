@@ -113,3 +113,54 @@ const conditionalRequired = (message) => Yup.string().test(
     }
     return err;
   };
+  export const SmsEmail = (formData) => {
+    let err = "";
+    if (
+      formData?.SmsToPatient.length > 0 &&
+      formData?.SmsToPatient.length < 10
+    ) {
+      err = {
+        ...err,
+        SmsToPatient: "Must contain atleast 10 digits",
+      };
+    }
+  
+    if (
+      formData?.SmsToDoctor.length > 0 &&
+      formData?.SmsToDoctor.length < 10
+    ) {
+      err = {
+        ...err,
+        SmsToDoctor: "Must contain atleast 10 digits",
+      };
+    }
+  
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (
+      formData?.EmailToPatient.trim().length > 0 &&
+      !emailRegex.test(formData?.EmailToPatient)
+    ) {
+      err = { ...err, EmailToPatient: "Please enter a valid email address" };
+    }
+  
+    if (
+      formData?.EmailToDoctor.trim().length > 0 &&
+      !emailRegex.test(formData?.EmailToDoctor)
+    ) {
+      err = { ...err, EmailToDoctor: "Please enter a valid email address" };
+    }
+    if (formData?.SmsToClient.length > 0 && formData?.SmsToClient.length < 10) {
+      err = {
+        ...err,
+        SmsToClient: "Must contain atleast 10 digits",
+      };
+    }
+  
+    if (
+      formData?.EmailToClient.trim().length > 0 &&
+      !emailRegex.test(formData?.EmailToClient)
+    ) {
+      err = { ...err, EmailToClient: "Please enter a valid email address" };
+    }
+    return err;
+  };

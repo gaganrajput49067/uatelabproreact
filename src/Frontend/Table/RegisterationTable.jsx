@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import DOSModal from "../utils/DOSModal";
 import TestNameModal from "../utils/TestNameModal";
 import CloseButton from "../../components/CommonComponent/CloseButton";
+import SlotBookModal from "../utils/SlotBookModal";
 
 function RegisterationTable({
   data,
@@ -69,7 +70,7 @@ function RegisterationTable({
           handlePLOChange={handlePLOChange}
           index={index}
         />
-      )}
+      )}*/}
       {slotOpen?.show && (
         <SlotBookModal
           slotOpen={slotOpen}
@@ -78,22 +79,8 @@ function RegisterationTable({
           LTData={LTData}
           tableData={tableData}
         />
-      )}*/}
-      {show2 && (
-        <TestNameModal
-          show={show2}
-          onHandleShow={handleClose2}
-          id={data?.InvestigationID}
-        />
       )}
-      {dos && (
-        <DOSModal
-          show={dos}
-          LTData={LTData}
-          onHandleShow={() => setDos(false)}
-          id={data?.InvestigationID}
-        />
-      )}
+      
       <td data-title="S.No">
         <div style={{ display: "flex", alignItems: "center" }}>
           {index + 1}&nbsp;
@@ -241,6 +228,21 @@ function RegisterationTable({
           <CloseButton handleClick={() => handleFilter(data)} />
         )}
       </td>
+      {show2 && (
+        <TestNameModal
+          show={show2}
+          onHandleShow={handleClose2}
+          id={data?.InvestigationID}
+        />
+      )}
+      {dos && (
+        <DOSModal
+          show={dos}
+          LTData={LTData}
+          onHandleShow={() => setDos(false)}
+          id={data?.InvestigationID}
+        />
+      )}
     </>
   );
 }

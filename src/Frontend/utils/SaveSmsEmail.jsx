@@ -3,6 +3,8 @@ import Modal from "../../components/Modal/Modal";
 import { useTranslation } from "react-i18next";
 import Input from "../../components/CommonComponent/Input";
 import Table from "../../components/Table/Table";
+import { SmsEmail } from "../../utils/Schema";
+import { toast } from "react-toastify";
 
 const SaveSmsEmail = ({
   state,
