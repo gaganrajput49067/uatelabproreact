@@ -1894,7 +1894,7 @@ const ResultEntry = () => {
                     </div>
                   </div>
                 </div>
-                <div className="card">
+                <div className="">
                   <RETable
                     redata={redata}
                     GetResultEntry={GetResultEntry}
