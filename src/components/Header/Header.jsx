@@ -112,7 +112,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
     <div className="header-main-container">
       <div className="company-info">
         <img src={defaultUserImg} alt="" />
-        <span className="ss-none ml-2">&nbsp;Itdose Infosystem</span>
+        <span className="ss-none ml-2">&nbsp;ITDOSE INFOSYSTEMS</span>
         <div className="header-show-menu ls-none" onClick={handleSidebar}>
           <i className="fa fa-bars m-2" aria-hidden="true"></i>
         </div>
@@ -203,7 +203,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
         ></i>
         <i
           className="pi pi-moon mr-3 pointer ss-none"
-          style={{display:"none"}}
+          style={{ display: "none" }}
           onClick={changeDarkMode}
         ></i>
         {/* full Screen */}

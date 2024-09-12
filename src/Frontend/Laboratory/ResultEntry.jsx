@@ -2454,7 +2454,7 @@ const ResultEntry = () => {
                               </button>
                             </div>
                             &nbsp;
-                            <div className="col-sm-2 m-0 p-0">
+                            <div className="col-sm-3 m-0 p-0">
                               <button
                                 className="btn btn-primary btn-sm"
                                 disabled={!Hdata?.isChecked}
@@ -2471,9 +2471,9 @@ const ResultEntry = () => {
                             </div>
                             &nbsp;
                             {Hdata?.datatype === "Profile" && (
-                              <div className="col-sm-2 m-0 p-0">
+                              <div className="col-sm-3 m-0 p-0">
                                 <button
-                                  className="btn btn-primary btn-sm"
+                                  className="btn btn-success btn-sm"
                                   disabled={!Hdata?.isChecked}
                                   onClick={() =>
                                     setShow2({
@@ -2536,7 +2536,7 @@ const ResultEntry = () => {
                                   ) : (
                                     <div className="col-sm-2 m-0 p-0">
                                       <button
-                                        className="btn btn-success btn-sm"
+                                        className="btn btn-danger btn-sm"
                                         type="button"
                                         disabled={!Hdata?.isChecked}
                                         id="btnMainList"
@@ -2610,7 +2610,7 @@ const ResultEntry = () => {
                                     <Loading />
                                   ) : (
                                     <button
-                                      className="btn btn-success btn-sm col-sm-1"
+                                      className="btn btn-danger btn-sm col-sm-1"
                                       type="button"
                                       id="btnMainList"
                                       key={index}
@@ -2635,7 +2635,7 @@ const ResultEntry = () => {
                     <td data-title={t("Flag")}>
                       {[3, 13, 14, 10].includes(Hdata.Status) && (
                         <button
-                          className="btn btn-sm btn-primary"
+                          className="btn btn-sm btn-warning"
                           disabled={!Hdata?.isChecked}
                           onClick={() => setShow7({ modal: true, data: Hdata })}
                         >
@@ -3285,7 +3285,7 @@ const ResultEntry = () => {
                   <div className="col-sm-1 ">
                     {["", 3, 10, 11, 13, 14, 15].includes(statusValue) && (
                       <button
-                        className="btn btn-primary mx-2 my-1 my btn-sm"
+                        className="btn btn-info mx-2 my-1 my btn-sm"
                         onClick={() => handleResultSubmit("Save")}
                       >
                         save
@@ -3294,7 +3294,7 @@ const ResultEntry = () => {
                   </div>
                   <div className="col-sm-1">
                     <button
-                      className="btn btn-primary mx-2 my-1 my btn-sm"
+                      className="btn btn-dark mx-2 my-1 my btn-sm"
                       type="button"
                       id="btnMainList"
                       onClick={() => {
@@ -3345,7 +3345,7 @@ const ResultEntry = () => {
                       <Loading />
                     ) : (
                       <button
-                        className="btn btn-success btn-sm mx-2 my-1 my"
+                        className="btn btn-secondary btn-sm mx-2 my-1 my"
                         type="button"
                         id="btnMainList"
                         onClick={() => handleReport("no", "")}
@@ -3377,7 +3377,7 @@ const ResultEntry = () => {
                   </div>
                   <div className="col-sm-1">
                     <button
-                      className="btn btn-success btn-sm mx-2 my-1"
+                      className="btn btn-warning btn-sm mx-2 my-1"
                       type="button"
                       id="btnMainList"
                       onClick={() => handleDeltaCheckReport(ResultTestData)}
@@ -3397,7 +3397,7 @@ const ResultEntry = () => {
                   </div>
                   <div className="col-sm-1">
                     <button
-                      className="btn btn-success btn-sm mx-2 my-1"
+                      className="btn btn-danger btn-sm mx-2 my-1"
                       type="button"
                       id="btnMainList"
                       onClick={() =>

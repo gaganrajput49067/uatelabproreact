@@ -341,10 +341,10 @@ function CustomDateModal({ show, data, onHide }) {
                       <th>{t("Registration Date and Time")}&nbsp;</th>
                       <th>{t("Sample Collection Date and Time")}&nbsp;</th>
                       <th>{t("Approval Date and Time")}</th>
-                      <th>
+                      <th className="d-flex">
                         {t("Update")}
-                        <br></br>
-                        <Input
+                        &nbsp;
+                        <input
                           type="checkbox"
                           checked={
                             tableData.length > 0
@@ -477,8 +477,8 @@ function CustomDateModal({ show, data, onHide }) {
                           </div>
                         </td>
 
-                        <td data-title={t("Status")}>
-                          <Input
+                        <td data-title={t("Status")} className="text-center">
+                          <input
                             type="checkbox"
                             name="isActive"
                             checked={data?.isActive === "1" ? true : false}

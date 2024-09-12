@@ -114,7 +114,7 @@ const PatientDetailModal = ({ showPH, setShowPH, ResultData, Index }) => {
               </div>
             </div>
             <div className="card">
-              <Table>
+              <Table overflow={false}>
                 <thead className="cf text-center" style={{ zIndex: 99 }}>
                   <tr>
                     <th className="text-center">{t("Investigation Name")}</th>
