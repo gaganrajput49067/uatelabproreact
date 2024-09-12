@@ -80,16 +80,16 @@ function RegisterationTable({
           tableData={tableData}
         />
       )}
-      
+
       <td data-title="S.No">
         <div style={{ display: "flex", alignItems: "center" }}>
           {index + 1}&nbsp;
         </div>
       </td>
-      <td data-title="Slot">
+      <td data-title="Slot" className="text-center">
         {data?.Radiology == 1 ? (
           <i
-            className="btn fa fa-search"
+            class="fa fa-gear fa-spin pointer text-success"
             onClick={() => {
               setSlotOpen({
                 data: data,

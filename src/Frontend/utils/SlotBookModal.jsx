@@ -319,18 +319,19 @@ const SlotBookModal = ({
             show: false,
           })
         }
+        className={"table-xl"}
       >
-        <div
-          className="card"
-          style={{
-            backgroundColor: "transparent",
-            maxHeight: "600px",
-            overflowY: "auto",
-          }}
-        >
-       
+        <>
+          <div
+            className="card"
+            style={{
+              backgroundColor: "transparent",
+              maxHeight: "600px",
+              overflowY: "auto",
+            }}
+          >
             <div className="row">
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <DatePicker
                   name="InvestigationDate"
                   minDate={new Date()}
@@ -343,7 +344,7 @@ const SlotBookModal = ({
                 />
               </div>
 
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <SelectBox
                   name="ModalityId"
                   options={modality}
@@ -354,7 +355,7 @@ const SlotBookModal = ({
                 />
               </div>
 
-              <div className="col-md-4">
+              <div className="col-md-3  ">
                 <SelectBox
                   name="ShiftName"
                   options={shift}
@@ -365,113 +366,111 @@ const SlotBookModal = ({
                 />
               </div>
             </div>
-         
-          <div className="card-body">
-           
-              <div className="row">
-                <label className="col-md-2" htmlFor="Investigation Date">
-                  {payload?.ShiftName}
-                </label>
-                <label className="col-md-6">
-                  <a style={{ color: "red" }}>
-                    <i>* Only Available Slot Can be Selected</i>
-                  </a>
-                </label>
-              </div>
-
-              {load ? (
-                <Loading />
-              ) : slotData?.length !== 0 ? (
-                <>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      justifyContent: "center",
-                      maxHeight: "400px",
-                      overflowY: "auto",
-                    }}
-                  >
-                    {slotData?.map((ele, index) => (
-                      <>
-                        <span style={{ padding: "5px", cursor: "pointer" }}>
-                          <button
-                            className="circle"
-                            style={{
-                              backgroundColor:
-                                ele?.SelectedSlot === true
-                                  ? "#e0ba5e"
-                                  : ele?.status == 1
-                                  ? "rgb(97 176 215)"
-                                  : ele?.tempHold == 1
-                                  ? "#f63d3d"
-                                  : ele?.isSelected == 1
-                                  ? "rgb(241 173 199)"
-                                  : ele?.color,
-                              padding: "2px",
-                              cursor: "pointer",
-                            }}
-                            title={ele?.status == 0 && "Double Click to Select"}
-                            onClick={() => handleSingleClick(ele, index)}
-                          
-                            onDoubleClick={() =>
-                              IshandleBookedSlot(payload, ele, slotOpen?.data)
-                            }
-                            disabled={
-                              !(ele?.status == 0) ||
-                              ele?.color == "rgb(192 191 191)" ||
-                              ele?.SelectedSlot === true ||
-                              ele?.tempHold == 1
-                            }
-                          >
-                            <label
-                              style={{ color: "black", cursor: "pointer" }}
-                            >
-                              {ele?.StartEndTimeSlot}
-                            </label>
-                          </button>
-                        </span>
-                      </>
-                    ))}
-                  </div>
-                </>
-              ) : (
-                <div style={{ textAlign: "center", fontSize: "15px" }}>
-                  <label style={{ fontWeight: "bold", color: "#b24040" }}>
-                    No Slot Found
-                  </label>
-                </div>
-              )}
-          
           </div>
-
-          <div className="card-body">
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                unicodeBidi: "isolate",
-              }}
-            >
-              {statusArray?.map((ele, _) => (
-                <>
-                  <span style={{ padding: "2px" }}>
-                    <button
-                      className="minicircle"
+          <div className="row d-flex align-items-stretch">
+            <div className="col-sm-9 p-0 d-flex flex-column">
+              <div className="card">
+                {load ? (
+                  <Loading />
+                ) : slotData?.length !== 0 ? (
+                  <>
+                    <div
                       style={{
-                        backgroundColor: ele?.color,
-                        padding: "2px",
+                        display: "flex",
+                        flexWrap: "wrap",
+                        justifyContent: "center",
+                        maxHeight: "400px",
+                        overflowY: "auto",
                       }}
-                    ></button>
-                    <label style={{ marginLeft: "4px", marginRight: "8px" }}>
-                      {ele?.status}
+                    >
+                      {slotData?.map((ele, index) => (
+                        <>
+                          <span style={{ padding: "5px", cursor: "pointer" }}>
+                            <button
+                              className="circle"
+                              style={{
+                                backgroundColor:
+                                  ele?.SelectedSlot === true
+                                    ? "#e0ba5e"
+                                    : ele?.status == 1
+                                    ? "rgb(97 176 215)"
+                                    : ele?.tempHold == 1
+                                    ? "#f63d3d"
+                                    : ele?.isSelected == 1
+                                    ? "rgb(241 173 199)"
+                                    : ele?.color,
+                                padding: "2px",
+                                cursor: "pointer",
+                              }}
+                              title={
+                                ele?.status == 0 && "Double Click to Select"
+                              }
+                              onClick={() => handleSingleClick(ele, index)}
+                              onDoubleClick={() =>
+                                IshandleBookedSlot(payload, ele, slotOpen?.data)
+                              }
+                              disabled={
+                                !(ele?.status == 0) ||
+                                ele?.color == "rgb(192 191 191)" ||
+                                ele?.SelectedSlot === true ||
+                                ele?.tempHold == 1
+                              }
+                            >
+                              <label
+                                style={{ color: "black", cursor: "pointer" }}
+                              >
+                                {ele?.StartEndTimeSlot}
+                              </label>
+                            </button>
+                          </span>
+                        </>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div style={{ textAlign: "center", fontSize: "15px" }}>
+                    <label style={{ fontWeight: "bold", color: "#b24040" }}>
+                      No Slot Found
                     </label>
-                  </span>
-                </>
-              ))}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="col-sm-3 pr-0 d-flex flex-column">
+              <div
+                className="card"
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  unicodeBidi: "isolate",
+                }}
+              >
+                <span className="slot-modal-txt" htmlFor="Investigation Date">
+                  {payload?.ShiftName}
+                </span>
+                {statusArray?.map((ele, _) => (
+                  <>
+                    <span style={{ padding: "2px" }}>
+                      <button
+                        className="minicircle"
+                        style={{
+                          backgroundColor: ele?.color,
+                          padding: "2px",
+                        }}
+                      ></button>
+                      <label style={{ marginLeft: "4px", marginRight: "8px" }}>
+                        {ele?.status}
+                      </label>
+                    </span>
+                  </>
+                ))}
+                <a style={{ color: "red" }}>
+                  <i>* Only Available Slot Can be Selected</i>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       </Modal>
     </>
   );

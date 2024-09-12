@@ -4,10 +4,9 @@ import { getS3FileData, guidNumber } from "../util/Commonservices/index.js";
 import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import { axiosInstance } from "../../utils/axiosInstance.jsx";
-
+import MyImage from "../../assets/image/PhelboImage.jpg";
 function CameraModal({ show, guid, handleClose, pageName, defaultImage }) {
-  const link =
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png";
+  const link = MyImage;
   const [imageSrc, setImageSrc] = useState(link);
   const [fileSrc, setFileSrc] = useState(null);
   const [guidNo, setGuidNo] = useState(guid);

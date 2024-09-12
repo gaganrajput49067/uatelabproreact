@@ -39,6 +39,11 @@ h6 {
   font-size: 15px !important;
   font-weight: bold;
 }
+
+.slot-modal-txt {
+  font-size: 12px !important;
+  font-weight: bold;
+}
 @keyframes blink {
   50% {
     opacity: 0;

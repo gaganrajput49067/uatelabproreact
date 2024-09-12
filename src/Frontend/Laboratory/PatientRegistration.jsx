@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import PageHead from "../../components/CommonComponent/PageHead";
 import { SelectBox } from "../../components/CommonComponent/SelectBox";
 import Input from "../../components/CommonComponent/Input";
-import MyImage from "../../assets/image/Gagan.jpg";
+import MyImage from "../../assets/image/PhelboImage.jpg";
 
 import Urgent from "../../assets/image/Urgent.gif";
 import { Button } from "primereact/button";
@@ -56,7 +56,7 @@ import CameraModal from "../utils/CameraModal";
 const PatientRegistration = () => {
   const { t } = useTranslation();
   const [patientImg, setPatientImg] = useState({
-    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png",
+    img: MyImage,
     show: false,
   });
   const [AgeWiseDiscountDropdown, setAgeWiseDiscountDropdown] = useState([]);
@@ -4109,7 +4109,7 @@ const PatientRegistration = () => {
           <div className="row patent-register-image">
             <div>
               <img
-                 src={patientImg.img}
+                src={patientImg.img}
                 alt="Image"
                 width="115"
                 height="130"
