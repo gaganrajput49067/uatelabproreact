@@ -27,6 +27,18 @@ h6 {
   display: none !important;
 }
 
+.result-entry-test p {
+  margin-bottom: 0;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: "";
+}
+.custom-bill {
+  font-size: 15px !important;
+  font-weight: bold;
+}
 @keyframes blink {
   50% {
     opacity: 0;
