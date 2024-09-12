@@ -99,7 +99,7 @@ const MainDaashBoard = () => {
             <div>
               <span>{getGreeting("greeting")}</span>
               <span>{getGreeting("date")}</span>
-              <span>Welcome Back Mr. ITDOSE</span>
+              <span>Welcome Back Mr. Prakhar Pandey</span>
             </div>
             <img
               src={greeticon}
