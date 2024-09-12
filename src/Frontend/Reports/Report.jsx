@@ -9,6 +9,8 @@ import PageHead from "../../components/CommonComponent/PageHead";
 import { useLocation, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { axiosInstance, axiosReport } from "../../utils/axiosInstance";
+import { SelectBoxWithCheckbox } from "../../components/CommonComponent/MultiSelectBox";
+import { workSheetSampleStatus } from "../../utils/Constants";
 
 const DocumentType = [
   {
@@ -162,68 +164,6 @@ function GetReport() {
     getInvestigationList();
   }, []);
 
-  const bindApiResponseAccording = (data) => {
-    const {
-      Centre,
-      User,
-      RateType,
-      Department,
-      DiscountApproval,
-      DiscountApprovalUser,
-      ReportType,
-      Test,
-      PatientType,
-      Doctor,
-      DateType,
-      Urgent,
-      Status,
-      MultipleCentre,
-      MultipleRateType,
-      MultipleDepartment,
-      MultipleUser,
-      MultipleReportType,
-      MultipleDoctor,
-      MultipleStatus,
-      MultiplePatientType,
-      MultipleDateType,
-      MultipleTest,
-      Barcodeno,
-      ChkisUrgent,
-      chkTATDelay,
-      SearchByDate,
-      AsOnNowOutstanding,
-      DateWiseOutstanding,
-      ProEmployee,
-      Source,
-    } = data;
-    if (Centre || MultipleCentre) {
-      getAccessCentresReports(setCentreData);
-    }
-    if (Department || MultipleDepartment) {
-      getDepartmentReports(setDepartment);
-    }
-    if (User || MultipleUser || DiscountApprovalUser) {
-      BindEmployeeReports(setEmployeeName);
-    }
-
-    if (Doctor || MultipleDoctor) {
-      BindApprovalDoctorReports(setDoctorAdmin);
-    }
-    if (RateType || MultipleRateType) {
-      getAccessDataRate(setRateType, formData?.Centre.toString()).then(
-        (res) => {
-          console.log(res);
-        }
-      );
-    }
-    if (ProEmployee) {
-      BindProEmployee(setProEmployee);
-    }
-    if (Source) {
-      getPaymentModes("Source", setPatientSource);
-    }
-  };
-
   const getPatientInfoReport = () => {
     setLoadingSearch(true);
     axiosReport
@@ -269,6 +209,7 @@ function GetReport() {
     axiosReport
       .get(`commonReports/getFields/${id}`)
       .then((res) => {
+        console.log("object");
         setLoad(false);
         bindApiResponseAccording(res?.data?.message);
         setFieldShow({
@@ -276,6 +217,7 @@ function GetReport() {
           AsOnNowOutstanding: id == "OutStandingReport" ? true : false,
           DateWiseOutstanding: id == "OutStandingReport" ? true : false,
         });
+        console.log("object");
       })
       .catch((err) => {
         toast.error(
@@ -285,7 +227,67 @@ function GetReport() {
         );
       });
   };
+  const bindApiResponseAccording = (data) => {
+    const {
+      Centre,
+      User,
+      RateType,
+      Department,
+      DiscountApproval,
+      DiscountApprovalUser,
+      ReportType,
+      Test,
+      PatientType,
+      Doctor,
+      DateType,
+      Urgent,
+      Status,
+      MultipleCentre,
+      MultipleRateType,
+      MultipleDepartment,
+      MultipleUser,
+      MultipleReportType,
+      MultipleDoctor,
+      MultipleStatus,
+      MultiplePatientType,
+      MultipleDateType,
+      MultipleTest,
+      Barcodeno,
+      ChkisUrgent,
+      chkTATDelay,
+      SearchByDate,
+      AsOnNowOutstanding,
+      DateWiseOutstanding,
+      ProEmployee,
+      Source,
+    } = data;
+    // if (Centre || MultipleCentre) {
+    //   getAccessCentresReports(setCentreData);
+    // }
+    // if (Department || MultipleDepartment) {
+    //   getDepartmentReports(setDepartment);
+    // }
+    // if (User || MultipleUser || DiscountApprovalUser) {
+    //   BindEmployeeReports(setEmployeeName);
+    // }
 
+    // if (Doctor || MultipleDoctor) {
+    //   BindApprovalDoctorReports(setDoctorAdmin);
+    // }
+    // if (RateType || MultipleRateType) {
+    //   getAccessDataRate(setRateType, formData?.Centre.toString()).then(
+    //     (res) => {
+    //       console.log(res);
+    //     }
+    //   );
+    // }
+    // if (ProEmployee) {
+    //   BindProEmployee(setProEmployee);
+    // }
+    // if (Source) {
+    //   getPaymentModes("Source", setPatientSource);
+    // }
+  };
   const handleSelectMultiChange = (select, name) => {
     const val = select?.map((ele) => ele?.value);
     setFormData({ ...formData, [name]: val });
@@ -313,7 +315,6 @@ function GetReport() {
       Status: "",
       PatientName: "",
       VisitNo: "",
-      InvestigationId: [],
       DiscountApprovalUser: [],
       Barcodeno: "",
       ChkisUrgent: 0,
@@ -327,27 +328,21 @@ function GetReport() {
     getPatientInfoField(id);
   }, [location?.pathname]);
 
-  console.log("formData?.ProEmployee", formData?.ProEmployee);
+  let pathNameTitle = location.pathname
+    .split("/")
+    .slice(-1)[0]
+    .replace(/([a-z])([A-Z])/g, "$1 $2");
   return (
     <>
       {load ? (
         <Loading />
       ) : (
         <>
-          <PageHead
-            title={t("Get Reports for ")}
-            {...location.pathname
-              .split("/")
-              .slice(-1)[0]
-              .replace(/([a-z])([A-Z])/g, "$1 $2")}
-          ></PageHead>
+          <PageHead name={`Get Reports For ${pathNameTitle}`}></PageHead>
           <div className="card">
             <div className="row">
               {FieldShow?.Centre && (
                 <div className="col-sm-2">
-                  <label>
-                    <small>{t("Select Centre")}</small>
-                  </label>
                   <SelectBox
                     options={[
                       { label: "Select Center", value: "" },
@@ -362,23 +357,18 @@ function GetReport() {
 
               {FieldShow?.MultipleCentre && (
                 <div className="col-sm-2">
-                  <label>
-                    <small>{t("Select Centre")}</small>
-                  </label>
                   <SelectBoxWithCheckbox
                     options={CentreData}
                     value={formData?.Centre}
                     name="Centre"
                     onChange={handleSelectMultiChange}
+                    lable={t("Select Centre")}
                   />
                 </div>
               )}
 
               {FieldShow?.RateType && (
                 <div className="col-sm-2">
-                  <label>
-                    <small>{t("Select Rate")}</small>
-                  </label>
                   <SelectBox
                     options={[
                       { label: "Select Rate Type", value: "" },
@@ -387,29 +377,25 @@ function GetReport() {
                     selectedValue={formData?.RateType}
                     name="RateType"
                     onChange={handleSelectChange}
+                    label={t("Select Rate")}
                   />
                 </div>
               )}
 
               {FieldShow?.MultipleRateType && (
                 <div className="col-sm-2">
-                  <label>
-                    <small>{t("Select Rate")}</small>
-                  </label>
                   <SelectBoxWithCheckbox
                     options={rateType}
                     value={formData?.RateType}
                     name="RateType"
                     onChange={handleSelectMultiChange}
+                    lable={t("Select Rate")}
                   />
                 </div>
               )}
 
               {FieldShow?.Department && (
                 <div className="col-sm-2 ">
-                  <label>
-                    <small>{t("Select Department")}</small>
-                  </label>
                   <SelectBox
                     options={[
                       { label: "Select Department", value: "" },
@@ -418,15 +404,13 @@ function GetReport() {
                     selectedValue={formData.Department}
                     name="Department"
                     onChange={handleSelectChange}
+                    lable={t("Select Department")}
                   />
                 </div>
               )}
 
               {FieldShow?.Source && (
                 <div className="col-sm-2 ">
-                  <label>
-                    <small>{t("Select Source")}</small>
-                  </label>
                   <SelectBox
                     options={[
                       { label: "Select Source", value: "" },
@@ -435,43 +419,37 @@ function GetReport() {
                     selectedValue={formData.Source}
                     name="Source"
                     onChange={handleSelectChange}
+                    lable={t("Select Source")}
                   />
                 </div>
               )}
 
               {FieldShow?.MultipleDepartment && (
                 <div className="col-sm-2">
-                  <label>
-                    <small>{t("Select Department")}</small>
-                  </label>
                   <SelectBoxWithCheckbox
                     options={Department}
                     value={formData?.Department}
                     name="Department"
                     onChange={handleSelectMultiChange}
+                    lable={t("Select Department")}
                   />
                 </div>
               )}
 
               {FieldShow?.SearchByDate && (
                 <div className="col-sm-2 ">
-                  <label>
-                    <small>{t("Search By Date")}</small>
-                  </label>
                   <SelectBox
                     options={SearchByDate}
                     selectedValue={formData.SearchByDate}
                     name="SearchByDate"
                     onChange={handleSelectChange}
+                    lable={t("Search By Date")}
                   />
                 </div>
               )}
 
               {FieldShow?.FromDate && (
                 <div className="col-sm-2">
-                  <label>
-                    <small>{t("FromDate")}:</small>
-                  </label>
                   <DatePicker
                     name="FromDate"
                     date={formData?.FromDate}
@@ -479,15 +457,13 @@ function GetReport() {
                     onChangeTime={handleTime}
                     secondName={FieldShow?.FromTime && "FromTime"}
                     maxDate={new Date()}
+                    lable={t("FromDate")}
                   />
                 </div>
               )}
 
               {FieldShow?.ToDate && (
                 <div className="col-sm-2 ">
-                  <label>
-                    <small>{t("ToDate")}:</small>
-                  </label>
                   <DatePicker
                     name="ToDate"
                     date={formData?.ToDate}
@@ -496,15 +472,13 @@ function GetReport() {
                     secondName={FieldShow?.ToTime && "ToTime"}
                     maxDate={new Date()}
                     minDate={new Date(formData.FromDate)}
+                    lable={t("ToDate")}
                   />
                 </div>
               )}
 
               {FieldShow?.DataType && (
                 <div className="col-sm-2 ">
-                  <label>
-                    <small>{t("select DateType")}</small>
-                  </label>
                   <SelectBox
                     options={[
                       { label: "DateType", value: "" },
@@ -513,15 +487,13 @@ function GetReport() {
                     formdata={formData?.DateType}
                     name="DateType"
                     onChange={handleSelectChange}
+                    lable={t("select DateType")}
                   />
                 </div>
               )}
 
               {FieldShow?.User && (
                 <div className="col-sm-2 ">
-                  <label>
-                    <small>{t("Select Employee")}</small>
-                  </label>
                   <SelectBox
                     options={[
                       { label: "Select Employee", value: "" },
@@ -530,55 +502,47 @@ function GetReport() {
                     formdata={formData?.User}
                     name="User"
                     onChange={handleSelectChange}
+                    label={t("Select Employee")}
                   />
                 </div>
               )}
 
               {FieldShow?.PatientName && (
                 <div className="col-sm-2 ">
-                  <label>
-                    <small>{t("Patient Name")}</small>
-                  </label>
                   <Input
                     className="form-control input-sm"
                     name="PatientName"
                     onChange={handleSelectChange}
                     value={formData?.PatientName}
+                    lable={t("Patient Name")}
                   />
                 </div>
               )}
               {FieldShow?.VisitNo && (
                 <div className="col-sm-2 ">
-                  <label>
-                    <small>{t("Visit No")}</small>
-                  </label>
                   <Input
                     className="form-control input-sm"
                     name="VisitNo"
                     onChange={handleSelectChange}
                     value={formData?.VisitNo}
+                    label={t("Visit No")}
                   />
                 </div>
               )}
               {FieldShow?.MultipleUser && (
                 <div className="col-sm-2 ">
-                  <label>
-                    <small>{t("Select Employee")}</small>
-                  </label>
                   <SelectBoxWithCheckbox
                     options={EmployeeName}
                     value={formData?.User}
                     name="User"
                     onChange={handleSelectMultiChange}
+                    lable={t("Select Employee")}
                   />
                 </div>
               )}
 
               {FieldShow?.Doctor && (
                 <div className="col-sm-2 ">
-                  <label>
-                    <small>{t("Select Doctor")}</small>
-                  </label>
                   <SelectBox
                     options={[
                       { label: "Select Doctor", value: "" },
@@ -587,48 +551,43 @@ function GetReport() {
                     formdata={formData?.Doctor}
                     name="Doctor"
                     onChange={handleSelectChange}
+                    lable={t("Select Doctor")}
                   />
                 </div>
               )}
 
               {FieldShow?.MultipleDoctor && (
                 <div className="col-sm-2 ">
-                  <label>
-                    <small>{t("Select Doctor")}</small>
-                  </label>
                   <SelectBoxWithCheckbox
                     options={[{ label: "Self", value: 1 }, ...DoctorName]}
                     value={formData?.Doctor}
                     name="Doctor"
                     onChange={handleSelectMultiChange}
+                    lable={t("Select Doctor")}
                   />
                 </div>
               )}
 
               {FieldShow?.MultipleTest && (
                 <div className="col-sm-2">
-                  <label>
-                    <small>{t("Test")}</small>
-                  </label>
                   <SelectBoxWithCheckbox
                     options={mapTest}
                     value={formData?.Test}
                     name="InvestigationId"
                     onChange={handleSelectMultiChange}
+                    lable={t("Test")}
                   />
                 </div>
               )}
 
               {FieldShow?.Status && (
                 <div className="col-sm-2">
-                  <label>
-                    <small>{t("Status")}</small>
-                  </label>
                   <SelectBox
                     options={workSheetSampleStatus}
                     selectedValue={formData.Status}
                     name="Status"
                     onChange={handleSelectChange}
+                    lable={t("Status")}
                   />
                 </div>
               )}
