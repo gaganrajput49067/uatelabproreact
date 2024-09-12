@@ -58,12 +58,18 @@ export let routeDetails = [
       {
         path: "/ViewGlobalMaster",
         element: "../Frontend/Master/ViewGlobalMaster",
-      }, {
+      },
+      {
         path: "/CentreTypeMaster",
         element: "../Frontend/Master/CentreTypeMaster",
-      },{
+      },
+      {
         path: "/CentrePanel",
         element: "../Frontend/Master/CentrePanel",
+      },
+      {
+        path: "/getReport/:id",
+        element: "../Frontend/Reports/Report",
       },
       { path: "*", element: "../components/NotFound" },
     ],
