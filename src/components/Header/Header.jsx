@@ -204,7 +204,6 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
         ></i>
         <i
           className="pi pi-moon mr-3 pointer ss-none"
-          style={{ display: "none" }}
           onClick={changeDarkMode}
         ></i>
         {/* full Screen */}

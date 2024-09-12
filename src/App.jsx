@@ -10,6 +10,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { axiosInstance } from "./utils/axiosInstance";
 import { getPageData } from "./utils/NetworkApi/commonApi";
 import Menubar from "./components/MenuBar/Menubar";
+import Footer from "./components/Footer/Footer";
 function App() {
   const navigate = useNavigate();
   const sideBarRef = useRef(null);
@@ -81,6 +82,7 @@ function App() {
       <div className="outer-container-main">
         <Outlet />
       </div>
+      <Footer />
     </div>
   );
 }
