@@ -317,7 +317,7 @@ function ToggleTheme() {
     {
       Name: "Default",
       value: "",
-      color: "#555299",
+      color: "#326fd1",
     },
     {
       Name: "Grey",

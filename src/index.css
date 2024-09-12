@@ -15,19 +15,19 @@
 }
 
 :root {
-  --bg-color: #555299;
-  --bg-subMenu: #9390d9;
+  --bg-color: #2b6dd8;
+  --bg-subMenu: #4e8ff7;
   --subMenuText-color: rgb(255, 255, 255);
   --gradient: linear-gradient(
     90deg,
-    rgba(85, 82, 153, 1) 0%,
-    rgba(145, 142, 205, 1) 57%,
+    rgb(40, 118, 207) 0%,
+    rgb(75, 131, 235) 57%,
     rgba(255, 255, 255, 1) 91%
   );
   --gradient: linear-gradient(
     90deg,
-    rgba(85, 82, 153, 1) 0%,
-    rgba(145, 142, 205, 1) 57%,
+    rgb(44, 91, 221) 0%,
+    rgb(78, 95, 241) 57%,
     rgba(255, 255, 255, 1) 91%
   );
 }
