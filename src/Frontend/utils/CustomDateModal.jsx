@@ -337,7 +337,14 @@ function CustomDateModal({ show, data, onHide }) {
                     <tr>
                       <th>{t("S.No")}</th>
                       <th>{t("Visit No.")}</th>
-                      <th>{t("Test Name")}</th>
+                      <th
+                        style={{
+                          wordWrap: "break-word",
+                          whiteSpace: "normal",
+                        }}
+                      >
+                        {t("Test Name")}
+                      </th>
                       <th>{t("Registration Date and Time")}&nbsp;</th>
                       <th>{t("Sample Collection Date and Time")}&nbsp;</th>
                       <th>{t("Approval Date and Time")}</th>
@@ -367,7 +374,11 @@ function CustomDateModal({ show, data, onHide }) {
                         <td data-title={t("Visit No")}>{data.VisitNo}</td>
                         <td
                           data-title={t("Test Name")}
-                          style={{ width: "100px" }}
+                          style={{
+                            wordWrap: "break-word",
+                            whiteSpace: "normal",
+                            width: "100px",
+                          }}
                         >
                           {data.ItemName}
                         </td>
