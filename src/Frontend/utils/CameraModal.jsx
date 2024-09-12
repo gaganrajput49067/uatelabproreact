@@ -207,6 +207,7 @@ function CameraModal({ show, guid, handleClose, pageName, defaultImage }) {
           )}
 
           {imageSrc && !isCapturing && (
+            <div className="card">
             <div
               className="col-sm-12"
               style={{
@@ -229,7 +230,7 @@ function CameraModal({ show, guid, handleClose, pageName, defaultImage }) {
                   }}
                 />
               )}
-            </div>
+            </div></div>
           )}
 
           <canvas
