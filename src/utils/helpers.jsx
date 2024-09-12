@@ -39,21 +39,9 @@ export function useClickOutside(ref, handleClose, active) {
   }, [ref, handleClose, active]);
 }
 export const changeDarkMode = () => {
-  const header = document.getElementById("main-header");
-
-  // Check if dark mode is currently enabled
-  const isDarkMode =
-    document.documentElement.getAttribute("data-theme") === "DarkMode";
-
-  if (header) {
-    if (isDarkMode) {
-      header.classList.remove("main-header-dark-mode");
-      document.documentElement.removeAttribute("data-theme");
-    } else {
-      header.classList.add("main-header-dark-mode");
-      document.documentElement.setAttribute("data-theme", "DarkMode");
-    }
-  }
+  document.documentElement.getAttribute("data-theme") == "DarkMode"
+    ? document.documentElement.removeAttribute("data-theme")
+    : document.documentElement.setAttribute("data-theme", "DarkMode");
 };
 export const useLocalStorage = (key, type, valueToStore) => {
   if (type === "set") {
