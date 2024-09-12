@@ -114,7 +114,8 @@ const CentreTypeMaster = () => {
     axiosInstance
       .get("Centre/GetCentreTypeData")
       .then((res) => {
-        if (res?.data.success) {
+        if (res?.data.message) {
+          console.log(res.data.message);
           setTableData(res?.data?.message);
         } else {
           setTableData([]);
@@ -129,6 +130,8 @@ const CentreTypeMaster = () => {
   useEffect(() => {
     getTableData();
   }, []);
+
+  console.log(tableData);
 
   return (
     <>
@@ -147,7 +150,7 @@ const CentreTypeMaster = () => {
                 max={20}
               />
             </div>
-            <div className="col-sm-1 flex">
+            <div className="col-sm-1 ">
               <input
                 name="IsActive"
                 id="IsActive"
@@ -185,56 +188,60 @@ const CentreTypeMaster = () => {
                 )}
               </div>
             )}
+            <div className="col-sm-1"></div>
+            <div className="col-sm-7 m-0 p-0">
+              <Table paginate={true} data={tableData ?? []} itemsPerPage={10}>
+                {({ currentItems, finalIndex }) => {
+                  return (
+                    <>
+                      <thead className="cf thead-class" style={{ zIndex: 99 }}>
+                        <tr>
+                          <th className="text-center">{"S.No"}</th>
+                          <th className="text-center">{"CentreType"}</th>
+                          <th className="text-center">{"Status"}</th>
+                          <th className="text-center">{"Select"}</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {currentItems.map((ele, index) => (
+                          <>
+                            <tr key={ele.ID}>
+                              <td data-title="#" className="text-center">
+                                {index + finalIndex}
+                              </td>
+                              <td
+                                data-title="CentreType"
+                                className="text-center"
+                              >
+                                {ele?.type} &nbsp;
+                              </td>
+                              <td data-title="Active" className="text-center">
+                                {ele?.IsActive == 1 ? "Active" : "Inactive"}{" "}
+                                &nbsp;
+                              </td>
+                              <td data-title="Select" className="text-center">
+                                <button
+                                  className="btn btn-primary btn-sm btn-class"
+                                  onClick={() => {
+                                    handleEditCentreType(ele);
+                                  }}
+                                >
+                                  Edit
+                                </button>
+                              </td>
+                            </tr>
+                          </>
+                        ))}
+                      </tbody>
+                    </>
+                  );
+                }}
+              </Table>
+            </div>
           </div>
         </div>
       </PageHead>
-
-      <div className="card mt-2">
-        <Table paginate={true} data={tableData ?? []} itemsPerPage={10}>
-          {({ currentItems, finalIndex }) => {
-            return (
-              <>
-                <thead className="cf thead-class" style={{ zIndex: 99 }}>
-                  <tr>
-                    <th className="text-center">{"S.No"}</th>
-                    <th className="text-center">{"CentreType"}</th>
-                    <th className="text-center">{"Status"}</th>
-                    <th className="text-center">{"Select"}</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {currentItems.map((ele, index) => (
-                    <>
-                      <tr key={ele.ID}>
-                        <td data-title="#" className="text-center">
-                          {index + finalIndex}
-                        </td>
-                        <td data-title="CentreType" className="text-center">
-                          {ele?.type} &nbsp;
-                        </td>
-                        <td data-title="Active" className="text-center">
-                          {ele?.IsActive == 1 ? "Active" : "Inactive"} &nbsp;
-                        </td>
-                        <td data-title="Select" className="text-center">
-                          <button
-                            className="btn btn-primary btn-sm btn-class"
-                            onClick={() => {
-                              handleEditCentreType(ele);
-                            }}
-                          >
-                            Edit
-                          </button>
-                        </td>
-                      </tr>
-                    </>
-                  ))}
-                </tbody>
-              </>
-            );
-          }}
-        </Table>{" "}
-      </div>
     </>
   );
 };

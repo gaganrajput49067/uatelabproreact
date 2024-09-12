@@ -159,7 +159,6 @@ const CentrePanel = () => {
         <>
           <div className="card">
             <div className="row">
-            
               <div className="col-sm-2">
                 <SelectBox
                   options={CentreData}
@@ -191,51 +190,60 @@ const CentrePanel = () => {
               </div>
             </div>
           </div>
-          </>
+        </>
       </PageHead>
-          <div className="card">
-            <h2 className="card-title">Tag Rate Type To Selected Centre</h2>
-          <hr></hr>
-            <div className="col-sm-12">
-              {load?.ReferenceRateLoading ? (
-                <div className="d-flex align-items-center justify-content-center">
-                  <Loading />
-                </div>
-              ) : (
-                <div className="row">
-                  {ReferenceRate.map((ele, index) => (
-                    <div key={index} className="col-sm-3">
-                      <input
-                        type="checkbox"
-                        
-                  className="mb-3"
-                        checked={ele?.isChecked}
-                        name="isChecked"
-                        onChange={(e) => handleChange(e, index)}
-                      />
-
-                      <span className="ml-2">{ele.label}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
+      <div className="card">
+        <h2 className="card-title">Tag Rate Type To Selected Centre</h2>
+        <hr></hr>
+        <div className="col-sm-12">
+          {load?.ReferenceRateLoading ? (
+            <div className="d-flex align-items-center justify-content-center">
+              <Loading />
             </div>
-            <div className="col-sm-1">
-              {load?.SaveLoad ? (
-                <Loading />
-              ) : (
-                <button
-                  type="submit"
-                  className="btn btn-success btn-sm btn-block mb-4"
-                  onClick={saveData}
-                  disabled={Disable}
+          ) : (
+            <div
+              className="row"
+              style={{
+                maxHeight: "50vh",
+                overflow: "auto",
+                boxShadow: "0 1px 2px rgba(0, 0, 0, 0.2)",
+              }}
+            >
+              {ReferenceRate.map((ele, index) => (
+                <div
+                  key={index}
+                  className="col-sm-3 d-flex justify-content-between mt-2 pr-4"
+                  style={{ boxShadow: "0 1px 2px rgba(0, 0, 0, 0.2)" }}
                 >
-                  {"Save"}
-                </button>
-              )}
+                  <span className="">{ele.label}</span>
+                  <input
+                    type="checkbox"
+                    className="mb-3"
+                    checked={ele?.isChecked}
+                    name="isChecked"
+                    onChange={(e) => handleChange(e, index)}
+                  />
+                </div>
+              ))}
             </div>
+          )}
+        </div>
+
+        {load?.SaveLoad ? (
+          <Loading />
+        ) : (
+          <div className="col-sm-1 m-0 p-0">
+            <button
+              type="submit"
+              className="btn btn-success btn-sm btn-block mt-3"
+              onClick={saveData}
+              disabled={Disable}
+            >
+              {"Save"}
+            </button>{" "}
           </div>
-       
+        )}
+      </div>
     </>
   );
 };

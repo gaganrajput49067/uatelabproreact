@@ -79,7 +79,7 @@ function App() {
         </div>
       </div>
       <Menubar pageData={pageData} handleSidebar={handleSidebar} />
-      <div className="outer-container-main">
+      <div className="outer-container-main" id="main-header">
         <Outlet />
       </div>
       <Footer />
