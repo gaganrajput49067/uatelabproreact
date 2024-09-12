@@ -14,7 +14,6 @@
   overflow: visible;
   margin-bottom: 5px;
   margin-top: 5px;
-  z-index: 1;
 }
 
 .simple-table-container::-webkit-scrollbar {
@@ -50,15 +49,15 @@
 
 .simple-table tr {
   background-color: #e6e6e6;
-  padding: .35em;
+  padding: 0.35em;
 }
 
 .simple-table th {
   background: var(--bg-subMenu);
   color: var(--subMenuText-color);
-  font-size: .35em;
-    border: 1px solid white;
-    /* text-transform: uppercase; */
+  font-size: 0.35em;
+  border: 1px solid white;
+  /* text-transform: uppercase; */
   padding: 0.2rem 0.3rem;
   text-align: justify;
   white-space: nowrap;
@@ -67,9 +66,9 @@
 }
 
 .simple-table td {
-  font-size: .35em;
-    /* text-transform: uppercase; */
-  padding: 0.15rem .3rem !important;
+  font-size: 0.35em;
+  /* text-transform: uppercase; */
+  padding: 0.15rem 0.3rem !important;
   text-align: left;
   white-space: nowrap;
   /* overflow: hidden; */
@@ -141,13 +140,13 @@
 
   .simple-table tr {
     background-color: #ffffff;
-    padding: .35em;
+    padding: 0.35em;
   }
-  
+
   .simple-table th {
     background: var(--bg-subMenu);
     color: var(--subMenuText-color);
-    font-size: .35em;
+    font-size: 0.35em;
     border: 1px solid var(--bg-color);
     /* text-transform: uppercase; */
     padding: 0.2rem 0.3rem;
@@ -155,11 +154,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    
   }
-  
+
   .simple-table td {
-    font-size: .35em;
+    font-size: 0.35em;
     /* text-transform: uppercase; */
     padding: 0px 4px 0px 4px !important;
     text-align: left;
@@ -168,97 +166,96 @@
     text-overflow: ellipsis;
     border: 1px solid var(--bg-color);
   }
-  
+
   .pagination {
     position: sticky;
     border-bottom: 3px solid #ddd;
     display: block;
-    margin-bottom: .625em;
+    margin-bottom: 0.625em;
     width: 100%;
   }
 
   .simple-table td {
     border-bottom: 1px solid #ddd;
     display: block;
-    font-size: .8em;
+    font-size: 0.8em;
     text-align: right;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  
+
   .pagination button.active {
     background-color: #007bff;
     color: white;
     border: 1px solid #007bff;
   }
-  
+
   .pagination button:disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
 }
-  /* Responsive styles */
-  @media screen and (max-width: 600px) {
-    .simple-table {
-      border: 0;
-      width: 100%;
-    }
-  
-    .simple-table caption {
-      font-size: 1.3em;
-    }
-  
-    .simple-table thead {
-      border: none;
-      clip: rect(0 0 0 0);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
-    }
-  
-    .simple-table tr {
-      border-bottom: 3px solid #ddd;
-      display: block;
-      margin-bottom: .625em;
-      width: 100%;
-    }
-  
-    .simple-table td {
-      border-bottom: 1px solid #ddd;
-      display: block;
-      font-size: .8em;
-      text-align: right;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  
-    .simple-table td::before {
-      content: attr(data-title);
-      float: left;
-      font-weight: bold;}
+/* Responsive styles */
+@media screen and (max-width: 600px) {
+  .simple-table {
+    border: 0;
+    width: 100%;
+  }
+
+  .simple-table caption {
+    font-size: 1.3em;
+  }
+
+  .simple-table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .simple-table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: 0.625em;
+    width: 100%;
+  }
+
+  .simple-table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 0.8em;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   .simple-table td::before {
     content: attr(data-title);
     float: left;
     font-weight: bold;
-      /* text-transform: uppercase; */
+  }
+
+  .simple-table td::before {
+    content: attr(data-title);
+    float: left;
+    font-weight: bold;
+    /* text-transform: uppercase; */
   }
 
   .simple-table td:last-child {
     border-bottom: 0;
   }
 
-  .pagination{
+  .pagination {
     flex-direction: row;
-
   }
 }
-
 
 .simple-table td.fixed-column {
   position: sticky;
@@ -269,7 +266,7 @@
   border: 1px solid var(--bg-color);
 }
 
-.simple-table th.fixed-column{
+.simple-table th.fixed-column {
   position: sticky;
   left: 0;
   background-color: var(--bg-color);
