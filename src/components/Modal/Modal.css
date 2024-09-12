@@ -2,29 +2,47 @@
     position: fixed;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.8); /* Semi-transparent white */
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
     height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
   
   .main-modal-box {
-    opacity: 1; /* Ensure full opacity */
-    background: #ffffff;
+    opacity: 1;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0); /* Light gradient background */
     padding: 0px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Increased border radius for smoother edges */
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3), 
+                -10px -10px 20px rgba(255, 255, 255, 0.5); /* 3D box shadow effect */
     display: flex;
     flex-direction: column;
     border: 1px solid var(--bg-subMenu);
     margin-bottom: 20px;
     max-width: 80vw;
+  
+    /* Adding 3D and animation */
+    transform: perspective(1000px) rotateX(-10deg) translateY(-50px);
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, box-shadow 0.3s ease;
+    opacity: 0;
+    animation: modal-open 0.6s forwards ease;
+  }
+  
+  @keyframes modal-open {
+    from {
+      opacity: 0;
+      transform: perspective(1000px) rotateX(-10deg) translateY(-50px);
+      box-shadow: none;
+    }
+    to {
+      opacity: 1;
+      transform: perspective(1000px) rotateX(0deg) translateY(0);
+      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3), 
+                  -10px -10px 20px rgba(255, 255, 255, 0.5);
+    }
   }
   
   .main-modal-header {
@@ -34,12 +52,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Subtle separator */
   }
   
   .main-modal-content {
-    padding: 0.5rem;
+    padding: 1rem;
     overflow: auto !important;
     max-height: 85vh;
+    
+    /* Styling for 3D child elements */
+    box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.2),
+                inset -5px -5px 15px rgba(255, 255, 255, 0.5);
+    border-radius: 8px; /* Rounded corners for content */
+    background-color: #f9f9f9;
   }
   
   .modal-close {
@@ -70,7 +96,7 @@
   
   @media (max-width: 900px) {
     .main-modal-box {
-      opacity: 1; /* Ensure full opacity */
+      opacity: 1;
       margin: 2rem;
       width: 90vw;
       overflow-y: auto;

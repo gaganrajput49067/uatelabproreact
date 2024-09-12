@@ -317,6 +317,7 @@
   top: -9px;
   left: 7px;
   background-color: white;
+  color: var(--bg-color) !important;
   background-image: linear-gradient(white, white) !important;
   padding: 0px 5px;
   transition: top 0.1s ease-out, left 0.1s ease-out, font-size 0.1s ease-out;
@@ -326,6 +327,8 @@
   top: -9px;
   left: 0px !important;
   background-color: white;
+  
+  color: var(--bg-color) !important;
   background-image: linear-gradient(white, white) !important;
   padding: 0px 5px;
   font-size: 10px !important;
@@ -335,6 +338,8 @@
 .form-control:not(:placeholder-shown) + label {
   top: -9px;
   left: 7px;
+  
+  color: var(--bg-color) !important;
   background-color: white;
   background-image: linear-gradient(white, white) !important;
   padding: 0px 5px;
@@ -1311,6 +1316,8 @@ input::placeholder {
   font-weight: bolder !important;
   background: #fff;
   line-height: 5px;
+  
+  color: var(--bg-color) !important;
   padding: 3px 5px;
   /* margin-bottom: 0 !important; */
   font-size: 10px !important;
