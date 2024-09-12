@@ -184,6 +184,11 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
           />
         </div>
         {/* theme */}
+
+        <i className="fas fa-user-times mr-1 ml-2 pointer ss-none ">
+          &nbsp;<span className="">3</span>
+        </i>
+
         <div
           className="user-drop-container pointer"
           onClick={() => setShowThemes(!showThemes)}
