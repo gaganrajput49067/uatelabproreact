@@ -6,7 +6,7 @@ import Modal from "../../components/Modal/Modal";
 
 function CameraModal({ show, guid, handleClose, pageName, defaultImage }) {
   const link =
-    "https://t3.ftcdn.net/jpg/05/79/68/24/360_F_579682479_j4jRfx0nl3C8vMrTYVapFnGP8EgNHgfk.jpg";
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png";
   const [imageSrc, setImageSrc] = useState(link);
   const [fileSrc, setFileSrc] = useState(null);
   const [guidNo, setGuidNo] = useState(guid);

@@ -56,7 +56,7 @@ import CameraModal from "../utils/CameraModal";
 const PatientRegistration = () => {
   const { t } = useTranslation();
   const [patientImg, setPatientImg] = useState({
-    img: MyImage,
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png",
     show: false,
   });
   const [AgeWiseDiscountDropdown, setAgeWiseDiscountDropdown] = useState([]);
@@ -4109,7 +4109,7 @@ const PatientRegistration = () => {
           <div className="row patent-register-image">
             <div>
               <img
-                src={MyImage}
+                 src={patientImg.img}
                 alt="Image"
                 width="115"
                 height="130"
