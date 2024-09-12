@@ -83,7 +83,7 @@ const DatePicker2 = ({
   return (
     <table cellPadding={0} cellSpacing={0} style={{ width: "100%" }}>
       <tr>
-        <td>
+        <td className="d-flex align-items-centre">
           <DatePicker
             showMonthDropdown
             selected={date}
@@ -93,7 +93,7 @@ const DatePicker2 = ({
             autoComplete="off"
             onBlur={onBlur}
             showYearDropdown
-            className={"form-control input-sm"}
+            className={"p-0 m-0"}
             dateFormat="dd-MMM-yyyy"
             maxDate={maxDate}
             minDate={minDate ? minDate : new Date("01-01-1900")}

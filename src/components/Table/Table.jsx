@@ -15,7 +15,7 @@ const Table = ({
   itemsPerPage = 10,
   fixCol = 0,
   children,
-  overflow = true,
+  overflow = false,
 }) => {
   const [itemsPerPages, setItemPerPage] = useState(itemsPerPage);
   const [currentPage, setCurrentPage] = useState(1);

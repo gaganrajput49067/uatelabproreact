@@ -24,7 +24,7 @@ function DatePicker({
   };
   return (
     <>
-      <div className={`${respclass} mb-2`} style={{ position: "relative" }}>
+      <div className={`${respclass}`} style={{ position: "relative" }}>
         <div className="form-group">
           <Calendar
             inputId={id}
@@ -41,13 +41,15 @@ function DatePicker({
             minDate={minDate}
           />
 
-          <label
-            htmlFor={id}
-            className="label lable truncate "
-            style={{ fontSize: "5px !important" }}
-          >
-            {lable}
-          </label>
+          {lable && lable !== "" && (
+            <label
+              htmlFor={id}
+              className="label lable truncate "
+              style={{ fontSize: "5px !important" }}
+            >
+              {lable}
+            </label>
+          )}
         </div>
       </div>
     </>

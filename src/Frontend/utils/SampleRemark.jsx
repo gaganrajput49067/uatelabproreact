@@ -16,7 +16,7 @@ const SampleRemark = ({
         <div className="modal-card">
           <textarea
             style={{ width: "40vw", height: "40vh" }}
-            className="form-control-txtarea"
+            className="form-control-txtarea p-2"
             name="CustomReason"
             onChange={(e) => {
               setPayload(e?.target?.value);

@@ -36,22 +36,19 @@ const PatientRegisterModal = ({ handleClose, Type }) => {
 
   return (
     <>
-      <Modal title={t(`${Type} Doctor`)} handleClose={handleClose} top={"25%"}>
-        <div
-          className="d-flex"
-          style={{
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "200px",
-          }}
-        >
-          <form onSubmit={handleSubmit}>
-            <div className="w-100">
-              <div className="col-sm-12 w-100">
+      <Modal
+        title={t(`${Type} Doctor`)}
+        handleClose={handleClose}
+        top={"25%"}
+        className={"table-sm"}
+      >
+        <div className="">
+          <form onSubmit={handleSubmit} className="w-100">
+            <div className="row">
+              <div className="col-sm-6">
                 <Input
                   className="select-input-box form-control input-sm"
-                  placeholder={t("Doctor Name")}
+                  lable={t("Doctor Name")}
                   type="text"
                   name="Name"
                   value={values.Name}
@@ -62,10 +59,10 @@ const PatientRegisterModal = ({ handleClose, Type }) => {
                 )}
               </div>
 
-              <div className="col-sm-12">
+              <div className="col-sm-6">
                 <Input
                   className="select-input-box form-control input-sm"
-                  placeholder={t("Mobile No")}
+                  lable={t("Mobile No")}
                   type="number"
                   name="Mobile"
                   onInput={(e) => number(e, 10)}

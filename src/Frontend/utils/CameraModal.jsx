@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { getS3FileData, guidNumber } from "../util/Commonservices/index.js";
 import axios from "axios";
 import Modal from "../../components/Modal/Modal";
+import { axiosInstance } from "../../utils/axiosInstance.jsx";
 
 function CameraModal({ show, guid, handleClose, pageName, defaultImage }) {
   const link =
@@ -123,8 +124,8 @@ function CameraModal({ show, guid, handleClose, pageName, defaultImage }) {
     formData.append("Guid", guidNo);
     formData.append("FileName", "Name");
 
-    await axios
-      .post("/api/v1/CommonController/UploadDocument", formData)
+    await axiosInstance
+      .post("CommonController/UploadDocument", formData)
       .then((res) => {
         toast.success(res?.data?.message);
         handleClose(guidNo, imageSrc);

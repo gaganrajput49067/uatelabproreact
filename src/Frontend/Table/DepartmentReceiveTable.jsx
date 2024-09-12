@@ -193,7 +193,7 @@ function DepartmentReceiveTable({
                         <div
                           style={{
                             display: "flex",
-                            justifyContent: "space-around",
+                            justifyContent: "space-between",
                           }}
                         >
                           <div>{index + 1}</div>
@@ -201,22 +201,13 @@ function DepartmentReceiveTable({
                             <div>
                               <img src={Urgent}></img>
                             </div>
-                          )}
+                          )}{" "}
+                          &nbsp;
                           {data?.IsVip === 1 && (
                             <div>
                               <img src={VIP}></img>
                             </div>
                           )}
-                          <div>
-                            <i
-                              className="fa fa-search"
-                              onClick={() => {
-                                setModal(true);
-                                setVisitID(data?.VisitNo);
-                              }}
-                            />
-                          </div>
-
                           {data.StatSample == 1 ? (
                             <div>
                               <span
@@ -227,8 +218,18 @@ function DepartmentReceiveTable({
                               ></span>
                             </div>
                           ) : (
-                            <></>
-                          )}
+                            <> &nbsp;</>
+                          )}{" "}
+                          &nbsp;
+                          <div>
+                            <i
+                              className="fa fa-search"
+                              onClick={() => {
+                                setModal(true);
+                                setVisitID(data?.VisitNo);
+                              }}
+                            />
+                          </div>
                         </div>
                       </td>
 

@@ -81,7 +81,11 @@ function OldReportModal({ show, handleClose, value }) {
 
   console.log(data);
   return (
-    <Modal title={"Old Reports"} handleClose={handleClose}>
+    <Modal
+      title={"Old Reports"}
+      handleClose={handleClose}
+      className={"table-lg"}
+    >
       {loading ? (
         <Loading />
       ) : (
