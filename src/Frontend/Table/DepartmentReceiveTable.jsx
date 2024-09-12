@@ -160,7 +160,7 @@ function DepartmentReceiveTable({
                       {"M.H"}
                     </th>
                     {pageType == 2 && (
-                      <th>
+                      <th className="text-center">
                         <input
                           type="checkbox"
                           checked={
@@ -340,7 +340,7 @@ function DepartmentReceiveTable({
                         </div>
                       </td>
                       {pageType == 2 && (
-                        <td data-title={"Select"}>
+                        <td data-title={"Select"} className="text-center">
                           {data?.Status == 2 && (
                             <input
                               type="checkbox"

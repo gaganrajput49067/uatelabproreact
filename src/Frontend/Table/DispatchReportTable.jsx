@@ -9,6 +9,7 @@ import { dateConfig } from "../../utils/helpers";
 import Loading from "../../components/Loading/Loading";
 import CustomModal from "../utils/CustomModal";
 import NoRecordFound from "../../components/CommonComponent/NoRecordFound";
+import FlexContainer from "../../components/CommonComponent/ResultEntrytest";
 function DispatchTable({ dispatchData, show, show2, users }) {
   const [modal, setModal] = useState(false);
   const [visitID, setVisitID] = useState();
@@ -202,7 +203,7 @@ function DispatchTable({ dispatchData, show, show2, users }) {
                       title="Uploaded Document"
                     >
                       <i
-                        className="fa fa-file-text-o text-centre "
+                        className="fa fa-file text-centre "
                         style={{ margin: "2px 8px" }}
                       ></i>
                     </th>
@@ -211,27 +212,25 @@ function DispatchTable({ dispatchData, show, show2, users }) {
                       data-placement="top"
                       title="Medical History"
                     >
-                      {"M.H"}
+                      <i
+                        className="fa fa-calendar text-centre "
+                        style={{ margin: "2px 8px" }}
+                      ></i>
                     </th>
                   </>
                 )}
+                <th>
+                  {" "}
+                  <i className="fa fa-search" />{" "}
+                </th>
               </tr>
             </thead>
             <tbody>
               {dispatchData.map((data, index) => (
                 <tr key={index}>
-                  <td
-                    data-title={"S.No"}
-                    onClick={() => {
-                      setModal(true);
-                      setVisitID(data?.VisitNo);
-                    }}
-                  >
-                    <div>
-                      {index + 1}&nbsp;
-                      {data?.IsVip === 1 && <img src={VIP}></img>}
-                      <i className="fa fa-search" />
-                    </div>
+                  <td data-title={"S.No"} className="text-center">
+                    {index + 1}&nbsp;
+                    {data?.IsVip === 1 && <img src={VIP}></img>}&nbsp;
                   </td>
                   <td data-title={"Reg Date"}>
                     <div>{dateConfig(data.Date)}</div>
@@ -251,56 +250,53 @@ function DispatchTable({ dispatchData, show, show2, users }) {
                     </div>
                   </td>
 
-                  <td className="w-100" data-title={"Test"}>
-                    {parse(data?.Test)}
+                  <td className="w-100 result-entry-test" data-title={"Test"}>
+                    <FlexContainer>{parse(data?.Test)}</FlexContainer>
                   </td>
 
                   <td data-title={"Print"}>
                     {handleCheck(data) && (
-                      <>
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                          }}
-                        >
-                          {printLoading.Without &&
-                          printLoading.index === index ? (
-                            <Loading />
-                          ) : (
-                            <i
-                              className="fa fa-print iconStyle"
-                              style={{
-                                cursor: "pointer",
-                                textAlign: "center",
-                              }}
-                              onClick={() =>
-                                handleReport(data, "Without", index, 0)
-                              }
-                              title="Print without header"
-                            ></i>
-                          )}
-                          <br></br>
-                          {printLoading.With && printLoading.index === index ? (
-                            <Loading />
-                          ) : (
-                            <i
-                              className="fa fa-print iconStyle"
-                              style={{
-                                color: "red",
-                                cursor: "pointer",
-                                textAlign: "center",
-                              }}
-                              onClick={() =>
-                                handleReport(data, "With", index, 1)
-                              }
-                              title="Print with header"
-                            ></i>
-                          )}
-                        </div>
-                      </>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        {printLoading.Without &&
+                        printLoading.index === index ? (
+                          <Loading />
+                        ) : (
+                          <i
+                            className="fa fa-print iconStyle"
+                            style={{
+                              cursor: "pointer",
+                              textAlign: "center",
+                            }}
+                            onClick={() =>
+                              handleReport(data, "Without", index, 0)
+                            }
+                            title="Print without header"
+                          ></i>
+                        )}
+                        &nbsp;&nbsp;
+                        {printLoading.With && printLoading.index === index ? (
+                          <Loading />
+                        ) : (
+                          <i
+                            className="fa fa-print iconStyle"
+                            style={{
+                              color: "red",
+                              cursor: "pointer",
+                              textAlign: "center",
+                            }}
+                            onClick={() => handleReport(data, "With", index, 1)}
+                            title="Print with header"
+                          ></i>
+                        )}
+                      </div>
                     )}
-                    &nbsp;
                   </td>
 
                   <td data-title={"UHID"}>{data?.PatientCode}&nbsp;</td>
@@ -370,6 +366,15 @@ function DispatchTable({ dispatchData, show, show2, users }) {
                       </td>
                     </>
                   )}
+                  <td>
+                    <i
+                      className="fa fa-search pointer text-primary"
+                      onClick={() => {
+                        setModal(true);
+                        setVisitID(data?.VisitNo);
+                      }}
+                    />
+                  </td>
                 </tr>
               ))}
             </tbody>

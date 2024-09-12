@@ -9,6 +9,7 @@ import Loading from "../../components/Loading/Loading";
 import CustomModal from "../utils/CustomModal";
 import CustomDateModal from "../utils/CustomDateModal";
 import NoRecordFound from "../../components/CommonComponent/NoRecordFound";
+import FlexContainer from "../../components/CommonComponent/ResultEntrytest";
 function RETable({ redata, GetResultEntry, show, show2 }) {
   const [modal, setModal] = useState(false);
   const [datemodal, showDatemodal] = useState(false);
@@ -200,22 +201,13 @@ function RETable({ redata, GetResultEntry, show, show2 }) {
                         <img src={urgentGIF}></img>
                       </div>
                     )}
+                    &nbsp;
                     {data?.IsVip === 1 && (
                       <div>
                         <img src={VIP}></img>
                       </div>
                     )}
-                    <div>
-                      <i
-                        className="fa fa-search"
-                        onClick={() => {
-                          setModal(true);
-                          setVisitID(data?.VisitNo);
-                        }}
-                        style={{ cursor: "pointer" }}
-                      />
-                    </div>
-
+                    &nbsp;
                     {data.StatSample == 1 ? (
                       <div>
                         <span
@@ -228,6 +220,17 @@ function RETable({ redata, GetResultEntry, show, show2 }) {
                     ) : (
                       <></>
                     )}
+                    &nbsp;
+                    <div>
+                      <i
+                        className="fa fa-search"
+                        onClick={() => {
+                          setModal(true);
+                          setVisitID(data?.VisitNo);
+                        }}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </div>
                   </div>
                 </td>
                 <td data-title={t("Reg Date")}>
@@ -254,7 +257,9 @@ function RETable({ redata, GetResultEntry, show, show2 }) {
                   </div>
                 </td>
 
-                <td data-title={t("Test")}>{parse(data?.Test)}</td>
+                <td data-title={t("Test")} className="result-entry-test">
+                  <FlexContainer>{parse(data?.Test)}</FlexContainer>
+                </td>
                 <td
                   data-title={t("Print")}
                   //   className="d-flex flex-column w-100"

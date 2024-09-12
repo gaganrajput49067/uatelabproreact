@@ -3,7 +3,10 @@ import "../../zStyles/Tooltip.css";
 
 const Tooltip = ({ label, children, className, position = "top" }) => {
   return (
-    <div className={`tooltip-container ${className}`}>
+    <div
+      className={`tooltip-container ${className}`}
+      // style={{ position: "relative", zIndex: 10000 }}
+    >
       {children}
       <div
         className={`tooltip ${

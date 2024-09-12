@@ -276,20 +276,24 @@ function SampleCollectionTable({
 
       <td data-title={"Vial Qty"}>
         {(data.Status === 1 || data.Status === 4) && data?.SINNo !== "" ? (
-          <div style={{ display: "flex", justifyContent: "centre" }}>
-            <button
-              className="btn btn-sm btn-danger"
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <i
+              class="fa fa-minus text-danger pointer"
               onClick={() => handleValQty("sub", data?.SINNo, data?.isSelected)}
-            >
-              -
-            </button>
+            ></i>
+            {/* <button className="btn btn-sm btn-danger">-</button> */}
             <span className="mx-2 ">{data?.valQty}</span>
-            <button
-              className="btn btn-sm btn-primary"
+            <i
+              class="fa fa-plus text-success pointer"
               onClick={() => handleValQty("add", data?.SINNo, data?.isSelected)}
-            >
-              +
-            </button>
+            ></i>
+            {/* <button className="btn btn-sm btn-primary">+</button> */}
           </div>
         ) : (
           <>{data?.VialQty}</>
@@ -347,7 +351,7 @@ function SampleCollectionTable({
           </button>
         )}
       </td>
-      <td data-title={"Select"}>
+      <td data-title={"Select"} className="text-center">
         {data.Status !== 2 &&
           data.Status !== 3 &&
           data.Approved !== 1 &&

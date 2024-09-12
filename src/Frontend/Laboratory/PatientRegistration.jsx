@@ -52,6 +52,7 @@ import SlotBookModal from "../utils/SlotBookModal";
 import SubPageHead from "../../components/CommonComponent/SubPageHead";
 import CloseButton from "../../components/CommonComponent/CloseButton";
 import Tooltip from "../../components/CommonComponent/Tooltip";
+import CameraModal from "../utils/CameraModal";
 const PatientRegistration = () => {
   const { t } = useTranslation();
   const [patientImg, setPatientImg] = useState({
@@ -3311,11 +3312,26 @@ const PatientRegistration = () => {
           handleUploadCount={handleUploadCount}
         />
       )}
+      {patientImg.show && (
+        <CameraModal
+          show={patientImg.show}
+          guid={PatientGuid}
+          pageName={"patientImage"}
+          defaultImage={patientImg.img}
+          handleClose={(guidNo, newUrl) => {
+            console.log(newUrl);
+            setPatientImg({
+              show: false,
+              img: newUrl ? newUrl : PhelboImage,
+            });
+          }}
+        />
+      )}
       <PageHead name="Patient Registration" showbtn={true} drop={false}>
         <>
           <Tooltip label={"Patient Report Delivery Method"}>
             <button
-              className="btn btn-warning btn-block w-100 btn-sm  mx-2"
+              className="btn btn-warning btn-block w-100 btn-sm  mx-1"
               id="PRDM"
               onClick={() => {
                 setSaveSmsEmail({
@@ -3845,7 +3861,6 @@ const PatientRegistration = () => {
                     </ul>
                   )}
                   <Tooltip label={"Add Secondary Referred Doctor"}>
-                    {" "}
                     <Button
                       icon="pi pi-plus"
                       className="iconSize"
@@ -4093,7 +4108,7 @@ const PatientRegistration = () => {
           </div>
           <div className="row patent-register-image">
             <div>
-              <Image
+              <img
                 src={MyImage}
                 alt="Image"
                 width="115"
@@ -4403,15 +4418,15 @@ const PatientRegistration = () => {
                     <th>{"Amt"}</th>
                     <th>{"D.Date"}</th>
                     <th>{"SC"}</th>
-                    <th>
-                      <Tooltip label={"Urgen Delivery"}>
-                        {/* <span class="blinking"> */}
+                    <th className="text-center">
+                      {/* <Tooltip label={"Urgen Delivery"}> */}
+                      <span class="blinking">
                         <i
                           className="fa fa-hourglass-start fa-spin blinking"
                           style={{ color: "red" }}
                         ></i>
-                        {/* </span> */}
-                      </Tooltip>
+                      </span>
+                      {/* </Tooltip> */}
                     </th>
                     <th className="text-center">
                       <i class="fa fa-trash"></i>
@@ -4934,23 +4949,17 @@ const PatientRegistration = () => {
                 )}
               </div>
               {state?.HideAmount != 1 && (
-                <div
-                  className="col-sm-3"
-                  style={{ fontSize: "18px !important", fontWeight: "bold" }}
-                >
+                <span className="col-sm-3 m-0 p-0, text-center custom-bill">
                   {"Due Amount"} : {Number(LTData?.NetAmount - paid).toFixed(2)}
-                </div>
+                </span>
               )}
               {state?.HideAmount != 1 && (
-                <div
-                  className="col-sm-4"
-                  style={{ fontSize: "18px !important", fontWeight: "bold" }}
-                >
+                <span className="col-sm-4 m-0 p-0 custom-bill">
                   {"Total Discount Amount"} :
                   {LTData?.DiscountOnTotal
                     ? parseFloat(LTData?.DiscountOnTotal).toFixed(2)
                     : " 0"}
-                </div>
+                </span>
               )}
               <div className="col-sm-3 m-0 p-0 ml-2">
                 <button
