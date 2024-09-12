@@ -185,10 +185,6 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
         </div>
         {/* theme */}
 
-        <i className="fas fa-user-times mr-1 ml-2 pointer ss-none ">
-          &nbsp;<span className="">3</span>
-        </i>
-
         <div
           className="user-drop-container pointer"
           onClick={() => setShowThemes(!showThemes)}
@@ -217,7 +213,9 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
           aria-hidden="true"
           onClick={toggleFullScreen}
         ></i>
-
+        <i className="fas fa-user-times mr-1 ml-2 pointer ss-none ">
+          &nbsp;<span className="">3</span>
+        </i>
         {/* User Profile */}
         <div
           className="user-Info-container"
