@@ -77,7 +77,7 @@ export const fetchuserdata = (data, state) => {
     .post("CommonController/UserwiseDashboard", {
       FromDate: moment(data?.FromDate).format("YYYY-MM-DD"),
       ToDate: moment(data?.ToDate).format("YYYY-MM-DD"),
-      CentreID: [1196, 5167, 5466],
+      CentreID: data?.CentreID,
       // data?.CentreID == "" || data?.CentreID == [""]
       //   ? centreData?.map((ele) => ele?.value)
       //   : data?.CentreID,
@@ -99,7 +99,7 @@ export const fetchuserdata = (data, state) => {
 export const getDashBoardData = (type, value, payload, state) => {
   axiosInstance
     .post("CommonController/GetDashBoardData", {
-      CentreID: [1196, 5167, 5466],
+      CentreID: type === "CentreID" ? value : payload?.CentreID,
       //   type === "CentreID" ? value : getValue(payload?.CentreID),
       FromDate:
         type === "FromDate"

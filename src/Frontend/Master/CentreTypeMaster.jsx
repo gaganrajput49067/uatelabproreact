@@ -199,7 +199,9 @@ const CentreTypeMaster = () => {
                           <th className="text-center">{"S.No"}</th>
                           <th className="text-center">{"CentreType"}</th>
                           <th className="text-center">{"Status"}</th>
-                          <th className="text-center">{"Select"}</th>
+                          <th className="text-center">
+                            <i class="fa fa-edit"></i>
+                          </th>
                         </tr>
                       </thead>
 
@@ -227,7 +229,7 @@ const CentreTypeMaster = () => {
                                     handleEditCentreType(ele);
                                   }}
                                 >
-                                  Edit
+                                  <i class="fa fa-edit"></i>
                                 </button>
                               </td>
                             </tr>

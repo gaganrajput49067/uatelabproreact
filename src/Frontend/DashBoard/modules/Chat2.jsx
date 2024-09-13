@@ -7,23 +7,22 @@ ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
 function Chat2({ state }) {
   const { t } = useTranslation();
-  console.log("props", state);
   const data = {
     labels: [
-      t("Sample Collected"),
-      t("Sample Not Collected"),
-      t("Sample Received"),
-      t("Sample Rejected"),
-      t("Sample Approved"),
+      `${t("Sample Collected")} : ${state?.SampleCollectionCount || 0}`,
+      `${t("Sample Not Collected")} : ${state?.NotCollectedCount || 0}`,
+      `${t("Sample Received")} : ${state?.DepartmentReceiveCount || 0}`,
+      `${t("Sample Rejected")} : ${state?.RejectedCount || 0}`,
+      `${t("Sample Approved")} : ${state?.ApprovedCount || 0}`,
     ],
     datasets: [
       {
         data: [
-          state?.SampleCollectionCount || 23,
-          state?.NotCollectedCount || 43,
-          state?.DepartmentReceiveCount || 43,
-          state?.RejectedCount || 43,
-          state?.ApprovedCount || 43,
+          state?.SampleCollectionCount,
+          state?.NotCollectedCount,
+          state?.DepartmentReceiveCount,
+          state?.RejectedCount,
+          state?.ApprovedCount,
         ],
         backgroundColor: [
           "rgba(252, 186, 3,0.8)",
@@ -49,7 +48,7 @@ function Chat2({ state }) {
           boxWidth: 20, // Size of the legend box
           padding: 20, // Spacing between the legend items
           font: {
-            size: 16, // Increase font size of the labels
+            size: 12, // Increase font size of the labels
           },
         },
       },

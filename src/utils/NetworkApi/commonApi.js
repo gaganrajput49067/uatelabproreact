@@ -420,9 +420,9 @@ export const getRejectCount = () => {
       if (rejectCountElement) {
         rejectCountElement.textContent = data;
         if (data === 0) {
-          rejectCountElement.parentNode.parentNode.style.display = "none";
+          document.getElementById("rejectCountCont").style.display = "none";
         } else {
-          rejectCountElement.parentNode.parentNode.style.display = "block";
+          document.getElementById("rejectCountCont").style.display = "flex";
         }
       }
     })
@@ -507,4 +507,59 @@ export const BindFieldType = (state) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+export const getAccessCentresReports = (state) => {
+  axiosInstance
+    .get("Centre/getAccessCentres")
+    .then((res) => {
+      let data = res.data.message;
+      console.log(data);
+      let CentreDataValue = data.map((ele) => {
+        return {
+          value: ele.CentreID,
+          label: ele.Centre,
+        };
+      });
+      state(CentreDataValue);
+    })
+    .catch((err) => {
+      toast.error(
+        err?.response?.data?.message
+          ? err?.response?.data?.message
+          : "Error Occured"
+      );
+    });
+};
+
+export const BindApprovalDoctorReports = (state) => {
+  axiosInstance
+    .get("CommonController/GetReferalDoctorData")
+    .then((res) => {
+      let data = res.data.message;
+      let doctorData = data.map((ele) => {
+        return {
+          value: ele?.DoctorReferalId,
+          label: ele?.Name,
+        };
+      });
+      state(doctorData);
+    })
+    .catch((err) => console.log(err));
+};
+
+export const BindProEmployee = (state) => {
+  axiosInstance
+    .get("Employee/ProEmployee")
+    .then((res) => {
+      let data = res.data.message;
+      let doctorData = data.map((ele) => {
+        return {
+          value: ele?.EmployeeID,
+          label: ele?.EmployeeName,
+        };
+      });
+      state(doctorData);
+    })
+    .catch((err) => console.log(err));
 };

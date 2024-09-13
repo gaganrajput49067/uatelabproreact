@@ -194,3 +194,10 @@ export const StatusCheck = {
   11: "Hold",
   6: "Approve",
 };
+
+export const workSheetSampleStatus = [
+  { label: "All", value: "", status: true },
+  { label: "Receive", value: "3", status: true },
+  { label: "Rejected", value: " 4", status: true },
+  { label: "Approved", value: "5", status: true },
+];

@@ -25,6 +25,8 @@ import {
   Legend,
 } from "chart.js";
 import { gsap } from "gsap";
+import moment from "moment";
+
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const MainDaashBoard = () => {
@@ -61,82 +63,97 @@ const MainDaashBoard = () => {
     });
   }, []);
 
+  const getOutput = (name, value) => {
+    const data = { ...payload };
+    if (Array.isArray(payload.CentreID) || payload.CentreID == "") {
+      data.CentreID = accessCentre?.map((ele) => ele?.value);
+    }
+    data[name] = value;
+    getDashBoardData(name, value, data, setUserWiseDashBoard);
+    fetchuserdata(data, setDashBoardData);
+  };
+
   return (
     <>
-      <div ref={elementRef}>
-        <div className="header-main-menu-container m-2">
-          <span className="header-dashboard">DashBoard</span>
-          <div className="header-option">
-            <div className="col-sm-3 mt-1">
-              <SelectBox
-                className="required-fields"
-                placeholderName="Select Centre"
-                options={accessCentre}
-                value={payload.CentreID}
-                name="CentreID"
-                onChange={(e) =>
-                  setPayload({ ...payload, [name]: e.target.value })
-                }
-                lable="Centre"
-              />
-            </div>
-            <div className="col-sm-3 mt-1">
-              <DatePicker
-                className="custom-calendar"
-                name="DOB"
-                placeholder=" "
-                value={new Date()}
-                id="DOB"
-                lable="From Date"
-              />
-            </div>
-            <div className="col-sm-3 mt-1">
-              <DatePicker
-                className="custom-calendar"
-                name="To Date"
-                placeholder=" "
-                value={new Date()}
-                id="DOB"
-                lable="To Date"
-              />
+      <div className="header-main-menu-container m-2">
+        <span className="header-dashboard">DashBoard</span>
+        <div className="header-option">
+          <div className="col-sm-3 mt-1">
+            <SelectBox
+              className="required-fields"
+              placeholderName="Select Centre"
+              options={accessCentre}
+              value={payload.CentreID}
+              name="CentreID"
+              onChange={(e) => {
+                setPayload({ ...payload, CentreID: e.target.value });
+                getOutput(e.target.name, e.target.value);
+              }}
+              lable="Centre"
+            />
+          </div>
+          <div className="col-sm-3 mt-1">
+            <DatePicker
+              className="custom-calendar"
+              name="FromDate"
+              placeholder=" "
+              value={new Date(payload.FromDate)}
+              id="DOB"
+              lable="From Date"
+              onChange={(value, name) => {
+                setPayload((ele) => ({ ...ele, [name]: value }));
+                getOutput(name, value);
+              }}
+            />
+          </div>
+          <div className="col-sm-3 mt-1">
+            <DatePicker
+              className="custom-calendar"
+              name="ToDate"
+              placeholder=" "
+              value={new Date(payload.ToDate)}
+              id="DOB"
+              lable="To Date"
+              onChange={(value, name) => {
+                setPayload((ele) => ({ ...ele, [name]: value }));
+                getOutput(name, value);
+              }}
+            />
+          </div>
+        </div>
+      </div>
+      <div class="main-dashboard-outlet">
+        <div class="main-cont-welcom">
+          <div className="dashboard-welcome-cont">
+            <div>
+              <span>{getGreeting("greeting")}</span>
+              <span>{getGreeting("date")}</span>
+              <span>Welcome Back Mr. Prakhar Pandey</span>
             </div>
           </div>
         </div>
-        <div class="main-dashboard-outlet">
-          <div class="main-cont-welcom">
-            <div className="dashboard-welcome-cont">
-              <div>
-                <span>{getGreeting("greeting")}</span>
-                <span>{getGreeting("date")}</span>
-                <span>Welcome Back Mr. Prakhar Pandey</span>
-              </div>
-              <img
-                src={greeticon}
-                alt=""
-                style={{ width: "150px", height: "150px" }}
-              />
-            </div>
-          </div>
-          <div class="div2 dashboard-Chart pt-3">
-            <DataSet />
-          </div>
-          <div class="SalesCollection dashboard-Chart">
-            <span>Sales Collection</span>
-            <SalesCollection userWiseDashBoard={userWiseDashBoard} />
-          </div>
-          <div class="div4 dashboard-Chart"> d</div>
-          <div class="MultiAxisLineChart dashboard-Chart">
-            <span>Registration wise Revenue</span>
-            <MultiAxisLineChart />
-          </div>
-          <div class="RevenueCollection dashboard-Chart">
-            <span>Revenue Collection</span>
-            <RevenueCollection userWiseDashBoard={userWiseDashBoard} />
-          </div>
-          <div class="sample-data-chart dashboard-Chart">
-            <span>Sample Collection Status</span>
-            <SampleCollection userWiseDashBoard={userWiseDashBoard} />
-          </div>
+        <div class="div2 dashboard-Chart pt-3">
+          <DataSet data={userDashBoardData} />
+        </div>
+        <div class="SalesCollection dashboard-Chart">
+          <span>Sales Collection</span>
+          <SalesCollection userWiseDashBoard={userDashBoardData} />
+        </div>
+        <div class="div4 dashboard-Chart"> d</div>
+        <div class="MultiAxisLineChart dashboard-Chart">
+          <span>Registration wise Revenue</span>
+          <MultiAxisLineChart
+            data1={userDashBoardData?.TotalBookeddata}
+            data2={userDashBoardData?.TotalBookeddata}
+          />
+        </div>
+        <div class="RevenueCollection dashboard-Chart">
+          <span>Revenue Collection</span>
+          <RevenueCollection userWiseDashBoard={userDashBoardData} />
+        </div>
+        <div class="sample-data-chart dashboard-Chart">
+          <span>Sample Collection Status</span>
+          <SampleCollection userWiseDashBoard={userWiseDashBoard} />
         </div>
       </div>
     </>
@@ -185,6 +202,7 @@ function RevenueCollection({ userWiseDashBoard }) {
 }
 
 function SalesCollection({ userWiseDashBoard }) {
+  console.log(userWiseDashBoard, "ds");
   const month = getGreeting("month");
   const SalesCollection = {
     labels: [month[2], month[1], month[0]],
@@ -249,34 +267,74 @@ function SalesCollection({ userWiseDashBoard }) {
   );
 }
 
-function DataSet({ userWiseDashBoard }) {
+function DataSet({ data }) {
   return (
     <>
       <div className="data-set-cont">
         <label>Total</label>
         <p>
-          <p>Registration</p> <p> 24</p>
+          <p>Registration</p>
+          <p>
+            {data?.TotalBookeddata
+              ? data?.TotalBookeddata?.filter(
+                  (ele) => ele?.Date == moment(new Date()).format("YYYY-MM-DD")
+                )[0].TotalReceiptBooked
+              : 0}
+          </p>
         </p>
         <p>
-          <p>Revenue</p> <p> 24</p>
+          <p>Revenue</p>
+          <p>
+            {data?.TotalBookeddata
+              ? Number(
+                  data?.TotalBookeddata?.filter(
+                    (ele) =>
+                      ele?.Date == moment(new Date()).format("YYYY-MM-DD")
+                  )[0].TotalNetAmount
+                ).toFixed(2)
+              : 0.0}
+          </p>
         </p>
       </div>
       <div className="data-set-cont">
         <label>Registration</label>
         <p>
-          <p>Today</p> <p> 24</p>
+          <p>Today</p>
+          <p>
+            {data?.TotalBookeddata
+              ? data?.TotalBookeddata?.filter(
+                  (ele) => ele?.Date == moment(new Date()).format("YYYY-MM-DD")
+                )[0].TotalReceiptBooked
+              : 0}
+          </p>
         </p>
         <p>
-          <p>August</p> <p> 24</p>
+          <p>August</p>
+          <p>{data?.Monthwisedata || 0}</p>
         </p>
       </div>
       <div className="data-set-cont">
         <label>Revenue</label>
         <p>
-          <p>Today</p> <p> 24</p>
+          <p>Today</p>
+          <p>
+            {data?.TotalBookeddata
+              ? Number(
+                  data?.TotalBookeddata?.filter(
+                    (ele) =>
+                      ele?.Date == moment(new Date()).format("YYYY-MM-DD")
+                  )[0].TotalNetAmount
+                ).toFixed(2)
+              : 0.0}
+          </p>
         </p>
         <p>
-          <p>August</p> <p> 24</p>
+          <p>August</p>
+          <p>
+            {data?.MonthCollection
+              ? Number(data?.MonthCollection).toFixed(2)
+              : 0}
+          </p>
         </p>
       </div>
     </>
