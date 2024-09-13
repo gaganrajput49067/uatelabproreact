@@ -24,6 +24,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import moment from "moment";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -53,6 +54,16 @@ const MainDaashBoard = () => {
     });
   }, []);
 
+  const getOutput = (name, value) => {
+    const data = { ...payload };
+    if (Array.isArray(payload.CentreID) || payload.CentreID == "") {
+      data.CentreID = accessCentre?.map((ele) => ele?.value);
+    }
+    data[name] = value;
+    getDashBoardData(name, value, data, setUserWiseDashBoard);
+    fetchuserdata(data, setDashBoardData);
+  };
+
   return (
     <>
       <div className="header-main-menu-container m-2">
@@ -65,30 +76,39 @@ const MainDaashBoard = () => {
               options={accessCentre}
               value={payload.CentreID}
               name="CentreID"
-              onChange={(e) =>
-                setPayload({ ...payload, [name]: e.target.value })
-              }
+              onChange={(e) => {
+                setPayload({ ...payload, CentreID: e.target.value });
+                getOutput(e.target.name, e.target.value);
+              }}
               lable="Centre"
             />
           </div>
           <div className="col-sm-3 mt-1">
             <DatePicker
               className="custom-calendar"
-              name="DOB"
+              name="FromDate"
               placeholder=" "
-              value={new Date()}
+              value={new Date(payload.FromDate)}
               id="DOB"
               lable="From Date"
+              onChange={(value, name) => {
+                setPayload((ele) => ({ ...ele, [name]: value }));
+                getOutput(name, value);
+              }}
             />
           </div>
           <div className="col-sm-3 mt-1">
             <DatePicker
               className="custom-calendar"
-              name="To Date"
+              name="ToDate"
               placeholder=" "
-              value={new Date()}
+              value={new Date(payload.ToDate)}
               id="DOB"
               lable="To Date"
+              onChange={(value, name) => {
+                setPayload((ele) => ({ ...ele, [name]: value }));
+                getOutput(name, value);
+              }}
             />
           </div>
         </div>
@@ -109,20 +129,23 @@ const MainDaashBoard = () => {
           </div>
         </div>
         <div class="div2 dashboard-Chart pt-3">
-          <DataSet />
+          <DataSet data={userDashBoardData} />
         </div>
         <div class="SalesCollection dashboard-Chart">
           <span>Sales Collection</span>
-          <SalesCollection userWiseDashBoard={userWiseDashBoard} />
+          <SalesCollection userWiseDashBoard={userDashBoardData} />
         </div>
         <div class="div4 dashboard-Chart"> d</div>
         <div class="MultiAxisLineChart dashboard-Chart">
           <span>Registration wise Revenue</span>
-          <MultiAxisLineChart />
+          <MultiAxisLineChart
+            data1={userDashBoardData?.TotalBookeddata}
+            data2={userDashBoardData?.TotalBookeddata}
+          />
         </div>
         <div class="RevenueCollection dashboard-Chart">
           <span>Revenue Collection</span>
-          <RevenueCollection userWiseDashBoard={userWiseDashBoard} />
+          <RevenueCollection userWiseDashBoard={userDashBoardData} />
         </div>
         <div class="sample-data-chart dashboard-Chart">
           <span>Sample Collection Status</span>
@@ -175,6 +198,7 @@ function RevenueCollection({ userWiseDashBoard }) {
 }
 
 function SalesCollection({ userWiseDashBoard }) {
+  console.log(userWiseDashBoard, "ds");
   const month = getGreeting("month");
   const SalesCollection = {
     labels: [month[2], month[1], month[0]],
@@ -239,34 +263,74 @@ function SalesCollection({ userWiseDashBoard }) {
   );
 }
 
-function DataSet({ userWiseDashBoard }) {
+function DataSet({ data }) {
   return (
     <>
       <div className="data-set-cont">
         <label>Total</label>
         <p>
-          <p>Registration</p> <p> 24</p>
+          <p>Registration</p>
+          <p>
+            {data?.TotalBookeddata
+              ? data?.TotalBookeddata?.filter(
+                  (ele) => ele?.Date == moment(new Date()).format("YYYY-MM-DD")
+                )[0].TotalReceiptBooked
+              : 0}
+          </p>
         </p>
         <p>
-          <p>Revenue</p> <p> 24</p>
+          <p>Revenue</p>
+          <p>
+            {data?.TotalBookeddata
+              ? Number(
+                  data?.TotalBookeddata?.filter(
+                    (ele) =>
+                      ele?.Date == moment(new Date()).format("YYYY-MM-DD")
+                  )[0].TotalNetAmount
+                ).toFixed(2)
+              : 0.0}
+          </p>
         </p>
       </div>
       <div className="data-set-cont">
         <label>Registration</label>
         <p>
-          <p>Today</p> <p> 24</p>
+          <p>Today</p>
+          <p>
+            {data?.TotalBookeddata
+              ? data?.TotalBookeddata?.filter(
+                  (ele) => ele?.Date == moment(new Date()).format("YYYY-MM-DD")
+                )[0].TotalReceiptBooked
+              : 0}
+          </p>
         </p>
         <p>
-          <p>August</p> <p> 24</p>
+          <p>August</p>
+          <p>{data?.Monthwisedata || 0}</p>
         </p>
       </div>
       <div className="data-set-cont">
         <label>Revenue</label>
         <p>
-          <p>Today</p> <p> 24</p>
+          <p>Today</p>
+          <p>
+            {data?.TotalBookeddata
+              ? Number(
+                  data?.TotalBookeddata?.filter(
+                    (ele) =>
+                      ele?.Date == moment(new Date()).format("YYYY-MM-DD")
+                  )[0].TotalNetAmount
+                ).toFixed(2)
+              : 0.0}
+          </p>
         </p>
         <p>
-          <p>August</p> <p> 24</p>
+          <p>August</p>
+          <p>
+            {data?.MonthCollection
+              ? Number(data?.MonthCollection).toFixed(2)
+              : 0}
+          </p>
         </p>
       </div>
     </>

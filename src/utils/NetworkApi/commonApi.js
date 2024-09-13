@@ -420,9 +420,9 @@ export const getRejectCount = () => {
       if (rejectCountElement) {
         rejectCountElement.textContent = data;
         if (data === 0) {
-          rejectCountElement.parentNode.parentNode.style.display = "none";
+          document.getElementById("rejectCountCont").style.display = "none";
         } else {
-          rejectCountElement.parentNode.parentNode.style.display = "block";
+          document.getElementById("rejectCountCont").style.display = "flex";
         }
       }
     })

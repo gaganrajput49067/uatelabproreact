@@ -6,13 +6,17 @@ import { useTranslation } from "react-i18next";
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
 function RevenueChart({ state }) {
+  console.log(state);
   const { t } = useTranslation();
-  console.log("props", state);
   const data = {
-    labels: [t("Cash"), t("Cheque"), t("Online")],
+    labels: [
+      `${t("Cash")} : ${state?.Cash}`,
+      `${t("Cheque")} : ${state?.Cheque}`,
+      `${t("Online")} : ${state?.Online}`,
+    ],
     datasets: [
       {
-        data: [state?.Cash || 23, state?.Cheque || 43, state?.Online || 12],
+        data: [state?.Cash, state?.Cheque, state?.Online],
         backgroundColor: [
           "rgba(252, 186, 3,0.8)",
           "rgba(237, 21, 21,0.8)",

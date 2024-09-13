@@ -14,7 +14,10 @@ import { axiosInstance } from "../../utils/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logOutAction } from "../../store/reducers/loginSlice/loginSlice";
-import { getCentreDetails } from "../../utils/NetworkApi/commonApi";
+import {
+  getCentreDetails,
+  getRejectCount,
+} from "../../utils/NetworkApi/commonApi";
 import { toast } from "react-toastify";
 
 const Header = ({ handleSidebar, menuData, handlePage }) => {
@@ -34,6 +37,10 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
   useEffect(() => {
     setSelectedMenu(menuData?.length > 0 ? menuData[0]?.value : []);
   }, [menuData]);
+
+  useEffect(() => {
+    getRejectCount();
+  }, []);
 
   useEffect(() => {
     getCentreDetails(setCentreData);
@@ -212,9 +219,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
           aria-hidden="true"
           onClick={toggleFullScreen}
         ></i>
-        <i className="fas fa-user-times mr-1 ml-2 pointer ss-none ">
-          &nbsp;<span className="">3</span>
-        </i>
+
         {/* User Profile */}
         <div
           className="user-Info-container"
@@ -302,8 +307,6 @@ function ToggleTheme() {
   const [theme, setTheme] = useState(
     window.localStorage.getItem("theme") || "default"
   );
-
-  // useEffect(() => {}, [theme]);
 
   const toggleTheme = (ele) => {
     setTheme(ele.value);

@@ -9,6 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import moment from "moment";
 
 ChartJS.register(
   LineElement,
@@ -19,13 +20,19 @@ ChartJS.register(
   Legend
 );
 
-function MultiAxisLineChart({ data1, data2 }) {
+function MultiAxisLineChart({ data1 }) {
   const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels:
+      data1 && data1.length > 0
+        ? data1.map((ele) => moment(ele?.Date).format("DD MMM"))
+        : [],
     datasets: [
       {
-        label: "Dataset 1",
-        data: data1 || [65, 59, 80, 81, 56, 55, 40],
+        label: "Revenue",
+        data:
+          data1 && data1.length > 0
+            ? data1.map((ele) => ele?.TotalNetAmount)
+            : [],
         borderColor: "rgba(75,192,192,1)",
         backgroundColor: "rgba(75,192,192,0.2)",
         yAxisID: "y-axis-1",
@@ -33,8 +40,11 @@ function MultiAxisLineChart({ data1, data2 }) {
         tension: 0.4,
       },
       {
-        label: "Dataset 2",
-        data: data2 || [28, 48, 40, 19, 86, 27, 90],
+        label: "Bookings",
+        data:
+          data1 && data1.length > 0
+            ? data1.map((ele) => ele?.TotalReceiptBooked)
+            : [],
         borderColor: "rgba(153,102,255,1)",
         backgroundColor: "rgba(153,102,255,0.2)",
         yAxisID: "y-axis-2",
