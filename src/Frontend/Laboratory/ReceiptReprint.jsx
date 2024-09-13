@@ -469,21 +469,7 @@ const ReceiptReprint = () => {
                 {"Fully Unpaid"}
               </label>
             </div>
-            <div
-              onClick={() => {
-                TableData("credit");
-              }}
-              className="col-md-1"
-            >
-              <button
-              
-                className="statusConfirmed"
-                style={{ backgroundColor: "#b3cdb3" }}
-              ></button>
-              <label className="reprintLable" style={{ cursor: "pointer" }}>
-                {"Credit"}
-              </label>
-            </div>
+            
 
             <div
               onClick={() => {
@@ -498,6 +484,21 @@ const ReceiptReprint = () => {
               ></button>
               <label className="reprintLable" style={{ cursor: "pointer" }}>
                 {"Full Refund"}
+              </label>
+            </div>
+            <div
+              onClick={() => {
+                TableData("credit");
+              }}
+              className="col-md-1"
+            >
+              <button
+              
+                className="statusConfirmed"
+                style={{ backgroundColor: "#b3cdb3" }}
+              ></button>
+              <label className="reprintLable" style={{ cursor: "pointer" }}>
+                {"Credit"}
               </label>
             </div>
           </div>
