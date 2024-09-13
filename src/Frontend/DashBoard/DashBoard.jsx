@@ -75,85 +75,87 @@ const MainDaashBoard = () => {
 
   return (
     <>
-      <div className="header-main-menu-container m-2">
-        <span className="header-dashboard">DashBoard</span>
-        <div className="header-option">
-          <div className="col-sm-3 mt-1">
-            <SelectBox
-              className="required-fields"
-              placeholderName="Select Centre"
-              options={accessCentre}
-              value={payload.CentreID}
-              name="CentreID"
-              onChange={(e) => {
-                setPayload({ ...payload, CentreID: e.target.value });
-                getOutput(e.target.name, e.target.value);
-              }}
-              lable="Centre"
-            />
-          </div>
-          <div className="col-sm-3 mt-1">
-            <DatePicker
-              className="custom-calendar"
-              name="FromDate"
-              placeholder=" "
-              value={new Date(payload.FromDate)}
-              id="DOB"
-              lable="From Date"
-              onChange={(value, name) => {
-                setPayload((ele) => ({ ...ele, [name]: value }));
-                getOutput(name, value);
-              }}
-            />
-          </div>
-          <div className="col-sm-3 mt-1">
-            <DatePicker
-              className="custom-calendar"
-              name="ToDate"
-              placeholder=" "
-              value={new Date(payload.ToDate)}
-              id="DOB"
-              lable="To Date"
-              onChange={(value, name) => {
-                setPayload((ele) => ({ ...ele, [name]: value }));
-                getOutput(name, value);
-              }}
-            />
-          </div>
-        </div>
-      </div>
-      <div class="main-dashboard-outlet">
-        <div class="main-cont-welcom">
-          <div className="dashboard-welcome-cont">
-            <div>
-              <span>{getGreeting("greeting")}</span>
-              <span>{getGreeting("date")}</span>
-              <span>Welcome Back Mr. Prakhar Pandey</span>
+      <div ref={elementRef}>
+        <div className="header-main-menu-container m-2">
+          <span className="header-dashboard">DashBoard</span>
+          <div className="header-option">
+            <div className="col-sm-3 mt-1">
+              <SelectBox
+                className="required-fields"
+                placeholderName="Select Centre"
+                options={accessCentre}
+                value={payload.CentreID}
+                name="CentreID"
+                onChange={(e) => {
+                  setPayload({ ...payload, CentreID: e.target.value });
+                  getOutput(e.target.name, e.target.value);
+                }}
+                lable="Centre"
+              />
+            </div>
+            <div className="col-sm-3 mt-1">
+              <DatePicker
+                className="custom-calendar"
+                name="FromDate"
+                placeholder=" "
+                value={new Date(payload.FromDate)}
+                id="DOB"
+                lable="From Date"
+                onChange={(value, name) => {
+                  setPayload((ele) => ({ ...ele, [name]: value }));
+                  getOutput(name, value);
+                }}
+              />
+            </div>
+            <div className="col-sm-3 mt-1">
+              <DatePicker
+                className="custom-calendar"
+                name="ToDate"
+                placeholder=" "
+                value={new Date(payload.ToDate)}
+                id="DOB"
+                lable="To Date"
+                onChange={(value, name) => {
+                  setPayload((ele) => ({ ...ele, [name]: value }));
+                  getOutput(name, value);
+                }}
+              />
             </div>
           </div>
         </div>
-        <div class="div2 dashboard-Chart pt-3">
-          <DataSet data={userDashBoardData} />
-        </div>
-        <div class="SalesCollection dashboard-Chart">
-          <span>Sales Collection</span>
-          <SalesCollection userWiseDashBoard={userDashBoardData} />
-        </div>
-        <div class="div4 dashboard-Chart"> d</div>
-        <div class="MultiAxisLineChart dashboard-Chart">
-          <span>Registration wise Revenue</span>
-          <MultiAxisLineChart
-            data1={userDashBoardData?.TotalBookeddata}
-            data2={userDashBoardData?.TotalBookeddata}
-          />
-        </div>
-        <div class="RevenueCollection dashboard-Chart">
-          <span>Revenue Collection</span>
-          <RevenueCollection userWiseDashBoard={userDashBoardData} />
-        </div>
-        <div class="sample-data-chart dashboard-Chart">
-          <span>Sample Collection Status</span>
-          <SampleCollection userWiseDashBoard={userWiseDashBoard} />
+        <div class="main-dashboard-outlet">
+          <div class="main-cont-welcom">
+            <div className="dashboard-welcome-cont">
+              <div>
+                <span>{getGreeting("greeting")}</span>
+                <span>{getGreeting("date")}</span>
+                <span>Welcome Back Mr. Prakhar Pandey</span>
+              </div>
+            </div>
+          </div>
+          <div class="div2 dashboard-Chart pt-3">
+            <DataSet data={userDashBoardData} />
+          </div>
+          <div class="SalesCollection dashboard-Chart">
+            <span>Sales Collection</span>
+            <SalesCollection userWiseDashBoard={userDashBoardData} />
+          </div>
+          <div class="div4 dashboard-Chart"> d</div>
+          <div class="MultiAxisLineChart dashboard-Chart">
+            <span>Registration wise Revenue</span>
+            <MultiAxisLineChart
+              data1={userDashBoardData?.TotalBookeddata}
+              data2={userDashBoardData?.TotalBookeddata}
+            />
+          </div>
+          <div class="RevenueCollection dashboard-Chart">
+            <span>Revenue Collection</span>
+            <RevenueCollection userWiseDashBoard={userDashBoardData} />
+          </div>
+          <div class="sample-data-chart dashboard-Chart">
+            <span>Sample Collection Status</span>
+            <SampleCollection userWiseDashBoard={userWiseDashBoard} />
+          </div>
         </div>
       </div>
     </>
@@ -245,7 +247,7 @@ function SalesCollection({ userWiseDashBoard }) {
       x: {
         ticks: {
           font: {
-            size: 14, // Adjust the font size for x-axis labels
+            size: 12, // Adjust the font size for x-axis labels
           },
         },
       },
@@ -253,7 +255,7 @@ function SalesCollection({ userWiseDashBoard }) {
         ticks: {
           beginAtZero: true,
           font: {
-            size: 14, // Adjust the font size for y-axis labels
+            size: 12, // Adjust the font size for y-axis labels
           },
         },
       },
