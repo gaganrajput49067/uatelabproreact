@@ -12,9 +12,9 @@ import ReactSelect from "../CommonComponent/ReactSelect";
 import axios from "axios";
 import { axiosInstance } from "../../utils/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logOutAction } from "../../store/reducers/loginSlice/loginSlice";
-import { getCentreDetails } from "../../utils/NetworkApi/commonApi";
+import { getCentreDetails, getRejectCount } from "../../utils/NetworkApi/commonApi";
 import { toast } from "react-toastify";
 
 const Header = ({ handleSidebar, menuData, handlePage }) => {
@@ -107,6 +107,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
       "data-theme",
       window.localStorage.getItem("theme")
     );
+    getRejectCount();
   }, []);
   return (
     <div className="header-main-container">
@@ -190,7 +191,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
           onClick={() => setShowThemes(!showThemes)}
           ref={themeProfile}
         >
-          <i className="fas fa-palette mr-3 ml-2 mt-2 pointer ss-none"></i>
+          <i className="fas fa-palette mr-3 ml-2 mt-2 pointer ss-none header-icon"></i>
           {showThemes && (
             <div className="header-theme-menu">
               <ToggleTheme />
@@ -199,22 +200,29 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
         </div>
         {/* Home */}
         <i
-          className="fa fa-home mr-3 pointer ss-none"
+          className="fa fa-home mr-3 pointer ss-none header-icon"
           onClick={() => navigate("/Dashboard")}
         ></i>
         <i
-          className="pi pi-moon mr-3 pointer ss-none"
+          className="pi pi-moon mr-3 pointer ss-none header-icon"
           onClick={changeDarkMode}
         ></i>
         {/* full Screen */}
         <i
-          className="fa fa-expand mr-3 pointer ss-none"
+          className="fa fa-expand mr-3 pointer header-icon ss-none"
           aria-hidden="true"
           onClick={toggleFullScreen}
         ></i>
-        <i className="fas fa-user-times mr-1 ml-2 pointer ss-none ">
-          &nbsp;<span className="">3</span>
-        </i>
+        <Link
+          to="/samplecollection"
+          state={{
+            other: true,
+          }}
+        >
+          <i className="fa fa-user-times header-icon mr-2">
+            &nbsp;<span className="notification-count" id="RejectCount"></span>
+          </i>
+        </Link>
         {/* User Profile */}
         <div
           className="user-Info-container"
@@ -270,6 +278,14 @@ function UserHeader({ handleThemeChange, handleLogout }) {
       <div className="row pt-2">
         <button className="btn btn-sm btn-light text-left">
           <i className="fa fa-edit">&nbsp;&nbsp;&nbsp;&nbsp;</i>Edit Profile
+        </button>
+      </div>
+      <div className="row pt-2">
+        <button
+          className="btn btn-sm btn-light text-left"
+          onClick={changeDarkMode}
+        >
+          <i className="pi pi-moon">&nbsp;&nbsp;</i>Dark Mode
         </button>
       </div>
       <div className="row pt-2">

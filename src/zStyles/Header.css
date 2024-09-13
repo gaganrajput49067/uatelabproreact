@@ -227,3 +227,28 @@ width: 100%;
     }
 
 }
+.header-icon {
+    position: relative;
+    display: inline-block;
+    font-size: 2rem; /* Adjust icon size */
+    color: white; /* Icon color */
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  .header-icon:hover {
+    transform: scale(1.2);
+  }
+  
+  .notification-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #FF4757; /* Red background for notification count */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  }

@@ -15,8 +15,8 @@
 }
 
 :root {
-  --bg-color: #2b6dd8;
-  --bg-subMenu: #4e8ff7;
+  --bg-color: #0858da;
+  --bg-subMenu: #377ef0;
   --subMenuText-color: rgb(255, 255, 255);
 
   --gradient: linear-gradient(
@@ -995,6 +995,9 @@ td {
 
 .p-datepicker.p-datepicker-timeonly .p-timepicker {
   border-top: 0 none;
+}
+.p-datepicker-trigger {
+  height: 22px !important;
 }
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year,
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {

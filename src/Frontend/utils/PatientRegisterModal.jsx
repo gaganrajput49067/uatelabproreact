@@ -40,9 +40,8 @@ const PatientRegisterModal = ({ handleClose, Type }) => {
         title={t(`${Type} Doctor`)}
         handleClose={handleClose}
         top={"25%"}
-        className={"table-sm"}
       >
-        <div className="">
+        <div className="modal-card">
           <form onSubmit={handleSubmit} className="w-100">
             <div className="row">
               <div className="col-sm-6">

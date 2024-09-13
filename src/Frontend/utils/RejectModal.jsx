@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { axiosInstance } from "../../utils/axiosInstance";
 import { SelectBox } from "../../components/CommonComponent/SelectBox";
 import Modal from "../../components/Modal/Modal";
+import { getRejectCount } from "../../utils/NetworkApi/commonApi";
 
 function RejectModal({ show, handleShow, data, TableData }) {
   const [dropDown, setDropDown] = useState([]);

@@ -419,6 +419,7 @@ const SampleCollection = () => {
         .catch((err) => setLoading(false));
       setErrors(generatedError);
     } else {
+      setLoading(false);
       setErrors(generatedError);
     }
   };

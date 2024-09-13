@@ -17,6 +17,7 @@
     "ckeditor4-react": "^5.2.0",
     "css-loader": "^7.1.2",
     "formik": "^2.4.6",
+    "gsap": "^3.12.5",
     "html-react-parser": "^5.1.12",
     "i18next": "^23.12.2",
     "jodit-react": "^4.1.2",
