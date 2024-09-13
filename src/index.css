@@ -961,9 +961,25 @@ td {
 .p-datepicker-header {
   padding: 0;
   height: 24px;
+  
   /* width: 208px !important; */
 }
-
+.p-datepicker-next {
+  cursor: pointer;
+  box-shadow: none;
+}
+.p-datepicker-prev {
+  cursor: pointer;
+  box-shadow: none;
+}
+.p-datepicker-month {
+  cursor: pointer;
+  box-shadow: none;
+}
+.p-datepicker-year {
+  cursor: pointer;
+  box-shadow: none;
+}
 .p-datepicker-calendar tr {
   text-align: center;
 }
@@ -1958,4 +1974,28 @@ textarea:disabled {
   color: var(--bg-color) !important;         
   border: 1px solid #ccc;  
   cursor: not-allowed;      
+}
+button {
+  /* background-color: #4CAF50; Green */
+  
+  border: none;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  height: 23px !important;
+  border-radius: 5px;
+  box-shadow: 0 3px #999;
+  transition: all 0.2s ease;
+}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 2px #666;
+  transform: translateY(4px); 
+}
+
+button:hover {
+  border: 2px solid rgba(12, 12, 12, 0.137);
+  transform: translateY(-1px);
 }
