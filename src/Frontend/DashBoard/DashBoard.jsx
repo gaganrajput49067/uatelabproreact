@@ -43,14 +43,55 @@ const MainDaashBoard = () => {
     ToTime: "23:59:59",
   });
   const elementRef = useRef(null);
-
-  useEffect(() => {
-    gsap.fromTo(
-      elementRef.current,
-      { opacity: 0, y: -50 },
-      { opacity: 1, y: 0, duration: 1 }
-    );
-  }, [navigate]);
+  // useEffect(() => {
+  //   // Select the pieces of the chart using the class name
+  //   const pieces = gsap.utils.toArray(".piece");
+  
+  //   // Abstract break effect (displacing the pieces)
+  //   gsap.fromTo(
+  //     pieces,
+  //     { 
+  //       opacity: 1, 
+  //       x: 0, 
+  //       y: 0, 
+  //       scale: 1, 
+  //       rotation: 0, 
+  //       skewX: 0, 
+  //       skewY: 0,
+  //       transformPerspective: 500 // Adds a 3D perspective to enhance the break effect
+  //     },
+  //     {
+  //       opacity: 0.4,
+  //       x: (i) => gsap.utils.random(-300, 300), // More aggressive scatter with wider range
+  //       y: (i) => gsap.utils.random(-300, 300),
+  //       scale: (i) => gsap.utils.random(0.4, 0.9), // More random scaling for pieces
+  //       rotation: (i) => gsap.utils.random(-90, 90), // More dramatic rotation
+  //       skewX: (i) => gsap.utils.random(-15, 15), // Larger skew distortion
+  //       skewY: (i) => gsap.utils.random(-15, 15),
+  //       duration: 0.8, // Longer duration for scatter
+  //       ease: "back.out(2)", // Easing that gives a slight 'whip' effect as pieces scatter
+  //       stagger: 0.07,
+  //       motionBlur: true, // Adds blur for fast-moving pieces
+  //       onComplete: mergePieces,
+  //     }
+  //   );
+  
+  //   // Function to merge pieces back together with bounce effect
+  //   function mergePieces() {
+  //     gsap.to(pieces, {
+  //       x: 0,
+  //       y: 0,
+  //       opacity: 1,
+  //       scale: 1,
+  //       rotation: 0,
+  //       skewX: 0,
+  //       skewY: 0,
+  //       duration: 0.7, // Longer duration for merge back
+  //       ease: "bounce.out", // Adds a bounce effect when pieces merge back
+  //       stagger: 0.08,
+  //     });
+  //   }
+  // }, []);
   useEffect(() => {
     getDashboardAccessCentres({
       state: setAccessCentre,
@@ -75,10 +116,10 @@ const MainDaashBoard = () => {
 
   return (
     <>
-      <div ref={elementRef}>
-        <div className="header-main-menu-container m-2">
+      <div ref={elementRef} >
+        <div className="header-main-menu-container m-2 piece">
           <span className="header-dashboard">DashBoard</span>
-          <div className="header-option">
+          <div className="header-option piece">
             <div className="col-sm-3 mt-1">
               <SelectBox
                 className="required-fields"
@@ -123,36 +164,36 @@ const MainDaashBoard = () => {
             </div>
           </div>
         </div>
-        <div class="main-dashboard-outlet">
-          <div class="main-cont-welcom">
-            <div className="dashboard-welcome-cont">
+        <div class="main-dashboard-outlet piece">
+          <div class="main-cont-welcom piece">
+            <div className="dashboard-welcome-cont piece">
               <div>
                 <span>{getGreeting("greeting")}</span>
                 <span>{getGreeting("date")}</span>
-                <span>Welcome Back Mr. Prakhar Pandey</span>
+                <span>Welcome Back Mr. ITODSE INFOSYSTEMS</span>
               </div>
             </div>
           </div>
-          <div class="div2 dashboard-Chart pt-3">
+          <div class="div2 dashboard-Chart pt-3 piece">
             <DataSet data={userDashBoardData} />
           </div>
-          <div class="SalesCollection dashboard-Chart">
+          <div class="SalesCollection dashboard-Chart piece">
             <span>Sales Collection</span>
             <SalesCollection userWiseDashBoard={userDashBoardData} />
           </div>
-          <div class="div4 dashboard-Chart"> d</div>
-          <div class="MultiAxisLineChart dashboard-Chart">
+          <div class="div4 dashboard-Chart piece"> d</div>
+          <div class="MultiAxisLineChart dashboard-Chart piece">
             <span>Registration wise Revenue</span>
             <MultiAxisLineChart
               data1={userDashBoardData?.TotalBookeddata}
               data2={userDashBoardData?.TotalBookeddata}
             />
           </div>
-          <div class="RevenueCollection dashboard-Chart">
+          <div class="RevenueCollection dashboard-Chart piece">
             <span>Revenue Collection</span>
             <RevenueCollection userWiseDashBoard={userDashBoardData} />
           </div>
-          <div class="sample-data-chart dashboard-Chart">
+          <div class="sample-data-chart dashboard-Chart piece">
             <span>Sample Collection Status</span>
             <SampleCollection userWiseDashBoard={userWiseDashBoard} />
           </div>

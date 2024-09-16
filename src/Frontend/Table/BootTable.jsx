@@ -198,7 +198,7 @@ function RETable({ redata, GetResultEntry, show, show2 }) {
                     <div>{index + 1}</div>
                     {data?.isUrgent === 1 && (
                       <div>
-                        <img src={urgentGIF}></img>
+                        {/* <img src={urgentGIF}></img> */}
                       </div>
                     )}
                     &nbsp;

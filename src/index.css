@@ -18,7 +18,7 @@
   --bg-color: #0858da;
   --bg-subMenu: #377ef0;
   --subMenuText-color: rgb(255, 255, 255);
-
+  --btn-bg-color: white;
   --gradient: linear-gradient(
     90deg,
     rgb(40, 118, 207) 0%,
@@ -54,6 +54,9 @@
 }
 [data-theme="DarkMode"] button {
   background-color: var(--btn-bg-color) !important;
+  color: var(--subMenuText-color) !important;
+}
+[data-theme="DarkMode"] span {
   color: var(--subMenuText-color) !important;
 }
 [data-theme="DarkMode"] label {
