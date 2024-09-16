@@ -47,7 +47,7 @@ const MainDaashBoard = () => {
   //   // Select the pieces of the chart using the class name
   //   const pieces = gsap.utils.toArray(".piece");
   
-  //   // Abstract break effect (displacing the pieces)
+  //   // Subtle break effect (gently displacing the pieces)
   //   gsap.fromTo(
   //     pieces,
   //     { 
@@ -58,26 +58,31 @@ const MainDaashBoard = () => {
   //       rotation: 0, 
   //       skewX: 0, 
   //       skewY: 0,
-  //       transformPerspective: 500 // Adds a 3D perspective to enhance the break effect
   //     },
   //     {
-  //       opacity: 0.4,
-  //       x: (i) => gsap.utils.random(-300, 300), // More aggressive scatter with wider range
-  //       y: (i) => gsap.utils.random(-300, 300),
-  //       scale: (i) => gsap.utils.random(0.4, 0.9), // More random scaling for pieces
-  //       rotation: (i) => gsap.utils.random(-90, 90), // More dramatic rotation
-  //       skewX: (i) => gsap.utils.random(-15, 15), // Larger skew distortion
-  //       skewY: (i) => gsap.utils.random(-15, 15),
-  //       duration: 0.8, // Longer duration for scatter
-  //       ease: "back.out(2)", // Easing that gives a slight 'whip' effect as pieces scatter
-  //       stagger: 0.07,
-  //       motionBlur: true, // Adds blur for fast-moving pieces
+  //       opacity: 0.9,
+  //       x: (i) => gsap.utils.random(-30, 30), // Very minimal scatter
+  //       y: (i) => gsap.utils.random(-30, 30),
+  //       scale: (i) => gsap.utils.random(0.95, 1.05), // Barely noticeable scaling
+  //       rotation: (i) => gsap.utils.random(-5, 5), // Minor rotation
+  //       skewX: (i) => gsap.utils.random(-2, 2), // Tiny skew distortion
+  //       skewY: (i) => gsap.utils.random(-2, 2),
+  //       duration: 0.4, // Fast, subtle scatter
+  //       ease: "power1.out", // Soft ease for simple effect
+  //       stagger: 0.04,
   //       onComplete: mergePieces,
   //     }
   //   );
   
-  //   // Function to merge pieces back together with bounce effect
+  //   // Function to merge pieces back together with background color change
   //   function mergePieces() {
+  //     // Change background color before merging
+  //     gsap.to(".chart-container", {
+  //       backgroundColor: "#e0f7fa", // Soft background color during merge
+  //       duration: 0.6, // Smooth transition
+  //     });
+  
+  //     // Merge the pieces back together
   //     gsap.to(pieces, {
   //       x: 0,
   //       y: 0,
@@ -86,12 +91,23 @@ const MainDaashBoard = () => {
   //       rotation: 0,
   //       skewX: 0,
   //       skewY: 0,
-  //       duration: 0.7, // Longer duration for merge back
-  //       ease: "bounce.out", // Adds a bounce effect when pieces merge back
-  //       stagger: 0.08,
+  //       duration: 0.6, // Smooth and light merge back
+  //       ease: "power1.inOut", // Subtle ease for merging effect
+  //       stagger: 0.04,
+  //       onComplete: resetBackground, // Reset background after merge
+  //     });
+  //   }
+  
+  //   // Reset background color after merge completes
+  //   function resetBackground() {
+  //     gsap.to(".chart-container", {
+  //       backgroundColor: "#ffffff", // Revert to original background color
+  //       duration: 0.6, // Smooth transition back
   //     });
   //   }
   // }, []);
+  
+  
   useEffect(() => {
     getDashboardAccessCentres({
       state: setAccessCentre,
