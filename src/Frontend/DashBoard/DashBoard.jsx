@@ -43,14 +43,69 @@ const MainDaashBoard = () => {
     ToTime: "23:59:59",
   });
   const elementRef = useRef(null);
+  // useEffect(() => {
+  //   // Select the pieces of the chart using the class name
+  //   const pieces = gsap.utils.toArray(".piece");
 
-  useEffect(() => {
-    gsap.fromTo(
-      elementRef.current,
-      { opacity: 0, y: -50 },
-      { opacity: 1, y: 0, duration: 1 }
-    );
-  }, [navigate]);
+  //   // Subtle break effect (gently displacing the pieces)
+  //   gsap.fromTo(
+  //     pieces,
+  //     {
+  //       opacity: 1,
+  //       x: 0,
+  //       y: 0,
+  //       scale: 1,
+  //       rotation: 0,
+  //       skewX: 0,
+  //       skewY: 0,
+  //     },
+  //     {
+  //       opacity: 0.9,
+  //       x: (i) => gsap.utils.random(-30, 30), // Very minimal scatter
+  //       y: (i) => gsap.utils.random(-30, 30),
+  //       scale: (i) => gsap.utils.random(0.95, 1.05), // Barely noticeable scaling
+  //       rotation: (i) => gsap.utils.random(-5, 5), // Minor rotation
+  //       skewX: (i) => gsap.utils.random(-2, 2), // Tiny skew distortion
+  //       skewY: (i) => gsap.utils.random(-2, 2),
+  //       duration: 0.4, // Fast, subtle scatter
+  //       ease: "power1.out", // Soft ease for simple effect
+  //       stagger: 0.04,
+  //       onComplete: mergePieces,
+  //     }
+  //   );
+
+  //   // Function to merge pieces back together with background color change
+  //   function mergePieces() {
+  //     // Change background color before merging
+  //     gsap.to(".chart-container", {
+  //       backgroundColor: "#e0f7fa", // Soft background color during merge
+  //       duration: 0.6, // Smooth transition
+  //     });
+
+  //     // Merge the pieces back together
+  //     gsap.to(pieces, {
+  //       x: 0,
+  //       y: 0,
+  //       opacity: 1,
+  //       scale: 1,
+  //       rotation: 0,
+  //       skewX: 0,
+  //       skewY: 0,
+  //       duration: 0.6, // Smooth and light merge back
+  //       ease: "power1.inOut", // Subtle ease for merging effect
+  //       stagger: 0.04,
+  //       onComplete: resetBackground, // Reset background after merge
+  //     });
+  //   }
+
+  //   // Reset background color after merge completes
+  //   function resetBackground() {
+  //     gsap.to(".chart-container", {
+  //       backgroundColor: "#ffffff", // Revert to original background color
+  //       duration: 0.6, // Smooth transition back
+  //     });
+  //   }
+  // }, []);
 
   useEffect(() => {
     getDashboardAccessCentres({
@@ -77,9 +132,9 @@ const MainDaashBoard = () => {
   return (
     <>
       <div ref={elementRef}>
-        <div className="header-main-menu-container m-2">
+        <div className="header-main-menu-container m-2 piece">
           <span className="header-dashboard">DashBoard</span>
-          <div className="header-option">
+          <div className="header-option piece">
             <div className="col-sm-3 mt-1">
               <SelectBox
                 className="required-fields"
@@ -124,36 +179,36 @@ const MainDaashBoard = () => {
             </div>
           </div>
         </div>
-        <div class="main-dashboard-outlet">
-          <div class="main-cont-welcom">
-            <div className="dashboard-welcome-cont">
+        <div class="main-dashboard-outlet piece">
+          <div class="main-cont-welcom piece">
+            <div className="dashboard-welcome-cont piece">
               <div>
                 <span>{getGreeting("greeting")}</span>
                 <span>{getGreeting("date")}</span>
-                <span>Welcome Back Mr. Prakhar Pandey</span>
+                <span>Welcome Back Mr. ITODSE INFOSYSTEMS</span>
               </div>
             </div>
           </div>
-          <div class="div2 dashboard-Chart pt-3">
+          <div class="div2 dashboard-Chart pt-3 piece">
             <DataSet data={userDashBoardData} />
           </div>
-          <div class="SalesCollection dashboard-Chart">
+          <div class="SalesCollection dashboard-Chart piece">
             <span>Sales Collection</span>
             <SalesCollection userWiseDashBoard={userDashBoardData} />
           </div>
-          <div class="div4 dashboard-Chart"> d</div>
-          <div class="MultiAxisLineChart dashboard-Chart">
+          <div class="div4 dashboard-Chart piece"> d</div>
+          <div class="MultiAxisLineChart dashboard-Chart piece">
             <span>Registration wise Revenue</span>
             <MultiAxisLineChart
               data1={userDashBoardData?.TotalBookeddata}
               data2={userDashBoardData?.TotalBookeddata}
             />
           </div>
-          <div class="RevenueCollection dashboard-Chart">
+          <div class="RevenueCollection dashboard-Chart piece">
             <span>Revenue Collection</span>
             <RevenueCollection userWiseDashBoard={userDashBoardData} />
           </div>
-          <div class="sample-data-chart dashboard-Chart">
+          <div class="sample-data-chart dashboard-Chart piece">
             <span>Sample Collection Status</span>
             <SampleCollection userWiseDashBoard={userWiseDashBoard} />
           </div>

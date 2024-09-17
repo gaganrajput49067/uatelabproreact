@@ -432,14 +432,8 @@ const ReceiptReprint = () => {
               className="col-md-1"
             >
               <button
-                style={{
-                  height: "14px",
-                  width: "16px",
-                  backgroundColor: "#00FA9A",
-                  marginRight: "3px",
-                  border: "1px solid",
-                  borderRadius: "2px",
-                }}
+              className="statusConfirmed"
+              style={{ backgroundColor: "#00FA9A" }}
               ></button>
               <label className="reprintLable" style={{ cursor: "pointer" }}>
                 {"Full Paid"}
@@ -452,14 +446,9 @@ const ReceiptReprint = () => {
               className="col-md-1"
             >
               <button
-                style={{
-                  height: "14px",
-                  width: "16px",
-                  backgroundColor: "#F6A9D1",
-                  marginRight: "3px",
-                  border: "1px solid",
-                  borderRadius: "2px",
-                }}
+               
+                className="statusConfirmed"
+                style={{ backgroundColor: "#F6A9D1" }}
               ></button>
               <label className="reprintLable" style={{ cursor: "pointer" }}>
                 {"Partial Paid"}
@@ -472,17 +461,29 @@ const ReceiptReprint = () => {
               className="col-md-1"
             >
               <button
-                style={{
-                  height: "14px",
-                  width: "16px",
-                  backgroundColor: "#FF457C",
-                  marginRight: "3px",
-                  border: "1px solid",
-                  borderRadius: "2px",
-                }}
+               
+                className="statusConfirmed"
+                style={{ backgroundColor: "#FF457C" }}
               ></button>
               <label className="reprintLable" style={{ cursor: "pointer" }}>
                 {"Fully Unpaid"}
+              </label>
+            </div>
+            
+
+            <div
+              onClick={() => {
+                TableData("fullrefund");
+              }}
+              className="col-md-1"
+            >
+              <button
+                
+                className="statusConfirmed"
+                style={{ backgroundColor: "#6699ff" }}
+              ></button>
+              <label className="reprintLable" style={{ cursor: "pointer" }}>
+                {"Full Refund"}
               </label>
             </div>
             <div
@@ -492,38 +493,12 @@ const ReceiptReprint = () => {
               className="col-md-1"
             >
               <button
-                style={{
-                  height: "14px",
-                  width: "16px",
-                  backgroundColor: "#b3cdb3",
-                  marginRight: "3px",
-                  border: "1px solid",
-                  borderRadius: "2px",
-                }}
+              
+                className="statusConfirmed"
+                style={{ backgroundColor: "#b3cdb3" }}
               ></button>
               <label className="reprintLable" style={{ cursor: "pointer" }}>
                 {"Credit"}
-              </label>
-            </div>
-
-            <div
-              onClick={() => {
-                TableData("fullrefund");
-              }}
-              className="col-md-1"
-            >
-              <button
-                style={{
-                  height: "14px",
-                  width: "16px",
-                  backgroundColor: "#6699ff",
-                  marginRight: "3px",
-                  border: "1px solid",
-                  borderRadius: "2px",
-                }}
-              ></button>
-              <label className="reprintLable" style={{ cursor: "pointer" }}>
-                {"Full Refund"}
               </label>
             </div>
           </div>

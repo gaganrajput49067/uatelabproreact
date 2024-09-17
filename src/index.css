@@ -18,7 +18,7 @@
   --bg-color: #0858da;
   --bg-subMenu: #377ef0;
   --subMenuText-color: rgb(255, 255, 255);
-
+  --btn-bg-color: white;
   --gradient: linear-gradient(
     90deg,
     rgb(40, 118, 207) 0%,
@@ -54,6 +54,9 @@
 }
 [data-theme="DarkMode"] button {
   background-color: var(--btn-bg-color) !important;
+  color: var(--subMenuText-color) !important;
+}
+[data-theme="DarkMode"] span {
   color: var(--subMenuText-color) !important;
 }
 [data-theme="DarkMode"] label {
@@ -2001,4 +2004,27 @@ button:active {
 button:hover {
   border: 2px solid rgba(12, 12, 12, 0.137);
   transform: translateY(-1px);
+}
+.statusConfirmed {
+  width: 20px !important;
+  height: 20px !important;
+  /* background-color: #00FA9A !important; */
+  border-radius: 50%;
+  margin-right: 3px;
+}
+
+
+
+.custom-toast { 
+  padding: 16px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #f5c6cb;
+  transition: all 0.3s ease;
+}
+
+.custom-toast:hover {
+  transform: scale(1.05);
 }

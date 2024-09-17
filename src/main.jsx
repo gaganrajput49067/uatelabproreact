@@ -33,15 +33,16 @@ const Loader = () => {
 ReactDOM.createRoot(document.getElementById("root")).render(
   <PrimeReactProvider>
     <Provider store={store}>
-      <ToastContainer
+    <ToastContainer
         autoClose={1500}
         draggable={false}
-        position="top-right"
+        position="top-center"
         hideProgressBar={false}
         newestOnTop
         closeOnClick
         rtl={false}
         pauseOnHover
+        toastClassName="custom-toast"
       />
       <Loader />
     </Provider>

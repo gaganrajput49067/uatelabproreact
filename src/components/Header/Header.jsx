@@ -14,10 +14,7 @@ import { axiosInstance } from "../../utils/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logOutAction } from "../../store/reducers/loginSlice/loginSlice";
-import {
-  getCentreDetails,
-  getRejectCount,
-} from "../../utils/NetworkApi/commonApi";
+import { getCentreDetails, getRejectCount } from "../../utils/NetworkApi/commonApi";
 import { toast } from "react-toastify";
 
 const Header = ({ handleSidebar, menuData, handlePage }) => {
@@ -37,10 +34,6 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
   useEffect(() => {
     setSelectedMenu(menuData?.length > 0 ? menuData[0]?.value : []);
   }, [menuData]);
-
-  useEffect(() => {
-    getRejectCount();
-  }, []);
 
   useEffect(() => {
     getCentreDetails(setCentreData);
@@ -220,6 +213,16 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
           aria-hidden="true"
           onClick={toggleFullScreen}
         ></i>
+        <Link
+          to="/samplecollection"
+          state={{
+            other: true,
+          }}
+        >
+          <i className="fa fa-user-times header-icon mr-2">
+            &nbsp;<span className="notification-count" id="RejectCount"></span>
+          </i>
+        </Link>
         {/* User Profile */}
         <div
           className="user-Info-container"
@@ -315,6 +318,8 @@ function ToggleTheme() {
   const [theme, setTheme] = useState(
     window.localStorage.getItem("theme") || "default"
   );
+
+  // useEffect(() => {}, [theme]);
 
   const toggleTheme = (ele) => {
     setTheme(ele.value);
