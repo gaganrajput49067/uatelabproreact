@@ -2028,3 +2028,10 @@ button:hover {
 .custom-toast:hover {
   transform: scale(1.05);
 }
+.dock-item{
+  /* cursor: pointer; */
+  width:40px;
+}
+.Dock{
+  padding: 10px;
+}

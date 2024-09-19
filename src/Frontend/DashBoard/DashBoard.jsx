@@ -26,10 +26,74 @@ import {
 } from "chart.js";
 import { gsap } from "gsap";
 import moment from "moment";
-
+import { Dock } from "primereact/dock";
+import { RadioButton } from "primereact/radiobutton";
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const MainDaashBoard = () => {
+  const items = [
+    {
+      label: "PatientRegister",
+      icon: () => (
+        <img
+          alt="PatientRegister"
+          src="https://img.icons8.com/3d-fluency/94/microscope.png"
+         
+          className="dock-item"
+        />
+      ),
+      command: () => navigate("/PatientRegister"),
+    },
+    {
+      label: "SampleCollection",
+      icon: () => (
+        <img
+          alt="SampleCollection"
+          src="https://img.icons8.com/arcade/64/blood-sample.png"
+         
+          className="dock-item"
+        />
+      ),
+      command: () => navigate("/SampleCollection"),
+    },
+    {
+      label: "DepartmentReceive",
+      icon: () => (
+        <img
+          alt="DepartmentReceive"
+          src="https://img.icons8.com/emoji/48/department-store.png"
+         
+          className="dock-item"
+        />
+      ),
+      command: () => navigate("/DepartmentReceive"),
+    },
+    {
+      label: "ResultEntry",
+      icon: () => (
+        <img
+          alt="ResultEntry"
+          src="https://img.icons8.com/arcade/64/report-card.png"
+         
+          className="dock-item"
+        />
+      ),
+      command: () => navigate("/ResultEntry"),
+    },
+    {
+      label: "ReceiptReprint",
+      icon: () => (
+        <img
+          alt="ReceiptReprint"
+          src="https://img.icons8.com/fluency/48/cash-receipt.png"
+         
+          className="dock-item"
+        />
+      ),
+      command: () => navigate("/ReceiptReprint"),
+    },
+  ];
+
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [userWiseDashBoard, setUserWiseDashBoard] = useState([]);
@@ -46,17 +110,17 @@ const MainDaashBoard = () => {
   // useEffect(() => {
   //   // Select the pieces of the chart using the class name
   //   const pieces = gsap.utils.toArray(".piece");
-  
+
   //   // Subtle break effect (gently displacing the pieces)
   //   gsap.fromTo(
   //     pieces,
-  //     { 
-  //       opacity: 1, 
-  //       x: 0, 
-  //       y: 0, 
-  //       scale: 1, 
-  //       rotation: 0, 
-  //       skewX: 0, 
+  //     {
+  //       opacity: 1,
+  //       x: 0,
+  //       y: 0,
+  //       scale: 1,
+  //       rotation: 0,
+  //       skewX: 0,
   //       skewY: 0,
   //     },
   //     {
@@ -73,7 +137,7 @@ const MainDaashBoard = () => {
   //       onComplete: mergePieces,
   //     }
   //   );
-  
+
   //   // Function to merge pieces back together with background color change
   //   function mergePieces() {
   //     // Change background color before merging
@@ -81,7 +145,7 @@ const MainDaashBoard = () => {
   //       backgroundColor: "#e0f7fa", // Soft background color during merge
   //       duration: 0.6, // Smooth transition
   //     });
-  
+
   //     // Merge the pieces back together
   //     gsap.to(pieces, {
   //       x: 0,
@@ -97,7 +161,7 @@ const MainDaashBoard = () => {
   //       onComplete: resetBackground, // Reset background after merge
   //     });
   //   }
-  
+
   //   // Reset background color after merge completes
   //   function resetBackground() {
   //     gsap.to(".chart-container", {
@@ -106,8 +170,7 @@ const MainDaashBoard = () => {
   //     });
   //   }
   // }, []);
-  
-  
+
   useEffect(() => {
     getDashboardAccessCentres({
       state: setAccessCentre,
@@ -132,7 +195,8 @@ const MainDaashBoard = () => {
 
   return (
     <>
-      <div ref={elementRef} >
+      <div ref={elementRef}>
+        <Dock model={items} position={"right"} className="Dock" />
         <div className="header-main-menu-container m-2 piece">
           <span className="header-dashboard">DashBoard</span>
           <div className="header-option piece">
