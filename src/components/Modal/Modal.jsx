@@ -1,8 +1,16 @@
+import ReactDOM from "react-dom";
 import "./Modal.css";
 
-const Modal = ({ title, children, handleClose, top, className }) => {
-  return (
-    <div className="Main-Modal-Container">
+const Modal = ({
+  title,
+  children,
+  handleClose,
+  zIndex = 1000,
+  top,
+  className,
+}) => {
+  return ReactDOM.createPortal(
+    <div className="Main-Modal-Container" style={{ zIndex }}>
       <div
         className={`main-modal-box ${className}`}
         style={top && top !== "" ? { position: "absolute", top: top } : {}}
@@ -13,7 +21,8 @@ const Modal = ({ title, children, handleClose, top, className }) => {
         </div>
         <div className="main-modal-content">{children}</div>
       </div>
-    </div>
+    </div>,
+    document.body // Use React Portal to render outside parent components
   );
 };
 
