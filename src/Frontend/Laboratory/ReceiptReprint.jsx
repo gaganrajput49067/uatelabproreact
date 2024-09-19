@@ -13,6 +13,7 @@ import {
 import {
   BindEmployeeReports,
   getDoctorSuggestion,
+  getPaymentModes,
 } from "../../utils/NetworkApi/commonApi";
 import { SearchBy } from "../../utils/Constants";
 import Input from "../../components/CommonComponent/Input";
@@ -21,6 +22,8 @@ import DatePicker from "../../components/CommonComponent/DatePicker";
 import CustomTimePicker from "../../components/CommonComponent/TimePicker";
 import Loading from "../../components/Loading/Loading";
 import ReceiptReprintTable from "../Table/ReceiptReprintTable";
+import MedicialModal from "../utils/MedicialModal";
+import UploadFile from "../utils/UploadFIleModal/UploadFile";
 const ReceiptReprint = () => {
   const [RateTypes, setRateTypes] = useState([]);
   const [CentreData, setCentreData] = useState([]);
@@ -30,6 +33,8 @@ const ReceiptReprint = () => {
   const [errors, setErrors] = useState({});
   const [doctorSuggestion, setDoctorSuggestion] = useState([]);
   const [indexMatch, setIndexMatch] = useState(0);
+  
+  const [Identity, setIdentity] = useState([]);
   const [dropFalse, setDropFalse] = useState(true);
   const [show4, setShow4] = useState({
     modal: false,
@@ -244,6 +249,8 @@ const ReceiptReprint = () => {
   useEffect(() => {
     getAccessCentres();
     BindEmployeeReports(SetUser);
+    
+    getPaymentModes("Identity", setIdentity);
   }, []);
 
   useEffect(() => {
@@ -251,6 +258,33 @@ const ReceiptReprint = () => {
   }, [formData?.DoctorName]);
   return (
     <>
+      {show4?.modal && (
+        <MedicialModal
+          show={show4.modal}
+          handleClose={() => {
+            setShow4({
+              modal: false,
+              data: "",
+              index: -1,
+            });
+          }}
+          MedicalId={show4?.data}
+          handleUploadCount={handleUploadCount}
+        />
+      )}
+
+      {show5?.modal && (
+        <UploadFile
+          show={show5?.modal}
+          handleClose={() => {
+            setShow5({ modal: false, data: "", index: -1 });
+          }}
+          options={Identity}
+          documentId={show5?.data}
+          pageName="Patient Registration"
+          handleUploadCount={handleUploadCount}
+        />
+      )}
       <PageHead name="Receipt Reprint" showDrop={"true"}>
         <div className="card">
           <div className="row">
@@ -432,8 +466,8 @@ const ReceiptReprint = () => {
               className="col-md-1"
             >
               <button
-              className="statusConfirmed"
-              style={{ backgroundColor: "#00FA9A" }}
+                className="statusConfirmed"
+                style={{ backgroundColor: "#00FA9A" }}
               ></button>
               <label className="reprintLable" style={{ cursor: "pointer" }}>
                 {"Full Paid"}
@@ -446,7 +480,6 @@ const ReceiptReprint = () => {
               className="col-md-1"
             >
               <button
-               
                 className="statusConfirmed"
                 style={{ backgroundColor: "#F6A9D1" }}
               ></button>
@@ -461,7 +494,6 @@ const ReceiptReprint = () => {
               className="col-md-1"
             >
               <button
-               
                 className="statusConfirmed"
                 style={{ backgroundColor: "#FF457C" }}
               ></button>
@@ -469,7 +501,6 @@ const ReceiptReprint = () => {
                 {"Fully Unpaid"}
               </label>
             </div>
-            
 
             <div
               onClick={() => {
@@ -478,7 +509,6 @@ const ReceiptReprint = () => {
               className="col-md-1"
             >
               <button
-                
                 className="statusConfirmed"
                 style={{ backgroundColor: "#6699ff" }}
               ></button>
@@ -493,7 +523,6 @@ const ReceiptReprint = () => {
               className="col-md-1"
             >
               <button
-              
                 className="statusConfirmed"
                 style={{ backgroundColor: "#b3cdb3" }}
               ></button>
