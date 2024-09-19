@@ -46,6 +46,7 @@ import RerunResultEntryModal from "../utils/RerunResultEntryModal";
 import Reason from "../utils/Reason";
 import ResultEditAddModal from "../utils/ResultEditAddModal";
 import SubPageHead from "../../components/CommonComponent/SubPageHead";
+import TemplateMasterModal from "../utils/TemplateMasterModal";
 const ResultEntry = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
