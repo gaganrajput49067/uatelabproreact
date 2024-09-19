@@ -98,7 +98,7 @@ const ResultEntry = () => {
     data: "",
     index: -1,
   });
-
+console.log(ResultData)
   const [show5, setShow5] = useState({
     modal: false,
     data: "",
@@ -470,6 +470,7 @@ const ResultEntry = () => {
     if (modal === "TemplateMaster") {
       let val = ResultData.map((ele) => {
         if (ele.labObservationID == data?.labObservationID) {
+          console.log(data)
           return {
             ...ele,
             COMMENT: data?.COMMENT,
@@ -899,7 +900,6 @@ const ResultEntry = () => {
         break;
     }
   };
-
   const handleListSearch = (data, name, index) => {
     const val = [...ResultData];
     val[index][name] = data?.label;
