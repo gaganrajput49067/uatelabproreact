@@ -2030,8 +2030,13 @@ button:hover {
 }
 .dock-item{
   /* cursor: pointer; */
-  width:40px;
+  width:35px;
 }
-.Dock{
-  padding: 10px;
+
+.p-dock .p-dock-list-container {
+  background: none; 
+  border: none;
+  
+  border-radius: 0.5rem;
+  margin: -18px !important;
 }

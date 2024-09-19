@@ -14,7 +14,10 @@ import { axiosInstance } from "../../utils/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logOutAction } from "../../store/reducers/loginSlice/loginSlice";
-import { getCentreDetails, getRejectCount } from "../../utils/NetworkApi/commonApi";
+import {
+  getCentreDetails,
+  getRejectCount,
+} from "../../utils/NetworkApi/commonApi";
 import { toast } from "react-toastify";
 
 const Header = ({ handleSidebar, menuData, handlePage }) => {
@@ -75,7 +78,18 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
       toast.error(err?.message || "Error Occurred");
     }
   };
-
+  const handlePatientLabSearch = (e) => {
+    const { value } = e.target;
+    const keypress = [9, 13];
+    if (keypress.includes(e.which)) {
+      if (value.trim() === "") {
+        toast.error("Please enter Value");
+        return;
+      }
+      e.preventDefault();
+      navigate("/DynamicLabSearch", { state: { data: value?.trim() } });
+    }
+  };
   const handleChange = (name, e) => {
     const { value } = e;
     if (name === "centre") {
@@ -155,13 +169,11 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
                 <div className="maindiv mt-2">
                   <Input
                     type="text"
-                    className="form-control"
-                    id="text"
-                    name="userName"
-                    lable={"Visit No. / Barcode No."}
-                    placeholder=" "
-                    // value={payload?.userName}
-                    // onChange={handleChange}
+                    id="LabNo"
+                    name="LabNo"
+                    // lable={"Visit No. / Barcode No."}
+                    placeholder="Visit No. / Barcode No."
+                    onKeyDown={(e) => handlePatientLabSearch(e, "LabNo")}
                   />
                 </div>
                 <i
@@ -176,12 +188,11 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
         <div className="header-visit ss-none " style={{ marginTop: "8px" }}>
           <Input
             type="text"
-            id="userName"
-            name="userName"
-            lable={"Visit No. / Barcode No."}
-            placeholder=" "
-            // value={payload?.userName}
-            // onChange={handleChange}
+            id="LabNo"
+            name="LabNo"
+            // lable={"Visit No. / Barcode No."}
+            placeholder="Visit No. / Barcode No."
+            onKeyDown={(e) => handlePatientLabSearch(e, "LabNo")}
           />
         </div>
         {/* theme */}

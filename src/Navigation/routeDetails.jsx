@@ -48,6 +48,10 @@ export let routeDetails = [
         element: "../Frontend/Laboratory/EditPatientDetails",
       },
       {
+        path: "/DynamicLabSearch",
+        element: "../Frontend/Laboratory/DynamicLabSearch",
+      },
+      {
         path: "/DoctorReferal",
         element: "../Frontend/Master/DoctorMaster",
       },

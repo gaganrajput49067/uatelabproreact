@@ -62,7 +62,13 @@
 }
 
 .menubar-navbar {
+  
+  font-size: 18px !important;
   color: var(--subMenuText-color);
+}
+.menubar-navbar:hover{
+  
+  transform: scale(1.1);
 }
 .active-tab-menu {
   background-color: var( --btn-bg-color);
