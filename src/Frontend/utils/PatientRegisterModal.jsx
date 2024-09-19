@@ -46,10 +46,11 @@ const PatientRegisterModal = ({ handleClose, Type }) => {
             <div className="row">
               <div className="col-sm-6">
                 <Input
-                  className="select-input-box form-control input-sm"
                   lable={t("Doctor Name")}
                   placeholder=" "
                   type="text"
+                  
+                  id="Doctor"
                   name="Name"
                   value={values.Name}
                   onChange={handleChange}
@@ -61,8 +62,7 @@ const PatientRegisterModal = ({ handleClose, Type }) => {
 
               <div className="col-sm-6">
                 <Input
-                  className="select-input-box form-control input-sm"
-                  
+                  id="MobileDoctor"
                   placeholder=" "
                   lable={t("Mobile No")}
                   type="number"
