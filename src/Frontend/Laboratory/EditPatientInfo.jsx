@@ -25,7 +25,7 @@ import DatePicker from "../../components/CommonComponent/DatePicker";
 import { SelectBox } from "../../components/CommonComponent/SelectBox";
 import { Button } from "primereact/button";
 import Loading from "../../components/Loading/Loading";
-const EditPatientInfo = () => {
+const EditPatientInfo = ({ modalData }) => {
   const location = useLocation();
   const [show, setShow] = useState({
     show: false,
@@ -217,7 +217,6 @@ const EditPatientInfo = () => {
       const data = DynamicFieldValidations();
       setVisibleFields(data);
       const flag = data.filter((ele) => ele?.isError === true);
-      console.log(values);
       if (flag.length === 0) {
         setLoad(true);
         axiosInstance
@@ -500,11 +499,11 @@ const EditPatientInfo = () => {
         break;
     }
   };
-
   useEffect(() => {
-    if (location?.state?.data) {
-      setLabNo(location?.state?.data);
-      EditPatientDetail(location?.state?.data);
+    if (location?.state?.data || modalData.VisitNo) {
+      let data = location?.state?.data || modalData?.VisitNo;
+      setLabNo(data);
+      EditPatientDetail(data);
     }
   }, []);
   useEffect(() => {
@@ -525,7 +524,7 @@ const EditPatientInfo = () => {
           Type={show?.Type}
         />
       )}
-      <PageHead name="Demographic Details" showDrop={"true"}></PageHead>
+      <PageHead name="Demographic Details"></PageHead>
       <div className="card">
         <div className="row">
           <div className="col-sm-2">
@@ -603,7 +602,6 @@ const EditPatientInfo = () => {
                   value={DefaultDoc ? DefaultDoc : formData?.DoctorName}
                   onChange={(e) => {
                     if (e.target.value == "") {
-                      console.log(e.target.value);
                       setFormData({
                         ...formData,
                         DoctorName: "",

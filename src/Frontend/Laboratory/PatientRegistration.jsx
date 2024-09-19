@@ -53,6 +53,7 @@ import SubPageHead from "../../components/CommonComponent/SubPageHead";
 import CloseButton from "../../components/CommonComponent/CloseButton";
 import Tooltip from "../../components/CommonComponent/Tooltip";
 import CameraModal from "../utils/CameraModal";
+import AfterRegistration from "../utils/AfterRegistration";
 const PatientRegistration = () => {
   const { t } = useTranslation();
   const [patientImg, setPatientImg] = useState({
@@ -150,7 +151,7 @@ const PatientRegistration = () => {
     IsWhatsappRequired: "",
   });
   const [membershipnum, setmembershipnum] = useState("");
-
+  const [preReg, setPreReg] = useState({ data: null, show: false });
   const [couponDetails, setCouponDetails] = useState([]);
   const [showCoupon, setShowCoupon] = useState({
     BindTestCouponShow: false,
@@ -375,6 +376,7 @@ const PatientRegistration = () => {
         setDocumentID(newDocumentId);
         setIsRazorPayOpen(false);
         setState(stateIniti);
+        setPreReg({ data: res.data, show: true });
         //    setLTData(LTDataIniti);
         setTime({
           Hour: new Date().getHours().toString().padStart(2, "0"),
@@ -3251,6 +3253,12 @@ const PatientRegistration = () => {
 
   return (
     <>
+      {preReg.show && (
+        <AfterRegistration
+          data={preReg?.data}
+          handleClose={() => setPreReg({ data: null, show: false })}
+        />
+      )}
       {slotOpen?.show && (
         <SlotBookModal
           slotOpen={slotOpen}
@@ -3522,7 +3530,7 @@ const PatientRegistration = () => {
             </div>
             <div className="row">
               <div className="col-sm-2">
-                <div className="p-inputgroup flex-1">
+                <div className="p-inputgroup flex-1 m-0 p-0">
                   <Input
                     name="Mobile"
                     id="Mobile"

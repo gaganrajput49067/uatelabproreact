@@ -46,7 +46,7 @@ import { Image } from "primereact/image";
 import Tooltip from "../../components/CommonComponent/Tooltip";
 import Table from "../../components/Table/Table";
 
-const EditPatientDetails = () => {
+const EditPatientDetails = ({ modalData }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [Gender, setGender] = useState([]);
@@ -512,7 +512,7 @@ const EditPatientDetails = () => {
 
   useEffect(() => {
     BindDoctorData();
-    EditPatientDetail(location?.state?.data);
+    EditPatientDetail(location?.state?.data || modalData.VisitNo);
   }, []);
 
   const handleListSearch = (data, name) => {
@@ -2358,7 +2358,7 @@ const EditPatientDetails = () => {
       <div className="patient-register-other">
         <div className="">
           <div className="card">
-          <div className="row">
+            <div className="row">
               <div className="col-sm-5">
                 <Input
                   name="TestName"
@@ -2541,27 +2541,27 @@ const EditPatientDetails = () => {
           </div>
         </div>
         <div className="">
-            <div className="card">
+          <div className="card">
             <div className="row">
-                  <div className="col-sm-2 col-4 mb-2 ">
-                    {isSubmit ? (
-                      <Loading />
-                    ) : (
-                      <button
-                        type="submit"
-                        id="btnSave"
-                        className="btn btn-success w-100 btn-sm"
-                        onClick={() => {
-                          handleSubmit();
-                          window.scrollTo(0, 0);
-                        }}
-                      >
-                        {("Submit")}
-                      </button>
-                    )}
-                  </div>
-                </div>
+              <div className="col-sm-2 col-4 mb-2 ">
+                {isSubmit ? (
+                  <Loading />
+                ) : (
+                  <button
+                    type="submit"
+                    id="btnSave"
+                    className="btn btn-success w-100 btn-sm"
+                    onClick={() => {
+                      handleSubmit();
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    {"Submit"}
+                  </button>
+                )}
+              </div>
             </div>
+          </div>
         </div>
       </div>
     </>

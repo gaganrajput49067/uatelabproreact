@@ -2167,7 +2167,7 @@ const ResultEntry = () => {
           </div> */}
           {/* <div className="card pb-0"> */}
           {/* <SubPageHead title={"Result Entry"}> */}
-          <div className="custom-box-body mb-3 mt-3">
+          <div className="custom-box-body mb-3">
             <div className="custom-row">
               <div className="custom-col custom-col-visit">
                 <span className="fa fa-folder custom-text">
