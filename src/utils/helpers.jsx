@@ -164,3 +164,7 @@ export const DyanmicStatusResponse = (state) => {
   }
   return StatusCheck[status];
 };
+export const AllowCharactersNumbersAndSpecialChars = (value) => {
+  const reg = /[^a-zA-Z0-9\-\/ ]|(\s{2,})|(\/{2,})|(-{2,})/g;
+  return !reg.test(value);
+};

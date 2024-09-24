@@ -35,7 +35,9 @@ export const getS3FileData = async (guidNumber, pageName) => {
   );
   return upDatedData;
 };
-
+const S4 = () => {
+  return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+};
 export const guidNumber = () => {
   const guidNumber =
     S4() +

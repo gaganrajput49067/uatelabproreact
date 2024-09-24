@@ -28,10 +28,10 @@ import { gsap } from "gsap";
 import moment from "moment";
 import { Dock } from "primereact/dock";
 import { RadioButton } from "primereact/radiobutton";
+import BlockComponent from "./BlockComponent";
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const MainDaashBoard = () => {
- 
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [userWiseDashBoard, setUserWiseDashBoard] = useState([]);
@@ -45,68 +45,68 @@ const MainDaashBoard = () => {
     ToTime: "23:59:59",
   });
   const elementRef = useRef(null);
-  // useEffect(() => {
-  //   // Select the pieces of the chart using the class name
-  //   const pieces = gsap.utils.toArray(".piece");
+  //   useEffect(() => {
+  //     // Select the pieces of the chart using the class name
+  //     const pieces = gsap.utils.toArray(".piece");
 
-  //   // Subtle break effect (gently displacing the pieces)
-  //   gsap.fromTo(
-  //     pieces,
-  //     {
-  //       opacity: 1,
-  //       x: 0,
-  //       y: 0,
-  //       scale: 1,
-  //       rotation: 0,
-  //       skewX: 0,
-  //       skewY: 0,
-  //     },
-  //     {
-  //       opacity: 0.9,
-  //       x: (i) => gsap.utils.random(-30, 30), // Very minimal scatter
-  //       y: (i) => gsap.utils.random(-30, 30),
-  //       scale: (i) => gsap.utils.random(0.95, 1.05), // Barely noticeable scaling
-  //       rotation: (i) => gsap.utils.random(-5, 5), // Minor rotation
-  //       skewX: (i) => gsap.utils.random(-2, 2), // Tiny skew distortion
-  //       skewY: (i) => gsap.utils.random(-2, 2),
-  //       duration: 0.4, // Fast, subtle scatter
-  //       ease: "power1.out", // Soft ease for simple effect
-  //       stagger: 0.04,
-  //       onComplete: mergePieces,
+  //     // Enhanced break effect (more noticeable displacement)
+  //     gsap.fromTo(
+  //       pieces,
+  //       {
+  //         opacity: 1,
+  //         x: 0,
+  //         y: 0,
+  //         scale: 1,
+  //         rotation: 0,
+  //         skewX: 0,
+  //         skewY: 0,
+  //       },
+  //       {
+  //         opacity: 0.9, // Slight opacity change
+  //         x: (i) => gsap.utils.random(-100, 100), // Increase scatter range for larger displacement
+  //         y: (i) => gsap.utils.random(-100, 100),
+  //         scale: (i) => gsap.utils.random(0.9, 1.1), // More noticeable scaling
+  //         rotation: (i) => gsap.utils.random(-15, 15), // Increase rotation for a stronger crack effect
+  //         skewX: (i) => gsap.utils.random(-5, 5), // Slightly more skew
+  //         skewY: (i) => gsap.utils.random(-5, 5),
+  //         duration: 0.4, // Keep the crack effect fast
+  //         ease: "power2.out", // Slightly stronger ease for the break effect
+  //         stagger: 0.05,
+  //         onComplete: mergePieces,
+  //       }
+  //     );
+
+  //     // Function to merge pieces back together with background color change
+  //     function mergePieces() {
+  //       // Change background color before merging
+  //       gsap.to(".chart-container", {
+  //         backgroundColor: "#e0f7fa", // Soft background color during merge
+  //         duration: 0.6, // Smooth transition
+  //       });
+
+  //       // Merge the pieces back together
+  //       gsap.to(pieces, {
+  //         x: 0,
+  //         y: 0,
+  //         opacity: 1,
+  //         scale: 1,
+  //         rotation: 0,
+  //         skewX: 0,
+  //         skewY: 0,
+  //         duration: 0.6, // Keep the merge smooth
+  //         ease: "power2.inOut", // Soft ease for a fluid merge
+  //         stagger: 0.05,
+  //         onComplete: resetBackground, // Reset background after merge
+  //       });
   //     }
-  //   );
 
-  //   // Function to merge pieces back together with background color change
-  //   function mergePieces() {
-  //     // Change background color before merging
-  //     gsap.to(".chart-container", {
-  //       backgroundColor: "#e0f7fa", // Soft background color during merge
-  //       duration: 0.6, // Smooth transition
-  //     });
-
-  //     // Merge the pieces back together
-  //     gsap.to(pieces, {
-  //       x: 0,
-  //       y: 0,
-  //       opacity: 1,
-  //       scale: 1,
-  //       rotation: 0,
-  //       skewX: 0,
-  //       skewY: 0,
-  //       duration: 0.6, // Smooth and light merge back
-  //       ease: "power1.inOut", // Subtle ease for merging effect
-  //       stagger: 0.04,
-  //       onComplete: resetBackground, // Reset background after merge
-  //     });
-  //   }
-
-  //   // Reset background color after merge completes
-  //   function resetBackground() {
-  //     gsap.to(".chart-container", {
-  //       backgroundColor: "#ffffff", // Revert to original background color
-  //       duration: 0.6, // Smooth transition back
-  //     });
-  //   }
+  //     // Reset background color after merge completes
+  //     function resetBackground() {
+  //       gsap.to(".chart-container", {
+  //         backgroundColor: "#ffffff", // Revert to original background color
+  //         duration: 0.6, // Smooth transition back
+  //       });
+  //     }
   // }, []);
 
   useEffect(() => {
@@ -134,7 +134,6 @@ const MainDaashBoard = () => {
   return (
     <>
       <div ref={elementRef}>
-       
         <div className="header-main-menu-container m-2 piece">
           <span className="header-dashboard">DashBoard</span>
           <div className="header-option piece">
@@ -181,6 +180,9 @@ const MainDaashBoard = () => {
               />
             </div>
           </div>
+        </div>
+        <div className="w-100">
+          <BlockComponent />
         </div>
         <div class="main-dashboard-outlet piece">
           <div class="main-cont-welcom piece">
@@ -236,7 +238,10 @@ function SampleCollection({ userWiseDashBoard }) {
 
   return (
     <>
-      <div className="sample-collection-selectbox" style={{ ...getPosition() }}>
+      <div
+        className="sample-collection-selectbox piece"
+        style={{ ...getPosition() }}
+      >
         <SelectBox
           className="required-fields"
           placeholderName="Chart Type"
@@ -331,7 +336,7 @@ function SalesCollection({ userWiseDashBoard }) {
 function DataSet({ data }) {
   return (
     <>
-      <div className="data-set-cont">
+      <div className="data-set-cont piece TotalDas">
         <label>Total</label>
         <p>
           <p>Registration</p>
@@ -357,7 +362,7 @@ function DataSet({ data }) {
           </p>
         </p>
       </div>
-      <div className="data-set-cont">
+      <div className="data-set-cont piece TotalReg">
         <label>Registration</label>
         <p>
           <p>Today</p>
@@ -374,7 +379,7 @@ function DataSet({ data }) {
           <p>{data?.Monthwisedata || 0}</p>
         </p>
       </div>
-      <div className="data-set-cont">
+      <div className="data-set-cont piece TotalRev">
         <label>Revenue</label>
         <p>
           <p>Today</p>

@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import * as Yup from "yup";
 const conditionalRequired = (message) => Yup.string().test(
     "isRequired",
@@ -164,3 +164,49 @@ const conditionalRequired = (message) => Yup.string().test(
     }
     return err;
   };
+
+  export const validation = (formData) => {
+    let err = "";
+    if (formData?.Department.trim() === "") {
+      err = { ...err, Department: "This Field is Required" };
+    }
+    if (
+      formData?.Department.trim().length < 2
+    ) {
+      err = { ...err, Departments: "Must have 2 Character" };
+    }
+  
+    if (formData?.DepartmentCode.trim() === "") {
+      err = { ...err, DepartmentCode: "This Field is Required" };
+    }
+    if (
+      formData?.DepartmentCode.trim().length < 2
+    ) {
+      err = { ...err, DepartmentCodes: "Must have 2 Character" };
+    }
+  
+    return err;
+  };export const CompanyMasterValidation = Yup.object({
+    CompanyCode: Yup.string()
+      .required("Please Enter Company Code")
+      .min(3)
+      .trim("The contact name cannot include leading and trailing spaces"),
+    CompanyName: Yup.string()
+      .trim("The contact name cannot include leading and trailing spaces")
+      .required("Please Enter Company Name"),
+    Email: Yup.string()
+      .email()
+      .required("Please Enter a Your Email")
+      .trim("The contact name cannot include leading and trailing spaces")
+      .matches(
+        /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
+        "Please Enter a Valid Email"
+      ),
+    Mobile1: Yup.string()
+      .min(10)
+      .trim("The contact name cannot include leading and trailing spaces")
+      .required("Please Enter Mobile1"),
+    Mobile2: Yup.string()
+      .min(10)
+      .trim("The contact name cannot include leading and trailing spaces"),
+  });

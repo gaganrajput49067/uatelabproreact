@@ -72,6 +72,10 @@ export let routeDetails = [
         element: "../Frontend/Master/CentrePanel",
       },
       {
+        path: "/Departments",
+        element: "../Frontend/Master/Department",
+      },
+      {
         path: "/getReport/:id",
         element: "../Frontend/Reports/Report",
       },
