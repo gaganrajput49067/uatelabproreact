@@ -179,9 +179,9 @@ const MainDaashBoard = () => {
                 }}
               />
             </div>
-          </div>
+          </div>{" "}
         </div>
-        <div className="w-100">
+        <div className="w-100 ss-none" style={{ margin: "" }}>
           <BlockComponent />
         </div>
         <div class="main-dashboard-outlet piece">
