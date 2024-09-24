@@ -72,6 +72,7 @@ const MainDaashBoard = () => {
     getDashBoardData(name, value, data, setUserWiseDashBoard);
     fetchuserdata(data, setDashBoardData);
   };
+  console.log(userWiseDashBoard);
 
   return (
     <>
@@ -79,6 +80,75 @@ const MainDaashBoard = () => {
         <div className="header-main-menu-container m-2">
           <span className="header-dashboard">DashBoard</span>
           <div className="header-option">
+            {userWiseDashBoard?.TotalWhatsappCount &&
+            userWiseDashBoard?.TotalWhatsappCount != 0 ? (
+              <div
+                className="count-sms-status"
+                title="Remaining Whatsapp Count"
+              >
+                <i
+                  className="fab fa-whatsapp"
+                  style={{ fontSize: "18px", color: "#00A65A" }}
+                ></i>{" "}
+                &nbsp;
+                <span
+                  style={{
+                    color:
+                      userWiseDashBoard?.UsedWhatsAppCount /
+                        userWiseDashBoard?.TotalWhatsappCount >=
+                      0.9
+                        ? "red"
+                        : "#008000",
+                  }}
+                >
+                  {userWiseDashBoard?.UsedWhatsAppCount ?? ""}
+                </span>
+                <span style={{ color: "black" }}>/</span>
+                <span style={{ color: "black" }}>
+                  {userWiseDashBoard?.TotalWhatsappCount ?? ""}
+                </span>
+              </div>
+            ) : (
+              ""
+            )}{" "}
+            &nbsp;&nbsp;&nbsp;
+            {userWiseDashBoard?.TotalSmsCount &&
+            userWiseDashBoard?.TotalSmsCount != 0 ? (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "white",
+                  borderRadius: "2rem",
+                  padding: "2px 6px",
+                }}
+                title="Remaining SMS Count"
+              >
+                <i
+                  class="far fa-comment-alt"
+                  style={{ fontSize: "20px", color: "#200fd6" }}
+                ></i>
+                &nbsp;
+                <span
+                  style={{
+                    color:
+                      userWiseDashBoard?.UsedSmsCount /
+                        userWiseDashBoard?.TotalSmsCount >=
+                      0.9
+                        ? "red"
+                        : "#008000",
+                  }}
+                >
+                  {userWiseDashBoard?.UsedSmsCount}
+                </span>{" "}
+                <span style={{ color: "black" }}>/</span>
+                <span style={{ color: "black" }}>
+                  {userWiseDashBoard?.TotalSmsCount}
+                </span>
+              </div>
+            ) : (
+              ""
+            )}
             <div className="col-sm-3 mt-1">
               <SelectBox
                 className="required-fields"
@@ -93,7 +163,7 @@ const MainDaashBoard = () => {
                 lable="Centre"
               />
             </div>
-            <div className="col-sm-3 mt-1">
+            <div className="col-sm-2 mt-1">
               <DatePicker
                 className="custom-calendar"
                 name="FromDate"
@@ -107,7 +177,7 @@ const MainDaashBoard = () => {
                 }}
               />
             </div>
-            <div className="col-sm-3 mt-1">
+            <div className="col-sm-2 mt-1">
               <DatePicker
                 className="custom-calendar"
                 name="ToDate"
@@ -140,7 +210,11 @@ const MainDaashBoard = () => {
             <span>Sales Collection</span>
             <SalesCollection userWiseDashBoard={userDashBoardData} />
           </div>
-          <div class="div4 dashboard-Chart"> d</div>
+          <div class="div4 dashboard-Chart">
+            <div>
+              <i class="fab fa-whatsapp"></i>
+            </div>
+          </div>
           <div class="MultiAxisLineChart dashboard-Chart">
             <span>Registration wise Revenue</span>
             <MultiAxisLineChart
