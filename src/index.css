@@ -15,14 +15,14 @@
 }
 
 :root {
-  --bg-color: #0858da;
-  --bg-subMenu: #377ef0;
+  --bg-color: #0649b4;
+  --bg-subMenu: #1c67e0;
   --subMenuText-color: rgb(255, 255, 255);
   --btn-bg-color: white;
   --gradient: linear-gradient(
     90deg,
-    rgb(40, 118, 207) 0%,
-    rgb(75, 131, 235) 57%,
+    rgb(25, 86, 156) 0%,
+    rgb(34, 85, 180) 57%,
     rgba(255, 255, 255, 1) 91%
   );
 }

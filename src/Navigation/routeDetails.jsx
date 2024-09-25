@@ -76,6 +76,10 @@ export let routeDetails = [
         element: "../Frontend/Master/Department",
       },
       {
+        path: "/MenuMaster",
+        element: "../Frontend/Master/MenuMaster",
+      },
+      {
         path: "/getReport/:id",
         element: "../Frontend/Reports/Report",
       },

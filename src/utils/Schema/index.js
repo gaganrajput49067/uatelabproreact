@@ -210,3 +210,19 @@ const conditionalRequired = (message) => Yup.string().test(
       .min(10)
       .trim("The contact name cannot include leading and trailing spaces"),
   });
+  export const MenuMasterValidation = (payload) => {
+    let errors = "";
+  
+    if (payload?.MenuName?.trim() === "") {
+      errors = { ...errors, MenuName: "This Field is Required" };
+    } else if (payload?.MenuName.length < 2) {
+      errors = { ...errors, MenuName: "Must be 2 Character long" };
+    }
+  
+    if (payload?.Priority.trim() === "") {
+      errors = { ...errors, Priority: "This Field is Required" };
+    }
+  
+    return errors;
+  };
+  

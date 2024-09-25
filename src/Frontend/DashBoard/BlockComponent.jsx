@@ -21,15 +21,14 @@ const BlockComponent = () => {
 
   const containerStyle = {
     display: "flex",
-    flexWrap: "wrap", // Keeps items in one line
-    padding: "10px 0", // Removes gap on left and right
-    margin: "0", // Ensures no extra margin around container
-    width: "100%", // Full width
-    justifyContent: "space-between", // Equal spacing around blocks, including at the ends
+    flexWrap: "wrap",
+    padding: "10px 0", 
+    margin: "0",
+    width: "100%",
+    justifyContent: "space-around", 
   };
 
   const blockStyle = {
-    // flex: '0 0 160px', // Each block is 150px wide
     padding: "20px",
     width: "13%",
     color: "#fff",
@@ -37,8 +36,8 @@ const BlockComponent = () => {
     textAlign: "center",
     fontSize: "18px",
     boxSizing: "border-box",
-    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)", // Adds shadow
-    transition: "transform 0.2s ease-in-out", // Hover animation
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+    transition: "transform 0.2s ease-in-out", 
   };
 
   return (
