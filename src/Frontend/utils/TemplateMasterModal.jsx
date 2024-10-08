@@ -14,7 +14,7 @@ function TemplateMasterModal({ show, handleClose, handleSave }) {
   useEffect(() => {
     setPayload({ ...payload, COMMENT: payload?.COMMENT ?? Editor });
   }, [Editor]);
-  console.log(payload);
+  console.log(Editor);
   const handleSaveClick = () => {
     if (isCommentEmpty) {
       toast.error("Please fill the mandatory field");

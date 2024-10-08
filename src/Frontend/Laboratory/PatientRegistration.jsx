@@ -3409,7 +3409,7 @@ const PatientRegistration = () => {
           )}
         </>
       </PageHead>
-      <div className="card">
+      <div className="card-patient">
         <div className="patent-register-outlet">
           <div className="patent-register-details">
             <div className="row">
@@ -3959,7 +3959,7 @@ const PatientRegistration = () => {
                 />
               </div>
             </div>
-            <div className="row mt-2">
+            <div className="row">
               <div className="col-sm-2">
                 <SelectBox
                   options={[{ label: "Select", value: "" }, ...proEmplyee]}
@@ -4112,7 +4112,7 @@ const PatientRegistration = () => {
                 src={patientImg.img}
                 alt="Image"
                 width="115"
-                height="130"
+                height="110"
                 margin="0"
                 padding="0"
                 preview

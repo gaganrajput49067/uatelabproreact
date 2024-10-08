@@ -225,4 +225,24 @@ const conditionalRequired = (message) => Yup.string().test(
   
     return errors;
   };
+  export const PageMasterValidation = (payload) => {
+    let errors = "";
+    if (payload?.MenuID === "") {
+      errors = { ...errors, MenuID: "This Field is Required" };
+    }
+    if (payload?.PageName?.trim() === "") {
+      errors = { ...errors, PageName: "This Field is Required" };
+    } else if (payload?.PageName.length < 2) {
+      errors = { ...errors, PageName: "Must be 2 Character long" };
+    }
+    if (payload?.Url?.trim() === "") {
+      errors = { ...errors, Url: "This Field is Required" };
+    } else if (payload?.Url.length < 2) {
+      errors = { ...errors, Url: "Must be 2 Character long" };
+    }
+    if (toString(payload?.Priority).trim() === "") {
+      errors = { ...errors, Priority: "This Field is Required" };
+    }
   
+    return errors;
+  };

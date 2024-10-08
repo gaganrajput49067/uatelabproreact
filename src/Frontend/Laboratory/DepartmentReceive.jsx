@@ -388,7 +388,7 @@ const DepartmentReceive = () => {
                         onInput={(e) => number(e, 10)}
                       />
                       {errors?.ItemValue && (
-                        <div className="golbal-Error">{errors?.ItemValue}</div>
+                        <div className="error-message">{errors?.ItemValue}</div>
                       )}
                     </div>
                   ) : (
@@ -402,7 +402,7 @@ const DepartmentReceive = () => {
                         onChange={handleChange}
                       />
                       {errors?.ItemValue && (
-                        <div className="golbal-Error">{errors?.ItemValue}</div>
+                        <div className="error-message">{errors?.ItemValue}</div>
                       )}
                     </div>
                   )}

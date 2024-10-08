@@ -1585,7 +1585,7 @@ console.log(ResultData)
                             onInput={(e) => number(e, 10)}
                           />
                           {errors?.ItemValue && (
-                            <div className="golbal-Error">
+                            <div className="error-message">
                               {errors?.ItemValue}
                             </div>
                           )}
@@ -1600,7 +1600,7 @@ console.log(ResultData)
                             onChange={handleChange}
                           />
                           {errors?.ItemValue && (
-                            <div className="golbal-Error">
+                            <div className="error-message">
                               {errors?.ItemValue}
                             </div>
                           )}

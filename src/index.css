@@ -163,7 +163,7 @@
 }
 
 .row {
-  margin-top: 6px !important;
+  margin-top: 3px !important;
   width: 100%;
   display: flex;
 }
@@ -242,7 +242,7 @@
 
 .form-group {
   position: relative;
-  margin-bottom: 0.4rem;
+  /* margin-bottom: 0.2rem; */
 }
 
 .form-control {
@@ -439,8 +439,16 @@ input.form-control {
   padding: 10px 10px;
   font-size: 13px;
   margin-bottom: 2px !important;
+  /* padding: 10px 10px 1px; */
 }
-
+.card-patient{
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* padding: 10px 10px; */
+  font-size: 13px;
+  margin-bottom: 2px !important;
+  padding: 10px 10px 1px;
+}
 .card-center {
   display: flex;
   justify-content: center;
@@ -533,6 +541,7 @@ input.form-control {
   min-height: 1px;
   padding-right: 3px;
   padding-left: 3px;
+  
 }
 
 .Flipped {
@@ -1036,10 +1045,7 @@ td {
   overflow-x: hidden;
 }
 
-.form-group {
-  position: relative;
-  margin-bottom: 0.4rem;
-}
+
 
 input:focus {
   outline: 0;
@@ -2042,3 +2048,11 @@ button:hover {
 }
 
 
+.rmsc .clear-selected-button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+  display: flex;
+  box-shadow: none;
+}

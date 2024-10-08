@@ -463,7 +463,7 @@ function GetReport() {
                   <DatePicker
                     className="custom-calendar"
                     name="FromDate"
-                    date={formData?.FromDate}
+                    value={formData?.FromDate}
                     onChange={dateSelect}
                     onChangeTime={handleTime}
                     secondName={FieldShow?.FromTime && "FromTime"}
@@ -478,7 +478,7 @@ function GetReport() {
                   <DatePicker
                     className="custom-calendar"
                     name="ToDate"
-                    date={formData?.ToDate}
+                    value={formData?.ToDate}
                     onChange={dateSelect}
                     onChangeTime={handleTime}
                     secondName={FieldShow?.ToTime && "ToTime"}

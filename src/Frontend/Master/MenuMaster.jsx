@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { axiosInstance } from "../../utils/axiosInstance";
 import { MenuMasterValidation } from "../../utils/Schema";
@@ -132,7 +131,7 @@ const MenuMaster = () => {
                 onChange={handleChange}
                 placeholder=" "
               />
-              <div className="golbal-Error">{errors?.MenuName}</div>
+              <div className="error-message">{errors?.MenuName}</div>
             </div>
             <div className="col-sm-2  ">
               <Input
@@ -144,7 +143,7 @@ const MenuMaster = () => {
                 onChange={handleChange}
                 placeholder=" "
               />
-              <div className="golbal-Error">{errors?.Priority}</div>
+              <div className="error-message">{errors?.Priority}</div>
             </div>
             <div className="col-sm-2  ">
               <Input
@@ -221,6 +220,7 @@ const MenuMaster = () => {
                 onClick={() => {
                   setPayload(payLoadConst);
                   setUpdate(false);
+                  setErrors({})
                 }}
               >
                 {t("Reset")}

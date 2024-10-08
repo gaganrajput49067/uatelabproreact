@@ -275,7 +275,7 @@ const UploadFile = ({
                   onChange={handleChange}
                 />
                 {state?.DocumentID === "" && (
-                  <div className="golbal-Error">{err?.DocumentID}</div>
+                  <div className="error-message">{err?.DocumentID}</div>
                 )}
               </div>
             )}

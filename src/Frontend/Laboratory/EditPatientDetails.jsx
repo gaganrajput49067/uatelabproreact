@@ -2165,7 +2165,7 @@ const EditPatientDetails = () => {
                           />
                         )}
                         {data?.isError && (
-                          <div className="golbal-Error">{data?.message}</div>
+                          <div className="error-message">{data?.message}</div>
                         )}
                       </div>
                     </>

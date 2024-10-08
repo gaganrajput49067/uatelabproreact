@@ -139,7 +139,7 @@ function SendEmailModalReprint({ data, handleClose }) {
               onChange={handlechangeForm}
             />
             {!emailRegex.test(formdata?.To) && (
-              <span className="golbal-Error">{err?.To}</span>
+              <span className="error-message">{err?.To}</span>
             )}
           </div>
         </div>
@@ -155,7 +155,7 @@ function SendEmailModalReprint({ data, handleClose }) {
             />
             {formdata?.CC.trim().length > 0 &&
               !emailRegex.test(formdata?.CC) && (
-                <span className="golbal-Error">{err?.CC}</span>
+                <span className="error-message">{err?.CC}</span>
               )}
           </div>
         </div>
@@ -171,7 +171,7 @@ function SendEmailModalReprint({ data, handleClose }) {
             />
             {formdata?.BCC.trim().length > 0 &&
               !emailRegex.test(formdata?.BCC) && (
-                <span className="golbal-Error">{err?.BCC}</span>
+                <span className="error-message">{err?.BCC}</span>
               )}
           </div>
         </div>

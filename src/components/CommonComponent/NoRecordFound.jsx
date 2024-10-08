@@ -1,5 +1,5 @@
 import React from "react";
-import nodata from "../../assets/image/nodata.jpg";
+import nodata from "../../assets/image/NoRecord.png";
 
 const NoRecordFound = () => {
   return (

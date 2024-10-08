@@ -152,7 +152,7 @@ const SaveSmsEmail = ({
 
                   {newSaveSmsEmail?.SmsToPatient.length > 0 &&
                     newSaveSmsEmail?.SmsToPatient.length < 10 && (
-                      <span className="golbal-Error">{err?.SmsToPatient}</span>
+                      <span className="error-message">{err?.SmsToPatient}</span>
                     )}
                 </div>
               </div>
@@ -182,7 +182,7 @@ const SaveSmsEmail = ({
                   />
                   {newSaveSmsEmail?.EmailToPatient.trim().length > 0 &&
                     !emailRegex.test(newSaveSmsEmail?.EmailToPatient) && (
-                      <span className="golbal-Error">
+                      <span className="error-message">
                         {err?.EmailToPatient}
                       </span>
                     )}
@@ -218,7 +218,7 @@ const SaveSmsEmail = ({
                   />
                   {newSaveSmsEmail?.SmsToDoctor.length > 0 &&
                     newSaveSmsEmail?.SmsToDoctor.length < 10 && (
-                      <span className="golbal-Error">{err?.SmsToDoctor}</span>
+                      <span className="error-message">{err?.SmsToDoctor}</span>
                     )}
                 </div>
               </div>
@@ -246,7 +246,7 @@ const SaveSmsEmail = ({
                   />
                   {newSaveSmsEmail?.EmailToDoctor.trim().length > 0 &&
                     !emailRegex.test(newSaveSmsEmail?.EmailToDoctor) && (
-                      <span className="golbal-Error">{err?.EmailToDoctor}</span>
+                      <span className="error-message">{err?.EmailToDoctor}</span>
                     )}
                 </div>
               </div>
@@ -281,7 +281,7 @@ const SaveSmsEmail = ({
                   />
                   {newSaveSmsEmail?.SmsToClient.length > 0 &&
                     newSaveSmsEmail?.SmsToClient.length < 10 && (
-                      <span className="golbal-Error">{err?.SmsToClient}</span>
+                      <span className="error-message">{err?.SmsToClient}</span>
                     )}
                 </div>
               </div>
@@ -309,7 +309,7 @@ const SaveSmsEmail = ({
                   />
                   {newSaveSmsEmail?.EmailToClient.trim().length > 0 &&
                     !emailRegex.test(newSaveSmsEmail?.EmailToClient) && (
-                      <span className="golbal-Error">{err?.EmailToClient}</span>
+                      <span className="error-message">{err?.EmailToClient}</span>
                     )}
                 </div>
               </div>

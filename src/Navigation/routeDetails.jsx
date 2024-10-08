@@ -80,6 +80,10 @@ export let routeDetails = [
         element: "../Frontend/Master/MenuMaster",
       },
       {
+        path: "/PageMaster",
+        element: "../Frontend/Master/PageMaster",
+      },
+      {
         path: "/getReport/:id",
         element: "../Frontend/Reports/Report",
       },
