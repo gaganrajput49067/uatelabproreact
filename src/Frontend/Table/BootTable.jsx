@@ -117,6 +117,7 @@ function RETable({ redata, GetResultEntry, show, show2 }) {
         VisitNo: data?.VisitNo,
         PEmail: data?.PEmail,
         MacID: "",
+        LedgertransactionIDHash:data?.LedgertransactionIDHash
       },
 
       index,

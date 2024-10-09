@@ -108,7 +108,7 @@ const MainDaashBoard = () => {
   //       });
   //     }
   // }, []);
-
+console.log(userDashBoardData)
   useEffect(() => {
     getDashboardAccessCentres({
       state: setAccessCentre,
@@ -259,9 +259,9 @@ function SampleCollection({ userWiseDashBoard }) {
 
 function RevenueCollection({ userWiseDashBoard }) {
   let data = {
-    Cash: userWiseDashBoard.cash || 0,
-    Online: userWiseDashBoard.TotalOnlinepayment || 0,
-    Cheque: userWiseDashBoard.cheque || 0,
+    cash: userWiseDashBoard.cash || 0,
+    Online: userWiseDashBoard.totalOnlinepayment || 0,
+    cheque: userWiseDashBoard.cheque || 0,
   };
 
   return <>{<RevenueChart state={data} />}</>;

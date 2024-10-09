@@ -140,8 +140,12 @@ function RegisterationTable({
             data?.RequiredAttachment + " Req."}
         </small>
       </td>
-      <td onClick={() => setShow2(true)} data-title="View">
-        <i className="fa fa-search" />
+      <td data-title={("View")} onClick={() => setShow2(true)}>
+        <i
+          className={`fa fa-search ${
+            data?.SampleRemarks != "" ? "requiredlabel" : ""
+          }`}
+        />
       </td>
       <td onClick={() => setDos(true)} data-title="DOS">
         <i className="fa fa-home" />

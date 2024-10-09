@@ -19,6 +19,8 @@ const UploadFile = ({
   formData,
   isPrintHeader = 0,
   showHeader = true,
+
+  blockUpload = false,
 }) => {
   const { t } = useTranslation();
   const [state, setState] = useState({
@@ -335,7 +337,9 @@ const UploadFile = ({
                     className="btn btn-success btn-block btn-sm"
                     id="btnSave"
                     onClick={handleUpload}
-                    disabled={formData?.SampleStatus === "5" ? true : false}
+                    disabled={
+                    formData?.SampleStatus == "5" || blockUpload ? true : false
+                  }
                   >
                     {t("Upload File")}
                   </button>
@@ -388,6 +392,11 @@ const UploadFile = ({
                             ? DeleteImage(ele?.ID_Hash)
                             : null
                         }
+                         disabled={
+                              formData?.SampleStatus == "5" || blockUpload
+                                ? true
+                                : false
+                            }
                       ></i>
                       <br />
                       <i

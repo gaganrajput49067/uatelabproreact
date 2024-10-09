@@ -268,6 +268,7 @@ const PatientRegistration = () => {
       } else return 0;
     }
   };
+  console.log(state)
   const saveData = (data) => {
     setIsSubmit({
       type: "Success",
@@ -300,7 +301,11 @@ const PatientRegistration = () => {
 
         LTData: getTrimmedData({
           ...LTData,
-          ProEmployee: state?.ProEmployee,
+          ReferLabId: LTData?.ReferLabId?.toString(),
+          GrossAmount: Number(LTData?.GrossAmount),
+          NetAmount: Number(LTData?.NetAmount),
+          ProEmployee: state?.ProEmployee?.toString(),
+
           OrderId: data ? data : "",
           LedgerTransactionIDHash: documentId,
           CoupanCode: coupon?.field ? coupon?.code : "",
@@ -315,7 +320,11 @@ const PatientRegistration = () => {
           IsWhatsappRequired: getWhtsapp(),
           IsCredit: handleRateTypePaymode == "Credit" ? 1 : 0,
           ...Pndt,
-          Pregnancy: moment(Pndt?.Pregnancy).format("YYYY-MM-DD"),
+          Pregnancy:
+            Pndt?.Pregnancy == ""
+              ? "0001-01-01"
+              : moment(Pndt?.Pregnancy).format("YYYY-MM-DD"),
+
           IsPndt: Pndt?.PNDT ? 1 : 0,
           // IsPndt: 1,
           IsPndtForm: checkPndt(),
@@ -328,6 +337,12 @@ const PatientRegistration = () => {
             localStorage.getItem("ModifyRegDate") == "1"
               ? LTData?.RegistrationDate
               : undefined,
+          Amount: ploItem?.Amount?.toString(),
+          DiscountAmt: ploItem?.DiscountAmt?.toString(),
+          Rate: ploItem?.Rate?.toString(),
+          sampleTypeID: ploItem?.sampleTypeID
+            ? Number(ploItem?.sampleTypeID)
+            : 0,
         })),
         DocumentDetail: {
           DocumentID: PatientGuid,
@@ -336,152 +351,149 @@ const PatientRegistration = () => {
           PatientGuid: PatientGuid,
         },
 
-        PRDeliveryMethod: Object.values({
+        PRDeliveryMethod: {
           IsPatientSMS: saveSmsEmail?.IsActiveSmsToPatient,
-
+          PatientMobileNo: saveSmsEmail?.SmsToPatient,
           IsPatientEmail: saveSmsEmail?.IsActiveEmailToPatient,
-
+          PatientEmailId: saveSmsEmail?.EmailToPatient,
           IsDoctorSMS: saveSmsEmail?.IsActiveSmsToDoctor,
-
+          DoctorMobileNo: saveSmsEmail?.SmsToDoctor,
           IsDoctorEmail: saveSmsEmail?.IsActiveEmailToDoctor,
+          DoctorEmailId: saveSmsEmail?.EmailToDoctor,
           IsClientSMS: saveSmsEmail?.IsActiveSmsToClient,
-
+          ClientMobileNo: saveSmsEmail?.SmsToClient,
           IsClientEmail: saveSmsEmail?.IsActiveEmailToClient,
+          ClientEmail: saveSmsEmail?.EmailToClient,
           IsCourier: saveSmsEmail?.IsCourier,
-        }).every((value) => value == 0 || value == "")
-          ? ""
-          : {
-              IsPatientSMS: saveSmsEmail?.IsActiveSmsToPatient,
-              PatientMobileNo: saveSmsEmail?.SmsToPatient,
-              IsPatientEmail: saveSmsEmail?.IsActiveEmailToPatient,
-              PatientEmailId: saveSmsEmail?.EmailToPatient,
-              IsDoctorSMS: saveSmsEmail?.IsActiveSmsToDoctor,
-              DoctorMobileNo: saveSmsEmail?.SmsToDoctor,
-              IsDoctorEmail: saveSmsEmail?.IsActiveEmailToDoctor,
-              DoctorEmailId: saveSmsEmail?.EmailToDoctor,
-              IsClientSMS: saveSmsEmail?.IsActiveSmsToClient,
-              ClientMobileNo: saveSmsEmail?.SmsToClient,
-              IsClientEmail: saveSmsEmail?.IsActiveEmailToClient,
-              ClientEmail: saveSmsEmail?.EmailToClient,
-              IsCourier: saveSmsEmail?.IsCourier,
-            },
+        },
         RcData: RcData,
         FieldIds: "",
         mandatoryFields: [],
       })
       .then((res) => {
-        toast.success(res.data.message);
-        const newDocumentId = guidNumber();
-        setDocumentID(newDocumentId);
-        setIsRazorPayOpen(false);
-        setState(stateIniti);
-        //    setLTData(LTDataIniti);
-        setTime({
-          Hour: new Date().getHours().toString().padStart(2, "0"),
-          Minute: new Date().getMinutes().toString().padStart(2, "0"),
-          Second: new Date().getSeconds().toString().padStart(2, "0"),
-        });
+        if (res.data.success) {
+          toast.success(res.data.message);
+          const newDocumentId = guidNumber();
+          setDocumentID(newDocumentId);
+          setIsRazorPayOpen(false);
+          setState(stateIniti);
+          //    setLTData(LTDataIniti);
+          setTime({
+            Hour: new Date().getHours().toString().padStart(2, "0"),
+            Minute: new Date().getMinutes().toString().padStart(2, "0"),
+            Second: new Date().getSeconds().toString().padStart(2, "0"),
+          });
 
-        setPLO([]);
-        setRcData([
-          {
-            PayBy: "Patient",
-            ReceiptNo: "",
-            ledgerNoCr: "",
-            RateTypeId: state?.RateID,
-            PaymentMode: "Cash",
-            PaymentModeID: 134,
-            BankName: "",
-            CardDate: "",
-            CardNo: "",
-            Amount: "",
-            CentreID: LTData?.CentreID,
-          },
-        ]);
-        setSaveSmsEmail({
-          SmsToPatient: "",
-          SmsToDoctor: "",
-          IsActiveSmsToPatient: "",
-          IsActiveSmsToDoctor: "",
-          EmailToPatient: "",
-          EmailToDoctor: "",
-          IsActiveEmailToPatient: "",
-          IsActiveEmailToDoctor: "",
-          SmsToClient: "",
-          IsActiveSmsToClient: "",
-          EmailToClient: "",
-          IsActiveEmailToClient: "",
-          IsCourier: "",
-          IsWhatsappRequired: "",
-        });
+          setPLO([]);
+          setRcData([
+            {
+              PayBy: "Patient",
+              ReceiptNo: "",
+              ledgerNoCr: "",
+              RateTypeId: state?.RateID,
+              PaymentMode: "Cash",
+              PaymentModeID: 134,
+              BankName: "",
+              CardDate: "",
+              CardNo: "",
+              Amount: "",
+              CentreID: LTData?.CentreID,
+            },
+          ]);
+          setSaveSmsEmail({
+            SmsToPatient: "",
+            SmsToDoctor: "",
+            IsActiveSmsToPatient: "",
+            IsActiveSmsToDoctor: "",
+            EmailToPatient: "",
+            EmailToDoctor: "",
+            IsActiveEmailToPatient: "",
+            IsActiveEmailToDoctor: "",
+            SmsToClient: "",
+            IsActiveSmsToClient: "",
+            EmailToClient: "",
+            IsActiveEmailToClient: "",
+            IsCourier: "",
+            IsWhatsappRequired: "",
+          });
 
-        setPndt({
-          ...Pndt,
-          PNDT: false,
-          NoOfChildren: "",
-          NoOfSon: "",
-          NoOfDaughter: "",
-          Pregnancy: "",
-          AgeOfSon: "",
-          AgeOfDaughter: "",
-          PNDTDoctor: "",
-          Husband: "",
-        });
-        setFormData({
-          DoctorName: "Self",
-          SecondReferDoctor: "",
-        });
-        setmembershipnum("");
-        setThroughmemberdata(false);
-        setMemberdetails({});
-        setTableData([]);
-        setIsSubmit({
-          type: "Success",
-          isLoading: false,
-        });
-        setCoupon({
-          code: "",
-          field: false,
-        });
-        setThroughMobileData(false);
-        setThroughmemberdata(false);
-        getAccessCentres(setCentreData, LTData, setLTData, LTDataIniti);
+          setPndt({
+            ...Pndt,
+            PNDT: false,
+            NoOfChildren: "",
+            NoOfSon: "",
+            NoOfDaughter: "",
+            Pregnancy: "",
+            AgeOfSon: "",
+            AgeOfDaughter: "",
+            PNDTDoctor: "",
+            Husband: "",
+          });
+          setFormData({
+            DoctorName: "Self",
+            SecondReferDoctor: "",
+          });
+          setmembershipnum("");
+          setThroughmemberdata(false);
+          setMemberdetails({});
+          setTableData([]);
+          setIsSubmit({
+            type: "Success",
+            isLoading: false,
+          });
+          setCoupon({
+            code: "",
+            field: false,
+          });
+          setThroughMobileData(false);
+          setThroughmemberdata(false);
+          getAccessCentres(setCentreData, LTData, setLTData, LTDataIniti);
+          console.log(res?.data);
+          if (res?.data?.data?.hideReceipt != 1) {
+            getReceipt(
+              res?.data?.data?.ledgertransactionID,
+              res?.data?.data?.fullyPaid
+            );
+          }
+          if (res?.data?.data?.isConcern == 1) {
+            getConcern(res?.data?.data?.ledgertransactionID);
+          }
+          if (res?.data?.data?.isPndt == 1) {
+            getPndtForm(res?.data?.data?.ledgertransactionID);
+          }
 
-        if (res?.data?.HideReceipt != 1) {
-          getReceipt(res?.data?.ledgertransactionID, res?.data?.FullyPaid);
-        }
-        if (res?.data?.IsConcern == 1) {
-          getConcern(res?.data?.ledgertransactionID);
-        }
-        if (res?.data?.IsPndt == 1) {
-          getPndtForm(res?.data?.ledgertransactionID);
-        }
-
-        getReceiptTRF(
-          res?.data?.ledgertransactionID,
-          res?.data?.IsTrfRequired,
-          res?.data?.IsDepartmentSlip
-        );
-        guidNumber();
-        setPatientImg({ img: MyImage, show: false });
-        setSuggestionData({
-          show: false,
-          viewTestModal: false,
-          viewTestModalId: "",
-          testSuggestions: {
-            data: [],
+          getReceiptTRF(
+            res?.data?.data?.ledgertransactionID,
+            res?.data?.data?.isTrfRequired,
+            res?.data?.data?.isDepartmentSlip
+          );
+          guidNumber();
+          setPatientImg({ img: PhelboImage, show: false });
+          setSuggestionData({
             show: false,
-            Total: [],
-          },
-          packageSuggestions: {
-            data: [],
-            show: false,
-          },
-          daySuggestions: {
-            data: [],
-            show: false,
-          },
-        });
+            viewTestModal: false,
+            viewTestModalId: "",
+            testSuggestions: {
+              data: [],
+              show: false,
+              Total: [],
+            },
+            packageSuggestions: {
+              data: [],
+              show: false,
+            },
+            daySuggestions: {
+              data: [],
+              show: false,
+            },
+          });
+        } else {
+          setIsSubmit({
+            type: "Error",
+            isLoading: false,
+          });
+          toast.error(res.data.message);
+        }
       })
       .catch((err) => {
         setIsRazorPayOpen(false);
@@ -936,7 +948,10 @@ const PatientRegistration = () => {
               SearchBy: searchTest,
             })
             .then((res) => {
-              setSuggestion(res?.data?.message);
+              if (res?.data?.success) setSuggestion(res?.data?.message);
+              else {
+                toast.error("Please check rate/Share and sample type");
+              }
             })
             .catch((err) => {
               toast.error(err?.response?.data?.message);
@@ -1116,7 +1131,7 @@ const PatientRegistration = () => {
 
   const findGender = () => {
     const male = ["Mr.", "Baba", "Dr.(Mr)", "Master"];
-    const female = ["Miss.", "Mrs.", "Baby", "Dr.(Miss)", "Dr.(Mrs)"];
+    const female = ["Miss.", "Mrs.", "Baby", "Dr.(Miss)", "Dr.(Mrs)", "Ms."];
     const other = [""];
     if (male.includes(state?.Title)) {
       setState({ ...state, Gender: "Male" });
@@ -1736,20 +1751,31 @@ const PatientRegistration = () => {
   const getSpecialDayTest = (CentreID, RateTypeID) => {
     axiosInstance
       .post("TestData/BindPromotional", {
-        CentreID: CentreID,
-        RateTypeID: RateTypeID,
+        CentreID: CentreID?.toString(),
+        RateTypeID: RateTypeID?.toString(),
       })
       .then((res) => {
-        let data = res?.data?.message;
-        setSuggestionData((ele) => ({
-          ...ele,
-          show: true,
-          daySuggestions: {
-            ...suggestionData.daySuggestions,
-            data: data,
+        if (res?.data?.success) {
+          let data = res?.data?.message;
+          setSuggestionData((ele) => ({
+            ...ele,
             show: true,
-          },
-        }));
+            daySuggestions: {
+              ...suggestionData.daySuggestions,
+              data: data,
+              show: true,
+            },
+          }));
+        } else {
+          setSuggestionData((ele) => ({
+            ...ele,
+            daySuggestions: {
+              ...suggestionData.daySuggestions,
+              data: [],
+              show: false,
+            },
+          }));
+        }
       })
       .catch((err) => {
         setSuggestionData((ele) => ({
@@ -1907,8 +1933,9 @@ const PatientRegistration = () => {
       show: true,
     });
   const handleShowMobile = () => {
-    getDataByMobileNo("Mobile");
-
+    if (state?.Mobile?.length === 10) {
+      getDataByMobileNo("Mobile");
+    }
     // setShow4(true)
   };
 
@@ -2205,14 +2232,20 @@ const PatientRegistration = () => {
             PatientCode: "",
           })
           .then((res) => {
-            setMobileData(res.data.message?.user);
-            setSuggestionData((ele) => ({
-              ...ele,
-              testSuggestions: {
-                ...suggestionData.testSuggestions,
-                Total: res?.data?.message?.Data,
-              },
-            }));
+            if (res?.data?.success) {
+              setMobileData(res.data.message?.user);
+              setSuggestionData((ele) => ({
+                ...ele,
+                testSuggestions: {
+                  ...suggestionData.testSuggestions,
+                  Total: res?.data?.message?.Data,
+                },
+              }));
+            } else {
+              setMobileData([]);
+              toast.error("No Patient Record Found");
+            }
+
             setShow4(true);
           })
           .catch((err) => {
@@ -2233,14 +2266,19 @@ const PatientRegistration = () => {
             PatientCode: state?.PatientCode,
           })
           .then((res) => {
-            setMobileData(res.data.message?.user);
-            setSuggestionData((ele) => ({
-              ...ele,
-              testSuggestions: {
-                ...suggestionData.testSuggestions,
-                Total: res?.data?.message?.Data,
-              },
-            }));
+            if (res?.data?.success) {
+              setMobileData(res.data.message?.user);
+              setSuggestionData((ele) => ({
+                ...ele,
+                testSuggestions: {
+                  ...suggestionData.testSuggestions,
+                  Total: res?.data?.message?.Data,
+                },
+              }));
+            } else {
+              setMobileData([]);
+              toast.error("No Patient Record Found");
+            }
             setShow4(true);
           })
           .catch((err) => {
@@ -2275,8 +2313,13 @@ const PatientRegistration = () => {
           CenterID: LTData?.CentreID,
         })
         .then((res) => {
-          setMemberdata(res?.data.message);
-          setShow7(true);
+          if (res?.data?.message?.length > 0) {
+            setMemberdata(res?.data.message);
+            setShow7(true);
+          } else {
+            toast.error("No Record Found");
+            setShow7(false);
+          }
         })
         .catch((err) => {
           toast.error(err?.response.data.message);
@@ -2404,6 +2447,7 @@ const PatientRegistration = () => {
       MiddleName: data?.MiddleName,
       Gender: data?.Gender,
       DOB: new Date(data?.DOB),
+      Age: data?.Age,
       PatientCode: data?.PatientCode,
       Email: data?.Email == null ? "" : data?.Email,
       PinCode: data?.Pincode,
@@ -2570,7 +2614,8 @@ const PatientRegistration = () => {
       })
       .then((res) => {
         if (res.data.success) {
-          const order_id = res.data.paymentLink.notes.order_id;
+          console.log(res.data.messageInfo.paymentLink.short_url);
+          const order_id = res.data.messageInfo.paymentLink.notes.order_id;
           let timeoutId;
           let intervalId;
           let countdownIntervalId;
@@ -2610,7 +2655,7 @@ const PatientRegistration = () => {
           intervalId = setInterval(async () => {
             const success = await checkPaymentStatus(
               order_id,
-              res.data.paymentLink.id
+              res.data.messageInfo.paymentLink.id
             );
             if (success) {
               setIsRazorPayOpen(false);
@@ -2647,7 +2692,8 @@ const PatientRegistration = () => {
     axiosInstance
       .get("RazorPay/Otherpayment")
       .then((res) => {
-        if (res?.data?.payment_capture == 1) {
+        console.log(res);
+        if (res?.data?.message?.payment_capture == 1) {
           setIsRazorPayOpen(true);
           getPaymentLink();
         } else {
@@ -2668,8 +2714,9 @@ const PatientRegistration = () => {
   };
 
   const handleSubmitApi = () => {
-    debugger;
+    // debugger;
     const { DocumentFlag, message } = handleFileValidationUpload();
+    console.log(DocumentFlag,message)
     if (!filterUnPaidRcData()) {
       if (getTestNamesWithBlankSampleTypeID()) {
         toast.error(getTestNamesWithBlankSampleTypeID());
@@ -2917,6 +2964,7 @@ const PatientRegistration = () => {
     let requiredDocument = [];
     let DocumentFlag = true;
     let message = "";
+    console.log(tableData)
     tableData.map((ele) => {
       if (ele.RequiredAttachment !== "") {
         requiredDocument.push(ele.RequiredAttachment);

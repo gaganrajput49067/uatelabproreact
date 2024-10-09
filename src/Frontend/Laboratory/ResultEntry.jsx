@@ -165,7 +165,7 @@ console.log(ResultData)
     Order: "DESC",
     Flag: "",
     moreFilter: 0,
-    parameterId: "",
+    parameterId: [],
     valueCheck: "=",
     valueToSearch: "",
     valueRangeFrom: "",
@@ -622,7 +622,7 @@ console.log(ResultData)
             };
           });
 
-          const dataTestHeader = res?.data?.TestHeader;
+          const dataTestHeader = res?.data?.message?.testHeader;
           let isPreviousResult = false;
           const valTestHeader = dataTestHeader?.map((ele) => {
             if (ele?.OldValueDate && ele?.OldValueDate !== "") {
@@ -635,6 +635,7 @@ console.log(ResultData)
               isDocumentUpload: 0,
               TestCenterId: val[0]?.TestCentreID,
               Mobile: payload?.Mobile,
+              LedgertransactionIDHash:payload?.LedgertransactionIDHash,
               PEmail: payload?.PEmail,
               MachineId:
                 payload?.MacID != "" ? payload?.MacID : machine[0]?.value,
@@ -688,7 +689,7 @@ console.log(ResultData)
               }
               if (ResultData[i].ReportType == "1") {
                 Formula = Formula.replace(
-                  ResultData[j].labObservationID + "&",
+                  new RegExp(ResultData[j].labObservationID + "&", "g"),
                   aa
                 );
               }
@@ -700,7 +701,7 @@ console.log(ResultData)
             if (vv == "0" || isNaN(vv)) {
               ResultData[i].Value = "0";
             } else {
-              ResultData[i].Value = vv;
+              ResultData[i].Value = vv.toString();
             }
           } catch (e) {
             ResultData[i].Value = "";
@@ -966,7 +967,7 @@ console.log(ResultData)
           const testidhash = ResultTestData.map((obj) => obj.TestID);
           (field === "Hold" || field === "Unhold") &&
             GetResultEntry({
-              TestID: testidhash,
+              TestID: testidhash.join(","),
               LedgerTransactionID: "",
               DepartmentID: "",
               symbol: "",
@@ -974,6 +975,7 @@ console.log(ResultData)
               VisitNo: payload[0]?.VisitNo,
               PEmail: payload[0]?.PEmail,
               MacID: "",
+              LedgertransactionIDHash:payload[0]?.LedgertransactionIDHash
             });
         })
         .catch((err) => {
@@ -1208,6 +1210,7 @@ console.log(ResultData)
         LedgerTransactionID: headerData[0]?.LedgerTransactionID,
         PEmail: headerData[0]?.PEmail,
         URL: Url,
+        LedgertransactionIDHash:headerData[0]?.LedgertransactionIDHash
       })
       .then((res) => console.log(res?.data?.message))
       .catch((err) => {
@@ -1364,9 +1367,15 @@ console.log(ResultData)
         testid: [],
       }
     );
-
-    axiosReport
-      .post("commonReports/DeltaCheckData", payloadData)
+console.log(payloadData);
+    axios
+      .post("/reports/v1/commonReports/DeltaCheckData", {
+        ...payloadData,
+        Patientcode: payloadData?.Patientcode??"",
+        testid: Array.isArray(payloadData?.testid)
+          ? payloadData?.testid
+          : [payloadData?.testid],
+      })
       .then((res) => {
         window.open(res?.data?.Url, "_blank");
       })
@@ -1539,7 +1548,7 @@ console.log(ResultData)
                 setShowAdvanceFilter({ show: false, data: "" });
                 setFormData((data) => ({
                   ...data,
-                  parameterId: "",
+                  parameterId: [],
                   valueCheck: "=",
                   valueToSearch: "",
                   valueRangeFrom: "",
@@ -1968,13 +1977,19 @@ console.log(ResultData)
             <UploadFile
               show={show5?.modal}
               handleClose={(data) => {
-                setShow5({ modal: false, data: "", pageName: "" });
+                setShow5({
+                  modal: false,
+                  data: "",
+                  pageName: "",
+                  blockUpload: "",
+                });
                 printHeader(data, show5.data);
               }}
               documentId={show5.data}
               pageName={show5?.pageName}
               formData={formData}
               isPrintHeader={show5?.Printwithhead}
+              blockUpload={show5.blockUpload}
             />
           )}
           {showRemark && (
@@ -2448,6 +2463,10 @@ console.log(ResultData)
                                     data: Hdata?.TestIDHash,
                                     pageName: "Add Report",
                                     Printwithhead: Hdata?.Printwithhead,
+ blockUpload:
+                                        Hdata?.Status == 5 || Hdata?.Status == 6
+                                          ? true
+                                          : false,
                                   });
                                 }}
                               >
@@ -2464,6 +2483,10 @@ console.log(ResultData)
                                     modal: true,
                                     data: Hdata?.TestIDHash,
                                     pageName: "Add Attachment",
+blockUpload:
+                                        Hdata?.Status == 5 || Hdata?.Status == 6
+                                          ? true
+                                          : false,
                                   });
                                 }}
                               >
@@ -2505,6 +2528,11 @@ console.log(ResultData)
                                           data: Hdata?.TestIDHash,
                                           pageName: "Add Report",
                                           Printwithhead: Hdata?.Printwithhead,
+    blockUpload:
+                                              Hdata?.Status == 5 ||
+                                              Hdata?.Status == 6
+                                                ? true
+                                                : false,
                                         });
                                       }}
                                     >
@@ -2523,6 +2551,11 @@ console.log(ResultData)
                                           modal: true,
                                           data: Hdata?.TestIDHash,
                                           pageName: "Add Attachment",
+ blockUpload:
+                                              Hdata?.Status == 5 ||
+                                              Hdata?.Status == 6
+                                                ? true
+                                                : false,
                                         });
                                       }}
                                     >
@@ -2680,7 +2713,13 @@ console.log(ResultData)
                               disabled={true}
                             />
                           </td>
-                          <td data-title={t("TestName")}>
+                         <td
+                                data-title={t("TestName")}
+                                style={{
+                                  wordWrap: "break-word",
+                                  whiteSpace: "normal",
+                                }}
+                              >
                             <span
                               style={{ cursor: "pointer" }}
                               data-toggle="tooltip"
@@ -3154,7 +3193,11 @@ console.log(ResultData)
                               {["2", "3"].includes(datanew?.ReportType) ? (
                                 <td data-title=""> &nbsp;</td>
                               ) : (
-                                <td data-title={t("Method Name")}>
+                                <td data-title={t("Method Name")} style={{
+   
+                                      wordWrap: "break-word", 
+                                      whiteSpace: "normal",
+                                                                  }}>
                                   {datanew?.MethodName} &nbsp;
                                 </td>
                               )}
@@ -3240,6 +3283,7 @@ console.log(ResultData)
                               PEmail:
                                 redata[ResultData[0]?.currentIndex - 1]?.PEmail,
                               MacID: "",
+                              LedgertransactionIDHash:redata[ResultData[0]?.currentIndex - 1]?.LedgertransactionIDHash
                             },
                             ResultData[0]?.currentIndex - 1
                           );
@@ -3270,6 +3314,8 @@ console.log(ResultData)
                               PEmail:
                                 redata[ResultData[0]?.currentIndex + 1]?.PEmail,
                               MacID: "",
+                              LedgertransactionIDHash:
+                                redata[ResultData[0]?.currentIndex + 1]?.LedgertransactionIDHash,
                             },
                             ResultData[0]?.currentIndex + 1
                           );
@@ -3334,6 +3380,7 @@ console.log(ResultData)
                               redata[ResultData[0]?.currentIndex]?.VisitNo,
                             PEmail: redata[ResultData[0]?.currentIndex]?.PEmail,
                             MacID: e?.target?.value,
+                            LedgertransactionIDHash: redata[ResultData[0]?.currentIndex]?.LedgertransactionIDHash,
                           },
                           ResultData[0]?.currentIndex
                         )
