@@ -26,7 +26,9 @@ function TemplateMasterModal({ show, handleClose, handleSave }) {
   const fetch = () => {
     axiosInstance
       .post("InvestigationCommentMaster/getInvestigationCommentData", {
-        InvestigationID: show?.data?.labObservationID,
+        InvestigationID: Array.isArray(show?.data?.labObservationID)
+          ? show?.data?.labObservationID
+          : [show?.data?.labObservationID],
         Template: "",
         TemplateText: "",
       })

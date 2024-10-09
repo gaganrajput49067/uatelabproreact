@@ -601,7 +601,7 @@ console.log(ResultData)
         MacID: payload?.MacID != "" ? payload?.MacID : machine[0]?.value,
       })
       .then((res) => {
-        const data = res?.data?.message;
+        const data = res?.data?.message?.message;
         if (data.length > 0) {
           const val = data.map((ele) => {
             return {
@@ -2385,7 +2385,7 @@ console.log(payloadData);
           </div>
           {/* </SubPageHead> */}
           {/* </div> */}
-          <Table overflow={true}>
+          <Table>
             <thead class="cf">
               <tr>
                 <th>{t("#")}</th>

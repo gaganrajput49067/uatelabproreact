@@ -408,31 +408,31 @@ const EditPatientDetails = () => {
       .then((res) => {
         setState({
           ...res?.data?.message?.patientDetail[0],
-          HideAmount: res?.data?.message?.LTData[0]?.HideAmount,
+          HideAmount: res?.data?.message?.ltData[0]?.HideAmount,
           DOB: new Date(res?.data?.message?.patientDetail[0]?.DOB),
         });
 
         setPndt({
-          PNDT: res?.data?.message?.LTData[0]?.IsPndt == 1 ? true : false,
-          NoOfChildren: res?.data?.message?.LTData[0]?.NoOfChildren,
-          NoOfSon: res?.data?.message?.LTData[0]?.NoOfSon,
-          NoOfDaughter: res?.data?.message?.LTData[0]?.NoOfDaughter,
+          PNDT: res?.data?.message?.ltData[0]?.IsPndt == 1 ? true : false,
+          NoOfChildren: res?.data?.message?.ltData[0]?.NoOfChildren,
+          NoOfSon: res?.data?.message?.ltData[0]?.NoOfSon,
+          NoOfDaughter: res?.data?.message?.ltData[0]?.NoOfDaughter,
           Pregnancy:
-            res?.data?.message?.LTData[0]?.Pregnancy == "01-Jan-0001"
+            res?.data?.message?.ltData[0]?.Pregnancy == "01-Jan-0001"
               ? "0001-01-01"
-              : new Date(res?.data?.message?.LTData[0]?.Pregnancy),
-          AgeOfSon: res?.data?.message?.LTData[0]?.AgeOfSon,
-          AgeOfDaughter: res?.data?.message?.LTData[0]?.AgeOfDaughter,
-          PNDTDoctor: res?.data?.message?.LTData[0]?.PNDTDoctor,
-          Husband: res?.data?.message?.LTData[0]?.Husband,
+              : new Date(res?.data?.message?.ltData[0]?.Pregnancy),
+          AgeOfSon: res?.data?.message?.ltData[0]?.AgeOfSon,
+          AgeOfDaughter: res?.data?.message?.ltData[0]?.AgeOfDaughter,
+          PNDTDoctor: res?.data?.message?.ltData[0]?.PNDTDoctor,
+          Husband: res?.data?.message?.ltData[0]?.Husband,
         });
         setLTData({
-          ...res?.data?.message?.LTData[0],
+          ...res?.data?.message?.ltData[0],
           LedgertransactionID:
-            res?.data?.message?.LTData[0]?.LedgerTransactionID,
-          BTB: res?.data?.message?.LTData[0]?.BTB,
+            res?.data?.message?.ltData[0]?.LedgerTransactionID,
+          BTB: res?.data?.message?.ltData[0]?.BTB,
         });
-        let data = res?.data?.message?.PLO;
+        let data = res?.data?.message?.plo;
         data = data.map((ele) => {
           return {
             ...ele,
@@ -499,10 +499,10 @@ const EditPatientDetails = () => {
         setPLO(val);
 
         setTableData(data);
-        setRcData(res?.data?.message?.RcData);
+        setRcData(res?.data?.message?.rcData);
         setFormData({
           ...formData,
-          DoctorName: res?.data?.message?.LTData[0]?.DoctorName,
+          DoctorName: res?.data?.message?.ltData[0]?.DoctorName,
         });
       })
       .catch((err) => {
@@ -1301,7 +1301,7 @@ const EditPatientDetails = () => {
           if (valiateProofID()) {
             // if (!paymentCheck) {
             if (disAmt || discountPercentage || match) {
-              if (DocumentFlag) {
+             
                 setIsSubmit(true);
                 axiosInstance
                   .post("PatientRegistration/RegistrationEditData", {
@@ -1339,6 +1339,8 @@ const EditPatientDetails = () => {
                       DoctorEmail: "",
                       LedgerTransactionID:
                         LTData?.LedgerTransactionID?.toString(),
+                      LedgertransactionID:
+                        LTData?.LedgertransactionID?.toString(),
                       Source: "",
                       RegistrationDate: new Date(),
                       SrfId: "",
@@ -1386,6 +1388,7 @@ const EditPatientDetails = () => {
                         ? ploItem?.UpdateModalityId?.toString()
                         : "",
 
+                    
                       OldModalityID: ploItem?.OldModalityID
                         ? ploItem?.OldModalityID?.toString()
                         : "",
@@ -1420,7 +1423,7 @@ const EditPatientDetails = () => {
                     mandatoryFields: [],
                   })
                   .then((res) => {
-                    if (true) {
+                    if (res?.data?.success) {
                       toast.success(res.data.message);
                       setState(stateIniti);
                       setLTData(LTDataIniti);
@@ -1474,9 +1477,7 @@ const EditPatientDetails = () => {
                     );
                     setIsSubmit(false);
                   });
-              } else {
-                toast.error(`${message} is Required Document`);
-              }
+              
             } else {
               if (DocumentFlag) {
                 setIsSubmit(true);

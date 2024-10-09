@@ -16,7 +16,7 @@ function ResultEditAddModal({ show, handleClose, handleSave }) {
   const getInvestigationsListData = () => {
     axiosInstance
       .post("InvestigationCommentMaster/getInvestigationCommentData", {
-        InvestigationID: show?.data?.labObservationID,
+        InvestigationID: Array.isArray(show?.data?.labObservationID)?show?.data?.labObservationID:[show?.data?.labObservationID],
         Template: "",
         TemplateText: "",
       })

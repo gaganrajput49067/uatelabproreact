@@ -589,7 +589,7 @@ const EditPatientInfo = () => {
                 onBlur={handleBlur}
                 onChange={handleMainChange}
                 min={10}
-                disabled
+                
               />
             </div>
 
