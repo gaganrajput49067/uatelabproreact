@@ -1310,6 +1310,7 @@ const ResultEntry = () => {
             label: ele?.name,
           };
         });
+
         setDoctorAdmin(doctorData);
       })
       .catch((err) => console.log(err));
@@ -2219,7 +2220,7 @@ const ResultEntry = () => {
 
               <div className="custom-col">
                 <span className="fa fa-user-md custom-text">
-                  &nbsp; <span> {ResultData[0]?.Referdoctor}</span>
+                  &nbsp; <span> {ResultData[0]?.ReferDoctor}</span>
                 </span>
               </div>
 
@@ -3334,16 +3335,18 @@ const ResultEntry = () => {
                       ›
                     </button>
                   </div>
-                  <div className="col-sm-1 ">
-                    {["", 3, 10, 11, 13, 14, 15].includes(statusValue) && (
+
+                  {["", 3, 10, 11, 13, 14, 15].includes(statusValue) && (
+                    <div className="col-sm-1 ">
                       <button
                         className="btn btn-info mx-2 my-1 my btn-sm"
                         onClick={() => handleResultSubmit("Save")}
                       >
                         save
                       </button>
-                    )}
-                  </div>
+                    </div>
+                  )}
+
                   <div className="col-sm-1">
                     <button
                       className="btn btn-dark mx-2 my-1 my btn-sm"
@@ -3359,10 +3362,12 @@ const ResultEntry = () => {
                   </div>
                   <div className="col-sm-2 pt-1">
                     <SelectBox
-                      options={doctorAdmin}
+                      options={[
+                        { label: "Select Doctor", value: "" },
+                        ...doctorAdmin,
+                      ]}
                       id="ApprovedBy"
                       lable="Doctor"
-                      selectedValue={formData.SelectTypes}
                       name="ApprovedBy"
                       onChange={handleDoctorName}
                     />
