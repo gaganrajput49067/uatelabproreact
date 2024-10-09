@@ -10,7 +10,7 @@
 .simple-table-container-overflow {
   width: 100%;
   position: relative;
-  max-height: 450px;
+  /* max-height: 450px; */
   overflow: visible;
   margin-bottom: 5px;
   margin-top: 5px;
@@ -47,7 +47,7 @@
   overflow: auto;
   
   position: relative;
-  z-index: 0;
+  z-index: 0.1;
 }
 
 .simple-table tr {

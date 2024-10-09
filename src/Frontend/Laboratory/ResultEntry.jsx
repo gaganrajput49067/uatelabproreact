@@ -98,7 +98,7 @@ const ResultEntry = () => {
     data: "",
     index: -1,
   });
-console.log(ResultData)
+  console.log(ResultData);
   const [show5, setShow5] = useState({
     modal: false,
     data: "",
@@ -470,7 +470,7 @@ console.log(ResultData)
     if (modal === "TemplateMaster") {
       let val = ResultData.map((ele) => {
         if (ele.labObservationID == data?.labObservationID) {
-          console.log(data)
+          console.log(data);
           return {
             ...ele,
             COMMENT: data?.COMMENT,
@@ -635,7 +635,7 @@ console.log(ResultData)
               isDocumentUpload: 0,
               TestCenterId: val[0]?.TestCentreID,
               Mobile: payload?.Mobile,
-              LedgertransactionIDHash:payload?.LedgertransactionIDHash,
+              LedgertransactionIDHash: payload?.LedgertransactionIDHash,
               PEmail: payload?.PEmail,
               MachineId:
                 payload?.MacID != "" ? payload?.MacID : machine[0]?.value,
@@ -975,7 +975,7 @@ console.log(ResultData)
               VisitNo: payload[0]?.VisitNo,
               PEmail: payload[0]?.PEmail,
               MacID: "",
-              LedgertransactionIDHash:payload[0]?.LedgertransactionIDHash
+              LedgertransactionIDHash: payload[0]?.LedgertransactionIDHash,
             });
         })
         .catch((err) => {
@@ -1210,7 +1210,7 @@ console.log(ResultData)
         LedgerTransactionID: headerData[0]?.LedgerTransactionID,
         PEmail: headerData[0]?.PEmail,
         URL: Url,
-        LedgertransactionIDHash:headerData[0]?.LedgertransactionIDHash
+        LedgertransactionIDHash: headerData[0]?.LedgertransactionIDHash,
       })
       .then((res) => console.log(res?.data?.message))
       .catch((err) => {
@@ -1367,11 +1367,11 @@ console.log(ResultData)
         testid: [],
       }
     );
-console.log(payloadData);
+    console.log(payloadData);
     axios
       .post("/reports/v1/commonReports/DeltaCheckData", {
         ...payloadData,
-        Patientcode: payloadData?.Patientcode??"",
+        Patientcode: payloadData?.Patientcode ?? "",
         testid: Array.isArray(payloadData?.testid)
           ? payloadData?.testid
           : [payloadData?.testid],
@@ -2385,7 +2385,7 @@ console.log(payloadData);
           </div>
           {/* </SubPageHead> */}
           {/* </div> */}
-          <Table>
+          <Table overflow={true}>
             <thead class="cf">
               <tr>
                 <th>{t("#")}</th>
@@ -2463,10 +2463,10 @@ console.log(payloadData);
                                     data: Hdata?.TestIDHash,
                                     pageName: "Add Report",
                                     Printwithhead: Hdata?.Printwithhead,
- blockUpload:
-                                        Hdata?.Status == 5 || Hdata?.Status == 6
-                                          ? true
-                                          : false,
+                                    blockUpload:
+                                      Hdata?.Status == 5 || Hdata?.Status == 6
+                                        ? true
+                                        : false,
                                   });
                                 }}
                               >
@@ -2483,10 +2483,10 @@ console.log(payloadData);
                                     modal: true,
                                     data: Hdata?.TestIDHash,
                                     pageName: "Add Attachment",
-blockUpload:
-                                        Hdata?.Status == 5 || Hdata?.Status == 6
-                                          ? true
-                                          : false,
+                                    blockUpload:
+                                      Hdata?.Status == 5 || Hdata?.Status == 6
+                                        ? true
+                                        : false,
                                   });
                                 }}
                               >
@@ -2528,11 +2528,11 @@ blockUpload:
                                           data: Hdata?.TestIDHash,
                                           pageName: "Add Report",
                                           Printwithhead: Hdata?.Printwithhead,
-    blockUpload:
-                                              Hdata?.Status == 5 ||
-                                              Hdata?.Status == 6
-                                                ? true
-                                                : false,
+                                          blockUpload:
+                                            Hdata?.Status == 5 ||
+                                            Hdata?.Status == 6
+                                              ? true
+                                              : false,
                                         });
                                       }}
                                     >
@@ -2551,11 +2551,11 @@ blockUpload:
                                           modal: true,
                                           data: Hdata?.TestIDHash,
                                           pageName: "Add Attachment",
- blockUpload:
-                                              Hdata?.Status == 5 ||
-                                              Hdata?.Status == 6
-                                                ? true
-                                                : false,
+                                          blockUpload:
+                                            Hdata?.Status == 5 ||
+                                            Hdata?.Status == 6
+                                              ? true
+                                              : false,
                                         });
                                       }}
                                     >
@@ -2713,13 +2713,13 @@ blockUpload:
                               disabled={true}
                             />
                           </td>
-                         <td
-                                data-title={t("TestName")}
-                                style={{
-                                  wordWrap: "break-word",
-                                  whiteSpace: "normal",
-                                }}
-                              >
+                          <td
+                            data-title={t("TestName")}
+                            style={{
+                              wordWrap: "break-word",
+                              whiteSpace: "normal",
+                            }}
+                          >
                             <span
                               style={{ cursor: "pointer" }}
                               data-toggle="tooltip"
@@ -3193,11 +3193,13 @@ blockUpload:
                               {["2", "3"].includes(datanew?.ReportType) ? (
                                 <td data-title=""> &nbsp;</td>
                               ) : (
-                                <td data-title={t("Method Name")} style={{
-   
-                                      wordWrap: "break-word", 
-                                      whiteSpace: "normal",
-                                                                  }}>
+                                <td
+                                  data-title={t("Method Name")}
+                                  style={{
+                                    wordWrap: "break-word",
+                                    whiteSpace: "normal",
+                                  }}
+                                >
                                   {datanew?.MethodName} &nbsp;
                                 </td>
                               )}
@@ -3255,7 +3257,7 @@ blockUpload:
               ))}
             </tbody>
           </Table>
-          <div className="card m-0 p-0 pb-2">
+          <div className="card m-0 p-0 pb-2" style={{ zIndex: 0 }}>
             <div className="row mt-3" style={{ textWrap: "avoid" }}>
               {loading ? (
                 <div className="mx-3">
@@ -3283,7 +3285,9 @@ blockUpload:
                               PEmail:
                                 redata[ResultData[0]?.currentIndex - 1]?.PEmail,
                               MacID: "",
-                              LedgertransactionIDHash:redata[ResultData[0]?.currentIndex - 1]?.LedgertransactionIDHash
+                              LedgertransactionIDHash:
+                                redata[ResultData[0]?.currentIndex - 1]
+                                  ?.LedgertransactionIDHash,
                             },
                             ResultData[0]?.currentIndex - 1
                           );
@@ -3315,7 +3319,8 @@ blockUpload:
                                 redata[ResultData[0]?.currentIndex + 1]?.PEmail,
                               MacID: "",
                               LedgertransactionIDHash:
-                                redata[ResultData[0]?.currentIndex + 1]?.LedgertransactionIDHash,
+                                redata[ResultData[0]?.currentIndex + 1]
+                                  ?.LedgertransactionIDHash,
                             },
                             ResultData[0]?.currentIndex + 1
                           );
@@ -3380,7 +3385,9 @@ blockUpload:
                               redata[ResultData[0]?.currentIndex]?.VisitNo,
                             PEmail: redata[ResultData[0]?.currentIndex]?.PEmail,
                             MacID: e?.target?.value,
-                            LedgertransactionIDHash: redata[ResultData[0]?.currentIndex]?.LedgertransactionIDHash,
+                            LedgertransactionIDHash:
+                              redata[ResultData[0]?.currentIndex]
+                                ?.LedgertransactionIDHash,
                           },
                           ResultData[0]?.currentIndex
                         )
