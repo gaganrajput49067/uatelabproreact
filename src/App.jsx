@@ -34,13 +34,14 @@ function App() {
   useClickOutside(sideBarRef, closeSidebar, showSidebar);
 
   useEffect(() => {
-    const tokenValue = getCookie("tokend");
-    if (tokenValue == "" || tokenValue === undefined) {
+    const tokenValue = localStorage.getItem("token");
+    console.log(tokenValue)
+    if (tokenValue == "" || tokenValue === undefined||tokenValue==null) {
       window.sessionStorage.clear();
       window.localStorage.clear();
       navigate("/login");
     }
-  }, [success, navigate]);
+  }, [success,navigate]);
 
   useEffect(() => {
     getPageData(setMenuData, setPageData);

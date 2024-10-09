@@ -6,6 +6,7 @@ import axios from "axios";
 
 const initialState = {
   user: {},
+  token:"",
   loading: false,
   error: "",
   message: "",
@@ -17,7 +18,8 @@ export const signInAction = createAsyncThunk(
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await axiosInstance.post("Users/Login", credentials);
+      const response = await axiosInstance.post("login/login", credentials);
+
       dispatch(setLoading(false));
       toast.success("Login is succeed!");
       console.log(response);
@@ -35,7 +37,7 @@ export const logOutAction = createAsyncThunk(
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
       dispatch(setLoading(true));
-      const response = await axiosInstance.post("Users/logout", credentials);
+      const response = await axiosInstance.post("login/logout", credentials);
       dispatch(setLoading(false));
       toast.success("LogOut Successfully !!");
       return response.data;
@@ -61,10 +63,11 @@ export const loginSlice = createSlice({
       .addCase(signInAction.fulfilled, (state, action) => {
         console.log(action);
         state.user = action.payload.user;
+        state.token=action.payload.token
         state.loading = false;
         state.success = true;
         state.error = "";
-        document.cookie = `tokend=${action.payload.token}; path=/`;
+        // document.cookie = `tokend=${action.payload.token}; path=/`;
       })
       .addCase(signInAction.rejected, (state, error) => {
         state.loading = false;

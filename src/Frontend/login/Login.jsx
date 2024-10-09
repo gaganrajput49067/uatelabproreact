@@ -29,7 +29,7 @@ const Login = () => {
     setRightPanelActive(false);
   };
   const IsForgot = useSelector((state) => state.forgetPasswordSlice.success);
-  const { user, loading, error, success } = useSelector(
+  const { user, loading, error, success,token } = useSelector(
     (state) => state.loginSlice
   );
 
@@ -38,6 +38,7 @@ const Login = () => {
       window.localStorage.setItem("Username", user.Username);
       window.localStorage.setItem("DefaultCentre", user.DefaultCentreID);
       window.localStorage.setItem("ModifyRegDate", user.ModifiedRegDate);
+      window.localStorage.setItem("token", token);
       navigate("/");
     }
   }, [success]);
@@ -101,6 +102,7 @@ const Login = () => {
       );
     }
   };
+
   const handleForget = (e) => {
     e.preventDefault();
     const Api = "ForgetPasswordController/ForgetPassword";

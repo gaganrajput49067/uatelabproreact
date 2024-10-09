@@ -102,7 +102,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
   const handleChangeCentre = (value) => {
     axiosInstance
       .post("Users/ChangeCentre", {
-        CentreID: value,
+        CentreID: value?.toString(),
       })
       .then((res) => {
         window.localStorage.setItem("DefaultCentre", value);

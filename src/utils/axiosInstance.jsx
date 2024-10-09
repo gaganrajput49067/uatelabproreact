@@ -1,12 +1,12 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "http://localhost:8000/api/v1/",
+  baseURL: "/api/v1/",  // No need for full URL
   withCredentials: true,
 });
 
 export const axiosReport = axios.create({
-  baseURL: "http://localhost:8000/reports/v1/",
+  baseURL: "/reports/v1/",  // No need for full URL
   withCredentials: true,
 });
 
