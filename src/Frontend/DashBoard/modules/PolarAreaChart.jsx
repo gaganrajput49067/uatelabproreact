@@ -19,11 +19,11 @@ const PolarAreaChart = (state) => {
         datasets: [
             {
                 data: [
-                    state?.state?.SampleCollectionCount,
-                    state?.state?.NotCollectedCount,
-                    state?.state?.DepartmentReceiveCount,
-                    state?.state?.RejectedCount,
-                    state?.state?.ApprovedCount,
+                    state?.state?.sampleCollectionCount,
+                    state?.state?.notCollectedCount,
+                    state?.state?.departmentReceiveCount,
+                    state?.state?.rejectedCount,
+                    state?.state?.approvedCount,
                 ],
                 backgroundColor: [
                     "rgba(252, 186, 3)",

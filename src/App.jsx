@@ -15,7 +15,7 @@ function App() {
   const navigate = useNavigate();
   const sideBarRef = useRef(null);
   const [showSidebar, setShowSideBar] = useState(false);
-  const [menuData, setMenuData] = useState(null);
+  const [menuData, setmenuData] = useState(null);
   const [notification, setNotification] = useState(false);
   const [pageData, setPageData] = useState([]);
 
@@ -44,7 +44,7 @@ function App() {
   }, [success,navigate]);
 
   useEffect(() => {
-    getPageData(setMenuData, setPageData);
+    getPageData(setmenuData, setPageData);
   }, []);
 
   const handlePage = (e) => {

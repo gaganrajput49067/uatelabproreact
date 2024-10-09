@@ -36,11 +36,11 @@ const UserPieChart = ({ state, BookingPerdata }) => {
     datasets: [
       {
         data: [
-          state?.Cash,
-          state?.Cheque,
-          // state?.Credit,
-          // state?.CreditCard,
-          // state?.DebitCard,
+          state?.cash,
+          state?.cheque,
+          // state?.credit,
+          // state?.creditCard,
+          // state?.debitCard,
           // state?.InternetBanking,
           state?.TotalOnlinepayment,
           // state?.Paytm,

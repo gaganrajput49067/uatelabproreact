@@ -9,20 +9,20 @@ function Chat2({ state }) {
   const { t } = useTranslation();
   const data = {
     labels: [
-      `${t("Sample Collected")} : ${state?.SampleCollectionCount || 0}`,
-      `${t("Sample Not Collected")} : ${state?.NotCollectedCount || 0}`,
-      `${t("Sample Received")} : ${state?.DepartmentReceiveCount || 0}`,
-      `${t("Sample Rejected")} : ${state?.RejectedCount || 0}`,
-      `${t("Sample Approved")} : ${state?.ApprovedCount || 0}`,
+      `${t("Sample Collected")} : ${state?.sampleCollectionCount || 0}`,
+      `${t("Sample Not Collected")} : ${state?.notCollectedCount || 0}`,
+      `${t("Sample Received")} : ${state?.departmentReceiveCount || 0}`,
+      `${t("Sample Rejected")} : ${state?.rejectedCount || 0}`,
+      `${t("Sample Approved")} : ${state?.approvedCount || 0}`,
     ],
     datasets: [
       {
         data: [
-          state?.SampleCollectionCount,
-          state?.NotCollectedCount,
-          state?.DepartmentReceiveCount,
-          state?.RejectedCount,
-          state?.ApprovedCount,
+          state?.sampleCollectionCount,
+          state?.notCollectedCount,
+          state?.departmentReceiveCount,
+          state?.rejectedCount,
+          state?.approvedCount,
         ],
         backgroundColor: [
           "rgba(252, 186, 3,0.8)",

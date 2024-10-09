@@ -33,7 +33,7 @@ const UserCartBar = ({ state }) => {
           state?.TotalReceiptBooked,
           state?.Tests,
           state?.Packages,
-          //   state?.Collection,
+          //   state?.collection,
         ],
         backgroundColor: [
           "rgba(252, 186, 3)",

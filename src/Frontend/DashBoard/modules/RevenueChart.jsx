@@ -10,13 +10,13 @@ function RevenueChart({ state }) {
   const { t } = useTranslation();
   const data = {
     labels: [
-      `${t("Cash")} : ${state?.Cash}`,
-      `${t("Cheque")} : ${state?.Cheque}`,
+      `${t("Cash")} : ${state?.cash}`,
+      `${t("Cheque")} : ${state?.cheque}`,
       `${t("Online")} : ${state?.Online}`,
     ],
     datasets: [
       {
-        data: [state?.Cash, state?.Cheque, state?.Online],
+        data: [state?.cash, state?.cheque, state?.Online],
         backgroundColor: [
           "rgba(252, 186, 3,0.8)",
           "rgba(237, 21, 21,0.8)",

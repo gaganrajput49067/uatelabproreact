@@ -28,12 +28,12 @@ const DayWiseCollectionChart = ({ state }) => {
   const { t } = useTranslation();
 
   const data = {
-    labels: state?.TotalBookeddata
+    labels: state?.totalBookeddata
       ?.map((item) => { return moment(item?.Date).format('DMMM') })?.reverse(),
     datasets: [
       {
         label: 'Last 7 Day Revenue',
-        data: state?.TotalBookeddata?.map((item) => { return item?.TotalNetAmount })?.reverse(),
+        data: state?.totalBookeddata?.map((item) => { return item?.TotalNetAmount })?.reverse(),
         backgroundColor: [
           "#999e05",
           "#ba3490",

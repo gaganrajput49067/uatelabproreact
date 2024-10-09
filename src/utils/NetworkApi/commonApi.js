@@ -27,7 +27,7 @@ export const getPageData = (state, state2) => {
     .get("Menu/MainMenuPageData")
     .then((res) => {
       let data = res?.data?.message;
-      let finalData = filtermenu(data?.MenuData, data?.pageData);
+      let finalData = filtermenu(data?.menuData, data?.pageData);
       state(finalData);
       state2(finalData[0].pageData);
     })

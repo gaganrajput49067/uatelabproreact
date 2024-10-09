@@ -23,11 +23,11 @@ function Chat3({ state }) {
     datasets: [
       {
         data: [
-          state?.SampleCollectionCount,
-          state?.NotCollectedCount,
-          state?.DepartmentReceiveCount,
-          state?.RejectedCount,
-          state?.ApprovedCount,
+          state?.sampleCollectionCount,
+          state?.notCollectedCount,
+          state?.departmentReceiveCount,
+          state?.rejectedCount,
+          state?.approvedCount,
         ],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",

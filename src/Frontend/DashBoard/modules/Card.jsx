@@ -33,25 +33,25 @@ const Card = ({ data }) => {
     {
       icon: <i className="fa fa-registered" aria-hidden="true"></i>,
       color: "bg-info",
-      number: data?.RegistrationCount?.toFixed(2),
+      number: data?.registrationCount?.toFixed(2),
       text: "TOTAL REGISTRATION",
     },
     {
       icon: <i className="fa fa-money" aria-hidden="true"></i>,
       color: "bg-danger",
-      number: data?.TotalEarning?.toFixed(2),
+      number: data?.totalEarning?.toFixed(2),
       text: "EARNINGS (MONTHLY)",
     },
     {
       icon: "%",
       color: "bg-success",
-      number: data?.TotalDiscount?.toFixed(2),
+      number: data?.totalDiscount?.toFixed(2),
       text: "TOTAL DISCOUNT",
     },
     {
       icon: <i className="fa fa-pencil" aria-hidden="true"></i>,
       color: "bg-warning",
-      number: data?.SamplePendingCount?.toFixed(2),
+      number: data?.samplePendingCount?.toFixed(2),
       text: "APPROVAL PENDING",
     },
   ];

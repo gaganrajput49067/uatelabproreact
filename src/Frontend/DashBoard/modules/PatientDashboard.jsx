@@ -100,7 +100,7 @@ const PatientDashBoard = ({ Data, centreData }) => {
     datasets: [
       {
         label: "Line Chart",
-        data: [data?.TotalPatient, data?.SampleCollectionCount, data?.NotCollectedCount, data?.DepartmentReceiveCount, data?.RejectedCount, data?.ApprovedCount],
+        data: [data?.TotalPatient, data?.sampleCollectionCount, data?.notCollectedCount, data?.departmentReceiveCount, data?.rejectedCount, data?.approvedCount],
         backgroundColor: [
           "#b802e0",
           "#f1c40f",

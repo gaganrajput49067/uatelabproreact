@@ -205,8 +205,8 @@ const MainDaashBoard = () => {
           <div class="MultiAxisLineChart dashboard-Chart piece">
             <span>Registration wise Revenue</span>
             <MultiAxisLineChart
-              data1={userDashBoardData?.TotalBookeddata}
-              data2={userDashBoardData?.TotalBookeddata}
+              data1={userDashBoardData?.totalBookeddata}
+              data2={userDashBoardData?.totalBookeddata}
             />
           </div>
           <div class="RevenueCollection dashboard-Chart piece">
@@ -259,9 +259,9 @@ function SampleCollection({ userWiseDashBoard }) {
 
 function RevenueCollection({ userWiseDashBoard }) {
   let data = {
-    Cash: userWiseDashBoard.Cash || 0,
+    Cash: userWiseDashBoard.cash || 0,
     Online: userWiseDashBoard.TotalOnlinepayment || 0,
-    Cheque: userWiseDashBoard.Cheque || 0,
+    Cheque: userWiseDashBoard.cheque || 0,
   };
 
   return <>{<RevenueChart state={data} />}</>;
@@ -276,15 +276,15 @@ function SalesCollection({ userWiseDashBoard }) {
       {
         label: "Sales Data",
         data: [
-          userWiseDashBoard?.PreviousMonth2 || 0, // Provide a default value if data is undefined
-          userWiseDashBoard?.PreviousMonth || 0,
-          userWiseDashBoard?.CurrentMonth || 0,
+          userWiseDashBoard?.previousMonth2 || 0, // Provide a default value if data is undefined
+          userWiseDashBoard?.previousMonth || 0,
+          userWiseDashBoard?.currentMonth || 0,
         ],
         backgroundColor: [
-          userWiseDashBoard?.PreviousMonth2 >= userWiseDashBoard?.PreviousMonth
+          userWiseDashBoard?.previousMonth2 >= userWiseDashBoard?.previousMonth
             ? "#0ba318"
             : "red",
-          userWiseDashBoard?.PreviousMonth >= userWiseDashBoard?.PreviousMonth2
+          userWiseDashBoard?.previousMonth >= userWiseDashBoard?.previousMonth2
             ? "#0ba318"
             : "red",
           "yellow",
@@ -341,8 +341,8 @@ function DataSet({ data }) {
         <p>
           <p>Registration</p>
           <p>
-            {data?.TotalBookeddata
-              ? data?.TotalBookeddata?.filter(
+            {data?.totalBookeddata
+              ? data?.totalBookeddata?.filter(
                   (ele) => ele?.Date == moment(new Date()).format("YYYY-MM-DD")
                 )[0].TotalReceiptBooked
               : 0}
@@ -351,9 +351,9 @@ function DataSet({ data }) {
         <p>
           <p>Revenue</p>
           <p>
-            {data?.TotalBookeddata
+            {data?.totalBookeddata
               ? Number(
-                  data?.TotalBookeddata?.filter(
+                  data?.totalBookeddata?.filter(
                     (ele) =>
                       ele?.Date == moment(new Date()).format("YYYY-MM-DD")
                   )[0].TotalNetAmount
@@ -367,8 +367,8 @@ function DataSet({ data }) {
         <p>
           <p>Today</p>
           <p>
-            {data?.TotalBookeddata
-              ? data?.TotalBookeddata?.filter(
+            {data?.totalBookeddata
+              ? data?.totalBookeddata?.filter(
                   (ele) => ele?.Date == moment(new Date()).format("YYYY-MM-DD")
                 )[0].TotalReceiptBooked
               : 0}
@@ -376,7 +376,7 @@ function DataSet({ data }) {
         </p>
         <p>
           <p>August</p>
-          <p>{data?.Monthwisedata || 0}</p>
+          <p>{data?.monthwisedata || 0}</p>
         </p>
       </div>
       <div className="data-set-cont piece TotalRev">
@@ -384,9 +384,9 @@ function DataSet({ data }) {
         <p>
           <p>Today</p>
           <p>
-            {data?.TotalBookeddata
+            {data?.totalBookeddata
               ? Number(
-                  data?.TotalBookeddata?.filter(
+                  data?.totalBookeddata?.filter(
                     (ele) =>
                       ele?.Date == moment(new Date()).format("YYYY-MM-DD")
                   )[0].TotalNetAmount
@@ -397,8 +397,8 @@ function DataSet({ data }) {
         <p>
           <p>August</p>
           <p>
-            {data?.MonthCollection
-              ? Number(data?.MonthCollection).toFixed(2)
+            {data?.monthCollection
+              ? Number(data?.monthCollection).toFixed(2)
               : 0}
           </p>
         </p>
