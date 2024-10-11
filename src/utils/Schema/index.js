@@ -246,3 +246,14 @@ const conditionalRequired = (message) => Yup.string().test(
   
     return errors;
   };
+
+  export const validationForSampleType = (formData) => {
+    let err = "";
+    if (formData?.SampleName.trim() === "") {
+      err = { ...err, SampleName: "This Field is Required" };
+    }
+    if (formData?.Container === "") {
+      err = { ...err, Container: "This Field is Required" };
+    }
+    return err;
+  };
