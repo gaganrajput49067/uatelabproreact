@@ -53,6 +53,7 @@ import SubPageHead from "../../components/CommonComponent/SubPageHead";
 import CloseButton from "../../components/CommonComponent/CloseButton";
 import Tooltip from "../../components/CommonComponent/Tooltip";
 import CameraModal from "../utils/CameraModal";
+import { getLocalStorageDecryptData } from "../../Navigation/Storage";
 const PatientRegistration = () => {
   const { t } = useTranslation();
   const [patientImg, setPatientImg] = useState({
@@ -312,7 +313,7 @@ const PatientRegistration = () => {
           CoupanId: coupon?.field ? couponData[0]?.CoupanId : "",
           IsCoupon: coupon?.field ? 1 : 0,
           DATE:
-            localStorage.getItem("ModifyRegDate") == "1"
+          getLocalStorageDecryptData("ModifyRegDate") == "1"
               ? LTData?.RegistrationDate
               : undefined,
           PNameVip: LTData?.PName,
@@ -2012,7 +2013,7 @@ const PatientRegistration = () => {
         ageInDays: state?.TotalAgeInDays,
         Gender: state?.Gender,
         CentreID: LTData?.CentreID,
-        SessionCentreID: window.localStorage.getItem("DefaultCentre"),
+        SessionCentreID: window.getLocalStorageDecryptData("DefaultCentre"),
         TestCentreID: 0,
         SampleBySelf: "1",
         sampleCollectionBy: 0,

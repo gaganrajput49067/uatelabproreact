@@ -2056,3 +2056,24 @@ button:hover {
   display: flex;
   box-shadow: none;
 }
+
+
+.cke_notification_warning{
+  display: none !important;
+}
+.cke_button_icon {
+  width: 24px; /* Adjust the size */
+  height: 24px;
+  font-family: "Source Sans Pro", sans-serif;
+  background-size: contain; /* Make sure the icons resize well */
+}
+
+.cke_toolgroup {
+  padding: 5px;
+  
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.cke_reset_all, .cke_reset_all *, .cke_reset_all a, .cke_reset_all textarea {
+  font-family: "Source Sans Pro", sans-serif;;
+}

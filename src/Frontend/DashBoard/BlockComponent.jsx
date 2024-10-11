@@ -1,8 +1,9 @@
 import React from "react";
 
-const BlockComponent = () => {
+const BlockComponent = ({ userDashBoardData, userWiseDashBoard }) => {
+  console.log(userDashBoardData, userWiseDashBoard);
   const data = [
-    { title: "Profit", value: "17K", backgroundColor: "rgb(249 91 103)" },
+    { title: "Total", value: "17K", backgroundColor: "rgb(249 91 103)" },
     { title: "Customers", value: "2K", backgroundColor: "rgb(35 201 139)" },
     {
       title: "Percentage",
@@ -22,10 +23,10 @@ const BlockComponent = () => {
   const containerStyle = {
     display: "flex",
     flexWrap: "wrap",
-    padding: "10px 0", 
+    padding: "10px 0",
     margin: "0",
     width: "100%",
-    justifyContent: "space-around", 
+    justifyContent: "space-around",
   };
 
   const blockStyle = {
@@ -37,7 +38,7 @@ const BlockComponent = () => {
     fontSize: "18px",
     boxSizing: "border-box",
     boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-    transition: "transform 0.2s ease-in-out", 
+    transition: "transform 0.2s ease-in-out",
   };
 
   return (

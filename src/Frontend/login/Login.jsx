@@ -13,6 +13,7 @@ import {
 } from "../../store/reducers/forgetPasswordSlice/forgetPasswordSlice";
 import OtpInput from "./OtpInput";
 import { toast } from "react-toastify";
+import { encryptData } from "../../Navigation/Storage";
 
 const Login = () => {
   const [t] = useTranslation();
@@ -29,16 +30,22 @@ const Login = () => {
     setRightPanelActive(false);
   };
   const IsForgot = useSelector((state) => state.forgetPasswordSlice.success);
-  const { user, loading, error, success,token } = useSelector(
+  const { user, loading, error, success, token } = useSelector(
     (state) => state.loginSlice
   );
 
   useEffect(() => {
     if (success) {
-      window.localStorage.setItem("Username", user.Username);
-      window.localStorage.setItem("DefaultCentre", user.DefaultCentreID);
-      window.localStorage.setItem("ModifyRegDate", user.ModifiedRegDate);
+      const userData = {
+        ModifyRegDate: user.ModifiedRegDate,
+        Username: user.Username,
+        DefaultCentre: user.DefaultCentreID,
+        ShowDashboard: user.ShowDashboard,
+      };
+
       window.localStorage.setItem("token", token);
+      const encryptedUserData = encryptData(userData, "yourSecretKey");
+      window.localStorage.setItem("user_Data", encryptedUserData);
       navigate("/");
     }
   }, [success]);
