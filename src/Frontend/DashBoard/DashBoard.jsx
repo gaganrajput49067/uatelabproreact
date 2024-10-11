@@ -29,6 +29,7 @@ import moment from "moment";
 import { Dock } from "primereact/dock";
 import { RadioButton } from "primereact/radiobutton";
 import BlockComponent from "./BlockComponent";
+import RazorPay from "../../Payment/RazorPay";
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const MainDaashBoard = () => {
@@ -108,7 +109,7 @@ const MainDaashBoard = () => {
   //       });
   //     }
   // }, []);
-console.log(userDashBoardData)
+  console.log(userDashBoardData);
   useEffect(() => {
     getDashboardAccessCentres({
       state: setAccessCentre,
@@ -133,6 +134,7 @@ console.log(userDashBoardData)
 
   return (
     <>
+      <RazorPay />
       <div ref={elementRef}>
         <div className="header-main-menu-container m-2 piece">
           <span className="header-dashboard">DashBoard</span>
@@ -182,7 +184,10 @@ console.log(userDashBoardData)
           </div>{" "}
         </div>
         <div className="w-100 ss-none" style={{ margin: "" }}>
-          <BlockComponent />
+          <BlockComponent
+            userDashBoardData={userDashBoardData}
+            userWiseDashBoard={userWiseDashBoard}
+          />
         </div>
         <div class="main-dashboard-outlet piece">
           <div class="main-cont-welcom piece">

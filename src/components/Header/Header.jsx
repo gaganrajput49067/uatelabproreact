@@ -19,6 +19,7 @@ import {
   getRejectCount,
 } from "../../utils/NetworkApi/commonApi";
 import { toast } from "react-toastify";
+import { getLocalStorageDecryptData, setLocalStorage } from "../../Navigation/Storage";
 
 const Header = ({ handleSidebar, menuData, handlePage }) => {
   const navigate = useNavigate();
@@ -64,7 +65,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
 
   const handleLogout = async () => {
     const payLoad = {
-      Username: localStorage?.getItem("Username"),
+      Username: getLocalStorageDecryptData("Username"),
     };
     try {
       await dispatch(logOutAction(payLoad))
@@ -105,7 +106,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
         CentreID: value?.toString(),
       })
       .then((res) => {
-        window.localStorage.setItem("DefaultCentre", value);
+        setLocalStorage(value);
         window.location.reload();
       })
       .catch((err) =>
@@ -153,7 +154,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
             name={"centre"}
             placeholderName=""
             dynamicOptions={centreData}
-            value={window?.localStorage?.getItem("DefaultCentre")}
+            value={getLocalStorageDecryptData("DefaultCentre")}
             onChange={handleChange}
           />
         </div>

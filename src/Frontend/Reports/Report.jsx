@@ -23,7 +23,7 @@ import {
 const DocumentType = [
   {
     label: "Select Document Type",
-    value: "",
+    value: 0,
   },
   {
     label: "PDF",
@@ -85,20 +85,21 @@ function GetReport() {
   const currentPathname = window.location.pathname;
 
   const [formData, setFormData] = useState({
-    Centre: "",
+    Centre: [],
     FromDate: new Date(),
     FromTime: "00:00:00",
     ToDate: new Date(),
     ToTime: "",
     DocumentType: 2,
+    Test:[],
     // new
-    User: "",
-    RateType: "",
-    Department: "",
+    User: [],
+    RateType:  [],
+    Department:  [],
     ReportType: "",
     InvestigationId: [],
     PatientType: "",
-    Doctor: "",
+    Doctor:  [],
     DateType: "",
     Urgent: "",
     Status: "",
@@ -182,7 +183,7 @@ function GetReport() {
           ToDate: moment(formData?.ToDate).format("DD-MMM-YYYY"),
           FromDate: moment(formData?.FromDate).format("DD-MMM-YYYY"),
           DocumentType: Number(formData?.DocumentType),
-          ReportType: reportType,
+          ReportType: reportType?.toString(),
           ledgertransactionid: "",
         },
         formData?.DocumentType == 1 && { method: "GET", responseType: "blob" }
@@ -199,7 +200,7 @@ function GetReport() {
           link.click();
         }
         if (formData?.DocumentType == 2) {
-          window.open(res?.data?.Url, "_blank");
+          window.open(res?.data?.url, "_blank");
         }
       })
       .catch((err) => {
@@ -233,6 +234,7 @@ function GetReport() {
         );
       });
   };
+
   const bindApiResponseAccording = (data) => {
     const {
       Centre,
@@ -301,25 +303,25 @@ function GetReport() {
 
   useEffect(() => {
     setFormData({
-      Centre: "",
+      Centre: [],
       FromDate: new Date(),
       FromTime: "00:00:00",
       ToDate: new Date(),
       ToTime: "",
       DocumentType: 2,
-      User: "",
-      RateType: "",
-      Department: "",
+      User:[],
+      RateType: [],
+      Department: [],
       ReportType: "",
       Test: "",
-      InvestigationId: [],
       PatientType: "",
-      Doctor: "",
+      Doctor: [],
       DateType: "",
       Urgent: "",
       Status: "",
       PatientName: "",
       VisitNo: "",
+      InvestigationId: [],
       DiscountApprovalUser: [],
       Barcodeno: "",
       ChkisUrgent: 0,
@@ -351,7 +353,7 @@ function GetReport() {
                   <SelectBox
                     className="required-fields"
                     options={[
-                      { label: "Select Center", value: "" },
+                      { label: "Select Center", value: [] },
                       ...CentreData,
                     ]}
                     selectedValue={formData?.Centre}
@@ -377,7 +379,7 @@ function GetReport() {
                 <div className="col-sm-2">
                   <SelectBox
                     options={[
-                      { label: "Select Rate Type", value: "" },
+                      { label: "Select Rate Type", value:[] },
                       ...rateType,
                     ]}
                     selectedValue={formData?.RateType}
@@ -406,7 +408,7 @@ function GetReport() {
                   <SelectBox
                     className="required-fields"
                     options={[
-                      { label: "Select Department", value: "" },
+                      { label: "Select Department", value: [] },
                       ...Department,
                     ]}
                     selectedValue={formData.Department}
@@ -510,7 +512,7 @@ function GetReport() {
                   <SelectBox
                     className="required-fields"
                     options={[
-                      { label: "Select Employee", value: "" },
+                      { label: "Select Employee", value: []},
                       ...EmployeeName,
                     ]}
                     formdata={formData?.User}
@@ -559,7 +561,7 @@ function GetReport() {
                 <div className="col-sm-2 ">
                   <SelectBox
                     options={[
-                      { label: "Select Doctor", value: "" },
+                      { label: "Select Doctor", value: [] },
                       ...DoctorName,
                     ]}
                     formdata={formData?.Doctor}
@@ -573,7 +575,7 @@ function GetReport() {
               {FieldShow?.MultipleDoctor && (
                 <div className="col-sm-2 ">
                   <SelectBoxWithCheckbox
-                    options={[{ label: "Self", value: 1 }, ...DoctorName]}
+                    options={[{ label: "Self", value: [1] }, ...DoctorName]}
                     value={formData?.Doctor}
                     name="Doctor"
                     onChange={handleSelectMultiChange}

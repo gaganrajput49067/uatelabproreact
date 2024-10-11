@@ -15,7 +15,10 @@ export default ({ mode }) => {
           target: process.env.VITE_PROXY_HOST,
           changeOrigin: true,
         },
-        
+        "/reports": {
+          target: process.env.VITE_PROXY_HOST,
+          changeOrigin: true,
+        },
       },
       
     },

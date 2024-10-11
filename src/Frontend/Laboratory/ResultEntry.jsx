@@ -598,7 +598,8 @@ const ResultEntry = () => {
     axiosInstance
       .post("RE/GetResultEntryData", {
         ...payload,
-        MacID: payload?.MacID != "" ? payload?.MacID : machine[0]?.value,
+       
+        MacID: payload?.MacID != "" ? payload?.MacID : machine[0]?.value ?? "",
       })
       .then((res) => {
         const data = res?.data?.message?.message;
