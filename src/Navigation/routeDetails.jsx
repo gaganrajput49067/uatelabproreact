@@ -86,6 +86,9 @@ export let routeDetails = [
       {
         path: "/PageMaster",
         element: "../Frontend/Master/PageMaster",
+      },{
+        path: "/SampleTypeCreate",
+        element: "../Frontend/Master/SampleTypeCreate",
       },
       {
         path: "/getReport/:id",
