@@ -169,3 +169,6 @@ export const AllowCharactersNumbersAndSpecialChars = (value) => {
   const reg = /[^a-zA-Z0-9\-\/ ]|(\s{2,})|(\/{2,})|(-{2,})/g;
   return !reg.test(value);
 };
+export const IndexHandle = (currentPage, pageSize) => {
+  return (currentPage - 1) * pageSize;
+};

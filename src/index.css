@@ -265,7 +265,8 @@
 .css-tzb43o-placeholder {
   max-width: 80% !important;
   line-height: 9px !important;
-  top: -3px !important;
+  top: -4px !important;
+
   font-size: 10px !important;
   display: inline-block !important;
   width: auto !important;
@@ -2076,4 +2077,19 @@ button:hover {
 
 .cke_reset_all, .cke_reset_all *, .cke_reset_all a, .cke_reset_all textarea {
   font-family: "Source Sans Pro", sans-serif;;
+}
+
+
+.p-link{
+  box-shadow: none;
+}
+.requiredlabel {
+  color: rgb(221, 10, 10);
+}.line-height-table {
+  line-height: 20px !important;
+}
+
+.line-height-table td {
+  padding: 0px 5px !important;
+  font-weight: 600;
 }

@@ -41,6 +41,8 @@ const Login = () => {
         Username: user.Username,
         DefaultCentre: user.DefaultCentreID,
         ShowDashboard: user.ShowDashboard,
+
+        SkipMicLabEntry: user.SkipMicLabEntry,
       };
 
       window.localStorage.setItem("token", token);

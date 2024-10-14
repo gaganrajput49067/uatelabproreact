@@ -52,8 +52,8 @@ const PrivateRoute = ({ element, path }) => {
           "You have not rights to access this page, Redirecting to Home.........."
         );
 
-        const redirectPath = Showdashboard == 1 ? "/Dashboard" : "/Welcome";
-        window.location.replace(redirectPath);
+        // const redirectPath = Showdashboard == 1 ? "/Dashboard" : "/Welcome";
+        // window.location.replace(redirectPath);
       }
     }
   };

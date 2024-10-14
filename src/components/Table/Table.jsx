@@ -16,6 +16,7 @@ const Table = ({
   fixCol = 0,
   children,
   overflow = false,
+  edit = true,
 }) => {
   const [itemsPerPages, setItemPerPage] = useState(itemsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
@@ -58,7 +59,7 @@ const Table = ({
         </table>
       </div>
 
-      {(data.length > itemsPerPages || nowFixed) && (
+      {(data.length > itemsPerPages || nowFixed) && edit && (
         <div className="pagination">
           <span className="fw-bold"> Items Per Page</span>&nbsp;&nbsp;&nbsp;
           <div style={{ display: "flex", alignItems: "center" }}>

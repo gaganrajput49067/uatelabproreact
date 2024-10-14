@@ -563,3 +563,45 @@ export const BindProEmployee = (state) => {
     })
     .catch((err) => console.log(err));
 };
+export const getDepartment = (
+  state,
+  api,
+  manageOrdering,
+  setCheckField
+) => {
+  axiosInstance
+    .get(`Department/${api ? api : "getDepartmentData"}`)
+    .then((res) => {
+      let data = res.data.message;
+      let Department = data.map((ele, index) => {
+        if (manageOrdering) {
+          return {
+            printOrder: ele?.printorder,
+            value: ele.DepartmentID,
+            label: ele.Department,
+          };
+        } else {
+          return {
+            value: ele.DepartmentID,
+            label: ele.Department,
+          };
+        }
+      });
+      if (setCheckField) {
+        setCheckField({
+          billingCategory: true,
+          department: true,
+        });
+      }
+      state(Department);
+    })
+    .catch((err) => {
+      if (setCheckField) {
+        setCheckField({
+          billingCategory: true,
+          department: true,
+        });
+      }
+      console.log(err);
+    });
+};

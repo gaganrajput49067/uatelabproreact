@@ -201,3 +201,35 @@ export const workSheetSampleStatus = [
   { label: "Rejected", value: " 4", status: true },
   { label: "Approved", value: "5", status: true },
 ];
+export const Status = [
+  {
+    label: "Pending",
+    value: "0",
+  },
+  {
+    label: "Approval",
+    value: "1",
+  },
+];
+export const SearchByCulture = [
+  { label: "Select", value: "" },
+  { label: "BarcodeNo", value: "pli.BarcodeNo" },
+  { label: "Mobile", value: "pm.mobile" },
+  { label: "PatientCode", value: "lt.PatientCode" },
+  { label: "PatientName", value: "lt.PName" },
+  { label: "VisitNo", value: "pli.LedgertransactionNo" },
+];export const ReportTypePreliminary = [
+  { label: "Preliminary 1", value: "Preliminary 1" },
+  { label: "Preliminary 2", value: "Preliminary 2" },
+  { label: "Preliminary 3", value: "Preliminary 3" },
+  { label: "Final Report", value: "Final Report" },
+];export const PayBy = [
+  {
+    label: "Patient",
+    value: 0,
+  },
+  {
+    label: "Corporate",
+    value: 1,
+  },
+];

@@ -50,6 +50,7 @@ export const setLocalStorage = (value) => {
       CompanyCode: decryptedData.CompanyCode,
       DefaultCentre: value,
       ShowDashboard: decryptedData.ShowDashboard,
+      SkipMicLabEntry: decryptedData.SkipMicLabEntry,
       role: 1,
     };
     const encryptedUserData = encryptData(userData, "yourSecretKey");

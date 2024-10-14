@@ -56,6 +56,26 @@ export let routeDetails = [
         element: "../Frontend/Laboratory/SendSampleToLab",
       },
       {
+        path: "/ResultCulture",
+        element: "../Frontend/Laboratory/ResultEntryCulture",
+      },
+      {
+        path: "/BulkSettlement",
+        element: "../Frontend/Laboratory/BulkSettlement",
+      },
+      {
+        path: "/BulkActivity",
+        element: "../Frontend/Laboratory/BulkActivity",
+      },  
+      {
+        path: "/MicroLabEntry",
+        element: "../Frontend/Laboratory/MicroLabEntry",
+      },  
+      {
+        path: "/PrintBarcode",
+        element: "../Frontend/Laboratory/PrintBarcode",
+      },  
+      {
         path: "/DoctorReferal",
         element: "../Frontend/Master/DoctorMaster",
       },
