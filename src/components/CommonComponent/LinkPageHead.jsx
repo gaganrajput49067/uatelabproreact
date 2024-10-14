@@ -6,8 +6,9 @@ const LinkPageHead = ({
   showDrop,
   name,
   border = true,
-  link,
+  to,
   title,
+  state,
 }) => {
   return (
     <div
@@ -18,9 +19,9 @@ const LinkPageHead = ({
         <h6 className="mb-0">{name}</h6>
         {showDrop && (
           <div className="main-heading-content-link">
-            <a href={link} style={{ float: "right" }}>
+            <Link to={to} style={{ float: "right" }} state={state}>
               {title}
-            </a>
+            </Link>
           </div>
         )}
       </div>

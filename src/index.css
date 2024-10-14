@@ -2093,3 +2093,23 @@ button:hover {
   padding: 0px 5px !important;
   font-weight: 600;
 }
+.card-header {
+  border-top: 2px solid var(--bg-color);
+  color: #444;
+  display: block;
+  padding: 5px;
+  margin-left: 9px;
+  position: relative;
+}
+
+.resultEntryCssTable {
+  width: 650px;
+  z-index: 2;
+}
+
+.resultEntryCssTable thead {
+  background-color: rgb(200, 200, 200);
+}
+.wrange {
+  border-bottom: solid 2px red !important;
+}

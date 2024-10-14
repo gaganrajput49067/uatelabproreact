@@ -2,6 +2,7 @@ import moment from "moment";
 import { useEffect } from "react";
 import { StatusCheck } from "./Constants";
 import { getLocalStorageDecryptData } from "../Navigation/Storage";
+import * as XLSX from "xlsx";
 export function getCookie(name) {
   const matches = document.cookie.match(
     new RegExp(
@@ -172,3 +173,11 @@ export const AllowCharactersNumbersAndSpecialChars = (value) => {
 export const IndexHandle = (currentPage, pageSize) => {
   return (currentPage - 1) * pageSize;
 };
+
+export const ExportToExcel = (data, fileName = "data.xlsx") => {
+  const worksheet = XLSX.utils.json_to_sheet(data);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+  XLSX.writeFile(workbook, fileName);
+};
+

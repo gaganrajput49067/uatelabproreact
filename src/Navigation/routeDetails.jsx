@@ -66,15 +66,19 @@ export let routeDetails = [
       {
         path: "/BulkActivity",
         element: "../Frontend/Laboratory/BulkActivity",
-      },  
+      },
       {
         path: "/MicroLabEntry",
         element: "../Frontend/Laboratory/MicroLabEntry",
-      },  
+      },
       {
         path: "/PrintBarcode",
         element: "../Frontend/Laboratory/PrintBarcode",
-      },  
+      },
+      {
+        path: "/BulkRegistration",
+        element: "../Frontend/Laboratory/BulkRegistration",
+      },
       {
         path: "/DoctorReferal",
         element: "../Frontend/Master/DoctorMaster",
@@ -106,10 +110,45 @@ export let routeDetails = [
       {
         path: "/PageMaster",
         element: "../Frontend/Master/PageMaster",
-      },{
+      },
+      {
         path: "/SampleTypeCreate",
         element: "../Frontend/Master/SampleTypeCreate",
       },
+      {
+        path: "/CentreMaster/:name",
+        element: "../Frontend/Master/CentreMaster",
+      },
+
+      {
+        path: "/CentreMasterList/:name",
+        element: "../Frontend/Master/CentreMasterList",
+      },
+      {
+        path: "/Investigations",
+        element: "../Frontend/Master/Investigations",
+      },
+      {
+        path: "/InvestigationsList",
+        element: "../Frontend/Master/InvestigationsList",
+      },
+      {
+        path: "/InvestigationRange",
+        element: "../Frontend/Master/InvestigationRange",
+      },
+      {
+        path: "/InvestigationsInterpretion",
+        element: "../Frontend/Master/InvestigationsInterpretion",
+      },
+      {
+        path: "/RequiredFields",
+        element: "../Frontend/Master/InvestigationsRequiredField",
+      },
+      {
+        path: "/HelpMenu",
+        element: "../Frontend/Master/InvestigationsHelpMenu",
+      },
+
       {
         path: "/getReport/:id",
         element: "../Frontend/Reports/Report",

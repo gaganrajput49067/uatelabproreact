@@ -257,3 +257,294 @@ const conditionalRequired = (message) => Yup.string().test(
     }
     return err;
   };
+  export const CenterMasterValidationSchema = Yup.object({
+    CentreCode: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    Centre: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    PANNo: Yup.string().min(10),
+    BankAccountNo: Yup.string().min(10),
+    IFSCCode: Yup.string().min(11),
+    DemandDraft: Yup.string().min(6),
+    Email: Yup.string()
+      .email()
+      .trim("The contact name cannot include leading and trailing spaces")
+      .matches(
+        /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
+        "Please Enter a Valid Email"
+      ),
+    Type: Yup.string().required("This Field is Required"),
+    Phone: Yup.string().min(10).max(12).trim(),
+    Url: Yup.string()
+      .trim("Url cannot include leading and trailing spaces")
+      .matches(/^[A-Za-z0-9._%-]+\.[A-Za-z]{2,6}$/, "Please Enter a Valid Url"),
+  });
+  
+  export const RateMasterValidationSchema = Yup.object({
+    CentreCode: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+  
+    Centre: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    Type: Yup.string().required("This Field is Required"),
+    AgainstInvoice: Yup.string().required("This Field is Required"),
+    Email: Yup.string()
+      .email()
+      .trim("The contact name cannot include leading and trailing spaces")
+      .matches(
+        /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
+        "Please Enter a Valid Email"
+      ),
+    InvoiceEmail: Yup.string()
+      .email()
+      .trim("The contact name cannot include leading and trailing spaces")
+      .matches(
+        /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
+        "Please Enter a Valid Email"
+      ),
+    Phone: Yup.string().min(10).max(12).trim(),
+    Url: Yup.string()
+      .trim("Url cannot include leading and trailing spaces")
+      .matches(/^[A-Za-z0-9._%-]+\.[A-Za-z]{2,6}$/, "Please Enter a Valid Url"),
+    IntimationLimit: Yup.string()
+      .test(
+        'is-less-than-or-equal',
+        'Intimation limit must be less than or equal to credit limit',
+        function (intimationLimit) {
+          const creditLimit = this.resolve(Yup.ref('CreditLimit'));
+          return !creditLimit || !intimationLimit || parseFloat(intimationLimit) <= parseFloat(creditLimit);
+        }
+      ),
+  
+  });
+  
+  export const RateMasterValidationSchemacash= Yup.object({
+    CentreCode: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+  
+    Centre: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    Type: Yup.string().required("This Field is Required"),
+    
+    Email: Yup.string()
+      .email()
+      .trim("The contact name cannot include leading and trailing spaces")
+      .matches(
+        /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
+        "Please Enter a Valid Email"
+      ),
+    InvoiceEmail: Yup.string()
+      .email()
+      .trim("The contact name cannot include leading and trailing spaces")
+      .matches(
+        /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
+        "Please Enter a Valid Email"
+      ),
+    Phone: Yup.string().min(10).max(12).trim(),
+    Url: Yup.string()
+      .trim("Url cannot include leading and trailing spaces")
+      .matches(/^[A-Za-z0-9._%-]+\.[A-Za-z]{2,6}$/, "Please Enter a Valid Url"),
+  
+  });
+
+  export const InvestigationsMasterSchema = Yup.object().shape({
+    TestCode: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    TestName: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    // ShortName: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    // PrintName: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    SampleContainer: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    FromAge: Yup.number().required("This Field is Required"),
+    // PrintSequence: Yup.number().required("This Field is Required"),
+    ToAge: Yup.number()
+      .required("This Field is Required")
+      .test(
+        "from-to-age",
+        "To age must be greater than or equal to FromAge",
+        function (value) {
+          const { FromAge } = this.parent;
+          return value >= FromAge;
+        }
+      )
+      .test("not-zero", "Age must not be zero", function (value) {
+        return value !== 0;
+      }),
+  
+    ReportType: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    Gender: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+  
+    DepartmentID: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+  
+    // SampleQty: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    // SampleRemarks: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    SampleTypeId: Yup.string().test(
+      "isRequired",
+      "This Field is Required",
+      function (value) {
+        const sampleOption = this.parent.SampleOption;
+        if (sampleOption === "Sample Required") {
+          return !!value;
+        }
+        return true;
+      }
+    ),
+    // SampleTypeId: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    BaseRate: Yup.number().required("This Field is Required"),
+    MaxRate: Yup.number()
+      .required("This Field is Required")
+      .test(
+        "MaxRate",
+        "MaxRate must be greater than or equal to BaseRate",
+        function (value) {
+          const { BaseRate } = this.parent;
+          return value >= BaseRate;
+        }
+      ),
+  
+    MethodName: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+  });
+  
+  export const ProfileInvestigationsMasterSchema = Yup.object().shape({
+    TestCode: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    TestName: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    // ShortName: Yup.string()
+    //   .required("This Field is Required")
+      // .trim("The contact name cannot include leading and trailing spaces"),
+    // PrintName: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    SampleContainer: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    FromAge: Yup.number().required("This Field is Required"),
+    ToAge: Yup.number()
+      .required("This Field is Required")
+      .test(
+        "from-to-age",
+        "To age must be greater than or equal to FromAge",
+        function (value) {
+          const { FromAge } = this.parent;
+          return value >= FromAge;
+        }
+      ),
+    ReportType: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    Gender: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+  
+    DepartmentID: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+  
+    // SampleQty: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    // SampleRemarks: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    // SampleTypeId: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    SampleTypeId: Yup.string().test(
+      "isRequired",
+      "This Field is Required",
+      function (value) {
+        const sampleOption = this.parent.SampleOption;
+        if (sampleOption === "Sample Required") {
+          return !!value;
+        }
+        return true;
+      }
+    ),
+  
+    BaseRate: Yup.number().required("BaseRate is required"),
+    MaxRate: Yup.number()
+      .required("This Field is Required")
+      .test(
+        "MaxRate",
+        "MaxRate must be greater than or equal to BaseRate",
+        function (value) {
+          const { BaseRate } = this.parent;
+          return value >= BaseRate;
+        }
+      ),
+  });
+  export const PackageInvestigationsMasterSchema = Yup.object().shape({
+    TestCode: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    TestName: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    // ShortName: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    FromAge: Yup.number().required("This Field is Required"),
+    // PrintSequence: Yup.number().required("This Field is Required"),
+    ToAge: Yup.number()
+      .required("This Field is Required")
+      .test(
+        "from-to-age",
+        "To age must be greater than or equal to FromAge",
+        function (value) {
+          const { FromAge } = this.parent;
+          return value >= FromAge;
+        }
+      )
+      .test("not-zero", "Age must not be zero", function (value) {
+        return value !== 0;
+      }),
+  
+    Gender: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    DepartmentID: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    BaseRate: Yup.number().required("This Field is Required"),
+    MaxRate: Yup.number()
+      .required("This Field is Required")
+      .test(
+        "MaxRate",
+        "MaxRate must be greater than or equal to BaseRate",
+        function (value) {
+          const { BaseRate } = this.parent;
+          return value >= BaseRate;
+        }
+      ),
+  });

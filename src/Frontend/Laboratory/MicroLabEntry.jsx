@@ -155,7 +155,7 @@ function MicroLabEntry() {
     setSingleData({});
     let searchType = type;
 
-    if (getLocalStorageDecryptData("Skipmiclabentry") == 1) {
+    if (getLocalStorageDecryptData("SkipMicLabEntry") == 0) {
     // if (true) {
       if (!type && payload?.EntryType === "Microscopic") {
         searchType = "Microscopic";
@@ -1077,6 +1077,7 @@ function MicroLabEntry() {
                   <div className="card">
                     <div className="row ">
                       <div
+                      className="card-header"
                         style={{
                           display: "flex",
                           justifyContent: "space-between",
