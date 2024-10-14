@@ -154,7 +154,7 @@ const InvestigationsHelpMenu = () => {
                 style={{
                   border: "1px solid black",
                   padding: "20px",
-                  width: "500px",
+                //   width: "500px",
                 }}
               >
                 <h5>{t("Details")} : </h5>
