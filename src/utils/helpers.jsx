@@ -181,3 +181,14 @@ export const ExportToExcel = (data, fileName = "data.xlsx") => {
   XLSX.writeFile(workbook, fileName);
 };
 
+export const isCheckedNew = (name, state, value, id, secondName) => {
+  const data = state?.map((ele) => {
+    if (ele[secondName] === id) {
+      return ele[name] === value ? true : false;
+    } else {
+      return ele;
+    }
+  });
+  return data;
+};
+

@@ -605,3 +605,72 @@ export const getDepartment = (
       console.log(err);
     });
 };
+export const getDesignationData = (state, all) => {
+  axiosInstance
+    .get("Designation/getDesignation")
+    .then((res) => {
+      let data = res.data.message;
+      let Visit = data.map((ele) => {
+        return {
+          value: ele.DesignationID,
+          label: ele.DesignationName,
+        };
+      });
+      !all && Visit.unshift({ label: "All", value: "" });
+      state(Visit);
+    })
+    .catch((err) => console.log(err));
+};
+export const GetAccessRightMaster = (state) => {
+  axios
+    .get("/api/v1/Employee/GetAccessRightMaster")
+    .then((res) => {
+      let data = res.data.message;
+      let CentreDataValue = data.map((ele) => {
+        return {
+          value: ele.AccessbyId,
+          label: ele.accessby,
+        };
+      });
+      state(CentreDataValue);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const GetAccessRightApproval = (state) => {
+  axios
+    .post("/api/v1/Employee/getApprovalRightMaster")
+    .then((res) => {
+      let data = res.data.message;
+
+      let CentreDataValue = data.map((ele) => {
+        return {
+          value: ele.EmployeeID,
+          label: ele.NAME,
+        };
+      });
+      state(CentreDataValue);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+export const getEmployeeCenter = (state) => {
+  axios
+    .get("/api/v1/Employee/GetAllCentres")
+    .then((res) => {
+      const data = res?.data?.message;
+      const val = data.map((ele) => {
+        return {
+          value: ele?.CentreID,
+          label: ele?.Centre,
+        };
+      });
+      state(val);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

@@ -25,7 +25,7 @@ const Pagination = props => {
   console.log(paginationRange)
 
   // If there are less than 2 times in pagination range we shall not render the component
-  if (currentPage === 0 || paginationRange.length < 2) {
+  if (currentPage === 0 || paginationRange?.length < 2) {
     return null;
   }
 
@@ -37,7 +37,7 @@ const Pagination = props => {
     onPageChange(currentPage - 1);
   };
 
-  let lastPage = paginationRange[paginationRange.length - 1];
+  let lastPage = paginationRange[paginationRange?.length - 1];
   return (
     <div
       className={classnames('pagination-container', { [className]: className })}
@@ -51,7 +51,7 @@ const Pagination = props => {
       >
         <div className="arrow left" />
       </td>
-      {paginationRange.map(pageNumber => {
+      {paginationRange?.map(pageNumber => {
          
         // If the pageItem is a DOT, render the DOTS unicode character
         // if (pageNumber === DOTS) {

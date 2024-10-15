@@ -23,9 +23,11 @@ export const SelectBoxWithCheckbox = ({
         array1 = value;
       }
 
-      const result = options.filter((o1) =>
-        array1?.some((o2) => o1.value === o2)
-      );
+      var result = options.filter(function (o1) {
+        return array1?.some(function (o2) {
+          return o1.value == o2;
+        });
+      });
       setData(result);
       if (depends) {
         depends(result);

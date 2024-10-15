@@ -412,3 +412,40 @@ export const RoundOff = [
     value: 4,
   },
 ];
+export const Theme = [
+  {
+    label: "Default",
+    value: "",
+    color: "#326fd1",
+  },
+  {
+    label: "Grey",
+    value: "grey",
+    color: "#666866",
+  },
+  {
+    label: "Brown",
+    value: "brown",
+    color: "#8b2424",
+  },
+  {
+    label: "Blue",
+    value: "blue",
+    color: "#03a0e7",
+  },
+  {
+    label: "Pale Pink",
+    value: "palePink",
+    color: "#f78e8e",
+  },
+  {
+    label: "Peach",
+    value: "peach",
+    color: "#bc8f3c",
+  },
+  {
+    label: "Green",
+    value: "green",
+    color: "#22d8a9",
+  },
+];

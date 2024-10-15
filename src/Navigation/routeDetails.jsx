@@ -80,8 +80,16 @@ export let routeDetails = [
         element: "../Frontend/Laboratory/BulkRegistration",
       },
       {
+        path: "/SingleBulkPanelChange",
+        element: "../Frontend/Laboratory/SingleBulkPanelChange",
+      },
+      {
         path: "/DoctorReferal",
         element: "../Frontend/Master/DoctorMaster",
+      },
+      {
+        path: "/CreateDoctorReferal",
+        element: "../Frontend/Master/CreateDoctorMaster",
       },
       {
         path: "/GlobalTypeMaster",
@@ -148,7 +156,26 @@ export let routeDetails = [
         path: "/HelpMenu",
         element: "../Frontend/Master/InvestigationsHelpMenu",
       },
-
+      {
+        path: "/EmployeeMaster",
+        element: "../Frontend/Master/EmployeeMaster",
+      },
+      {
+        path: "/CreateEmployeeMaster",
+        element: "../Frontend/Master/CreateEmployeeMaster",
+      },
+      {
+        path: "/ChangeDeliveryStatus",
+        element: "../Frontend/Laboratory/ChangeDeliveryStatus",
+      },
+      {
+        path: "/Designations",
+        element: "../Frontend/Master/Designations",
+      },
+      {
+        path: "/DesignationsCreate",
+        element: "../Frontend/Master/DesignationsCreate",
+      },
       {
         path: "/getReport/:id",
         element: "../Frontend/Reports/Report",

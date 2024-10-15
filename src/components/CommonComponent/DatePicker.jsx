@@ -18,6 +18,7 @@ function DatePicker({
 
   maxDate,
   minDate,
+  disabled,
 }) {
   const handleDateChange = (e) => {
     onChange(e?.target?.value, name);
@@ -39,6 +40,7 @@ function DatePicker({
             tabIndex={tabIndex ? tabIndex : "-1"}
             maxDate={maxDate}
             minDate={minDate}
+            disabled={disabled}
           />
 
           {lable && lable !== "" && (

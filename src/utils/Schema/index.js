@@ -548,3 +548,108 @@ const conditionalRequired = (message) => Yup.string().test(
         }
       ),
   });
+
+  export const DocotorReferal = Yup.object({
+    // DoctorCode: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    // Phone: Yup.number(),
+    // Title: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    Name: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    // Locality: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    // Zone: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    // Degree: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    // Specialization: Yup.string()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    //  ClinicName: Yup.string()
+    //    .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces"),
+    // Email: Yup.string()
+    //   .email()
+    //   .required("This Field is Required")
+    //   .trim("The contact name cannot include leading and trailing spaces")
+    //   .matches(
+    //     /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
+    //     "Please Enter a Valid Email"
+    //   ),
+    Mobile: Yup.string()
+      .matches(
+        /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+        "Phone number is not valid"
+      )
+      .matches(/^[5-9]\d{9}$/, "Phone number is not valid")
+      .required("This Field is Required"),
+  });
+
+  export const EmployeeMasterSchema = Yup.object({
+  
+    Name: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    Mobile: Yup.string()
+      .matches(
+        /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+        "Phone number is not valid"
+      ),
+    Email: Yup.string()
+      .email()
+      .trim("The contact name cannot include leading and trailing spaces")
+      .matches(
+        /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
+        "Please Enter a Valid Email"
+      ),
+    Department: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    Centre: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    AccessRight: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    ApprovalRight: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    CentreID: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    DesignationID: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    Username: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    isPassword: Yup.boolean(),
+    Password: Yup.string().when("isPassword", (isPassword, schema) => {
+      if (isPassword[0]) {
+        return schema
+          .required("Please Enter your password")
+          .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+            "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+          );
+      }
+      return schema;
+    }),
+  });
+  export const validationForDesignations = (formData) => {
+    let err = "";
+    if (formData?.Name.trim() === "") {
+      err = { ...err, Name: "This Field is Required" };
+    }
+    if (formData?.SequenceNo === "") {
+      err = { ...err, SequenceNo: "This Field is Required" };
+    }
+    return err;
+  };

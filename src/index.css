@@ -164,6 +164,7 @@
 
 .row {
   margin-top: 3px !important;
+  margin-bottom: 2px !important;
   width: 100%;
   display: flex;
 }
@@ -2112,4 +2113,12 @@ button:hover {
 }
 .wrange {
   border-bottom: solid 2px red !important;
+}
+
+.designation{
+  background-color: var(--bg-color) !important;
+}
+
+.coloricon{
+  box-shadow: none !important;
 }
