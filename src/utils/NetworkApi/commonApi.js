@@ -674,3 +674,18 @@ export const getEmployeeCenter = (state) => {
       console.log(err);
     });
 };
+export const GetRateTypeByGlobalCentre = (state) => {
+  axios
+    .get("/api/v1/Accounts/GetRateTypeByGlobalCentre")
+    .then((res) => {
+      let data = res.data.message;
+      let responce = data.map((ele) => {
+        return {
+          value: ele.RateTypeID,
+          label: ele.RateTypeName,
+        };
+      });
+      state(responce);
+    })
+    .catch((err) => console.log(err));
+};

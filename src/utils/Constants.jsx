@@ -449,3 +449,33 @@ export const Theme = [
     color: "#22d8a9",
   },
 ];
+
+export const TypeData = [
+  {
+    label: "As On Date",
+    value: "1",
+  },
+  {
+    label: "From Date To Date ",
+    value: "2",
+  },
+  {
+    label: "Date Wise Trend (Closing Balance)",
+    value: "3",
+  },
+];
+
+export const RADIOADVANCEINPUT = [
+  {
+    value: "1",
+    label: "Deposit",
+  },
+  {
+    value: "2",
+    label: "Credit Note",
+  },
+  {
+    value: "3",
+    label: "Debit Note",
+  },
+];
