@@ -217,6 +217,10 @@ export let routeDetails = [
         element: "../Frontend/Invoicing/AdvancePayment",
       },
       {
+        path: "/ValidatePayment",
+        element: "../Frontend/Invoicing/ValidatePayment",
+      },
+      {
         path: "/getReport/:id",
         element: "../Frontend/Reports/Report",
       },
