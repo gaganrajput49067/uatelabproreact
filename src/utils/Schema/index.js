@@ -680,3 +680,16 @@ const conditionalRequired = (message) => Yup.string().test(
     }
     return err;
   };
+
+  export const AdvancePaymentValidationSchema = (formData) => {
+    let err = "";
+    if (formData?.Type == "") {
+      err = { ...err, Type: "This Field is Required" };
+    }
+    if (formData?.RateTypeID == "") {
+      err = { ...err, RateTypeID: "This Field is Required" };
+    }
+  
+   
+    return err;
+  };

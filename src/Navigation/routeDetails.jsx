@@ -180,6 +180,50 @@ export let routeDetails = [
         element: "../Frontend/Master/DesignationsCreate",
       },
       {
+        path: "/InvestigationCommentMaster",
+        element: "../Frontend/Master/InvestigationCommentMaster",
+      },
+      {
+        path: "/InvestigationCommentMasterList",
+        element: "../Frontend/Master/InvestigationCommentMasterList",
+      },
+      {
+        path: "/LedgerStatusAsOnDate",
+        element: "../Frontend/Invoicing/LedgerStatusAsOnDate",
+      },
+      {
+        path: "/LedgerTransaction",
+        element: "../Frontend/Invoicing/LedgerTransaction",
+      },
+      {
+        path: "/LedgerStatement",
+        element: "../Frontend/Invoicing/LedgerStatement",
+      },
+      {
+        path: "/LedgerReport",
+        element: "../Frontend/Invoicing/LedgerReport",
+      },
+      {
+        path: "/InvoiceReprint",
+        element: "../Frontend/Invoicing/InvoiceReprint",
+      },
+      {
+        path: "/InvoiceCancel",
+        element: "../Frontend/Invoicing/InvoiceCancel",
+      },
+      {
+        path: "/InvoiceCreation",
+        element: "../Frontend/Invoicing/InvoiceCreation",
+      },
+      {
+        path: "/AdvancePayment",
+        element: "../Frontend/Invoicing/AdvancePayment",
+      },
+      {
+        path: "/ValidatePayment",
+        element: "../Frontend/Invoicing/ValidatePayment",
+      },
+      {
         path: "/getReport/:id",
         element: "../Frontend/Reports/Report",
       },
