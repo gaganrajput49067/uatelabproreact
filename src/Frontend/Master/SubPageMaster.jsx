@@ -1,40 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
-import { PageMasterValidation } from "../../utils/Schema";
+import { axiosInstance } from "../../utils/axiosInstance";
+import { toast } from "react-toastify";
 import PageHead from "../../components/CommonComponent/PageHead";
+import { SelectBox } from "../../components/CommonComponent/SelectBox";
+import { SubPageMasterValidation } from "../../utils/Schema";
 import Input from "../../components/CommonComponent/Input";
-import { number } from "../../utils/helpers";
+import Loading from "../../components/Loading/Loading";
 import Table from "../../components/Table/Table";
 import { Link } from "react-router-dom";
-import Loading from "../../components/Loading/Loading";
-import { axiosInstance } from "../../utils/axiosInstance";
-import { SelectBox } from "../../components/CommonComponent/SelectBox";
 
-const PageMaster = () => {
+const SubPageMaster = () => {
   const [menudata, setMenuData] = useState([]);
+  const [PageData, setPageData] = useState([]);
   const [update, setUpdate] = useState(false);
   const [load, setLoad] = useState(false);
   const [savedata, setSaveData] = useState([]);
   const [errors, setErrors] = useState({});
   const [payload, setPayload] = useState({
     PageName: "",
+    PageId: "",
+    SubPageName: "",
     Url: "",
     Priority: "",
     isActive: 1,
     MenuID: "",
     SetMaster: 0,
-    PageID: "",
+    Id: "",
   });
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const handleSelectChange = (e) => {
     const { name, value } = e.target;
-
     if (name === "MenuID") {
-      setPayload({ ...payload, [name]: value, ItemValue: "" });
-      setErrors({});
+      getpageData(value);
+      setPayload({
+        ...payload,
+        [name]: value,
+      });
       fetchPageMaster(value);
+      setErrors({});
     } else {
       setPayload({ ...payload, [name]: value, ItemValue: "" });
       setErrors({});
@@ -61,7 +66,6 @@ const PageMaster = () => {
             value: ele?.ID,
           };
         });
-        menuapi.unshift({ label: "Select", value: "" });
         setMenuData(menuapi);
       })
       .catch((err) => {
@@ -73,11 +77,39 @@ const PageMaster = () => {
       });
   };
 
-  const fetchPageMaster = (value) => {
+  const getpageData = (value) => {
     axiosInstance
-      .post("Menu/SelectAllPage", { MenuID: value })
+      .post("Menu/getpage", { MenuId: Number(value) })
       .then((res) => {
         console.log(res);
+        if (res?.data?.success) {
+          const data = res?.data?.message;
+          const Pageapi = data.map((ele) => {
+            return {
+              label: ele?.Display,
+              value: ele?.PageId,
+            };
+          });
+          setPageData(Pageapi);
+        } else {
+          setPageData([]);
+        }
+      })
+      .catch((err) => {
+        toast.error(
+          err?.response?.data?.message
+            ? err?.response?.data?.message
+            : "Somthing Wents Wrong"
+        );
+      });
+  };
+
+  const fetchPageMaster = (value) => {
+    axiosInstance
+      .post("Menu/GetSubpageMaster", {
+        MenuID: value,
+      })
+      .then((res) => {
         if (res?.data?.success) {
           const data = res?.data?.message;
           setSaveData(data);
@@ -95,51 +127,104 @@ const PageMaster = () => {
       });
   };
 
-  const editIDMaster = (id) => {
+  const editIDMaster = (ele) => {
+    console.log(ele);
     setUpdate(true);
-    axiosInstance
-      .post("Menu/SelectAllPageByPageID", {
-        PageID: id,
-      })
-      .then((res) => {
-        console.log(res);
-        const data = res.data.message[0];
-        setPayload(data);
-      })
-      .catch((err) => console.log(err));
+    getpageData(ele?.MenuId);
+    setPayload({
+      PageName: ele?.Display,
+      SubPageName: ele?.SubPageName,
+      Url: ele?.Url,
+      Priority: ele?.Priority,
+      isActive: ele?.isActive,
+      MenuID: ele?.MenuId,
+      PageId: ele?.PageId,
+      Id: ele?.Id,
+      MenuName: ele?.MenuName,
+      CompanyID: ele?.CompanyID,
+    });
   };
-  console.log(payload);
-  const handleSave = (url, btnName) => {
-    let generatedError = PageMasterValidation(payload);
+
+  const handleSave = () => {
+    let generatedError = SubPageMasterValidation(payload);
     if (generatedError === "") {
       setLoad(true);
-      axiosInstance
-        .post(url, payload)
-        .then((res) => {
-          toast.success(res.data?.message);
-          setLoad(false);
-          fetchPageMaster("");
-          if (btnName === "Update") {
+      if (update === true) {
+        axiosInstance
+          .post("Menu/UpdateSubpageMaster", {
+            SubPageName: payload?.SubPageName,
+            Url: payload?.Url,
+            Priority: payload?.Priority,
+            Id: payload?.Id,
+            MenuId: payload?.MenuID,
+            PageID: payload?.PageId,
+            isActive: payload?.isActive,
+
+            SetMaster: payload?.SetMaster,
+          })
+          .then((res) => {
+            toast.success(res.data?.message);
+            setLoad(false);
+            fetchPageMaster("");
+
+            setPayload({
+              PageName: "",
+              SubPageName: "",
+              Url: "",
+              Priority: "",
+              isActive: 1,
+              MenuID: "",
+              PageId: "",
+              SetMaster: 0,
+              Id: "",
+            });
             setUpdate(false);
-          }
-          setPayload({
-            PageName: "",
-            Url: "",
-            Priority: "",
-            isActive: 1,
-            MenuID: "",
-            SetMaster: 0,
-            PageID: "",
+          })
+          .catch((err) => {
+            toast.error(
+              err?.response?.data?.message
+                ? err?.response?.data?.message
+                : "Error Occured"
+            );
+            setLoad(false);
           });
-        })
-        .catch((err) => {
-          toast.error(
-            err?.response?.data?.message
-              ? err?.response?.data?.message
-              : "Error Occured"
-          );
-          setLoad(false);
-        });
+      } else {
+        axiosInstance
+          .post("Menu/SaveSubPageMaster", {
+            MenuID: payload?.MenuID,
+            PageID: payload?.PageId,
+            SubPageName: payload?.SubPageName,
+            Url: payload?.Url,
+            Priority: payload?.Priority,
+            isActive: payload?.isActive,
+            SetMaster: payload?.SetMaster,
+          })
+          .then((res) => {
+            toast.success(res.data?.message);
+            setLoad(false);
+            fetchPageMaster("");
+
+            setPayload({
+              PageName: "",
+              SubPageName: "",
+              Url: "",
+              Priority: "",
+              isActive: 1,
+              MenuID: "",
+              PageId: "",
+              SetMaster: 0,
+              Id: "",
+            });
+          })
+          .catch((err) => {
+            toast.error(
+              err?.response?.data?.message
+                ? err?.response?.data?.message
+                : "Error Occured"
+            );
+            setLoad(false);
+          });
+      }
     } else {
       setErrors(generatedError);
       setLoad(false);
@@ -152,14 +237,14 @@ const PageMaster = () => {
   }, []);
   return (
     <>
-      <PageHead name="Page Master" showDrop={"true"}>
+      <PageHead name="Sub Page Master" showDrop={"true"}>
         <div className="card">
           <div className="row">
             <div className="col-sm-2">
               <SelectBox
                 name="MenuID"
                 onChange={handleSelectChange}
-                options={menudata}
+                options={[{ label: "Select", value: "" }, ...menudata]}
                 isDisabled={payload?.CompanyID == 0 ? true : false}
                 selectedValue={payload?.MenuID}
                 lable="Menu"
@@ -167,18 +252,29 @@ const PageMaster = () => {
               <div className="error-message">{errors?.MenuID}</div>
             </div>
             <div className="col-sm-2">
+              <SelectBox
+                name="PageId"
+                onChange={handleSelectChange}
+                options={[{ label: "Select", value: "" }, ...PageData]}
+                isDisabled={payload?.CompanyID == 0 ? true : false}
+                selectedValue={payload?.PageId}
+                lable="Page Name"
+              />
+              <div className="error-message">{errors?.PageId}</div>
+            </div>
+            <div className="col-sm-2">
               <Input
                 type="text"
-                lable="Page Name"
-                name="PageName"
-                id="PageName"
+                lable="Sub Page Name"
+                name="SubPageName"
+                id="SubPageName"
                 placeholder=""
                 max={50}
                 disabled={payload?.CompanyID == 0 ? true : false}
-                value={payload?.PageName}
+                value={payload?.SubPageName}
                 onChange={handleChange}
               />
-              <div className="error-message">{errors?.PageName}</div>
+              <div className="error-message">{errors?.SubPageName}</div>
             </div>
             <div className="col-sm-2">
               <Input
@@ -187,7 +283,6 @@ const PageMaster = () => {
                 name="Url"
                 id="Url"
                 placeholder=""
-                disabled={payload?.CompanyID == 0 ? true : false}
                 value={payload?.Url}
                 onChange={handleChange}
               />
@@ -195,13 +290,14 @@ const PageMaster = () => {
             </div>
             <div className="col-sm-2">
               <Input
-                type="number"
+                type="text"
                 lable="Priority"
                 name="Priority"
                 id="Priority"
                 placeholder=""
-                onInput={(e) => number(e, 4)}
+                max={50}
                 value={payload?.Priority}
+                onInput={(e) => number(e, 4)}
                 onChange={handleChange}
               />
               <div className="error-message">{errors?.Priority}</div>
@@ -218,7 +314,7 @@ const PageMaster = () => {
               </div>
               <label className="col-sm-10">{t("Active")}</label>
             </div>
-            {payload?.PageID == "" ? (
+            {payload?.Id == "" ? (
               <div className="col-sm-1 d-flex">
                 <div className="mt-1">
                   <input
@@ -234,30 +330,15 @@ const PageMaster = () => {
             ) : (
               ""
             )}
+          </div>
+          <div className="row">
             <div className="col-sm-1">
-              {load ? (
-                <Loading />
-              ) : update ? (
-                <button
-                  type="button"
-                  className="btn btn-block btn-warning btn-sm"
-                  id="btnSave"
-                  title="Update"
-                  onClick={() => handleSave("Menu/UpdatePageMaster", "Update")}
-                >
-                  {t("Update")}
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  className="btn btn-block btn-success btn-sm"
-                  id="btnSave"
-                  title="Update"
-                  onClick={() => handleSave("Menu/SavePageMaster", "Save")}
-                >
-                  {t("Save")}
-                </button>
-              )}
+              <button
+                className="btn btn-success btn-sm btn-block"
+                onClick={handleSave}
+              >
+                {update ? "Update" : "Save"}
+              </button>
             </div>
             <div className="col-sm-1">
               <button
@@ -302,10 +383,11 @@ const PageMaster = () => {
                   <th>{t("S.No")}</th>
                   <th>{t("Menu Name")}</th>
                   <th>{t("Page Name")}</th>
+                  <th>{t("SubPageName")}</th>
                   <th>{t("URL")}</th>
                   <th>{t("Is Master")}</th>
                   <th>{t("Priority")}</th>
-                  <th>{t("Is Active")}</th>
+                  <th>{t("Status")}</th>
                   <th>{t("Action")}</th>
                 </tr>
               </thead>
@@ -313,17 +395,28 @@ const PageMaster = () => {
                 {savedata.map((ele, index) => (
                   <tr key={index}>
                     <td data-title={t("S.No")}>{index + 1}&nbsp;</td>
-                    <td data-title={t("MenuName")}>{ele?.MenuName}&nbsp;</td>
-                    <td data-title={t("PageName")}>{ele?.PageName}&nbsp;</td>
-                    <td data-title={t("Active")}>{ele?.Url}&nbsp;</td>
+                    <td data-title={t("Manu Name")}>
+                      {ele?.MenuName}
+                      &nbsp;
+                    </td>
+                    <td data-title={t("Page Name")}>
+                      {ele?.Display}
+                      &nbsp;
+                    </td>
+
+                    <td data-title={t("SubPageName")}>
+                      {ele?.SubPageName}&nbsp;
+                    </td>
+                    <td data-title={t("Url")}>{ele?.Url}&nbsp;</td>
                     <td data-title={t("IsMaster")}>
                       {ele?.CompanyID == 0 ? "Master" : "Self"}&nbsp;
                     </td>
                     <td data-title={t("Priority")}>{ele?.Priority}&nbsp;</td>
-                    <td data-title={t("Is Active")}>
-                      {ele?.isActive == 1 ? "Active" : "InActive"}&nbsp;
+                    <td data-title={t("Status")}>
+                      {ele?.isActive == 1 ? "Active" : "Deactive"}
+                      &nbsp;
                     </td>
-                    <td>
+                    <td data-title={t("Action")}>
                       <Link
                         className="text-primary"
                         style={{
@@ -331,8 +424,8 @@ const PageMaster = () => {
                           textDecoration: "underline",
                         }}
                         onClick={() => {
-                          window?.scroll(0, 0);
-                          editIDMaster(ele?.PageID);
+                          window.scroll(0, 0);
+                          editIDMaster(ele);
                           setErrors({});
                         }}
                       >
@@ -350,4 +443,4 @@ const PageMaster = () => {
   );
 };
 
-export default PageMaster;
+export default SubPageMaster;

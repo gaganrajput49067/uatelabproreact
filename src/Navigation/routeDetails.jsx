@@ -120,6 +120,10 @@ export let routeDetails = [
         element: "../Frontend/Master/PageMaster",
       },
       {
+        path: "/SubPageMaster",
+        element: "../Frontend/Master/SubPageMaster"
+      },
+      {
         path: "/SampleTypeCreate",
         element: "../Frontend/Master/SampleTypeCreate",
       },
@@ -127,7 +131,6 @@ export let routeDetails = [
         path: "/CentreMaster/:name",
         element: "../Frontend/Master/CentreMaster",
       },
-
       {
         path: "/CentreMasterList/:name",
         element: "../Frontend/Master/CentreMasterList",
@@ -179,6 +182,10 @@ export let routeDetails = [
       {
         path: "/getReport/:id",
         element: "../Frontend/Reports/Report",
+      },
+      {
+        path: "/OutSourceLabMaster",
+        element: "../Frontend/Master/OutSourceLabMaster",
       },
       { path: "*", element: "../components/NotFound" },
     ],

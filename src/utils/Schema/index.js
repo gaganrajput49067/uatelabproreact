@@ -247,6 +247,33 @@ const conditionalRequired = (message) => Yup.string().test(
     return errors;
   };
 
+  export const SubPageMasterValidation = (payload) => {
+    let errors = "";
+    if (payload?.MenuID === "") {
+      errors = { ...errors, MenuID: "This Field is Required" };
+    }
+    if (payload?.PageId === "") {
+      errors = { ...errors, PageId: "This Field is Required" };
+    }
+    if (payload?.SubPageName === "") {
+      errors = { ...errors, SubPageName: "This Field is Required" };
+    } else if (payload?.SubPageName.length < 2) {
+      errors = { ...errors, SubPageName: "Must be 2 Character long" };
+    }
+  
+    if (payload?.Url === "") {
+      errors = { ...errors, Url: "This Field is Required" };
+    } else if (payload?.Url.length < 2) {
+      errors = { ...errors, Url: "Must be 2 Character long" };
+    }
+  
+    if (toString(payload?.Priority).trim() === "") {
+      errors = { ...errors, Priority: "This Field is Required" };
+    }
+  
+    return errors;
+  };
+
   export const validationForSampleType = (formData) => {
     let err = "";
     if (formData?.SampleName.trim() === "") {
