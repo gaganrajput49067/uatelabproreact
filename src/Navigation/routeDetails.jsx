@@ -121,7 +121,7 @@ export let routeDetails = [
       },
       {
         path: "/SubPageMaster",
-        element: "../Frontend/Master/SubPageMaster"
+        element: "../Frontend/Master/SubPageMaster",
       },
       {
         path: "/SampleTypeCreate",
@@ -230,6 +230,22 @@ export let routeDetails = [
       {
         path: "/OutSourceLabMaster",
         element: "../Frontend/Master/OutSourceLabMaster",
+      },
+      {
+        path: "/OutSourceTagging",
+        element: "../Frontend/Master/OutSourceTagging",
+      },
+      {
+        path: "/OutSourceTestMaster",
+        element: "../Frontend/Master/OutSourceTestMaster",
+      },
+      {
+        path: "/OutSourceTestToOtherLab",
+        element: "../Frontend/Master/OutSourceTestToOtherLab",
+      },
+      {
+        path: "/IDMaster",
+        element: "../Frontend/Master/IDMaster",
       },
       { path: "*", element: "../components/NotFound" },
     ],
