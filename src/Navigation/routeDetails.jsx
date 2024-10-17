@@ -294,6 +294,8 @@ export let routeDetails = [
       {
         path: "/DiscountMasterEmployeeWise",
         element: "../Frontend/Administrator/DiscountMasterEmployeeWise",
+      },
+      {
         path: "/OutSourceTagging",
         element: "../Frontend/Master/OutSourceTagging",
       },
