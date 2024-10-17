@@ -143,7 +143,7 @@ const MainDaashBoard = () => {
               <SelectBox
                 className="required-fields"
                 placeholderName="Select Centre"
-                options={accessCentre}
+                options={[{ label: "All Centre", value: [0] }, ...accessCentre]}
                 value={payload.CentreID}
                 name="CentreID"
                 onChange={(e) => {

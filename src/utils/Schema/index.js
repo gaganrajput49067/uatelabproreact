@@ -720,37 +720,60 @@ export const MicroBioMasterSchema = (formData) => {
   if (formData?.Code.trim() === "") {
     err = { ...err, Code: "This Field is Required" };
   }
- 
+
   return err;
 };
-  
-   
 
-  export const validationForIDMAster = (formData) => {
-    let err = "";
-    if (formData?.TypeName === "") {
-      err = { ...err, TypeName: "This Field is Required" };
-    }
-    if (formData?.InitialChar?.trim() === "") {
-      err = { ...err, InitialChar: "This Field is Required" };
-    }
-    if (formData?.FinancialYearStart?.trim() === "") {
-      err = { ...err, FinancialYearStart: "This Field is Required" };
-    }
-  
-    if (formData?.TypeLength === "") {
-      err = { ...err, TypeLength: "This Field is Required" };
-    }
-    return err;
-  };
+export const validationForIDMAster = (formData) => {
+  let err = "";
+  if (formData?.TypeName === "") {
+    err = { ...err, TypeName: "This Field is Required" };
+  }
+  if (formData?.InitialChar?.trim() === "") {
+    err = { ...err, InitialChar: "This Field is Required" };
+  }
+  if (formData?.FinancialYearStart?.trim() === "") {
+    err = { ...err, FinancialYearStart: "This Field is Required" };
+  }
 
-  export const OutSourceLabMasterValidationSchema = Yup.object({
-    LabName: Yup.string()
-      .required("This Field is Required")
-      .trim("The contact name cannot include leading and trailing spaces"),
-    ContactPersonName: Yup.string()
-      .required("This Field is Required")
-      .trim("The contact name cannot include leading and trailing spaces"),
-    MobileNo: Yup.string().min(10).required("This Field is Required"),
-      EmailID: Yup.string().email(),
-  });
+  if (formData?.TypeLength === "") {
+    err = { ...err, TypeLength: "This Field is Required" };
+  }
+  return err;
+};
+
+export const OutSourceLabMasterValidationSchema = Yup.object({
+  LabName: Yup.string()
+    .required("This Field is Required")
+    .trim("The contact name cannot include leading and trailing spaces"),
+  ContactPersonName: Yup.string()
+    .required("This Field is Required")
+    .trim("The contact name cannot include leading and trailing spaces"),
+  MobileNo: Yup.string().min(10).required("This Field is Required"),
+  EmailID: Yup.string().email(),
+});
+export const CompanyKeyValidationSchema = (payload) => {
+  let err = "";
+  if (payload?.CompanyID === "") {
+    err = { ...err, CompanyID: "This Field is Required" };
+  }
+  if (payload?.KeyID.trim() === "") {
+    err = { ...err, KeyID: "This Field is Required" };
+  }
+  if (payload?.SecretKey.trim() === "") {
+    err = { ...err, SecretKey: "This Field is Required" };
+  }
+
+  return err;
+};
+export const OnlinePaymentValidationSchema = (payload) => {
+  let err = "";
+  if (payload?.RateTypeId === "") {
+    err = { ...err, RateTypeId: "This Field is Required" };
+  }
+  if (payload?.Amount === "") {
+    err = { ...err, Amount: "This Field is Required" };
+  }
+
+  return err;
+};

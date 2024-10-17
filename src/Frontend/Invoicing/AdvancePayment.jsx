@@ -701,8 +701,8 @@ function AdvancePayment() {
                 options={[{ label: "Select Payment Mode" }, ...PaymentMode]}
                 onChange={handleSelectChange}
                 name="paymentModeID"
-                lable="DataType"
-                id="DataType"
+                lable="Payment Mode"
+                id="Payment Mode"
                 selectedValue={(PaymentMode, formData?.paymentModeID)}
               />
             </div>

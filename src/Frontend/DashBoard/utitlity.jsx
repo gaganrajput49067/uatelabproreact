@@ -77,10 +77,9 @@ export const fetchuserdata = (data, state) => {
     .post("CommonController/UserwiseDashboard", {
       FromDate: moment(data?.FromDate).format("YYYY-MM-DD"),
       ToDate: moment(data?.ToDate).format("YYYY-MM-DD"),
-      CentreID: data?.CentreID,
-      // data?.CentreID == "" || data?.CentreID == [""]
-      //   ? centreData?.map((ele) => ele?.value)
-      //   : data?.CentreID,
+      CentreID: Array.isArray(data?.CentreID)
+        ? data?.CentreID
+        : [data?.CentreID],
       FromTime: data?.FromTime,
       ToTime: data?.ToTime,
     })
@@ -99,8 +98,14 @@ export const fetchuserdata = (data, state) => {
 export const getDashBoardData = (type, value, payload, state) => {
   axiosInstance
     .post("CommonController/GetDashBoardData", {
-      CentreID: type === "CentreID" ? value : payload?.CentreID,
-      //   type === "CentreID" ? value : getValue(payload?.CentreID),
+      CentreID:
+        type === "CentreID"
+          ? Array.isArray(value)
+            ? value
+            : [value]
+          : Array.isArray(payload?.CentreID)
+          ? payload?.CentreID
+          : [payload?.CentreID],
       FromDate:
         type === "FromDate"
           ? moment(value).format("YYYY-MM-DD")

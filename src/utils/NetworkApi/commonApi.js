@@ -690,3 +690,18 @@ export const GetRateTypeByGlobalCentre = (state) => {
     .catch((err) => console.log(err));
 };
 
+export const getAccessRateType = (state) => {
+  axios
+    .get("/api/v1/RateType/getAccessRateType")
+    .then((res) => {
+      let data = res.data.message;
+      let CentreDataValue = data.map((ele) => {
+        return {
+          value: ele.RateTypeID,
+          label: ele.Rate,
+        };
+      });
+      state(CentreDataValue);
+    })
+    .catch((err) => console.log(err));
+};

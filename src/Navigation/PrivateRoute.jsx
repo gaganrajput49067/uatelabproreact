@@ -60,6 +60,7 @@ const PrivateRoute = ({ element, path }) => {
   };
 
   useEffect(() => {
+    console.log("firstfirstfirstfirst")
     checkAccessRights();
   }, [window.location.pathname]);
 

@@ -311,6 +311,78 @@ export let routeDetails = [
         path: "/IDMaster",
         element: "../Frontend/Master/IDMaster",
       },
+      {
+        path: "/ChangePaymentMode",
+        element: "../Frontend/Administrator/ChangePaymentMode",
+      },
+      {
+        path: "/ChangeSampleStatus",
+        element: "../Frontend/Administrator/ChangeSampleStatus",
+      },
+      {
+        path: "/ChangeBarCode",
+        element: "../Frontend/Administrator/ChangeBarCode",
+      },
+      {
+        path: "/DiscountApproval",
+        element: "../Frontend/Administrator/DiscountApproval",
+      },
+      {
+        path: "/RevertDiscountApprovalStatus",
+        element: "../Frontend/Administrator/RevertDiscountApprovalStatus",
+      },
+      {
+        path: "/DiscountAfterBill",
+        element: "../Frontend/Administrator/DiscountAfterBill",
+      },
+      {
+        path: "/RefundAfterBill",
+        element: "../Frontend/Administrator/RefundAfterBill",
+      },
+      {
+        path: "/MacData",
+        element: "../Frontend/Master/MacData",
+      },
+      {
+        path: "/MacObservation",
+        element: "../Frontend/Master/MacObservation",
+      },
+      {
+        path: "/CriticalCalloutRecord",
+        element: "../Frontend/Master/CriticalCalloutRecord",
+      },
+      {
+        path: "/CancelReceipt",
+        element: "../Frontend/Master/CancelReceipt",
+      },
+      {
+        path: "/CompanyPaymentDetail",
+        element: "../Frontend/CompanyMaster/CompanyPaymentDetail",
+      },
+      {
+        path: "/DoctorShareMaster",
+        element: "../Frontend/Master/DoctorShareMaster",
+      },
+      {
+        path: "/DoctorTypeCopyShare",
+        element: "../Frontend/Master/DoctorTypeCopyShare",
+      },
+      {
+        path: "/CompanyKey",
+        element: "../Frontend/CompanyMaster/CompanyKey",
+      },
+      {
+        path: "/OnlinePaymentPage",
+        element: "../Frontend/CompanyMaster/OnlinePaymentPage",
+      },
+      {
+        path: "/CompanyMaster",
+        element: "../Frontend/CompanyMaster/CompanyMaster",
+      },
+      {
+        path: "/CompanyMasterList",
+        element: "../Frontend/CompanyMaster/CompanyMasterList",
+      },
       { path: "*", element: "../components/NotFound" },
     ],
   },

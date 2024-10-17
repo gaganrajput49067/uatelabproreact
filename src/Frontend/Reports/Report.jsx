@@ -91,15 +91,15 @@ function GetReport() {
     ToDate: new Date(),
     ToTime: "",
     DocumentType: 2,
-    Test:[],
+    Test: [],
     // new
     User: [],
-    RateType:  [],
-    Department:  [],
+    RateType: [],
+    Department: [],
     ReportType: "",
     InvestigationId: [],
     PatientType: "",
-    Doctor:  [],
+    Doctor: [],
     DateType: "",
     Urgent: "",
     Status: "",
@@ -309,7 +309,7 @@ function GetReport() {
       ToDate: new Date(),
       ToTime: "",
       DocumentType: 2,
-      User:[],
+      User: [],
       RateType: [],
       Department: [],
       ReportType: "",
@@ -349,7 +349,7 @@ function GetReport() {
           <div className="card">
             <div className="row">
               {FieldShow?.Centre && (
-                <div className="col-sm-2">
+                <div className="col-sm-2 mt-2">
                   <SelectBox
                     className="required-fields"
                     options={[
@@ -364,7 +364,7 @@ function GetReport() {
               )}
               {console.log(CentreData)}
               {FieldShow?.MultipleCentre && (
-                <div className="col-sm-2 mb-2">
+                <div className="col-sm-2 mt-2 mb-2">
                   <SelectBoxWithCheckbox
                     options={CentreData}
                     value={formData?.Centre}
@@ -376,10 +376,10 @@ function GetReport() {
               )}
 
               {FieldShow?.RateType && (
-                <div className="col-sm-2">
+                <div className="col-sm-2 mt-2">
                   <SelectBox
                     options={[
-                      { label: "Select Rate Type", value:[] },
+                      { label: "Select Rate Type", value: [] },
                       ...rateType,
                     ]}
                     selectedValue={formData?.RateType}
@@ -392,7 +392,7 @@ function GetReport() {
               )}
 
               {FieldShow?.MultipleRateType && (
-                <div className="col-sm-2">
+                <div className="col-sm-2 mt-2">
                   <SelectBoxWithCheckbox
                     options={rateType}
                     value={formData?.RateType}
@@ -404,7 +404,7 @@ function GetReport() {
               )}
 
               {FieldShow?.Department && (
-                <div className="col-sm-2 ">
+                <div className="col-sm-2 mt-2 ">
                   <SelectBox
                     className="required-fields"
                     options={[
@@ -420,7 +420,7 @@ function GetReport() {
               )}
 
               {FieldShow?.Source && (
-                <div className="col-sm-2 ">
+                <div className="col-sm-2 mt-2 ">
                   <SelectBox
                     className="required-fields"
                     options={[
@@ -436,7 +436,7 @@ function GetReport() {
               )}
 
               {FieldShow?.MultipleDepartment && (
-                <div className="col-sm-2">
+                <div className="col-sm-2 mt-2">
                   <SelectBoxWithCheckbox
                     options={Department}
                     value={formData?.Department}
@@ -448,7 +448,7 @@ function GetReport() {
               )}
 
               {FieldShow?.SearchByDate && (
-                <div className="col-sm-2 ">
+                <div className="col-sm-2 mt-2 ">
                   <SelectBox
                     className="required-fields"
                     options={SearchByDate}
@@ -461,7 +461,7 @@ function GetReport() {
               )}
 
               {FieldShow?.FromDate && (
-                <div className="col-sm-2">
+                <div className="col-sm-2 mt-2">
                   <DatePicker
                     className="custom-calendar"
                     name="FromDate"
@@ -476,7 +476,7 @@ function GetReport() {
               )}
 
               {FieldShow?.ToDate && (
-                <div className="col-sm-2 ">
+                <div className="col-sm-2 mt-2 ">
                   <DatePicker
                     className="custom-calendar"
                     name="ToDate"
@@ -492,7 +492,7 @@ function GetReport() {
               )}
 
               {FieldShow?.DataType && (
-                <div className="col-sm-2 ">
+                <div className="col-sm-2 mt-2 ">
                   <SelectBox
                     className="required-fields"
                     options={[
@@ -508,11 +508,11 @@ function GetReport() {
               )}
 
               {FieldShow?.User && (
-                <div className="col-sm-2 ">
+                <div className="col-sm-2 mt-2 ">
                   <SelectBox
                     className="required-fields"
                     options={[
-                      { label: "Select Employee", value: []},
+                      { label: "Select Employee", value: [] },
                       ...EmployeeName,
                     ]}
                     formdata={formData?.User}
@@ -524,20 +524,23 @@ function GetReport() {
               )}
 
               {FieldShow?.PatientName && (
-                <div className="col-sm-2 ">
+                <div className="col-sm-2 mt-2 ">
                   <Input
-                    className="form-control required-fields"
+                    lable="PatientName"
+                    id="PatientName"
                     name="PatientName"
                     onChange={handleSelectChange}
                     value={formData?.PatientName}
-                    lable={t("Patient Name")}
+                    placeholder=" "
                   />
                 </div>
               )}
               {FieldShow?.VisitNo && (
-                <div className="col-sm-2 ">
+                <div className="col-sm-2 mt-2 ">
                   <Input
-                    className="form-control required-fields"
+                    lable="VisitNo"
+                    id="VisitNo"
+                    placeholder=" "
                     name="VisitNo"
                     onChange={handleSelectChange}
                     value={formData?.VisitNo}
@@ -546,7 +549,7 @@ function GetReport() {
                 </div>
               )}
               {FieldShow?.MultipleUser && (
-                <div className="col-sm-2 ">
+                <div className="col-sm-2 mt-2 ">
                   <SelectBoxWithCheckbox
                     options={EmployeeName}
                     value={formData?.User}
@@ -558,7 +561,7 @@ function GetReport() {
               )}
 
               {FieldShow?.Doctor && (
-                <div className="col-sm-2 ">
+                <div className="col-sm-2 mt-2 ">
                   <SelectBox
                     options={[
                       { label: "Select Doctor", value: [] },
@@ -573,7 +576,7 @@ function GetReport() {
               )}
 
               {FieldShow?.MultipleDoctor && (
-                <div className="col-sm-2 ">
+                <div className="col-sm-2 mt-2 ">
                   <SelectBoxWithCheckbox
                     options={[{ label: "Self", value: [1] }, ...DoctorName]}
                     value={formData?.Doctor}
@@ -585,7 +588,7 @@ function GetReport() {
               )}
 
               {FieldShow?.MultipleTest && (
-                <div className="col-sm-2">
+                <div className="col-sm-2 mt-2">
                   <SelectBoxWithCheckbox
                     options={mapTest}
                     value={formData?.Test}
@@ -597,7 +600,7 @@ function GetReport() {
               )}
 
               {FieldShow?.Status && (
-                <div className="col-sm-2">
+                <div className="col-sm-2 mt-2">
                   <SelectBox
                     options={workSheetSampleStatus}
                     selectedValue={formData.Status}
@@ -609,7 +612,7 @@ function GetReport() {
               )}
 
               {FieldShow?.DiscountApprovalUser && (
-                <div className="col-sm-2">
+                <div className="col-sm-2 mt-2">
                   <SelectBoxWithCheckbox
                     options={[...EmployeeName]}
                     value={formData.DiscountApprovalUser}
@@ -621,7 +624,7 @@ function GetReport() {
               )}
 
               {FieldShow?.Barcodeno && (
-                <div className="col-sm-2 ">
+                <div className="col-sm-2 mt-2 ">
                   <Input
                     className="form-control required-fields"
                     name="Barcodeno"
@@ -632,7 +635,7 @@ function GetReport() {
                 </div>
               )}
               {FieldShow?.LabNo && (
-                <div className="col-sm-2 ">
+                <div className="col-sm-2 mt-2 ">
                   <Input
                     className="form-control required-fields"
                     name="LabNo"
@@ -643,7 +646,7 @@ function GetReport() {
                 </div>
               )}
               {FieldShow?.ProEmployee && (
-                <div className="col-sm-2">
+                <div className="col-sm-2 mt-2">
                   <SelectBoxWithCheckbox
                     options={proEmployee}
                     value={formData?.ProEmployee}
@@ -653,7 +656,7 @@ function GetReport() {
                   />
                 </div>
               )}
-              <div className="col-sm-2 ">
+              <div className="col-sm-2 mt-2 ">
                 <SelectBox
                   className="required-fields"
                   options={DocumentType}
@@ -666,7 +669,7 @@ function GetReport() {
 
               {FieldShow?.Urgent && (
                 <div
-                  className="col-sm-2 d-flex"
+                  className="col-sm-2 mt-2 d-flex"
                   style={{
                     justifyContent: "space-around",
                     alignItems: "center",
@@ -685,7 +688,7 @@ function GetReport() {
               )}
               {FieldShow?.ChkisUrgent && (
                 <div
-                  className="col-sm-2 d-flex"
+                  className="col-sm-2 mt-2 d-flex"
                   style={{
                     justifyContent: "space-around",
                     alignItems: "center",
@@ -705,7 +708,7 @@ function GetReport() {
               )}
               {FieldShow?.chkTATDelay && (
                 <div
-                  className="col-sm-2 d-flex"
+                  className="col-sm-2 mt-2 d-flex"
                   style={{
                     justifyContent: "space-around",
                     alignItems: "center",
@@ -782,7 +785,7 @@ function GetReport() {
               )}
             </div>
 
-            <div className="col-sm-2">
+            <div className="col-sm-2 mt-2">
               {FieldShow?.AsOnNowOutstanding && (
                 <>
                   <input
@@ -798,7 +801,7 @@ function GetReport() {
                 </>
               )}
             </div>
-            <div className="col-sm-2">
+            <div className="col-sm-2 mt-2">
               {FieldShow?.DateWiseOutstanding && (
                 <>
                   <input

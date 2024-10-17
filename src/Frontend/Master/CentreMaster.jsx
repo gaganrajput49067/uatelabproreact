@@ -1702,7 +1702,7 @@ const CentreMaster = () => {
 
                 <div className="col-sm-2">
                   <button
-                    className="btn btn-success btn-sm btn-block"
+                    className="btn btn-info btn-sm btn-block"
                     id="btnUpload"
                     disabled={!formData?.isNabl}
                     onClick={() => {
@@ -1715,7 +1715,7 @@ const CentreMaster = () => {
 
                 <div className="col-sm-2">
                   <button
-                    className="btn btn-success btn-sm btn-block"
+                    className="btn btn-info btn-sm btn-block"
                     id="btnUpload"
                     onClick={() => {
                       setShow2(true);
@@ -1744,7 +1744,7 @@ const CentreMaster = () => {
             )}
             <div className="col-sm-2 col-md-2">
               <button
-                className="btn btn-success btn-sm btn-block"
+                className="btn btn-info btn-sm btn-block"
                 id="btnUpload"
                 onClick={() => {
                   setShow(true);
@@ -1755,7 +1755,7 @@ const CentreMaster = () => {
             </div>
             <div className="col-sm-2 col-md-2">
               <button
-                className="btn btn-success btn-sm btn-block"
+                className="btn btn-info btn-sm btn-block"
                 id="btnUpload"
                 onClick={() => {
                   setShow3(true);
@@ -1766,7 +1766,7 @@ const CentreMaster = () => {
             </div>
             <div className="col-sm-2 col-md-2">
               <button
-                className="btn btn-success btn-sm btn-block"
+                className="btn btn-info btn-sm btn-block"
                 id="btnUpload"
                 onClick={() => {
                   setShow4(true);
@@ -1777,7 +1777,9 @@ const CentreMaster = () => {
             </div>
           </div>{" "}
         </div>
-        <div className="card">
+     
+      </SubPageHead>
+         <div className="card">
           {name === "Rate" && (
             <>
               <div className="row">
@@ -1969,7 +1971,6 @@ const CentreMaster = () => {
             </>
           ) : null}
         </div>
-      </SubPageHead>
     </>
   );
 };

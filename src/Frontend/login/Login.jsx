@@ -41,7 +41,7 @@ const Login = () => {
         Username: user.Username,
         DefaultCentre: user.DefaultCentreID,
         ShowDashboard: user.ShowDashboard,
-
+        CompanyCode: user.CompanyCode,
         SkipMicLabEntry: user.SkipMicLabEntry,
       };
 

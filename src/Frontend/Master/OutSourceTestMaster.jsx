@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 import PageHead from "../../components/CommonComponent/PageHead";
 import { SelectBox } from "../../components/CommonComponent/SelectBox";
 import Table from "../../components/Table/Table";
-import Input from "../../components/CommonComponent/Input";
 import Loading from "../../components/Loading/Loading";
+import NoRecordFound from "../../components/CommonComponent/NoRecordFound";
 
 const OutSourceTestMaster = () => {
   const [load, setLoad] = useState(false);
@@ -396,7 +396,7 @@ const OutSourceTestMaster = () => {
           </div>
         </div>
       </PageHead>
-      {tableData?.length > 0 && (
+      {tableData?.length > 0 ? (
         <div className="card">
           <Table>
             <thead className="cf">
@@ -423,9 +423,12 @@ const OutSourceTestMaster = () => {
                   <td data-title={t("Investigation")}>
                     {item?.Investigation}&nbsp;
                   </td>
-                  <td data-title={t("OutSourceTestCode")}>
+                  <td
+                    data-title={t("OutSourceTestCode")}
+                    style={{ textAlign: "center" }}
+                  >
                     {item?.isDefault == 1 ? (
-                      <Input
+                      <input
                         max={20}
                         name="OutSourceTestCode"
                         value={item?.OutSourceTestCode}
@@ -435,9 +438,12 @@ const OutSourceTestMaster = () => {
                       item?.OutSourceTestCode
                     )}
                   </td>
-                  <td data-title={t("Out Source Rate")}>
+                  <td
+                    data-title={t("Out Source Rate")}
+                    style={{ textAlign: "center" }}
+                  >
                     {item?.isDefault == 1 ? (
-                      <Input
+                      <input
                         max={6}
                         name="OutSourceRate"
                         value={item?.OutSourceRate}
@@ -494,6 +500,10 @@ const OutSourceTestMaster = () => {
               </>
             )
           )}
+        </div>
+      ) : (
+        <div className="card">
+          <NoRecordFound />
         </div>
       )}
     </>

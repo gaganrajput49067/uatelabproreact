@@ -483,3 +483,17 @@ export const MicroBioMaster = [
   { label: "Organism", value: "2" },
   { label: "Antibiotic", value: "4" }
 ];
+export const SelectType = [
+  // {
+  //   label: "Select",
+  //   value: "Select",
+  // },
+  {
+    label: "PrePaid",
+    value: "PrePaid",
+  },
+  {
+    label: "PostPaid",
+    value: "PostPaid",
+  },
+];
