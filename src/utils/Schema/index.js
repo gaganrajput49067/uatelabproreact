@@ -723,3 +723,34 @@ export const MicroBioMasterSchema = (formData) => {
  
   return err;
 };
+  
+   
+
+  export const validationForIDMAster = (formData) => {
+    let err = "";
+    if (formData?.TypeName === "") {
+      err = { ...err, TypeName: "This Field is Required" };
+    }
+    if (formData?.InitialChar?.trim() === "") {
+      err = { ...err, InitialChar: "This Field is Required" };
+    }
+    if (formData?.FinancialYearStart?.trim() === "") {
+      err = { ...err, FinancialYearStart: "This Field is Required" };
+    }
+  
+    if (formData?.TypeLength === "") {
+      err = { ...err, TypeLength: "This Field is Required" };
+    }
+    return err;
+  };
+
+  export const OutSourceLabMasterValidationSchema = Yup.object({
+    LabName: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    ContactPersonName: Yup.string()
+      .required("This Field is Required")
+      .trim("The contact name cannot include leading and trailing spaces"),
+    MobileNo: Yup.string().min(10).required("This Field is Required"),
+      EmailID: Yup.string().email(),
+  });

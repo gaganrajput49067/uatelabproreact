@@ -294,6 +294,20 @@ export let routeDetails = [
       {
         path: "/DiscountMasterEmployeeWise",
         element: "../Frontend/Administrator/DiscountMasterEmployeeWise",
+        path: "/OutSourceTagging",
+        element: "../Frontend/Master/OutSourceTagging",
+      },
+      {
+        path: "/OutSourceTestMaster",
+        element: "../Frontend/Master/OutSourceTestMaster",
+      },
+      {
+        path: "/OutSourceTestToOtherLab",
+        element: "../Frontend/Master/OutSourceTestToOtherLab",
+      },
+      {
+        path: "/IDMaster",
+        element: "../Frontend/Master/IDMaster",
       },
       { path: "*", element: "../components/NotFound" },
     ],
