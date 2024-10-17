@@ -82,20 +82,20 @@
 }
 
 [data-theme="DarkMode"] .outer-container-main {
-  background-color: rgb(48, 47, 47)
+  background-color: rgb(48, 47, 47);
 }
 [data-theme="DarkMode"] .outer-container-main {
-  background-color: rgb(48, 47, 47)
+  background-color: rgb(48, 47, 47);
 }
 [data-theme="DarkMode"] .suggestion-data {
   background-color: var(--btn-bg-color) !important;
   color: var(--subMenuText-color) !important;
 }
-[data-theme="DarkMode"] .simple-table td  {
+[data-theme="DarkMode"] .simple-table td {
   background-color: var(--btn-bg-color) !important;
   color: var(--subMenuText-color) !important;
 }
-[data-theme="DarkMode"] .p-inputtext   {
+[data-theme="DarkMode"] .p-inputtext {
   background-color: var(--btn-bg-color) !important;
   color: var(--subMenuText-color) !important;
 }
@@ -332,7 +332,7 @@
   top: -9px;
   left: 0px !important;
   background-color: white;
-  
+
   color: var(--bg-color) !important;
   background-image: linear-gradient(white, white) !important;
   padding: 0px 5px;
@@ -343,7 +343,7 @@
 .form-control:not(:placeholder-shown) + label {
   top: -9px;
   left: 7px;
-  
+
   color: var(--bg-color) !important;
   background-color: white;
   background-image: linear-gradient(white, white) !important;
@@ -443,7 +443,7 @@ input.form-control {
   margin-bottom: 2px !important;
   /* padding: 10px 10px 1px; */
 }
-.card-patient{
+.card-patient {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   /* padding: 10px 10px; */
@@ -543,7 +543,6 @@ input.form-control {
   min-height: 1px;
   padding-right: 3px;
   padding-left: 3px;
-  
 }
 
 .Flipped {
@@ -975,7 +974,7 @@ td {
 .p-datepicker-header {
   padding: 0;
   height: 24px;
-  
+
   /* width: 208px !important; */
 }
 .p-datepicker-next {
@@ -1046,8 +1045,6 @@ td {
   height: 100vh;
   overflow-x: hidden;
 }
-
-
 
 input:focus {
   outline: 0;
@@ -1346,7 +1343,7 @@ input::placeholder {
   font-weight: bolder !important;
   background: #fff;
   line-height: 5px;
-  
+
   color: var(--bg-color) !important;
   padding: 3px 5px;
   /* margin-bottom: 0 !important; */
@@ -1984,14 +1981,14 @@ hr {
 input:disabled,
 select:disabled,
 textarea:disabled {
-  background-color: #f0f0f0 !important; 
-  color: var(--bg-color) !important;         
-  border: 1px solid #ccc;  
-  cursor: not-allowed;      
+  background-color: #f0f0f0 !important;
+  color: var(--bg-color) !important;
+  border: 1px solid #ccc;
+  cursor: not-allowed;
 }
 button {
   /* background-color: #4CAF50; Green */
-  
+
   border: none;
   text-align: center;
   font-weight: bold;
@@ -2006,7 +2003,7 @@ button {
 button:active {
   background-color: #3e8e41;
   box-shadow: 0 2px #666;
-  transform: translateY(4px); 
+  transform: translateY(4px);
 }
 
 button:hover {
@@ -2021,9 +2018,7 @@ button:hover {
   margin-right: 3px;
 }
 
-
-
-.custom-toast { 
+.custom-toast {
   padding: 16px;
   font-size: 16px;
   font-weight: bold;
@@ -2036,19 +2031,18 @@ button:hover {
 .custom-toast:hover {
   transform: scale(1.05);
 }
-.dock-item{
+.dock-item {
   /* cursor: pointer; */
-  width:35px;
+  width: 35px;
 }
 
 .p-dock .p-dock-list-container {
-  background: none; 
+  background: none;
   border: none;
-  
+
   border-radius: 0.5rem;
   margin: -18px !important;
 }
-
 
 .rmsc .clear-selected-button {
   cursor: pointer;
@@ -2059,8 +2053,7 @@ button:hover {
   box-shadow: none;
 }
 
-
-.cke_notification_warning{
+.cke_notification_warning {
   display: none !important;
 }
 .cke_button_icon {
@@ -2072,21 +2065,24 @@ button:hover {
 
 .cke_toolgroup {
   padding: 5px;
-  
+
   font-family: "Source Sans Pro", sans-serif;
 }
 
-.cke_reset_all, .cke_reset_all *, .cke_reset_all a, .cke_reset_all textarea {
-  font-family: "Source Sans Pro", sans-serif;;
+.cke_reset_all,
+.cke_reset_all *,
+.cke_reset_all a,
+.cke_reset_all textarea {
+  font-family: "Source Sans Pro", sans-serif;
 }
 
-
-.p-link{
+.p-link {
   box-shadow: none;
 }
 .requiredlabel {
   color: rgb(221, 10, 10);
-}.line-height-table {
+}
+.line-height-table {
   line-height: 20px !important;
 }
 
@@ -2115,10 +2111,17 @@ button:hover {
   border-bottom: solid 2px red !important;
 }
 
-.designation{
+.designation {
   background-color: var(--bg-color) !important;
 }
 
-.coloricon{
+.coloricon {
   box-shadow: none !important;
+}
+
+.formula-tag {
+  height: 100px !important;
+}
+.mapping-tag {
+  height: 300px !important;
 }

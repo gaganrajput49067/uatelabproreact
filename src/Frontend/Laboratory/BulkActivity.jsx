@@ -1161,7 +1161,7 @@ const BulkActivity = () => {
                     <>
                       <div className="col-sm-2">
                         <TableSelectBox
-                          value={ApprovedBy}
+                          selectedValue={ApprovedBy}
                           id="ApprovedBy"
                           lable="ApprovedBy"
                           options={doctorAdmin}

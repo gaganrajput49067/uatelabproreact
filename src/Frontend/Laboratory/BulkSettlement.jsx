@@ -412,7 +412,7 @@ const BulkSettlement = () => {
                                     { label: "Pay By", value: "" },
                                     ...PayBy,
                                   ]}
-                                  value={ele?.PayBy}
+                                  selectedValue={ele?.PayBy}
                                   onChange={(e) => {
                                     handleChangeMap(e, index);
                                   }}
@@ -446,7 +446,7 @@ const BulkSettlement = () => {
                                     { label: "Payment Mode", value: "" },
                                     ...paymentMode,
                                   ]}
-                                  value={ele?.PaymentModeID}
+                                  selectedValue={ele?.PaymentModeID}
                                   onChange={(e) => {
                                     handleChangeMap(e, index);
                                   }}
@@ -466,7 +466,7 @@ const BulkSettlement = () => {
                                       { label: "BankName", value: "" },
                                       ...BankName,
                                     ]}
-                                    value={ele?.BankName}
+                                    selectedValue={ele?.BankName}
                                     onChange={(e) => {
                                       handleChangeMap(e, index);
                                     }}

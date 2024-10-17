@@ -689,3 +689,4 @@ export const GetRateTypeByGlobalCentre = (state) => {
     })
     .catch((err) => console.log(err));
 };
+

@@ -479,3 +479,7 @@ export const RADIOADVANCEINPUT = [
     label: "Debit Note",
   },
 ];
+export const MicroBioMaster = [
+  { label: "Organism", value: "2" },
+  { label: "Antibiotic", value: "4" }
+];

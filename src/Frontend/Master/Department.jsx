@@ -319,7 +319,7 @@ const Department = () => {
                         ) : (
                           <button
                             type="button"
-                            className="btn btn-block btn-primary btn-sm"
+                            className="btn btn-block btn-primary btn-sm w-5"
                             id="btnSave"
                             title="Edit"
                             onClick={() => EditData(data)}

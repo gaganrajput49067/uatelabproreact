@@ -15,7 +15,7 @@ const TableSelectBox = ({
     <div className="selectbox">
       <select
         className={`form-control input-sm ${className} m-0 mt-0`}
-        value={selectedValue?.label !== "" && selectedValue}
+        value={selectedValue?.label !="" && selectedValue}
         disabled={isDisabled}
         name={name}
         id={id}

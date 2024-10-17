@@ -33,7 +33,8 @@ const PrivateRoute = ({ element, path }) => {
       "/welcome",
       "/login",
       "/forgotpassword",
-      "/"
+      "/",
+      "*",
     ];
 
     if (!accessiblePaths.includes(window.location.pathname.toLowerCase())) {

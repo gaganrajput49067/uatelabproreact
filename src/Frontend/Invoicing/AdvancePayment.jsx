@@ -844,7 +844,7 @@ function AdvancePayment() {
                       <TableSelectBox
                         name="BankName"
                         options={BankName}
-                        value={formData?.BankName}
+                        selectedValue={formData?.BankName}
                         onChange={handleChange}
                       ></TableSelectBox>
                     </td>

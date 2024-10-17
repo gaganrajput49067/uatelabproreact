@@ -334,7 +334,7 @@ function ValidatePaymentModal({ showValidateModal, handleClose }) {
                         ...BankName,
                       ]}
                       name="BankName"
-                      value={formData?.BankName}
+                      selectedValue={formData?.BankName}
                       onChange={handleChange}
                     ></TableSelectBox>
                   </td>

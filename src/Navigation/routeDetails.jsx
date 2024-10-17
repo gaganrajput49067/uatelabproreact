@@ -121,7 +121,7 @@ export let routeDetails = [
       },
       {
         path: "/SubPageMaster",
-        element: "../Frontend/Master/SubPageMaster"
+        element: "../Frontend/Master/SubPageMaster",
       },
       {
         path: "/SampleTypeCreate",
@@ -230,6 +230,70 @@ export let routeDetails = [
       {
         path: "/OutSourceLabMaster",
         element: "../Frontend/Master/OutSourceLabMaster",
+      },
+      {
+        path: "/CenterAccess",
+        element: "../Frontend/Master/CenterAccess",
+      },
+      {
+        path: "/FieldBoyMaster",
+        element: "../Frontend/Master/FieldBoyMaster",
+      },
+      {
+        path: "/CreateFieldBoyMaster",
+        element: "../Frontend/Master/CreateFieldBoyMaster",
+      },
+      {
+        path: "/ImportExportExcel",
+        element: "../Frontend/Master/ImportExportExcel",
+      },
+      {
+        path: "/RateList",
+        element: "../Frontend/Master/RateList",
+      },
+      {
+        path: "/ManageFieldMaster",
+        element: "../Frontend/Master/ManageFieldMaster",
+      },
+      {
+        path: "/RateTypeShareMaster",
+        element: "../Frontend/Master/RateTypeShareMaster",
+      },
+      {
+        path: "/Rate/:id",
+        element: "../Frontend/Master/RateTypeCopyShare",
+      },
+      {
+        path: "/FormulaMaster",
+        element: "../Frontend/Master/FormulaMaster",
+      },
+      {
+        path: "/InvalidContactNumber",
+        element: "../Frontend/Master/InvalidContactNumber",
+      },
+      {
+        path: "/MicroBiologyMaster",
+        element: "../Frontend/Master/MicroBiologyMaster",
+      },
+      {
+        path: "/MicroBiologyMasterMapping",
+        element: "../Frontend/Master/MicroBiologyMasterMapping",
+      },
+      {
+        path: "/ManageOrdering",
+        element: "../Frontend/Master/ManageOrdering",
+      },
+      {
+        path: "/TestMappingCenter",
+        element: "../Frontend/Master/TestCentreMapping",
+      },
+      {
+        path: "/Settlement",
+        element: "../Frontend/Administrator/SettlementPatient",
+      },
+      {
+        path: "/DiscountMasterEmployeeWise",
+        element: "../Frontend/Administrator/DiscountMasterEmployeeWise",
       },
       { path: "*", element: "../components/NotFound" },
     ],
