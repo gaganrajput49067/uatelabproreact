@@ -1069,3 +1069,22 @@ export const RoundUpTo = [
   { label: "4", value: "4" },
 
 ];
+
+export const NoOfRecord = [
+  {
+    label: 5,
+    value: Number(5),
+  },
+  {
+    label: 10,
+    value: Number(10),
+  },
+  {
+    label: 20,
+    value: Number(20),
+  },
+  {
+    label: 50,
+    value: Number(50),
+  },
+];
