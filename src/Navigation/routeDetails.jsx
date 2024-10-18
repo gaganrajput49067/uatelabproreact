@@ -8,7 +8,7 @@ export let routeDetails = [
         element: "../Frontend/DashBoard/DashBoard",
       },
       {
-        path: "dashboard",
+        path: "/dashboard",
         element: "../Frontend/DashBoard/DashBoard",
       },
       {
@@ -124,7 +124,7 @@ export let routeDetails = [
         element: "../Frontend/Master/SubPageMaster",
       },
       {
-        path: "/SampleTypeCreate",
+        path: "/SampleType",
         element: "../Frontend/Master/SampleTypeCreate",
       },
       {
@@ -315,6 +315,10 @@ export let routeDetails = [
         path: "/ChangePaymentMode",
         element: "../Frontend/Administrator/ChangePaymentMode",
       },
+       {
+        path: "/ChangePassword",
+        element: "../Frontend/Master/ChangePassword",
+      },
       {
         path: "/ChangeSampleStatus",
         element: "../Frontend/Administrator/ChangeSampleStatus",
@@ -327,9 +331,21 @@ export let routeDetails = [
         path: "/DiscountApproval",
         element: "../Frontend/Administrator/DiscountApproval",
       },
+        {
+        path: "/ManageHoliday",
+        element: "../Frontend/Master/ManageHoliday",
+      },
       {
         path: "/RevertDiscountApprovalStatus",
         element: "../Frontend/Administrator/RevertDiscountApprovalStatus",
+      },
+      {
+        path: "/AgeWiseDiscount",
+        element: "../Frontend/Master/AgeWiseDiscount",
+      },
+      {
+        path: "/AgeWiseDiscountList",
+        element: "../Frontend/Master/AgeWiseDiscountList",
       },
       {
         path: "/DiscountAfterBill",
@@ -360,12 +376,28 @@ export let routeDetails = [
         element: "../Frontend/CompanyMaster/CompanyPaymentDetail",
       },
       {
+        path: "/setDoctor",
+        element: "../Frontend/Master/SetDoctorShare",
+      },
+      {
+        path: "/MergeDoctor",
+        element: "../Frontend/Master/MergeDoctor",
+      },
+      {
+        path: "/DoctorMisReportPage",
+        element: "../Frontend/Master/DoctorMisReportPage",
+      },
+      {
         path: "/DoctorShareMaster",
         element: "../Frontend/Master/DoctorShareMaster",
       },
       {
         path: "/DoctorTypeCopyShare",
         element: "../Frontend/Master/DoctorTypeCopyShare",
+      },
+       {
+        path: "/MachineMaster",
+        element: "../Frontend/Machine/MachineMaster",
       },
       {
         path: "/CompanyKey",
@@ -383,7 +415,51 @@ export let routeDetails = [
         path: "/CompanyMasterList",
         element: "../Frontend/CompanyMaster/CompanyMasterList",
       },
-      { path: "*", element: "../components/NotFound" },
+      {
+        path: "/LoadData",
+        element: "../Frontend/Master/LoadData",
+      },
+      {
+        path: "/MachineGroup",
+        element: "../Frontend/Machine/MachineGroup",
+      },
+      {
+        path: "/MachineReading",
+        element: "../Frontend/Machine/MachineReading",
+      },
+      {
+        path: "/MachineParams",
+        element: "../Frontend/Machine/MachineParams",
+      },
+      {
+        path: "/BreakpointPage",
+        element: "../Frontend/Master/BreakpointPage",
+      },
+        {
+        path: "/MachineReferenceRangeMaster",
+        element: "../Frontend/Master/MachineReferenceRangeMaster"
+      },
+      {
+        path: "/ModalityMaster",
+        element: "../Frontend/Radiology/ModalityMaster",
+      },
+      {
+        path: "/TokenGenerationMaster",
+        element: "../Frontend/Radiology/TokenGenerationMaster",
+      },
+      {
+        path: "/ScRoomMaster",
+        element: "../Frontend/Radiology/ScRoomMaster",
+      },
+      {
+        path: "/InvestigationTimeSlotMaster",
+        element: "../Frontend/Radiology/InvestigationTimeSlotMaster",
+      },
+      {
+        path: "/ReportBill",
+        element: "../Frontend/Reports/ReportBill",
+      },
+      { path: "*", element: "../Frontend/Extra/BlankPage" },
     ],
   },
   {

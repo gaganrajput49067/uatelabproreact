@@ -26,6 +26,7 @@ import {
 import ReactSelect from "../../components/CommonComponent/ReactSelect";
 import { Link } from "react-router-dom";
 import Table from "../../components/Table/Table";
+import PatientDetailModal from "../utils/PatientDetailModal";
 const ResultEntryCulture = () => {
   const [ResultTestData, setResultTestData] = useState([]);
   const [ResultData, setResultData] = useState([]);
@@ -1133,10 +1134,20 @@ const ResultEntryCulture = () => {
           {show3?.modal && (
             <TemplateMasterModal
               show={show3}
-              handleClose={() => {
+              handleClose={() => {  
                 setShow3({ modal: false, data: {} });
               }}
               handleSave={handleSave}
+            />
+          )}
+          {showPH && (
+            <PatientDetailModal
+              showPH={showPH}
+              setShowPH={(data) => {
+                setShowPH(false);
+                console.log("object");
+              }}
+              ResultData={ResultData}
             />
           )}
           <>
@@ -2216,7 +2227,7 @@ const ResultEntryCulture = () => {
                           )
                       )}
                       <button
-                        className="btn btn-success mx-2 btn-sm my-1 my"
+                        className="col-sm-1 btn btn-success mx-2 btn-sm my-1 my"
                         onClick={() => {
                           setShowPH(true);
                         }}

@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
 function RevenueChart({ state }) {
-  console.log(state);
+
   const { t } = useTranslation();
   const data = {
     labels: [

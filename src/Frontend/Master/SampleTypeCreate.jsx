@@ -214,33 +214,44 @@ const SampleTypeCreate = () => {
               </button>
             </div>
           </div>
-        </div>
-        <div className="card">
-          {load ? (
-            <Loading />
-          ) : (
-            <Table>
-              {" "}
-              <thead className="cf">
+        </div>{" "}
+      </PageHead>
+      <div className="card">
+        {load ? (
+          <Loading />
+        ) : (
+          <Table>
+            {" "}
+            <thead>
+              <tr>
+                <th>{t("S.No")}</th>
+                <th>{t("SampleName")}</th>
+                <th>{t("Container")}</th>
+                <th>{t("ColorName")}</th>
+                <th>{t("Active")}</th>
+                <th className="text-center">
+                  <i class="fa fa-edit"></i>
+                </th>
+              </tr>
+            </thead>
+            {data.map((data, i) => (
+              <tbody>
+                {" "}
                 <tr>
-                  <th>{t("S.No")}</th>
-                  <th>{t("SampleName")}</th>
-                  <th>{t("Container")}</th>
-                  <th>{t("ColorName")}</th>
-                  <th>{t("Active")}</th>
-                  <th className="text-center">
-                    <i class="fa fa-edit"></i>
-                  </th>
-                </tr>
-              </thead>
-              {data.map((data, i) => (
-                <tbody>
-                  <td data-title={t("S.No")}>{i + 1}&nbsp;</td>
-                  <td data-title={t("SampleName")}>{data?.SampleName}&nbsp;</td>
+                  <td data-title={t("S.No")} className="text-center">
+                    {i + 1}&nbsp;
+                  </td>
+                  <td data-title={t("SampleName")} className="text-center">
+                    {data?.SampleName}&nbsp;
+                  </td>
 
-                  <td data-title={t("Container")}>{data?.Container}&nbsp;</td>
-                  <td data-title={t("ColorName")}>{data?.ColorName}&nbsp;</td>
-                  <td data-title={t("IsActive")}>
+                  <td data-title={t("Container")} className="text-center">
+                    {data?.Container}&nbsp;
+                  </td>
+                  <td data-title={t("ColorName")} className="text-center">
+                    {data?.ColorName}&nbsp;
+                  </td>
+                  <td data-title={t("IsActive")} className="text-center">
                     {data?.isActive == 1 ? "Active" : "InActive"}&nbsp;
                   </td>
                   <td data-title="Select" className="text-center">
@@ -253,12 +264,12 @@ const SampleTypeCreate = () => {
                       <i class="fa fa-edit"></i>
                     </button>
                   </td>
-                </tbody>
-              ))}
-            </Table>
-          )}
-        </div>
-      </PageHead>
+                </tr>{" "}
+              </tbody>
+            ))}
+          </Table>
+        )}
+      </div>
     </>
   );
 };

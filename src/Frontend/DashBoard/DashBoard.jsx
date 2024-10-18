@@ -109,7 +109,6 @@ const MainDaashBoard = () => {
   //       });
   //     }
   // }, []);
-  console.log(userDashBoardData);
   useEffect(() => {
     getDashboardAccessCentres({
       state: setAccessCentre,
@@ -272,8 +271,7 @@ function RevenueCollection({ userWiseDashBoard }) {
   return <>{<RevenueChart state={data} />}</>;
 }
 
-function SalesCollection({ userWiseDashBoard }) {
-  console.log(userWiseDashBoard, "ds");
+function SalesCollection({ userWiseDashBoard }) {;
   const month = getGreeting("month");
   const SalesCollection = {
     labels: [month[2], month[1], month[0]],

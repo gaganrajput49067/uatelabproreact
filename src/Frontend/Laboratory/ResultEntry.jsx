@@ -1508,7 +1508,6 @@ const ResultEntry = () => {
           showPH={showPH}
           setShowPH={(data) => {
             setShowPH(false);
-            console.log("object");
           }}
           ResultData={ResultData}
         />

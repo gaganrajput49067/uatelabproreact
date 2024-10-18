@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 const UserCartBar = ({ state }) => {
   const { t } = useTranslation();
   ChartJS.register(CategoryScale, LinearScale, Title, BarElement, Tooltip);
-  console.log("first", state);
+
 
   const data = {
     labels: [

@@ -34,7 +34,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
   const [selectedMenu, setSelectedMenu] = useState(
     menuData?.length > 0 ? menuData[0]?.value : []
   );
-
+console.log(menuData)
   useEffect(() => {
     setSelectedMenu(menuData?.length > 0 ? menuData[0]?.value : []);
   }, [menuData]);

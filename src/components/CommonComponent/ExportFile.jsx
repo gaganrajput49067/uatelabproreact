@@ -8,7 +8,7 @@ function ExportFile({ dataExcel }) {
     <>
       <>
         <button
-          className="btn btn-block btn-success btn-sm"
+          className="btn btn-block btn-primary btn-sm"
           onClick={() => ExportToExcel(dataExcel)}
           disabled={dataExcel.length == 0}
         >

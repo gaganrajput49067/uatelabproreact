@@ -75,7 +75,7 @@ const Footer = () => {
   ];
   return (
     <footer className="main-footer">
-      <Dock model={items} position={"bottom"} className="Dock ss-none" />
+      {/* <Dock model={items} position={"bottom"} className="Dock ss-none" /> */}
       <div className="footer-left">
         <strong>
           Copyright © {new Date().getFullYear()}{" "}

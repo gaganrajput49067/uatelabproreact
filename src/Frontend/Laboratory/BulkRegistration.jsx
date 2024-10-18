@@ -241,7 +241,7 @@ const BulkRegistration = () => {
             </div>
             <div className="col-sm-2">
               <button
-                className="btn btn-block btn-success btn-sm"
+                className="btn btn-block btn-primary btn-sm"
                 onClick={() => handleSaveToDatabase()}
                 disabled={ExcelPreview?.exportJSON?.length === 0 ? true : false}
               >

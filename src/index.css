@@ -15,15 +15,15 @@
 }
 
 :root {
-  --bg-color: #0649b4;
-  --bg-subMenu: #1c67e0;
-  --subMenuText-color: rgb(255, 255, 255);
-  --btn-bg-color: white;
+  --bg-color: #043a8a; /* Darkened the blue for a more solid background */
+  --bg-subMenu: #1553c4; /* Slightly deeper for better contrast */
+  --subMenuText-color: rgb(255, 255, 255); /* Kept the text white for legibility */
+  --btn-bg-color: #f1f1f1; /* Lightened the button background to add a subtle contrast */
   --gradient: linear-gradient(
     90deg,
-    rgb(25, 86, 156) 0%,
-    rgb(34, 85, 180) 57%,
-    rgba(255, 255, 255, 1) 91%
+    rgb(18, 67, 123) 0%, /* Darker blue for the start of the gradient */
+    rgb(30, 90, 174) 57%, /* Enhanced the midpoint to make the gradient smoother */
+    rgba(255, 255, 255, 1) 91% /* Kept the white endpoint for clean contrast */
   );
 }
 
@@ -101,64 +101,64 @@
 }
 
 [data-theme="blue"] {
-  --bg-color: #2a91bd;
-  --bg-subMenu: #85bcd5;
-  --subMenuText-color: #e6f7ff;
+  --bg-color: #1e7ba2;
+  --bg-subMenu: #6fa7c2;
+  --subMenuText-color: #e0f3ff;
   --gradient: linear-gradient(
     90deg,
-    rgba(42, 145, 189, 1) 0%,
-    rgba(133, 188, 213, 1) 57%,
-    rgba(255, 255, 255, 1) 91%
+    rgba(30, 123, 162, 1) 0%,
+    rgba(111, 167, 194, 1) 50%,
+    rgba(204, 232, 247, 1) 100%
   );
 }
 
 [data-theme="brown"] {
-  --bg-color: #a52a2a;
-  --bg-subMenu: #d05050;
-  --subMenuText-color: #f9f9f9;
+  --bg-color: #8b1e1e;
+  --bg-subMenu: #b64545;
+  --subMenuText-color: #f0e4e4;
   --gradient: linear-gradient(
     90deg,
-    rgba(165, 42, 42, 1) 0%,
-    rgba(208, 80, 80, 1) 57%,
-    rgba(255, 255, 255, 1) 91%
+    rgba(139, 30, 30, 1) 0%,
+    rgba(182, 69, 69, 1) 50%,
+    rgba(243, 208, 208, 1) 100%
   );
 }
 
 [data-theme="palePink"] {
-  --bg-color: #f78e8e;
-  --bg-subMenu: #ffc5c5;
-  --subMenuText-color: #000000 !important;
+  --bg-color: #f36b6b;
+  --bg-subMenu: #ffb1b1;
+  --subMenuText-color: #111111;
   --darkMode-color: white;
   --gradient: linear-gradient(
     90deg,
     rgba(188, 60, 139, 1) 0%,
-    rgba(238, 148, 203, 1) 57%,
-    rgba(255, 255, 255, 1) 91%
+    rgba(238, 148, 203, 1) 50%,
+    rgba(255, 224, 232, 1) 100%
   );
 }
 
 [data-theme="peach"] {
-  --bg-color: #bc8f3c;
-  --bg-subMenu: #f3ba74;
-  --subMenuText-color: #fff7e6;
+  --bg-color: #ad7632;
+  --bg-subMenu: #e0a55f;
+  --subMenuText-color: #fff2d9;
   --gradient: linear-gradient(
     90deg,
-    rgba(188, 143, 60, 1) 0%,
-    rgba(243, 186, 116, 1) 57%,
-    rgba(255, 255, 255, 1) 91%
+    rgba(173, 118, 50, 1) 0%,
+    rgba(224, 165, 95, 1) 50%,
+    rgba(255, 234, 205, 1) 100%
   );
 }
 
 [data-theme="green"] {
-  --bg-color: #08d4a1;
-  --bg-subMenu: #21fac0 !important;
-  --subMenuText-color: black !important;
+  --bg-color: #06c890;
+  --bg-subMenu: #18e6b2;
+  --subMenuText-color: #0a0a0a;
   --darkMode-color: white;
   --gradient: linear-gradient(
     90deg,
-    rgba(54, 192, 153, 1) 0%,
-    rgba(104, 240, 210, 1) 57%,
-    rgba(255, 255, 255, 1) 91%
+    rgba(6, 200, 144, 1) 0%,
+    rgba(72, 224, 184, 1) 50%,
+    rgba(198, 255, 239, 1) 100%
   );
 }
 
@@ -2124,4 +2124,8 @@ button:hover {
 }
 .mapping-tag {
   height: 300px !important;
+}
+
+.css-8tjzm1-placeholder{
+  color: var(--bg-color);
 }

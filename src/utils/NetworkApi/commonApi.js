@@ -28,6 +28,15 @@ export const getPageData = (state, state2) => {
     .then((res) => {
       let data = res?.data?.message;
       let finalData = filtermenu(data?.menuData, data?.pageData);
+      const allPageData = finalData.flatMap((menu) => menu.pageData);
+      const allMenu = {
+        MenuID: 9999,
+        MenuName: "All Menu",
+        value: 9999,
+        label: "All Menu",
+        pageData: allPageData,
+      };
+      finalData.unshift(allMenu);
       state(finalData);
       state2(finalData[0].pageData);
     })
@@ -563,12 +572,7 @@ export const BindProEmployee = (state) => {
     })
     .catch((err) => console.log(err));
 };
-export const getDepartment = (
-  state,
-  api,
-  manageOrdering,
-  setCheckField
-) => {
+export const getDepartment = (state, api, manageOrdering, setCheckField) => {
   axiosInstance
     .get(`Department/${api ? api : "getDepartmentData"}`)
     .then((res) => {
@@ -704,4 +708,73 @@ export const getAccessRateType = (state) => {
       state(CentreDataValue);
     })
     .catch((err) => console.log(err));
+};
+
+export const bindDepartment = (state) => {
+  axios
+    .get("/api/v1/ModalityMaster/BindDepartment")
+    .then((res) => {
+      let data = res.data.message;
+      let responce = data.map((ele) => {
+        return {
+          value: ele.DepartmentId,
+          label: ele.Department,
+        };
+      });
+      state(responce);
+    })
+    .catch((err) =>
+      toast.error(err?.res?.data ? err?.res?.data : "Something Went Wrong")
+    );
+};
+export const bindFloor = (state) => {
+  axios
+    .get("/api/v1/ModalityMaster/BindFloor")
+    .then((res) => {
+      let data = res.data.message;
+      let responce = data.map((ele) => {
+        return {
+          value: ele.NAME,
+          label: ele.NAME,
+        };
+      });
+      state(responce);
+    })
+    .catch((err) =>
+      toast.error(err?.res?.data ? err?.res?.data : "Something Went Wrong")
+    );
+};
+export const BindRoomList = (state) => {
+  axios
+    .get("/api/v1/ModalityMaster/BindRoomList")
+    .then((res) => {
+      let data = res.data.message;
+      let responce = data.map((ele) => {
+        return {
+          value: ele.Id,
+          label: ele.RoomName,
+        };
+      });
+      state(responce);
+    })
+    .catch((err) =>
+      toast.error(err?.res?.data ? err?.res?.data : "Something Went Wrong")
+    );
+};
+export const BindGroupToken = (state) => {
+  axios
+    .get("/api/v1/ModalityMaster/BindGroupToken")
+    .then((res) => {
+      let data = res.data.message;
+      let responce = data.map((ele) => {
+        return {
+          value: ele.GroupID,
+          label: ele.GroupName,
+        };
+      });
+      state(responce);
+    })
+    .catch((err) =>
+      console.log(err?.res?.data ? err?.res?.data : "Something Went Wrong")
+    );
 };

@@ -481,7 +481,7 @@ export const RADIOADVANCEINPUT = [
 ];
 export const MicroBioMaster = [
   { label: "Organism", value: "2" },
-  { label: "Antibiotic", value: "4" }
+  { label: "Antibiotic", value: "4" },
 ];
 export const SelectType = [
   // {
@@ -496,4 +496,576 @@ export const SelectType = [
     label: "PostPaid",
     value: "PostPaid",
   },
+];
+
+export const NoofRecord = [
+  { label: "10", value: "10" },
+  { label: "20", value: "20" },
+  { label: "30", value: "30" },
+  { label: "40", value: "40" },
+  { label: "50", value: "50" },
+  { label: "60", value: "60" },
+  { label: "70", value: "70" },
+  { label: "80", value: "80" },
+  { label: "90", value: "90" },
+  { label: "100", value: "100" },
+];
+export const Showonly = [
+  {
+    label: "Synced Data",
+    value: "1",
+  },
+  {
+    label: "Pending Data",
+    value: "0",
+  },
+];
+
+export const Active = [
+  {
+    label: "Active",
+    value: "1",
+  },
+  {
+    label: "Deactive",
+    value: "0",
+  },
+];
+export const ActiveTemplateID = [{ label: "Active", value: "1" }];
+export const DDLData = [
+  {
+    label: "",
+    value: "",
+  },
+  {
+    label: "PatientName",
+    value: "PatientName",
+  },
+  {
+    label: "Age",
+    value: "Age",
+  },
+  {
+    label: "Mobile",
+    value: "Mobile",
+  },
+  {
+    label: "Bill",
+    value: "Bill",
+  },
+  {
+    label: "Date",
+    value: "Date",
+  },
+  {
+    label: "Address",
+    value: "Address",
+  },
+  {
+    label: "Centre",
+    value: "Centre",
+  },
+  {
+    label: "PatientCode",
+    value: "PatientCode",
+  },
+  {
+    label: "ReferedBy",
+    value: "ReferedBy",
+  },
+  {
+    label: "VisitNo",
+    value: "VisitNo",
+  },
+  {
+    label: "CentreContactNo",
+    value: "CentreContactNo",
+  },
+  {
+    label: "CentreAddress",
+    value: "CentreAddress",
+  },
+  {
+    label: "CreatedBy",
+    value: "CreatedBy",
+  },
+  {
+    label: "Collector",
+    value: "Collector",
+  },
+  {
+    label: "Ph.",
+    value: "Phone",
+  },
+  {
+    label: "Mail",
+    value: "Mail",
+  },
+  {
+    label: "Web",
+    value: "web",
+  },
+  {
+    label: "company",
+    value: "company",
+  },
+  {
+    label: "Qrcode",
+    value: "Qrcode",
+  },
+];
+export const Dynamic = {
+  Data: "",
+  DynamicReportType: "Text",
+  Height: "",
+  ImageData: "undefined",
+  IsActive: "1",
+  PositionLeft: "",
+  PositionTop: "",
+  Text: "",
+  fontSize: 10,
+  TypePlaceHolder: "Header",
+  Width: "",
+};
+export const DynamicReportType = [
+  {
+    label: "Text",
+    value: "Text",
+  },
+  {
+    label: "Data",
+    value: "Data",
+  },
+  {
+    label: "Barcode",
+    value: "Barcode",
+  },
+  {
+    label: "Image",
+    value: "Image",
+  },
+  {
+    label: "Line",
+    value: "Line",
+  },
+  {
+    label: "Box",
+    value: "Box",
+  },
+  {
+    label: "RoundBox",
+    value: "RoundBox",
+  },
+  {
+    label: "PrintDateTime",
+    value: "PrintDateTime",
+  },
+  {
+    label: "NoOfPages",
+    value: "NoOfPages",
+  },
+  {
+    label: "Provisional",
+    value: "Provisional",
+  },
+  {
+    label: "Qrcode",
+    value: "Qrcode",
+  },
+];
+export const FontFamily = [
+  {
+    label: "Arial",
+    value: "Arial",
+  },
+  {
+    label: "Times New Roman",
+    value: "Times New Roman",
+  },
+  {
+    label: "Calibri",
+    value: "Calibri",
+  },
+  {
+    label: "Verdana",
+    value: "Verdana",
+  },
+];
+export const LableID = [
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "Patient NAME ",
+    LabelID: "PatientName",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "Age/Gender",
+    LabelID: "Age",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "Patient NAME ",
+    LabelID: "PatientName",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "Mobile No.",
+    LabelID: "Mobile",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "DeliveryMode",
+    LabelID: "Bill",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "Reg. Date",
+    LabelID: "Date",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "Patient Address.",
+    LabelID: "Address",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "Panel Name ",
+    LabelID: "Centre",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "PatientCode",
+    LabelID: "PatientCode",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "Refered By ",
+    LabelID: "ReferedBy",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "Lab No",
+    LabelID: "VisitNo",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "Centre Cont No",
+    LabelID: "CentreContactNo",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "",
+    LabelID: "CentreAddress",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "CreatedBy",
+    LabelID: "CreatedBy",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "Collector",
+    LabelID: "Collector",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "ICMRID",
+    LabelID: "ICMRID",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+  {
+    Bold: 1,
+    DetailXPosition: "75",
+    FontFamily: "",
+    FontSize: "10",
+    Italic: 1,
+    LabelDetail: "SRFID",
+    LabelID: "SRFID",
+    Left: "8",
+    Print: 1,
+    Top: "90",
+    Underline: 0,
+  },
+];
+export const PageOrientation = [
+  {
+    label: "Portrait",
+    value: "Portrait",
+  },
+  {
+    label: "Landscape",
+    value: "Landscape",
+  },
+];
+export const PageSize = [
+  {
+    value: "A0",
+    label: "A0",
+  },
+
+  {
+    value: "A1",
+    label: "A1",
+  },
+
+  {
+    value: "A2",
+    label: "A2",
+  },
+
+  {
+    value: "A3",
+    label: "A3",
+  },
+
+  {
+    value: "A4",
+    label: "A4",
+  },
+
+  {
+    value: "A5",
+    label: "A5",
+  },
+
+  {
+    value: "A6",
+    label: "A6",
+  },
+
+  {
+    value: "A7",
+    label: "A7",
+  },
+
+  {
+    value: "A8",
+    label: "A8",
+  },
+
+  {
+    value: "A9",
+    label: "A9",
+  },
+
+  {
+    value: "A10",
+    label: "A10",
+  },
+
+  {
+    value: "B0",
+    label: "B0",
+  },
+
+  {
+    value: "B1",
+    label: "B1",
+  },
+
+  {
+    value: "B2",
+    label: "B2",
+  },
+
+  {
+    value: "B3",
+    label: "B3",
+  },
+
+  {
+    value: "B4",
+    label: "B4",
+  },
+
+  {
+    value: "B5",
+    label: "B5",
+  },
+  {
+    value: "ArchA",
+    label: "ArchA",
+  },
+  {
+    value: "ArchB",
+    label: "ArchB",
+  },
+  {
+    value: "ArchC",
+    label: "ArchC",
+  },
+  {
+    value: "ArchD",
+    label: "ArchD",
+  },
+  {
+    value: "ArchE",
+    label: "ArchE",
+  },
+
+  {
+    value: "Flsa",
+    label: "Flsa",
+  },
+  { value: "HalfLetter", label: "HalfLetter" },
+  { value: "Ledger", label: "Ledger" },
+  { value: "Legal", label: "Legal" },
+  { value: "Letter", label: "Letter" },
+  { value: "Letter11x17", label: "Letter11x17" },
+  { value: "Note", label: "Note" },
+];
+export const ReportType = [
+  { label: "Lab Report", value: "Lab Report" },
+  { label: "Bill", value: "Bill" },
+  { label: "TRF", value: "TRF" },
+  { label: "Department Slip", value: "Department Slip" },
+];
+export const TypePlaceHolder = [
+  {
+    label: "Header",
+    value: "Header",
+  },
+  {
+    label: "Page",
+    value: "Page",
+  },
+  {
+    label: "Footer",
+    value: "Footer",
+  },
+];
+export const RoundUpTo = [
+  { label: "0", value: "0" },
+  { label: "1", value: "1" },
+  { label: "2", value: "2" },
+  { label: "3", value: "3" },
+  { label: "4", value: "4" },
+
 ];

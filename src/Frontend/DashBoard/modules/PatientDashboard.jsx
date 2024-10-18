@@ -94,7 +94,7 @@ const PatientDashBoard = ({ Data, centreData }) => {
       },
     ],
   };
-  console.log("datashelp", data)
+  
   const chartData3 = {
     labels: [t("Total Booking"), t("Sample Collected"), t("SampleNotCollected"), t("Dept.Received"), t("Rejected"), t("Approved")],
     datasets: [

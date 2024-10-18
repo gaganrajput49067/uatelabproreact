@@ -97,7 +97,7 @@ const Menubar = ({ pageData = [], handleSidebar }) => {
         <input
           className="search-menu-container"
           type="text"
-          placeholder="Search Menu"
+          placeholder="Search Page"
           onChange={handleChange}
         />
         <i className="fa fa-search"></i>

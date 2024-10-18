@@ -2,7 +2,7 @@ import React from "react";
 import { ProgressBar } from "react-bootstrap";
 
 function ProgressBarCustom({ value, total, text, variant }) {
-  console.log(value);
+ 
   const findPercentage = () => {
     let val = 0;
     let vals = value ? value : 0;

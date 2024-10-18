@@ -12,7 +12,7 @@ import {
 import { useTranslation } from "react-i18next";
 const RadarChart = (state) => {
   const { t } = useTranslation();
-console.log("radar",state)
+
   ChartJS.register(
     RadialLinearScale,
     PointElement,
