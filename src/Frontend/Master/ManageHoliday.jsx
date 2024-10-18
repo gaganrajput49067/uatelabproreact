@@ -155,7 +155,7 @@ const ManageHoliday = () => {
                 name="Holiday"
                 id="ToDate"
                 placeholder=" "
-                date={payload?.Holiday}
+                value={payload?.Holiday}
                 onChange={dateSelect}
                 minDate={new Date()}
                 lable="Holiday Date"
