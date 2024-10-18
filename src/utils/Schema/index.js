@@ -1,3 +1,4 @@
+import moment from "moment";
 import * as Yup from "yup";
 const conditionalRequired = (message) =>
   Yup.string().test("isRequired", message, function (value) {
@@ -720,37 +721,127 @@ export const MicroBioMasterSchema = (formData) => {
   if (formData?.Code.trim() === "") {
     err = { ...err, Code: "This Field is Required" };
   }
- 
+
   return err;
 };
-  
-   
 
-  export const validationForIDMAster = (formData) => {
-    let err = "";
-    if (formData?.TypeName === "") {
-      err = { ...err, TypeName: "This Field is Required" };
-    }
-    if (formData?.InitialChar?.trim() === "") {
-      err = { ...err, InitialChar: "This Field is Required" };
-    }
-    if (formData?.FinancialYearStart?.trim() === "") {
-      err = { ...err, FinancialYearStart: "This Field is Required" };
-    }
-  
-    if (formData?.TypeLength === "") {
-      err = { ...err, TypeLength: "This Field is Required" };
-    }
-    return err;
-  };
+export const validationForIDMAster = (formData) => {
+  let err = "";
+  if (formData?.TypeName === "") {
+    err = { ...err, TypeName: "This Field is Required" };
+  }
+  if (formData?.InitialChar?.trim() === "") {
+    err = { ...err, InitialChar: "This Field is Required" };
+  }
+  if (formData?.FinancialYearStart?.trim() === "") {
+    err = { ...err, FinancialYearStart: "This Field is Required" };
+  }
 
-  export const OutSourceLabMasterValidationSchema = Yup.object({
-    LabName: Yup.string()
-      .required("This Field is Required")
-      .trim("The contact name cannot include leading and trailing spaces"),
-    ContactPersonName: Yup.string()
-      .required("This Field is Required")
-      .trim("The contact name cannot include leading and trailing spaces"),
-    MobileNo: Yup.string().min(10).required("This Field is Required"),
-      EmailID: Yup.string().email(),
-  });
+  if (formData?.TypeLength === "") {
+    err = { ...err, TypeLength: "This Field is Required" };
+  }
+  return err;
+};
+
+export const OutSourceLabMasterValidationSchema = Yup.object({
+  LabName: Yup.string()
+    .required("This Field is Required")
+    .trim("The contact name cannot include leading and trailing spaces"),
+  ContactPersonName: Yup.string()
+    .required("This Field is Required")
+    .trim("The contact name cannot include leading and trailing spaces"),
+  MobileNo: Yup.string().min(10).required("This Field is Required"),
+  EmailID: Yup.string().email(),
+});
+
+export const ChangePasswordSchema = Yup.object({
+  OldPassword: Yup.string()
+    .required("Please Enter your old Password")
+    .min(6)
+    .trim("The contact name cannot include leading and trailing spaces"),
+  NewPassword: Yup.string()
+    .trim("The contact name cannot include leading and trailing spaces")
+    .required("Please Enter your password")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+    ),
+  ConfirmPassword: Yup.string()
+    .trim("The contact name cannot include leading and trailing spaces")
+    .required()
+    .oneOf([Yup.ref("NewPassword"), null], "Passwords must match"),
+});
+
+export const validationForAgeWise = (formData) => {
+  let err = "";
+  if (formData?.DiscountType.trim() === "") {
+    err = { ...err, DiscountType: "This Field is Required" };
+  }
+  // if (formData?.FromAge > formData?.ToAge ) {
+  //   err = { ...err,FromAgeCheck : "FromAge is greater" };
+  // }
+  // if (formData?.FromAge < formData?.ToAge) {
+  //   err = { ...err, ToAgeCheck: "ToAge is greater" };
+  // }
+  if (["", "0"].includes(formData?.DiscountPer)) {
+    err = { ...err, DiscountPer: "This Field is Required" };
+  } else if (formData?.DiscountPer > 100) {
+    err = { ...err, DiscountPer: "Enter Valid Discount" };
+  }
+
+  if (formData?.FromAge === "") {
+    err = { ...err, FromAge: "This Field is Required" };
+  } else if (formData?.FromAge > 110) {
+    err = { ...err, FromAge: "Enter Valid Age" };
+  }
+
+  if (
+    moment(formData?.FromDate).format("DD-MM-YYYY") >
+    moment(formData?.ToDate).format("DD-MM-YYYY")
+  ) {
+    err = { ...err, ToDateCheck: "Invalid Date" };
+  }
+
+  if (formData?.ToAge === "") {
+    err = { ...err, ToAge: "This Field is Required" };
+  } else if (formData?.ToAge > 110) {
+    err = { ...err, ToAge: "Enter Valid Age" };
+  } else if (formData?.ToAge == 0) {
+    err = { ...err, ToAge: " Should not be 0" };
+  } else if (formData?.ToAge < formData?.FromAge) {
+    err = { ...err, ToAge: " Must be equal or greater than FromAge" };
+  }
+
+  if (formData?.Gender === "") {
+    err = { ...err, Gender: "Gender is Required" };
+  }
+
+  if (formData?.DiscountShareType === "") {
+    err = { ...err, DiscountShareType: "DiscountShareType is Required" };
+  }
+
+  return err;
+};
+
+export const validationForMachineMaster = (payload) => {
+  let err = "";
+  if (payload?.MachineID.trim() === "") {
+    err = { ...err, MachineID: "This Field is Required" };
+  }
+  if (payload?.MachineName === "") {
+    err = { ...err, MachineName: "This Field is Required" };
+  }
+
+  if (payload?.CentreID === "") {
+    err = { ...err, CentreID: "Centre ID is Required" };
+  }
+
+  if (payload?.GlobalMachineID === "") {
+    err = { ...err, GlobalMachineID: "Global Machine ID is Required" };
+  }
+  if (payload?.ITDKEY === "") {
+    err = { ...err, ITDKEY: "This Field is Required" };
+  }
+
+  return err;
+};

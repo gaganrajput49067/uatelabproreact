@@ -1,10 +1,11 @@
 import moment from "moment/moment";
 import { toast } from "react-toastify";
+import { axiosInstance } from "../../../utils/axiosInstance";
 
 const getS3url = async (id) => {
   if (id && id !== "") {
     try {
-      const res = await axios.post("/api/v1/CommonController/GetFileUrl", {
+      const res = await axiosInstance.post("CommonController/GetFileUrl", {
         Key: id,
       });
       return res?.data?.message;
@@ -19,7 +20,7 @@ const getS3url = async (id) => {
 export const getS3FileData = async (guidNumber, pageName) => {
   let Data = [];
   try {
-    const res = await axios.post("/api/v1/CommonController/GetDocument", {
+    const res = await axiosInstance.post("CommonController/GetDocument", {
       Page: pageName,
       Guid: guidNumber,
     });
@@ -106,4 +107,54 @@ export const isChecked = (name, state, value, id) => {
     });
     return data;
   }
+};
+
+export const getAccessRateType = (state) => {
+  axiosInstance
+    .get("RateType/getAccessRateType")
+    .then((res) => {
+      let data = res.data.message;
+      let CentreDataValue = data.map((ele) => {
+        return {
+          value: ele.RateTypeID,
+          label: ele.Rate,
+        };
+      });
+      state(CentreDataValue);
+    })
+    .catch((err) => console.log(err));
+};
+
+export const getAccessRateTypeNew = (state) => {
+  axiosInstance
+    .post("Centre/getRateTypeWithGlobalCentre")
+    .then((res) => {
+      let data = res.data.message;
+      let CentreDataValue = data.map((ele) => {
+        return {
+          value: ele.RateTypeID,
+          label: ele.Rate,
+        };
+      });
+      state(CentreDataValue);
+    })
+    .catch((err) => console.log(err));
+};
+
+export const getBillingCategory = (state) => {
+  axiosInstance
+    .get("RateList/getBillingCategory")
+    .then((res) => {
+      let data = res.data.message;
+      let val = data.map((ele) => {
+        return {
+          value: ele?.BillingCategoryID,
+          label: ele?.BillingCategory,
+        };
+      });
+      state(val);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

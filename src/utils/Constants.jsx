@@ -483,3 +483,42 @@ export const MicroBioMaster = [
   { label: "Organism", value: "2" },
   { label: "Antibiotic", value: "4" }
 ];
+
+export const Showonly = [
+  {
+    label: "Synced Data",
+    value: "1",
+  },
+  {
+    label: "Pending Data",
+    value: "0",
+  },
+];
+
+export const NoOfRecord = [
+  {
+    label: 5,
+    value: Number(5),
+  },
+  {
+    label: 10,
+    value: Number(10),
+  },
+  {
+    label: 20,
+    value: Number(20),
+  },
+  {
+    label: 50,
+    value: Number(50),
+  },
+];
+
+export const RoundUpTo = [
+  { label: "0", value: "0" },
+  { label: "1", value: "1" },
+  { label: "2", value: "2" },
+  { label: "3", value: "3" },
+  { label: "4", value: "4" },
+
+];

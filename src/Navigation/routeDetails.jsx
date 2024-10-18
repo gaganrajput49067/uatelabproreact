@@ -311,6 +311,58 @@ export let routeDetails = [
         path: "/IDMaster",
         element: "../Frontend/Master/IDMaster",
       },
+      {
+        path: "/ChangePassword",
+        element: "../Frontend/Master/ChangePassword",
+      },
+      {
+        path: "/ManageHoliday",
+        element: "../Frontend/Master/ManageHoliday",
+      },
+      {
+        path: "/AgeWiseDiscount",
+        element: "../Frontend/Master/AgeWiseDiscount",
+      },
+      {
+        path: "/AgeWiseDiscountList",
+        element: "../Frontend/Master/AgeWiseDiscountList",
+      },
+      {
+        path: "/setDoctor",
+        element: "../Frontend/Master/SetDoctorShare",
+      },
+      {
+        path: "/MergeDoctor",
+        element: "../Frontend/Master/MergeDoctor",
+      },
+      {
+        path: "/DoctorMisReportPage",
+        element: "../Frontend/Master/DoctorMisReportPage",
+      },
+      {
+        path: "/MachineMaster",
+        element: "../Frontend/Machine/MachineMaster",
+      },
+      {
+        path: "/MachineGroup",
+        element: "../Frontend/Machine/MachineGroup",
+      },
+      {
+        path: "/MachineReading",
+        element: "../Frontend/Machine/MachineReading",
+      },
+      {
+        path: "/MachineParams",
+        element: "../Frontend/Machine/MachineParams",
+      },
+      {
+        path: "/BreakpointPage",
+        element: "../Frontend/Master/BreakpointPage",
+      },
+      {
+        path: "/MachineReferenceRangeMaster",
+        element: "../Frontend/Master/MachineReferenceRangeMaster"
+      },
       { path: "*", element: "../components/NotFound" },
     ],
   },
