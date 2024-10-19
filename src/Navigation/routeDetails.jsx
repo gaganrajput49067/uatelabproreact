@@ -459,6 +459,14 @@ export let routeDetails = [
         path: "/ReportBill",
         element: "../Frontend/Reports/ReportBill",
       },
+      {
+        path: "/CampConfigurationMaster",
+        element: "../Frontend/Camp/CampConfigurationMaster",
+      },
+      {
+        path: "/CampConfigurationApproval",
+        element: "../Frontend/Camp/CampConfigurationApproval",
+      },
       { path: "*", element: "../Frontend/Extra/BlankPage" },
     ],
   },

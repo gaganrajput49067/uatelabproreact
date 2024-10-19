@@ -60,7 +60,7 @@ const Table = ({
       </div>
 
       {(data.length > itemsPerPages || nowFixed) && edit && (
-        <div className="pagination">
+        <div className="pagination d-flex">
           <span className="fw-bold"> Items Per Page</span>&nbsp;&nbsp;&nbsp;
           <div style={{ display: "flex", alignItems: "center" }}>
             <TableSelectBox

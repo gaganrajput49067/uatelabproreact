@@ -59,9 +59,9 @@ function CustomModal({ visitID, show, onHide }) {
   }, [auditValue.ItemId]);
   return (
     <Modal title={tableData[0]?.pname} handleClose={onHide} top={"100px"}>
-      <div style={{ width: "800px" }}>
+ 
         <div className="row mb-2">
-          <div className="col-sm-12 w-100">
+          <div className="col-sm-12">
             <select
               className="select-input-box form-control input-sm"
               onChange={handleChange}
@@ -87,7 +87,7 @@ function CustomModal({ visitID, show, onHide }) {
             </button>
           </div>
         </div>
-      </div>
+    
     </Modal>
   );
 }

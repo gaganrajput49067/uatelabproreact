@@ -778,3 +778,9 @@ export const BindGroupToken = (state) => {
       console.log(err?.res?.data ? err?.res?.data : "Something Went Wrong")
     );
 };
+
+export const CheckApprovalRights = (state) => {
+  axiosInstance.get("Camp/Aprrovalrights").then((res) => {
+    state(res?.data?.message);
+  });
+};

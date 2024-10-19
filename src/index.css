@@ -168,8 +168,7 @@
   width: 100%;
   display: flex;
 }
-
-/* @media only screen and (max-width: 574) {
+@media (max-width: 768px) {
   .col-lg-1,
   .col-lg-10,
   .col-lg-11,
@@ -218,12 +217,19 @@
   .col-xs-7,
   .col-xs-8,
   .col-xs-9 {
-    margin-top: 6px !important;
+    margin-top: 4px !important;
+  }
+}
+ /* @media (max-width: 768px) {
+  .btn {
+    width: auto; 
   }
 } */
-.btn {
-  width: 100%;
-}
+@media (min-width: 768px) {
+  .btn {
+    width: 100%; 
+  }
+} 
 
 .btn-sm {
   height: 30px;

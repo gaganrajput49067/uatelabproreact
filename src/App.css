@@ -35,6 +35,13 @@ h6 {
   justify-content: flex-start;
   flex-direction: "";
 }
+
+@media (max-width: 768px) {
+  .result-entry-test p {
+    word-wrap:break-word; 
+    white-space: normal;
+  }
+}
 .custom-bill {
   font-size: 13px !important;
   font-weight: bold;

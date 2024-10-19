@@ -117,7 +117,7 @@ function RETable({ redata, GetResultEntry, show, show2 }) {
         VisitNo: data?.VisitNo,
         PEmail: data?.PEmail,
         MacID: "",
-        LedgertransactionIDHash:data?.LedgertransactionIDHash
+        LedgertransactionIDHash: data?.LedgertransactionIDHash,
       },
 
       index,
@@ -198,9 +198,7 @@ function RETable({ redata, GetResultEntry, show, show2 }) {
                   >
                     <div>{index + 1}</div>
                     {data?.isUrgent === 1 && (
-                      <div>
-                        {/* <img src={urgentGIF}></img> */}
-                      </div>
+                      <div>{/* <img src={urgentGIF}></img> */}</div>
                     )}
                     &nbsp;
                     {data?.IsVip === 1 && (
@@ -371,7 +369,9 @@ function RETable({ redata, GetResultEntry, show, show2 }) {
           </tbody>
         </Table>
       ) : (
-        <NoRecordFound />
+        <div className="card">
+          <NoRecordFound />
+        </div>
       )}
       {modal && (
         <CustomModal

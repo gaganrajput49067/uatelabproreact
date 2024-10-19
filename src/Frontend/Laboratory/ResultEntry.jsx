@@ -3259,14 +3259,14 @@ const ResultEntry = () => {
             </tbody>
           </Table>
           <div className="card m-0 p-0 pb-2" style={{ zIndex: 0 }}>
-            <div className="row mt-3" style={{ textWrap: "avoid" }}>
+            <div className="row mt-3  d-flex flex-wrap" style={{ textWrap: "avoid" }}>
               {loading ? (
                 <div className="mx-3">
                   <Loading />
                 </div>
               ) : (
                 <>
-                  <div className="col-sm-1">
+                  <div className="col-3 col-sm-1">
                     <button
                       className="previous roundarrow btn-success mx-2"
                       onClick={() => {
@@ -3337,7 +3337,7 @@ const ResultEntry = () => {
                   </div>
 
                   {["", 3, 10, 11, 13, 14, 15].includes(statusValue) && (
-                    <div className="col-sm-1 ">
+                    <div className="col-2  col-sm-1 ">
                       <button
                         className="btn btn-info mx-2 my-1 my btn-sm"
                         onClick={() => handleResultSubmit("Save")}
@@ -3347,7 +3347,7 @@ const ResultEntry = () => {
                     </div>
                   )}
 
-                  <div className="col-sm-1">
+                  <div className="col-3  col-sm-1">
                     <button
                       className="btn btn-dark mx-2 my-1 my btn-sm"
                       type="button"
@@ -3360,7 +3360,7 @@ const ResultEntry = () => {
                       {t("Main List")}
                     </button>
                   </div>
-                  <div className="col-sm-2 pt-1">
+                  <div className=" col-4 col-sm-2 ">
                     <SelectBox
                       options={[
                         { label: "Select Doctor", value: "" },
@@ -3372,7 +3372,7 @@ const ResultEntry = () => {
                       onChange={handleDoctorName}
                     />
                   </div>
-                  <div className="col-sm-2 pt-1">
+                  <div className=" col-4 ml-1 col-sm-2">
                     <SelectBox
                       options={machine}
                       id="Machine"
@@ -3400,7 +3400,7 @@ const ResultEntry = () => {
                       lable={"Machine"}
                     />
                   </div>
-                  <div className="col-sm-1">
+                  <div className="col-2 col-sm-1">
                     {PrintReportLoading ? (
                       <Loading />
                     ) : (
@@ -3414,7 +3414,7 @@ const ResultEntry = () => {
                       </button>
                     )}
                   </div>
-                  <div className="col-sm-1">
+                  <div className="col-2 col-sm-1">
                     {buttonsData?.map(
                       (ele, index) =>
                         ele?.AccessBy !== "Not Approved" &&
@@ -3435,7 +3435,7 @@ const ResultEntry = () => {
                         )
                     )}
                   </div>
-                  <div className="col-sm-1">
+                  <div className="col-2 col-sm-1">
                     <button
                       className="btn btn-warning btn-sm mx-2 my-1"
                       type="button"
@@ -3445,7 +3445,7 @@ const ResultEntry = () => {
                       DeltaCheck
                     </button>
                   </div>
-                  <div className="col-sm-1">
+                  <div className="col-4 col-sm-1">
                     <button
                       className="btn btn-success mx-2 btn-sm my-1 my"
                       onClick={() => {
@@ -3455,7 +3455,7 @@ const ResultEntry = () => {
                       {t("Patient Details")}
                     </button>
                   </div>
-                  <div className="col-sm-1">
+                  <div className="col-4 col-sm-1">
                     <button
                       className="btn btn-danger btn-sm mx-2 my-1"
                       type="button"

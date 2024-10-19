@@ -360,7 +360,9 @@ function DepartmentReceiveTable({
           }}
         </Table>
       ) : (
-        <NoRecordFound />
+        <div className="card">
+          <NoRecordFound />
+        </div>
       )}
       {modal && (
         <CustomModal

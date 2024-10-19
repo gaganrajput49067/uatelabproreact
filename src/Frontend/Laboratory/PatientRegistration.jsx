@@ -3583,6 +3583,7 @@ const PatientRegistration = () => {
                     type="number"
                     lable="Mobile Number"
                     placeholder=" "
+                    required
                   />
                   <Button
                     icon="pi pi-search"

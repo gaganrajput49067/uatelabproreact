@@ -404,7 +404,7 @@ const ReceiptReprint = () => {
               />
             </div>
           </div>
-          <div className="row d-flex" style={{ alignItems: "center" }}>
+          <div className="row" >
             <div className="col-md-2">
               <DatePicker
                 className="custom-calendar"

@@ -188,7 +188,7 @@ function RECultureTable({
                       {data?.Age_Gender}&nbsp;
                     </td>
                     <td data-title={t("Status")}>{data?.SampleStatus}&nbsp;</td>
-                    <td data-title={t("Test")}>
+                    <td data-title={t("Test")} className="result-entry-test">
                       <p className={`round Status-${data?.Status}`}>
                         {data?.Test}
                       </p>
@@ -199,8 +199,11 @@ function RECultureTable({
                         <div
                           style={{
                             display: "flex",
-                            flexDirection: "column",
-                            padding: "3px",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            cursor: "pointer",
+                            padding: "5px",
                           }}
                         >
                           {printLoading.Without &&
