@@ -950,3 +950,40 @@ export const CampRequestSchema = (formData) => {
   
   return err;
 };
+export const validateIssue = (formData, type, error) => {
+  let err = error ?? "";
+  if (formData?.cardid === "" && (type === "cardid" || type === "All")) {
+    err = { ...err, cardid: "This feild is Required" };
+  }
+
+  if (formData?.PatientData?.DOB === "" && (type === "DOB" || type === "All")) {
+    err = { ...err, DOB: "Select from Item" };
+  }
+
+  if (
+    formData?.PatientData?.Mobile === "" &&
+    (type === "Mobile" || type === "All")
+  ) {
+    err = { ...err, Mobile: "This Field is Required" };
+  } else if (
+    formData?.PatientData?.Mobile.length !== 10 &&
+    (type === "Mobile" || type === "All")
+  ) {
+    err = { ...err, Mobilelen: "Invalid!.. 10 Digits Required" };
+  }
+
+  if (
+    formData?.PatientData?.PName === "" &&
+    (type === "PName" || type === "All")
+  ) {
+    err = { ...err, PName: "This Field is Required" };
+  } else if (
+    formData?.PatientData?.PName !== "" &&
+    formData?.PatientData?.PName.length <=2 &&
+    (type === "PName" || type === "All")
+  ) {
+    err = { ...err, PNamelength: "This Field is Required" };
+  }
+
+  return err;
+};

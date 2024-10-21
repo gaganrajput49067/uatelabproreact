@@ -158,3 +158,25 @@ export const getBillingCategory = (state) => {
       console.log(err);
     });
 };
+export const AllowedSpecialChar = (val, allowedSpecialCharacters) => {
+  const isValid =
+    val === "" ||
+    [...val].every(
+      (char) =>
+        /[a-zA-Z0-9]/.test(char) || allowedSpecialCharacters.includes(char)
+    );
+  if (isValid) {
+    return val;
+  } else {
+    return; 
+  }
+};
+
+export const PreventSpecialCharacterandNumber = (value) => {
+  const reg = /[^a-zA-Z ]/g;
+  if (!reg.test(value)) {
+    return true;
+  } else {
+    return false;
+  }
+};
