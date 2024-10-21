@@ -315,7 +315,7 @@ export let routeDetails = [
         path: "/ChangePaymentMode",
         element: "../Frontend/Administrator/ChangePaymentMode",
       },
-       {
+      {
         path: "/ChangePassword",
         element: "../Frontend/Master/ChangePassword",
       },
@@ -331,7 +331,7 @@ export let routeDetails = [
         path: "/DiscountApproval",
         element: "../Frontend/Administrator/DiscountApproval",
       },
-        {
+      {
         path: "/ManageHoliday",
         element: "../Frontend/Master/ManageHoliday",
       },
@@ -395,7 +395,7 @@ export let routeDetails = [
         path: "/DoctorTypeCopyShare",
         element: "../Frontend/Master/DoctorTypeCopyShare",
       },
-       {
+      {
         path: "/MachineMaster",
         element: "../Frontend/Machine/MachineMaster",
       },
@@ -435,9 +435,9 @@ export let routeDetails = [
         path: "/BreakpointPage",
         element: "../Frontend/Master/BreakpointPage",
       },
-        {
+      {
         path: "/MachineReferenceRangeMaster",
-        element: "../Frontend/Master/MachineReferenceRangeMaster"
+        element: "../Frontend/Master/MachineReferenceRangeMaster",
       },
       {
         path: "/ModalityMaster",
@@ -466,6 +466,14 @@ export let routeDetails = [
       {
         path: "/CampConfigurationApproval",
         element: "../Frontend/Camp/CampConfigurationApproval",
+      },
+      {
+        path: "/CampCreationMaster",
+        element: "../Frontend/Camp/CampCreationMaster",
+      },
+      {
+        path: "/CampRequest",
+        element: "../Frontend/Camp/CampRequest",
       },
       { path: "*", element: "../Frontend/Extra/BlankPage" },
     ],

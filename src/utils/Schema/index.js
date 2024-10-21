@@ -934,3 +934,19 @@ export const validationForMachineMaster = (payload) => {
 
   return err;
 };
+
+
+export const CampRequestSchema = (formData) => {
+  let err = "";
+  if (formData?.CampName=== "") {
+    err = { ...err, CampName: "This Field is Required" };
+  }
+  if (formData?.center=== "") {
+    err = { ...err, Campcenter: "This Field is Required" };
+  }
+  if (formData?.campType === "") {
+    err = { ...err, Camptype: "This Field is Required" };
+  }
+  
+  return err;
+};

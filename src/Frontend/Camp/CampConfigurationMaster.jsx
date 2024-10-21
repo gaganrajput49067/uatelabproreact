@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { axiosInstance } from "../../utils/axiosInstance";
@@ -344,13 +344,11 @@ const CampConfigurationMaster = () => {
                       >
                         <td data-title="S.No">{index + 1}&nbsp;</td>
                         <td data-title="Camp Centre">{ele?.Centre}&nbsp;</td>
-                        {/* <td data-title="Rate Type">{ele?.ClientType}&nbsp;</td> */}
+
                         <td data-title="Rate Type Code">
                           {ele?.CentreCode}&nbsp;
                         </td>
-                        {/* <td data-title="Rate Type Name">
-                          {ele?.ClientName}&nbsp;
-                        </td> */}
+
                         <td data-title="April">
                           {ele?.ApprovedStatus === 1 ? (
                             ele?.Apr
