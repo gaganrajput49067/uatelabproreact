@@ -1,5 +1,5 @@
 import React from "react";
-import logoitdose from "../../assets/image/logoitdose.png"
+import logoitdose from "../../assets/image/logoitdose2.png"
 const Loading = () => {
   return (
     <div className="loading-overlay">

@@ -209,3 +209,69 @@ export const getBase64 = (file) => {
     };
   });
 };
+
+export const getLabelUrl = (url) => {
+  switch (url) {
+    case "/patientregister":
+      return <span className="linkStatecss">Patient Registration</span>;
+    case "/samplecollection":
+      return <span className="linkStatecss">Sample Collection</span>;
+    case "/departmentreceive":
+      return <span className="linkStatecss">Department Receive</span>;
+    case "/resultentry":
+      return <span className="linkStatecss">Result Entry</span>;
+    case "/dispatchreport":
+      return <span className="linkStatecss">Dispatch Lab Report</span>;
+    case "/receiptreprint":
+      return <span className="linkStatecss">Receipt Reprint</span>;
+    case "/resultculture":
+      return <span className="linkStatecss">Result Culture</span>;
+  }
+};
+
+export const getLabIcons = (icon) => {
+  switch (icon) {
+    case "/patientregister":
+      return <i className="fas fa-tachometer-alt nav-icon "></i>;
+    case "/samplecollection":
+      return <i className="fas fa-tachometer-alt nav-icon"></i>;
+    case "/departmentreceive":
+      return <i className="fas fa-tachometer-alt nav-icon"></i>;
+    case "/resultentry":
+      return <i className="fas fa-tachometer-alt nav-icon"></i>;
+    case "/dispatchreport":
+      return <i className="fas fa-tachometer-alt nav-icon"></i>;
+    case "/receiptreprint":
+      return <i className="fas fa-tachometer-alt nav-icon"></i>;
+    case "/resultculture":
+      return <i className="fas fa-tachometer-alt nav-icon"></i>;
+  }
+};
+
+export function formatDate(dateString) {
+  const date = new Date(dateString);
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  const month = monthNames[date.getUTCMonth()];
+  const year = date.getUTCFullYear();
+
+  const hours = String(date.getUTCHours()).padStart(2, "0");
+  const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+  const seconds = String(date.getUTCSeconds()).padStart(2, "0");
+
+  return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+}

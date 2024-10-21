@@ -12,7 +12,10 @@ import {
   getDashBoardData,
 } from "./utitlity";
 import { useNavigate } from "react-router-dom";
-import { getDashboardAccessCentres } from "../../utils/NetworkApi/commonApi";
+import {
+  getDashboardAccessCentres,
+  getQuickLinks,
+} from "../../utils/NetworkApi/commonApi";
 import MultiAxisLineChart from "./modules/MultiAxisLineChart";
 import RevenueChart from "./modules/RevenueChart";
 import { Bar } from "react-chartjs-2";
@@ -30,6 +33,7 @@ import { Dock } from "primereact/dock";
 import { RadioButton } from "primereact/radiobutton";
 import BlockComponent from "./BlockComponent";
 import RazorPay from "../../Payment/RazorPay";
+import { getLabelUrl, getLabIcons } from "../../utils/helpers";
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const MainDaashBoard = () => {
@@ -46,69 +50,15 @@ const MainDaashBoard = () => {
     ToTime: "23:59:59",
   });
   const elementRef = useRef(null);
-  //   useEffect(() => {
-  //     // Select the pieces of the chart using the class name
-  //     const pieces = gsap.utils.toArray(".piece");
 
-  //     // Enhanced break effect (more noticeable displacement)
-  //     gsap.fromTo(
-  //       pieces,
-  //       {
-  //         opacity: 1,
-  //         x: 0,
-  //         y: 0,
-  //         scale: 1,
-  //         rotation: 0,
-  //         skewX: 0,
-  //         skewY: 0,
-  //       },
-  //       {
-  //         opacity: 0.9, // Slight opacity change
-  //         x: (i) => gsap.utils.random(-100, 100), // Increase scatter range for larger displacement
-  //         y: (i) => gsap.utils.random(-100, 100),
-  //         scale: (i) => gsap.utils.random(0.9, 1.1), // More noticeable scaling
-  //         rotation: (i) => gsap.utils.random(-15, 15), // Increase rotation for a stronger crack effect
-  //         skewX: (i) => gsap.utils.random(-5, 5), // Slightly more skew
-  //         skewY: (i) => gsap.utils.random(-5, 5),
-  //         duration: 0.4, // Keep the crack effect fast
-  //         ease: "power2.out", // Slightly stronger ease for the break effect
-  //         stagger: 0.05,
-  //         onComplete: mergePieces,
-  //       }
-  //     );
-
-  //     // Function to merge pieces back together with background color change
-  //     function mergePieces() {
-  //       // Change background color before merging
-  //       gsap.to(".chart-container", {
-  //         backgroundColor: "#e0f7fa", // Soft background color during merge
-  //         duration: 0.6, // Smooth transition
-  //       });
-
-  //       // Merge the pieces back together
-  //       gsap.to(pieces, {
-  //         x: 0,
-  //         y: 0,
-  //         opacity: 1,
-  //         scale: 1,
-  //         rotation: 0,
-  //         skewX: 0,
-  //         skewY: 0,
-  //         duration: 0.6, // Keep the merge smooth
-  //         ease: "power2.inOut", // Soft ease for a fluid merge
-  //         stagger: 0.05,
-  //         onComplete: resetBackground, // Reset background after merge
-  //       });
-  //     }
-
-  //     // Reset background color after merge completes
-  //     function resetBackground() {
-  //       gsap.to(".chart-container", {
-  //         backgroundColor: "#ffffff", // Revert to original background color
-  //         duration: 0.6, // Smooth transition back
-  //       });
-  //     }
-  // }, []);
+  const [linkState, setLinkState] = useState([]);
+  useEffect(() => {
+    gsap.fromTo(
+      [elementRef.current],
+      { opacity: 0, scale: 0.8 },
+      { opacity: 1, scale: 1, duration: 1, ease: "power2.out", stagger: 0.3 }
+    );
+  }, []);
   useEffect(() => {
     getDashboardAccessCentres({
       state: setAccessCentre,
@@ -120,7 +70,9 @@ const MainDaashBoard = () => {
       },
     });
   }, []);
-
+  useEffect(() => {
+    getQuickLinks(setLinkState);
+  }, []);
   const getOutput = (name, value) => {
     const data = { ...payload };
     if (Array.isArray(payload.CentreID) || payload.CentreID == "") {
@@ -134,10 +86,10 @@ const MainDaashBoard = () => {
   return (
     <>
       <RazorPay />
-      <div ref={elementRef}>
-        <div className="header-main-menu-container m-2 piece">
+      <div>
+        <div className="header-main-menu-container m-2">
           <span className="header-dashboard">DashBoard</span>
-          <div className="header-option piece">
+          <div className="header-option">
             <div className="col-sm-3 mt-1">
               <SelectBox
                 className="required-fields"
@@ -183,13 +135,13 @@ const MainDaashBoard = () => {
           </div>{" "}
         </div>
         <div className="w-100 ss-none" style={{ margin: "" }}>
-          <BlockComponent
+          {/* <BlockComponent
             userDashBoardData={userDashBoardData}
             userWiseDashBoard={userWiseDashBoard}
-          />
+          /> */}
         </div>
-        <div class="main-dashboard-outlet piece">
-          <div class="main-cont-welcom piece">
+        <div class="main-dashboard-outlet">
+          <div class="main-cont-welcom piece" ref={elementRef}>
             <div className="dashboard-welcome-cont piece">
               <div>
                 <span>{getGreeting("greeting")}</span>
@@ -198,26 +150,51 @@ const MainDaashBoard = () => {
               </div>
             </div>
           </div>
-          <div class="div2 dashboard-Chart pt-3 piece">
+          <div class="div2 dashboard-Chart pt-3">
             <DataSet data={userDashBoardData} />
           </div>
-          <div class="SalesCollection dashboard-Chart piece">
+          <div class="SalesCollection dashboard-Chart">
             <span>Sales Collection</span>
             <SalesCollection userWiseDashBoard={userDashBoardData} />
           </div>
-          <div class="div4 dashboard-Chart piece"> d</div>
-          <div class="MultiAxisLineChart dashboard-Chart piece">
+          <div class="div4 dashboard-Chart2">
+            {" "}
+            <div
+              className="innerCardDayswise"
+              style={{ height: "auto" }}
+              ref={elementRef}
+            >
+              <span>Quick Links</span>
+              {linkState?.map((ele, index) => (
+                <h6
+                  key={index}
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    margin: "8.5px 2px",
+                    padding: 0,
+                  }}
+                >
+                  <a>{getLabIcons(ele)}</a>
+                  <a href={ele} >
+                    {getLabelUrl(ele)}
+                  </a>
+                </h6>
+              ))}
+            </div>
+          </div>
+          <div class="MultiAxisLineChart dashboard-Chart">
             <span>Registration wise Revenue</span>
             <MultiAxisLineChart
               data1={userDashBoardData?.totalBookeddata}
               data2={userDashBoardData?.totalBookeddata}
             />
           </div>
-          <div class="RevenueCollection dashboard-Chart piece">
+          <div class="RevenueCollection dashboard-Chart">
             <span>Revenue Collection</span>
             <RevenueCollection userWiseDashBoard={userDashBoardData} />
           </div>
-          <div class="sample-data-chart dashboard-Chart piece">
+          <div class="sample-data-chart dashboard-Chart">
             <span>Sample Collection Status</span>
             <SampleCollection userWiseDashBoard={userWiseDashBoard} />
           </div>
@@ -242,10 +219,7 @@ function SampleCollection({ userWiseDashBoard }) {
 
   return (
     <>
-      <div
-        className="sample-collection-selectbox piece"
-        style={{ ...getPosition() }}
-      >
+      <div className="sample-collection-selectbox" style={{ ...getPosition() }}>
         <SelectBox
           className="required-fields"
           placeholderName="Chart Type"
@@ -271,7 +245,7 @@ function RevenueCollection({ userWiseDashBoard }) {
   return <>{<RevenueChart state={data} />}</>;
 }
 
-function SalesCollection({ userWiseDashBoard }) {;
+function SalesCollection({ userWiseDashBoard }) {
   const month = getGreeting("month");
   const SalesCollection = {
     labels: [month[2], month[1], month[0]],
@@ -337,17 +311,37 @@ function SalesCollection({ userWiseDashBoard }) {;
 }
 
 function DataSet({ data }) {
+  const totalDasRef = useRef(null);
+  const totalRegRef = useRef(null);
+  const totalRevRef = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(
+      [totalDasRef.current, totalRegRef.current, totalRevRef.current],
+      { opacity: 0, scale: 0.8 },
+      { opacity: 1, scale: 1, duration: 1, ease: "power2.out", stagger: 0.3 }
+    );
+  }, []);
+
   return (
     <>
-      <div className="data-set-cont piece TotalDas">
-        <label>Total</label>
+      <div
+        ref={totalDasRef}
+        className="data-set-cont TotalDas"
+        style={{
+          padding: "10px",
+          border: "1px solid #ddd",
+          borderRadius: "8px",
+        }}
+      >
+        <label style={{ fontWeight: "bold", fontSize: "18px" }}>Total</label>
         <p>
           <p>Registration</p>
           <p>
             {data?.totalBookeddata
               ? data?.totalBookeddata?.filter(
-                  (ele) => ele?.Date == moment(new Date()).format("YYYY-MM-DD")
-                )[0].TotalReceiptBooked
+                  (ele) => ele?.Date === moment(new Date()).format("YYYY-MM-DD")
+                )[0]?.TotalReceiptBooked || 0
               : 0}
           </p>
         </p>
@@ -358,22 +352,33 @@ function DataSet({ data }) {
               ? Number(
                   data?.totalBookeddata?.filter(
                     (ele) =>
-                      ele?.Date == moment(new Date()).format("YYYY-MM-DD")
-                  )[0].TotalNetAmount
+                      ele?.Date === moment(new Date()).format("YYYY-MM-DD")
+                  )[0]?.TotalNetAmount || 0
                 ).toFixed(2)
               : 0.0}
           </p>
         </p>
       </div>
-      <div className="data-set-cont piece TotalReg">
-        <label>Registration</label>
+
+      <div
+        ref={totalRegRef}
+        className="data-set-cont TotalReg"
+        style={{
+          padding: "10px",
+          border: "1px solid #ddd",
+          borderRadius: "8px",
+        }}
+      >
+        <label style={{ fontWeight: "bold", fontSize: "18px" }}>
+          Registration
+        </label>
         <p>
           <p>Today</p>
           <p>
             {data?.totalBookeddata
               ? data?.totalBookeddata?.filter(
-                  (ele) => ele?.Date == moment(new Date()).format("YYYY-MM-DD")
-                )[0].TotalReceiptBooked
+                  (ele) => ele?.Date === moment(new Date()).format("YYYY-MM-DD")
+                )[0]?.TotalReceiptBooked || 0
               : 0}
           </p>
         </p>
@@ -382,8 +387,17 @@ function DataSet({ data }) {
           <p>{data?.monthwisedata || 0}</p>
         </p>
       </div>
-      <div className="data-set-cont piece TotalRev">
-        <label>Revenue</label>
+
+      <div
+        ref={totalRevRef}
+        className="data-set-cont TotalRev"
+        style={{
+          padding: "10px",
+          border: "1px solid #ddd",
+          borderRadius: "8px",
+        }}
+      >
+        <label style={{ fontWeight: "bold", fontSize: "18px" }}>Revenue</label>
         <p>
           <p>Today</p>
           <p>
@@ -391,8 +405,8 @@ function DataSet({ data }) {
               ? Number(
                   data?.totalBookeddata?.filter(
                     (ele) =>
-                      ele?.Date == moment(new Date()).format("YYYY-MM-DD")
-                  )[0].TotalNetAmount
+                      ele?.Date === moment(new Date()).format("YYYY-MM-DD")
+                  )[0]?.TotalNetAmount || 0
                 ).toFixed(2)
               : 0.0}
           </p>

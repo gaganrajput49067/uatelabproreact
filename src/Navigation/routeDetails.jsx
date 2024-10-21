@@ -495,6 +495,25 @@ export let routeDetails = [
         path: "/CampRequest",
         element: "../Frontend/Camp/CampRequest",
       },
+      {
+        path: "/WelcomePage",
+        element: "../Frontend/Extra/WelcomePage",
+      }, {
+        path: "/CampReject",
+        element: "../Frontend/Camp/CampReject",
+      },
+      {
+        path: "/CampApprovalRightMaster",
+        element: "../Frontend/Camp/CampApprovalRightMaster",
+      },
+      {
+        path: "/CampCreationSearch",
+        element: "../Frontend/Camp/CampCreationSearch",
+      },
+      {
+        path: "/CampRequestApproval",
+        element: "../Frontend/Camp/CampRequestApproval",
+      },
       { path: "*", element: "../Frontend/Extra/BlankPage" },
     ],
   },
