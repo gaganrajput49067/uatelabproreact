@@ -24,6 +24,7 @@ import moment from "moment";
 import DepartmentReceiveTable from "../Table/DepartmentReceiveTable";
 import MedicialModal from "../utils/MedicialModal";
 import UploadFile from "../utils/UploadFIleModal/UploadFile";
+import NoRecordFound from "../../components/CommonComponent/NoRecordFound";
 
 const DepartmentReceive = () => {
   const [CentreData, setCentreData] = useState([]);
@@ -610,7 +611,7 @@ const DepartmentReceive = () => {
         {loading ? (
           <Loading />
         ) : (
-          load && (
+          load ? (
             <>
               <DepartmentReceiveTable
                 drdata={drdata}
@@ -636,7 +637,7 @@ const DepartmentReceive = () => {
                   )}
               </div>
             </>
-          )
+          ):<NoRecordFound />
         )}
       </div>
     </>

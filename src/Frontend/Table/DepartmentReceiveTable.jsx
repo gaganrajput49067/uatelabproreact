@@ -105,7 +105,7 @@ function DepartmentReceiveTable({
         });
     }
   };
-  console.log(show1);
+  console.log(drdata);
   return (
     <>
       {show1?.modal && (

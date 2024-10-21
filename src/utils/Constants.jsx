@@ -1088,3 +1088,36 @@ export const NoOfRecord = [
     value: Number(50),
   },
 ];
+
+
+export const InvType = [
+  {
+    label: "Investigation",
+    value: "Investigation",
+  },
+  {
+    label: "InvestigationObservation",
+    value: "InvestigationObservation",
+  },
+
+  {
+    label: "InvestigationRange",
+    value: "InvestigationRange",
+  },
+  {
+    label: "InvestigationInterpretation",
+    value: "InvestigationInterpretation",
+  },
+  {
+    label: "InvestigationComment",
+    value: "InvestigationComment",
+  },
+  {
+    label: "InvestigationProfile",
+    value: "InvestigationProfile",
+  },
+  {
+    label: "InvestigationPackage",
+    value: "InvestigationPackage",
+  },
+];

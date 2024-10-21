@@ -19,7 +19,10 @@ import {
   getRejectCount,
 } from "../../utils/NetworkApi/commonApi";
 import { toast } from "react-toastify";
-import { getLocalStorageDecryptData, setLocalStorage } from "../../Navigation/Storage";
+import {
+  getLocalStorageDecryptData,
+  setLocalStorage,
+} from "../../Navigation/Storage";
 
 const Header = ({ handleSidebar, menuData, handlePage }) => {
   const navigate = useNavigate();
@@ -34,7 +37,7 @@ const Header = ({ handleSidebar, menuData, handlePage }) => {
   const [selectedMenu, setSelectedMenu] = useState(
     menuData?.length > 0 ? menuData[0]?.value : []
   );
-console.log(menuData)
+  console.log(menuData);
   useEffect(() => {
     setSelectedMenu(menuData?.length > 0 ? menuData[0]?.value : []);
   }, [menuData]);
@@ -215,10 +218,10 @@ console.log(menuData)
           className="fa fa-home mr-3 pointer ss-none header-icon"
           onClick={() => navigate("/Dashboard")}
         ></i>
-        <i
+        {/* <i
           className="pi pi-moon mr-3 pointer ss-none header-icon"
           onClick={changeDarkMode}
-        ></i>
+        ></i> */}
         {/* full Screen */}
         <i
           className="fa fa-expand mr-3 pointer header-icon ss-none"
@@ -243,7 +246,9 @@ console.log(menuData)
         >
           <img src={defaultUserImg} alt="" className="user-info-image" />
 
-          <span className="header-userName">&nbsp;&nbsp;&nbsp;Itd-Admin</span>
+          <span className="header-userName">
+            &nbsp;&nbsp;&nbsp;{getLocalStorageDecryptData("Username")}
+          </span>
           {showUserProfile && (
             <div className="header-dropDown-menu">
               <UserHeader
@@ -267,11 +272,15 @@ console.log(menuData)
 export default Header;
 
 function UserHeader({ handleThemeChange, handleLogout }) {
+  const navigate = useNavigate();
   return (
     <div className="header-user-dropDown">
       <img src={defaultUserImg} alt="" className="user-dropdown-info-image" />
       <div className="row pt-2">
-        <button className="btn btn-sm btn-light text-left">
+        <button
+          className="btn btn-sm btn-light text-left"
+          onClick={() => navigate("/Dashboard")}
+        >
           <i className="fa fa-home" aria-hidden="true">
             &nbsp;&nbsp;&nbsp;&nbsp;
           </i>
@@ -292,14 +301,14 @@ function UserHeader({ handleThemeChange, handleLogout }) {
           <i className="fa fa-edit">&nbsp;&nbsp;&nbsp;&nbsp;</i>Edit Profile
         </button>
       </div>
-      <div className="row pt-2">
+      {/* <div className="row pt-2">
         <button
           className="btn btn-sm btn-light text-left"
           onClick={changeDarkMode}
         >
           <i className="pi pi-moon">&nbsp;&nbsp;</i>Dark Mode
         </button>
-      </div>
+      </div> */}
       <div className="row pt-2">
         <button
           className="btn btn-sm btn-light text-left"
@@ -378,6 +387,86 @@ function ToggleTheme() {
       Name: "Green",
       value: "green",
       color: "#22d8a9",
+    },
+    {
+      Name: "Purple",
+      value: "purple",
+      color: "#9b59b6",
+    },
+    {
+      Name: "Dark Blue",
+      value: "darkBlue",
+      color: "#2c3e50",
+    },
+    {
+      Name: "Light Blue",
+      value: "lightBlue",
+      color: "#00c3ff",
+    },
+    {
+      Name: "Yellow",
+      value: "yellow",
+      color: "#f1c40f",
+    },
+    {
+      Name: "Orange",
+      value: "orange",
+      color: "#e67e22",
+    },
+    {
+      Name: "Teal",
+      value: "teal",
+      color: "#1abc9c",
+    },
+    {
+      Name: "Magenta",
+      value: "magenta",
+      color: "#ff00ff",
+    },
+    {
+      Name: "Lavender",
+      value: "lavender",
+      color: "#e6e6fa",
+    },
+    {
+      Name: "Midnight",
+      value: "midnight",
+      color: "#2f3640",
+    },
+    {
+      Name: "Gold",
+      value: "gold",
+      color: "#ffd700",
+    },
+    {
+      Name: "Coral",
+      value: "coral",
+      color: "#ff7f50",
+    },
+    {
+      Name: "Crimson",
+      value: "crimson",
+      color: "#dc143c",
+    },
+    {
+      Name: "Mint",
+      value: "mint",
+      color: "#98ff98",
+    },
+    {
+      Name: "Sky Blue",
+      value: "skyBlue",
+      color: "#87ceeb",
+    },
+    {
+      Name: "Dark Olive",
+      value: "darkOlive",
+      color: "#556b2f",
+    },
+    {
+      Name: "Rose Gold",
+      value: "roseGold",
+      color: "#b76e79",
     },
   ];
 

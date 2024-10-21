@@ -47,6 +47,7 @@ import Reason from "../utils/Reason";
 import ResultEditAddModal from "../utils/ResultEditAddModal";
 import SubPageHead from "../../components/CommonComponent/SubPageHead";
 import TemplateMasterModal from "../utils/TemplateMasterModal";
+import NoRecordFound from "../../components/CommonComponent/NoRecordFound";
 const ResultEntry = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -598,7 +599,7 @@ const ResultEntry = () => {
     axiosInstance
       .post("RE/GetResultEntryData", {
         ...payload,
-       
+
         MacID: payload?.MacID != "" ? payload?.MacID : machine[0]?.value ?? "",
       })
       .then((res) => {
@@ -1862,60 +1863,62 @@ const ResultEntry = () => {
           </PageHead>
           {loading ? (
             <Loading />
-          ) : (
-            load && (
-              <div className="box mb-4">
-                <div
-                  className="box-header with-border"
-                  style={{ display: "none" }}
-                >
-                  <div className="row">
-                    <div
-                      className="col-sm-3"
+          ) : load ? (
+            <div className="box mb-4">
+              <div
+                className="box-header with-border"
+                style={{ display: "none" }}
+              >
+                <div className="row">
+                  <div
+                    className="col-sm-3"
+                    style={{
+                      background: "#605ca8",
+                      display: "flex",
+                      justifyContent: "space-evenly",
+                    }}
+                  >
+                    <span
                       style={{
-                        background: "#605ca8",
-                        display: "flex",
-                        justifyContent: "space-evenly",
+                        color: "white",
+                        padding: "3px",
+                        borderRadius: "3px",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                        fontSize: "15px",
                       }}
                     >
-                      <span
-                        style={{
-                          color: "white",
-                          padding: "3px",
-                          borderRadius: "3px",
-                          textAlign: "center",
-                          fontWeight: "bold",
-                          fontSize: "15px",
-                        }}
-                      >
-                        {`Total Patient : ${totalPatient()}`}
-                      </span>
-                      <span
-                        style={{
-                          color: "white",
-                          padding: "3px",
-                          borderRadius: "3px",
-                          textAlign: "center",
-                          fontWeight: "bold",
-                          fontSize: "15px",
-                        }}
-                      >
-                        {`Total Test Count : ${prop()}`}
-                      </span>
-                    </div>
+                      {`Total Patient : ${totalPatient()}`}
+                    </span>
+                    <span
+                      style={{
+                        color: "white",
+                        padding: "3px",
+                        borderRadius: "3px",
+                        textAlign: "center",
+                        fontWeight: "bold",
+                        fontSize: "15px",
+                      }}
+                    >
+                      {`Total Test Count : ${prop()}`}
+                    </span>
                   </div>
                 </div>
-                <div className="">
-                  <RETable
-                    redata={redata}
-                    GetResultEntry={GetResultEntry}
-                    show={setShow4}
-                    show2={setShow6}
-                    handleInnerChecked={handleInnerChecked}
-                  />
-                </div>
               </div>
-            )
+              <div className="card">
+                <RETable
+                  redata={redata}
+                  GetResultEntry={GetResultEntry}
+                  show={setShow4}
+                  show2={setShow6}
+                  handleInnerChecked={handleInnerChecked}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="card">
+              <NoRecordFound />
+            </div>
           )}
         </>
       ) : (
@@ -2773,7 +2776,7 @@ const ResultEntry = () => {
                               ) : datanew?.dlcCheck === 1 ? (
                                 datanew?.IsHelpMenu === 0 ? (
                                   <td data-title={t("Value")}>
-                                    <Input
+                                    <input
                                       type="text"
                                       className={`form-control input-sm ${
                                         (datanew?.MaxValue != "0" ||
@@ -2822,7 +2825,7 @@ const ResultEntry = () => {
                                   </td>
                                 ) : (
                                   <td data-title={t("Value")}>
-                                    <Input
+                                    <input
                                       type="text"
                                       className={`form-control input-sm ${
                                         (datanew?.MaxValue != "0" ||
@@ -2871,7 +2874,7 @@ const ResultEntry = () => {
                                 )
                               ) : datanew?.IsHelpMenu === 0 ? (
                                 <td data-title={t("Value")}>
-                                  <Input
+                                  <input
                                     type="text"
                                     className={`form-control input-sm ${
                                       (datanew?.MaxValue != "0" ||
@@ -2920,7 +2923,7 @@ const ResultEntry = () => {
                               ) : (
                                 <td data-title={t("Value")}>
                                   <div style={{ position: "relative" }}>
-                                    <Input
+                                    <input
                                       type="text"
                                       className={`form-control input-sm ${
                                         (datanew?.MaxValue != "0" ||
@@ -3259,7 +3262,10 @@ const ResultEntry = () => {
             </tbody>
           </Table>
           <div className="card m-0 p-0 pb-2" style={{ zIndex: 0 }}>
-            <div className="row mt-3  d-flex flex-wrap" style={{ textWrap: "avoid" }}>
+            <div
+              className="row mt-3  d-flex flex-wrap"
+              style={{ textWrap: "avoid" }}
+            >
               {loading ? (
                 <div className="mx-3">
                   <Loading />

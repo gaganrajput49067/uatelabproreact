@@ -259,12 +259,12 @@ function SalesCollection({ userWiseDashBoard }) {
         ],
         backgroundColor: [
           userWiseDashBoard?.previousMonth2 >= userWiseDashBoard?.previousMonth
-            ? "#0ba318"
-            : "red",
+            ? "green"
+            : "#021e4d",
           userWiseDashBoard?.previousMonth >= userWiseDashBoard?.previousMonth2
-            ? "#0ba318"
-            : "red",
-          "yellow",
+            ? "green"
+            : "#021e4d",
+          "blue",
         ],
       },
     ],

@@ -369,7 +369,7 @@ function RETable({ redata, GetResultEntry, show, show2 }) {
           </tbody>
         </Table>
       ) : (
-        <div className="card">
+        <div className="">
           <NoRecordFound />
         </div>
       )}

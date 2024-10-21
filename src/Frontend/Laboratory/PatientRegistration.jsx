@@ -2013,7 +2013,7 @@ const PatientRegistration = () => {
         ageInDays: state?.TotalAgeInDays,
         Gender: state?.Gender,
         CentreID: LTData?.CentreID,
-        SessionCentreID: window.getLocalStorageDecryptData("DefaultCentre"),
+        SessionCentreID: getLocalStorageDecryptData("DefaultCentre"),
         TestCentreID: 0,
         SampleBySelf: "1",
         sampleCollectionBy: 0,

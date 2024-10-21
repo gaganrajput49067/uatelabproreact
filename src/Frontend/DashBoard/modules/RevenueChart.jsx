@@ -18,9 +18,9 @@ function RevenueChart({ state }) {
       {
         data: [state?.cash, state?.cheque, state?.Online],
         backgroundColor: [
-          "rgba(252, 186, 3,0.8)",
+          "blue",
           "rgba(237, 21, 21,0.8)",
-          "rgba(51, 122, 183)",
+          "green",
           "rgba(99,104,116,0.8)",
           "rgba(51, 122, 183)",
           "rgba(237, 21, 21,0.8)",

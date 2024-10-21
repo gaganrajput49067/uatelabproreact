@@ -22,7 +22,7 @@
     255,
     255
   ); /* Kept the text white for legibility */
-  --btn-bg-color: #f1f1f1; /* Lightened the button background to add a subtle contrast */
+  --btn-bg-color: black; /* Lightened the button background to add a subtle contrast */
   --gradient: linear-gradient(
     90deg,
     rgb(18, 67, 123) 0%,
@@ -171,6 +171,212 @@
     rgba(198, 255, 239, 1) 100%
   );
 }
+[data-theme="purple"] {
+  --bg-color: #8e44ad;
+  --bg-subMenu: #a569bd;
+  --subMenuText-color: #ffffff;
+  --darkMode-color: white;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(142, 68, 173, 1) 0%,
+    rgba(165, 105, 189, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+
+[data-theme="darkBlue"] {
+  --bg-color: #2c3e50;
+  --bg-subMenu: #34495e;
+  --subMenuText-color: #ffffff;
+  --darkMode-color: white;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(44, 62, 80, 1) 0%,
+    rgba(52, 73, 94, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+
+[data-theme="lightBlue"] {
+  --bg-color: #00c3ff;
+  --bg-subMenu: #80dfff;
+  --subMenuText-color: #ffffff;
+  --darkMode-color: white;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(0, 195, 255, 1) 0%,
+    rgba(128, 223, 255, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+
+[data-theme="yellow"] {
+  --bg-color: #f1c40f;
+  --bg-subMenu: #f4d03f;
+  --subMenuText-color: #000000;
+  --darkMode-color: black;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(241, 196, 15, 1) 0%,
+    rgba(244, 208, 63, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+
+[data-theme="orange"] {
+  --bg-color: #e67e22;
+  --bg-subMenu: #eb984e;
+  --subMenuText-color: #ffffff;
+  --darkMode-color: white;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(230, 126, 34, 1) 0%,
+    rgba(235, 152, 78, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+
+[data-theme="teal"] {
+  --bg-color: #1abc9c;
+  --bg-subMenu: #48c9b0;
+  --subMenuText-color: #ffffff;
+  --darkMode-color: white;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(26, 188, 156, 1) 0%,
+    rgba(72, 201, 176, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+
+[data-theme="magenta"] {
+  --bg-color: #ff00ff;
+  --bg-subMenu: #ff66ff;
+  --subMenuText-color: #ffffff;
+  --darkMode-color: white;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(255, 0, 255, 1) 0%,
+    rgba(255, 102, 255, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+
+[data-theme="lavender"] {
+  --bg-color: #e6e6fa;
+  --bg-subMenu: #f0f0ff;
+  --subMenuText-color: #000000;
+  --darkMode-color: black;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(230, 230, 250, 1) 0%,
+    rgba(240, 240, 255, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+
+[data-theme="midnight"] {
+  --bg-color: #2f3640;
+  --bg-subMenu: #3a3f51;
+  --subMenuText-color: #ffffff;
+  --darkMode-color: white;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(47, 54, 64, 1) 0%,
+    rgba(58, 63, 81, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+
+[data-theme="gold"] {
+  --bg-color: #ffd700;
+  --bg-subMenu: #ffdd33;
+  --subMenuText-color: #000000;
+  --darkMode-color: black;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(255, 215, 0, 1) 0%,
+    rgba(255, 221, 51, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+
+[data-theme="coral"] {
+  --bg-color: #ff7f50;
+  --bg-subMenu: #ffa07a;
+  --subMenuText-color: #ffffff;
+  --darkMode-color: white;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(255, 127, 80, 1) 0%,
+    rgba(255, 160, 122, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+[data-theme="crimson"] {
+  --bg-color: #dc143c;
+  --bg-subMenu: #ff4d6a;
+  --subMenuText-color: #ffffff;
+  --darkMode-color: white;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(220, 20, 60, 1) 0%,
+    rgba(255, 77, 106, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+
+[data-theme="mint"] {
+  --bg-color: #98ff98;
+  --bg-subMenu: #ccffcc;
+  --subMenuText-color: #000000;
+  --darkMode-color: black;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(152, 255, 152, 1) 0%,
+    rgba(204, 255, 204, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+
+[data-theme="skyBlue"] {
+  --bg-color: #87ceeb;
+  --bg-subMenu: #a6e0f7;
+  --subMenuText-color: #000000;
+  --darkMode-color: black;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(135, 206, 235, 1) 0%,
+    rgba(166, 224, 247, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+
+[data-theme="darkOlive"] {
+  --bg-color: #556b2f;
+  --bg-subMenu: #6e8b3d;
+  --subMenuText-color: #ffffff;
+  --darkMode-color: white;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(85, 107, 47, 1) 0%,
+    rgba(110, 139, 61, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
+
+[data-theme="roseGold"] {
+  --bg-color: #b76e79;
+  --bg-subMenu: #d8a7af;
+  --subMenuText-color: #ffffff;
+  --darkMode-color: white;
+  --gradient: linear-gradient(
+    90deg,
+    rgba(183, 110, 121, 1) 0%,
+    rgba(216, 167, 175, 1) 57%,
+    rgba(255, 255, 255, 1) 91%
+  );
+}
 
 .row {
   margin-top: 3px !important;
@@ -235,10 +441,9 @@
     width: auto; 
   }
 } */
-@media (min-width: 768px) {
-  .btn {
-    width: 100%;
-  }
+
+.btn {
+  width: 100%;
 }
 
 .btn-sm {
@@ -300,8 +505,9 @@
   max-width: 80%;
   margin-left: 6px;
 
-  color: var(--bg-color);
+  /* color: var(--bg-color); */
   /* color: #4f90d6; */
+  color: black;
 }
 #search:focus-within + .lable,
 #search input[type="text"]:not(:placeholder-shown) + .lable {
@@ -338,7 +544,8 @@
   top: -9px;
   left: 7px;
   background-color: white;
-  color: var(--bg-color) !important;
+  color: black;
+  /* color: var(--bg-color) !important; */
   background-image: linear-gradient(white, white) !important;
   padding: 0px 5px;
   transition: top 0.1s ease-out, left 0.1s ease-out, font-size 0.1s ease-out;
@@ -348,8 +555,8 @@
   top: -9px;
   left: 0px !important;
   background-color: white;
-
-  color: var(--bg-color) !important;
+  color: black;
+  /* color: var(--bg-color) !important; */
   background-image: linear-gradient(white, white) !important;
   padding: 0px 5px;
   font-size: 10px !important;
@@ -359,8 +566,8 @@
 .form-control:not(:placeholder-shown) + label {
   top: -9px;
   left: 7px;
-
-  color: var(--bg-color) !important;
+  color: black;
+  /* color: var(--bg-color) !important; */
   background-color: white;
   background-image: linear-gradient(white, white) !important;
   padding: 0px 5px;
@@ -1311,8 +1518,8 @@ input[type="number"] {
   font-size: 10px !important;
   display: inline-block !important;
   width: auto !important;
-
-  color: var(--bg-color) !important;
+  color: black;
+  /* color: var(--bg-color) !important; */
 }
 
 .input-group-text {
@@ -1359,8 +1566,8 @@ input::placeholder {
   font-weight: bolder !important;
   background: #fff;
   line-height: 5px;
-
-  color: var(--bg-color) !important;
+  color: black;
+  /* color: var(--bg-color) !important; */
   padding: 3px 5px;
   /* margin-bottom: 0 !important; */
   font-size: 10px !important;
@@ -1416,7 +1623,8 @@ input::placeholder {
   font-size: 10px !important;
   background: white;
   padding: 0px 2px;
-  color: var(--bg-color);
+  color: black;
+  /* color: var(--bg-color); */
 }
 
 .rmsc .dropdown-heading {
@@ -1899,8 +2107,8 @@ hr {
 }
 .circle {
   border-radius: 70px;
-  width: 55px;
-  height: 55px;
+  width: 75px;
+  height: 100px;
   padding-top: 20px;
   padding-left: 5px;
   padding-bottom: 5px;
@@ -1997,8 +2205,9 @@ hr {
 input:disabled,
 select:disabled,
 textarea:disabled {
+  color: black;
   background-color: #f0f0f0 !important;
-  color: var(--bg-color) !important;
+  /* color: var(--bg-color) !important; */
   border: 1px solid #ccc;
   cursor: not-allowed;
 }
@@ -2143,7 +2352,8 @@ button:hover {
 }
 
 .css-8tjzm1-placeholder {
-  color: var(--bg-color);
+  color: black;
+  /* color: var(--bg-color); */
 }
 .innerCardDayswise {
   width: auto;
@@ -2171,12 +2381,12 @@ button:hover {
 }
 
 .linkStatecss {
-  text-decoration: none; 
-  color: var(--bg-color); 
-  transition: color 0.3s, background-color 0.3s, transform 0.2s;  
+  text-decoration: none;
+  color: var(--bg-color);
+  transition: color 0.3s, background-color 0.3s, transform 0.2s;
 }
 
 .linkStatecss:hover {
   color: black;
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }

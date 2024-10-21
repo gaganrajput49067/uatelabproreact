@@ -142,9 +142,9 @@ width: 100%;
     width: 100%;
     background-color: rgb(255, 255, 255);
     border-radius: 0.2rem;
-    padding: 2px 15px;
+    padding: 1px 15px;
     font-size: 0.9rem;
-    margin: 5px;
+    margin: 4px;
 }
 .theme-div:hover{
     background-color: rgb(229, 228, 228);

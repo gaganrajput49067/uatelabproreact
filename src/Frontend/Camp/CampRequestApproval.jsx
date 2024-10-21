@@ -156,6 +156,9 @@ const CampRequestApproval = () => {
         />
       )}
       <PageHead name={t("Camp Approval Search")} showDrop="true">
+        {!access ? (
+          <p style={{ color: "red" }}>You don't have access to this page.</p>
+        ) : null}
         <div className="card">
           <div className="row">
             <div className="col-sm-2 ">
