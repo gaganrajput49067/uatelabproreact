@@ -269,7 +269,7 @@ const PatientRegistration = () => {
       } else return 0;
     }
   };
-  console.log(state)
+  // console.log(state)
   const saveData = (data) => {
     setIsSubmit({
       type: "Success",
@@ -344,6 +344,7 @@ const PatientRegistration = () => {
           sampleTypeID: ploItem?.sampleTypeID
             ? Number(ploItem?.sampleTypeID)
             : 0,
+            ModalityId:ploItem?.ModalityId?.toString()
         })),
         DocumentDetail: {
           DocumentID: PatientGuid,
@@ -449,27 +450,27 @@ const PatientRegistration = () => {
           setThroughMobileData(false);
           setThroughmemberdata(false);
           getAccessCentres(setCentreData, LTData, setLTData, LTDataIniti);
-          console.log(res?.data);
-          if (res?.data?.data?.hideReceipt != 1) {
-            getReceipt(
-              res?.data?.data?.ledgertransactionID,
-              res?.data?.data?.fullyPaid
-            );
-          }
-          if (res?.data?.data?.isConcern == 1) {
-            getConcern(res?.data?.data?.ledgertransactionID);
-          }
-          if (res?.data?.data?.isPndt == 1) {
-            getPndtForm(res?.data?.data?.ledgertransactionID);
-          }
+          // console.log(res?.data);
+          // if (res?.data?.data?.hideReceipt != 1) {
+          //   getReceipt(
+          //     res?.data?.data?.ledgertransactionID,
+          //     res?.data?.data?.fullyPaid
+          //   );
+          // }
+          // if (res?.data?.data?.isConcern == 1) {
+          //   getConcern(res?.data?.data?.ledgertransactionID);
+          // }
+          // if (res?.data?.data?.isPndt == 1) {
+          //   getPndtForm(res?.data?.data?.ledgertransactionID);
+          // }
 
-          getReceiptTRF(
-            res?.data?.data?.ledgertransactionID,
-            res?.data?.data?.isTrfRequired,
-            res?.data?.data?.isDepartmentSlip
-          );
+          // getReceiptTRF(
+          //   res?.data?.data?.ledgertransactionID,
+          //   res?.data?.data?.isTrfRequired,
+          //   res?.data?.data?.isDepartmentSlip
+          // );
           guidNumber();
-          setPatientImg({ img: PhelboImage, show: false });
+          setPatientImg({ img: MyImage, show: false });
           setSuggestionData({
             show: false,
             viewTestModal: false,
@@ -1180,7 +1181,7 @@ const PatientRegistration = () => {
   const calculateTotalNumberOfDays = (value) => {
     return moment(moment().format("YYYY-MM-DD")).diff(value, "days");
   };
-  console.log(state);
+  // console.log(state);
   const dateSelect = (value, name) => {
     const { years, months, days } = calculateDOB(value);
     setState({
@@ -2108,6 +2109,7 @@ const PatientRegistration = () => {
   }, []);
 
   useEffect(() => {
+
     if (!isSubmit?.isLoading && isSubmit?.type === "Success") {
       if (LTData?.CentreID || !throughMemberData) {
         getAccessDataRate(setRateType, LTData?.CentreID).then((res) => {
@@ -2615,7 +2617,7 @@ const PatientRegistration = () => {
       })
       .then((res) => {
         if (res.data.success) {
-          console.log(res.data.messageInfo.paymentLink.short_url);
+          // console.log(res.data.messageInfo.paymentLink.short_url);
           const order_id = res.data.messageInfo.paymentLink.notes.order_id;
           let timeoutId;
           let intervalId;
@@ -2693,7 +2695,7 @@ const PatientRegistration = () => {
     axiosInstance
       .get("RazorPay/Otherpayment")
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res?.data?.message?.payment_capture == 1) {
           setIsRazorPayOpen(true);
           getPaymentLink();
@@ -2717,7 +2719,7 @@ const PatientRegistration = () => {
   const handleSubmitApi = () => {
     // debugger;
     const { DocumentFlag, message } = handleFileValidationUpload();
-    console.log(DocumentFlag,message)
+    // console.log(DocumentFlag,message)
     if (!filterUnPaidRcData()) {
       if (getTestNamesWithBlankSampleTypeID()) {
         toast.error(getTestNamesWithBlankSampleTypeID());
@@ -2960,12 +2962,12 @@ const PatientRegistration = () => {
       setTableData(data);
     }
   };
-
+console.log(LTData)
   const handleFileValidationUpload = () => {
     let requiredDocument = [];
     let DocumentFlag = true;
     let message = "";
-    console.log(tableData)
+    // console.log(tableData)
     tableData.map((ele) => {
       if (ele.RequiredAttachment !== "") {
         requiredDocument.push(ele.RequiredAttachment);
@@ -3368,10 +3370,10 @@ const PatientRegistration = () => {
           pageName={"patientImage"}
           defaultImage={patientImg.img}
           handleClose={(guidNo, newUrl) => {
-            console.log(newUrl);
+            // console.log(newUrl);
             setPatientImg({
               show: false,
-              img: newUrl ? newUrl : PhelboImage,
+              img: newUrl ? newUrl : MyImage,
             });
           }}
         />

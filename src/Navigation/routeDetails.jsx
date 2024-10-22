@@ -459,26 +459,26 @@ export let routeDetails = [
         path: "/ReportBill",
         element: "../Frontend/Reports/ReportBill",
       },
-      {
-        path: "/MembershipCardMaster",
-        element: "../Frontend/MembershipCard/MembershipCardMaster",
-      },
-      {
-        path: "/MembershipCardItemMapping",
-        element: "../Frontend/MembershipCard/MembershipCardItemMapping",
-      },
-      {
-        path: "/MembershipCardIssue",
-        element: "../Frontend/MembershipCard/MembershipCardIssue",
-      },
-      {
-        path: "/MembershipCardSearch",
-        element: "../Frontend/MembershipCard/MembershipCardSearch",
-      },
-      {
-        path: "/MemberShipCardEdit",
-        element: "../Frontend/MembershipCard/MemberShipCardEdit",
-      },
+      // {
+      //   path: "/MembershipCardMaster",
+      //   element: "../Frontend/MembershipCard/MembershipCardMaster",
+      // },
+      // {
+      //   path: "/MembershipCardItemMapping",
+      //   element: "../Frontend/MembershipCard/MembershipCardItemMapping",
+      // },
+      // {
+      //   path: "/MembershipCardIssue",
+      //   element: "../Frontend/MembershipCard/MembershipCardIssue",
+      // },
+      // {
+      //   path: "/MembershipCardSearch",
+      //   element: "../Frontend/MembershipCard/MembershipCardSearch",
+      // },
+      // {
+      //   path: "/MemberShipCardEdit",
+      //   element: "../Frontend/MembershipCard/MemberShipCardEdit",
+      // },
       {
         path: "/CampConfigurationMaster",
         element: "../Frontend/Camp/CampConfigurationMaster",

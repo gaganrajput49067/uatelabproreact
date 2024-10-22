@@ -1301,183 +1301,182 @@ const EditPatientDetails = () => {
           if (valiateProofID()) {
             // if (!paymentCheck) {
             if (disAmt || discountPercentage || match) {
-             
-                setIsSubmit(true);
-                axiosInstance
-                  .post("PatientRegistration/RegistrationEditData", {
-                    PatientData: getTrimmedData({
-                      ...state,
-                      PageName: "",
-                      BarcodeNo: "",
-                      ProEmployee: "",
-                      RateTypeEmail: "",
-                      RateTypePhone: "",
-                      ClientAddress: "",
-                      MobileVip: "",
-                      FirstNameVip: "",
-                      MiddleNameVip: "",
-                      LastNameVip: "",
-                      MembershipCardID: 0,
-                      FamilyMemberIsPrimary: 0,
-                      SecondReferName: "",
-                      SecondReferDoctor: "",
-                      PatientID: state?.PatientID?.toString(),
-                    }),
-                    LTData: getTrimmedData({
-                      ...LTData,
+              setIsSubmit(true);
+              axiosInstance
+                .post("PatientRegistration/RegistrationEditData", {
+                  PatientData: getTrimmedData({
+                    ...state,
+                    PageName: "",
+                    BarcodeNo: "",
+                    ProEmployee: "",
+                    RateTypeEmail: "",
+                    RateTypePhone: "",
+                    ClientAddress: "",
+                    MobileVip: "",
+                    FirstNameVip: "",
+                    MiddleNameVip: "",
+                    LastNameVip: "",
+                    MembershipCardID: 0,
+                    FamilyMemberIsPrimary: 0,
+                    SecondReferName: "",
+                    SecondReferDoctor: "",
+                    PatientID: state?.PatientID?.toString(),
+                  }),
+                  LTData: getTrimmedData({
+                    ...LTData,
+                    ...Pndt,
+                    Pregnancy:
+                      Pndt?.Pregnancy == "0001-01-01"
+                        ? "0001-01-01"
+                        : moment(Pndt?.Pregnancy).format("YYYY-MM-DD"),
+                    DiscountApprovedBy: "",
+                    ReferRate: "",
+                    CentreName: "",
+                    DiscountType: "",
+                    SecondReferDoctor: "",
+                    DoctorMobile: "",
+                    DoctorEmail: "",
+                    LedgerTransactionID:
+                      LTData?.LedgerTransactionID?.toString(),
+                    LedgertransactionID:
+                      LTData?.LedgertransactionID?.toString(),
+                    Source: "",
+                    RegistrationDate: new Date(),
+                    SrfId: "",
+                    IcmrId: "",
+                    IsConcern: 0,
+                    HideAmount: "",
+                    DiscountId: "",
+                    BTB: "0",
+                    OrderId: "",
+                    CoupanCode: "",
+                    CoupanId: "",
+                    IsCoupon: "",
+                    PNameVip: "",
+                    IsCourier: "",
+                    IsWhatsappRequired: "",
+                    IsPndtForm: "",
+                    ReferLabId: "",
+                    CollectionBoyId: "",
+                    IsPndt: Pndt?.PNDT ? 1 : 0,
+                  }),
+                  PLO: PLO.map((ploItem) => ({
+                    ...getTrimmedData(ploItem),
+                    IsSampleRequired: "Sample Required",
+
+                    DiscountApprovedBy: "",
+                    ReportType: ploItem?.ReportType?.toString(),
+                    Amount: ploItem?.Amount?.toString(),
+                    DiscountAmt: ploItem?.DiscountAmt?.toString(),
+                    Rate: ploItem?.Rate?.toString(),
+                    SessionCentreID: "",
+                    TestCentreID: ploItem?.TestCentreID
+                      ? Number(ploItem?.TestCentreID)
+                      : 0,
+                    UrgentDateTime: "",
+                    isLabOutSource: ploItem?.isLabOutSource
+                      ? Number(ploItem?.isLabOutSource)
+                      : 0,
+                    IsCulture: ploItem?.IsCulture ?? 0,
+                    MemberType: ploItem?.MemberType
+                      ? Number(ploItem?.MemberType)
+                      : 0,
+                    IsConcern: "0",
+                    SetMRP: "0",
+                    UpdateModalityId: ploItem?.UpdateModalityId
+                      ? ploItem?.UpdateModalityId?.toString()
+                      : "",
+
+                    OldModalityID: ploItem?.OldModalityID
+                      ? ploItem?.OldModalityID?.toString()
+                      : "",
+                    OldUpdateModalityId: ploItem?.OldUpdateModalityId
+                      ? ploItem?.OldUpdateModalityId?.toString()
+                      : "",
+                    DATE: new Date(),
+
+                    ModalityId: ploItem?.ModalityId?.toString(),
+                  })),
+                  DocumentDetail: {
+                    DocumentID: "",
+                  },
+                  patientMedical: {
+                    PatientGuid: "",
+                  },
+                  PRDeliveryMethod: {
+                    IsPatientSMS: "",
+                    PatientMobileNo: "",
+                    IsPatientEmail: "",
+                    PatientEmailId: "",
+                    IsDoctorSMS: "",
+                    DoctorMobileNo: "",
+                    IsDoctorEmail: "",
+                    DoctorEmailId: "",
+                    IsClientSMS: "",
+                    ClientMobileNo: "",
+                    IsClientEmail: "",
+                    ClientEmail: "",
+                    IsCourier: "",
+                  },
+                  RcData: RcData,
+                  FieldIds: "",
+                  mandatoryFields: [],
+                })
+                .then((res) => {
+                  if (res?.data?.success) {
+                    toast.success(res.data.message);
+                    setState(stateIniti);
+                    setLTData(LTDataIniti);
+                    setPLO([]);
+                    setRcData([
+                      {
+                        PayBy: "Patient",
+                        ReceiptNo: "",
+                        ledgerNoCr: "",
+                        RateTypeId: state?.RateID,
+                        PaymentMode: "Cash",
+                        PaymentModeID: 134,
+                        BankName: "",
+                        CardDate: "",
+                        CardNo: "",
+                        Amount: "",
+                        CentreID: state?.CentreID,
+                      },
+                    ]);
+                    setFormData({
+                      DoctorName: "",
+                    });
+                    setPndt({
                       ...Pndt,
-                      Pregnancy:
-                        Pndt?.Pregnancy == "0001-01-01"
-                          ? "0001-01-01"
-                          : moment(Pndt?.Pregnancy).format("YYYY-MM-DD"),
-                      DiscountApprovedBy: "",
-                      ReferRate: "",
-                      CentreName: "",
-                      DiscountType: "",
-                      SecondReferDoctor: "",
-                      DoctorMobile: "",
-                      DoctorEmail: "",
-                      LedgerTransactionID:
-                        LTData?.LedgerTransactionID?.toString(),
-                      LedgertransactionID:
-                        LTData?.LedgertransactionID?.toString(),
-                      Source: "",
-                      RegistrationDate: new Date(),
-                      SrfId: "",
-                      IcmrId: "",
-                      IsConcern: 0,
-                      HideAmount: "",
-                      DiscountId: "",
-                      BTB: "0",
-                      OrderId: "",
-                      CoupanCode: "",
-                      CoupanId: "",
-                      IsCoupon: "",
-                      PNameVip: "",
-                      IsCourier: "",
-                      IsWhatsappRequired: "",
-                      IsPndtForm: "",
-                      ReferLabId: "",
-                      CollectionBoyId: "",
-                      IsPndt: Pndt?.PNDT ? 1 : 0,
-                    }),
-                    PLO: PLO.map((ploItem) => ({
-                      ...getTrimmedData(ploItem),
-                      IsSampleRequired: "Sample Required",
+                      PNDT: false,
+                      NoOfChildren: "",
+                      NoOfSon: "",
+                      NoOfDaughter: "",
+                      Pregnancy: "",
+                      AgeOfSon: "",
+                      AgeOfDaughter: "",
+                      PNDTDoctor: "",
+                      Husband: "",
+                    });
+                    setTableData([]);
 
-                      DiscountApprovedBy: "",
-                      ReportType: ploItem?.ReportType?.toString(),
-                      Amount: ploItem?.Amount?.toString(),
-                      DiscountAmt: ploItem?.DiscountAmt?.toString(),
-                      Rate: ploItem?.Rate?.toString(),
-                      SessionCentreID: "",
-                      TestCentreID: ploItem?.TestCentreID
-                        ? Number(ploItem?.TestCentreID)
-                        : 0,
-                      UrgentDateTime: "",
-                      isLabOutSource: ploItem?.isLabOutSource
-                        ? Number(ploItem?.isLabOutSource)
-                        : 0,
-                      IsCulture: ploItem?.IsCulture ?? 0,
-                      MemberType: ploItem?.MemberType
-                        ? Number(ploItem?.MemberType)
-                        : 0,
-                      IsConcern: "0",
-                      SetMRP: "0",
-                      UpdateModalityId: ploItem?.UpdateModalityId
-                        ? ploItem?.UpdateModalityId?.toString()
-                        : "",
+                    if (res?.data?.HideReceipt != 1)
+                      getReceipt(res?.data?.ledgertransactionID);
 
-                    
-                      OldModalityID: ploItem?.OldModalityID
-                        ? ploItem?.OldModalityID?.toString()
-                        : "",
-                      OldUpdateModalityId: ploItem?.OldUpdateModalityId
-                        ? ploItem?.OldUpdateModalityId?.toString()
-                        : "",
-                      DATE: new Date(),
-                    })),
-                    DocumentDetail: {
-                      DocumentID: "",
-                    },
-                    patientMedical: {
-                      PatientGuid: "",
-                    },
-                    PRDeliveryMethod: {
-                      IsPatientSMS: "",
-                      PatientMobileNo: "",
-                      IsPatientEmail: "",
-                      PatientEmailId: "",
-                      IsDoctorSMS: "",
-                      DoctorMobileNo: "",
-                      IsDoctorEmail: "",
-                      DoctorEmailId: "",
-                      IsClientSMS: "",
-                      ClientMobileNo: "",
-                      IsClientEmail: "",
-                      ClientEmail: "",
-                      IsCourier: "",
-                    },
-                    RcData: RcData,
-                    FieldIds: "",
-                    mandatoryFields: [],
-                  })
-                  .then((res) => {
-                    if (res?.data?.success) {
-                      toast.success(res.data.message);
-                      setState(stateIniti);
-                      setLTData(LTDataIniti);
-                      setPLO([]);
-                      setRcData([
-                        {
-                          PayBy: "Patient",
-                          ReceiptNo: "",
-                          ledgerNoCr: "",
-                          RateTypeId: state?.RateID,
-                          PaymentMode: "Cash",
-                          PaymentModeID: 134,
-                          BankName: "",
-                          CardDate: "",
-                          CardNo: "",
-                          Amount: "",
-                          CentreID: state?.CentreID,
-                        },
-                      ]);
-                      setFormData({
-                        DoctorName: "",
-                      });
-                      setPndt({
-                        ...Pndt,
-                        PNDT: false,
-                        NoOfChildren: "",
-                        NoOfSon: "",
-                        NoOfDaughter: "",
-                        Pregnancy: "",
-                        AgeOfSon: "",
-                        AgeOfDaughter: "",
-                        PNDTDoctor: "",
-                        Husband: "",
-                      });
-                      setTableData([]);
-
-                      if (res?.data?.HideReceipt != 1)
-                        getReceipt(res?.data?.ledgertransactionID);
-
-                      navigate("/receiptreprint");
-                    } else {
-                      toast.error(res.data.message);
-                    }
-                    setIsSubmit(false);
-                  })
-                  .catch((err) => {
-                    toast.error(
-                      err?.response?.data?.message
-                        ? err?.response?.data?.message
-                        : "Something Went Wrong"
-                    );
-                    setIsSubmit(false);
-                  });
-              
+                    navigate("/receiptreprint");
+                  } else {
+                    toast.error(res.data.message);
+                  }
+                  setIsSubmit(false);
+                })
+                .catch((err) => {
+                  toast.error(
+                    err?.response?.data?.message
+                      ? err?.response?.data?.message
+                      : "Something Went Wrong"
+                  );
+                  setIsSubmit(false);
+                });
             } else {
               if (DocumentFlag) {
                 setIsSubmit(true);
@@ -2359,7 +2358,7 @@ const EditPatientDetails = () => {
       <div className="patient-register-other">
         <div className="">
           <div className="card">
-          <div className="row">
+            <div className="row">
               <div className="col-sm-5">
                 <Input
                   name="TestName"
@@ -2542,27 +2541,27 @@ const EditPatientDetails = () => {
           </div>
         </div>
         <div className="">
-            <div className="card">
+          <div className="card">
             <div className="row">
-                  <div className="col-sm-2 col-4 mb-2 ">
-                    {isSubmit ? (
-                      <Loading />
-                    ) : (
-                      <button
-                        type="submit"
-                        id="btnSave"
-                        className="btn btn-success w-100 btn-sm"
-                        onClick={() => {
-                          handleSubmit();
-                          window.scrollTo(0, 0);
-                        }}
-                      >
-                        {("Submit")}
-                      </button>
-                    )}
-                  </div>
-                </div>
+              <div className="col-sm-2 col-4 mb-2 ">
+                {isSubmit ? (
+                  <Loading />
+                ) : (
+                  <button
+                    type="submit"
+                    id="btnSave"
+                    className="btn btn-success w-100 btn-sm"
+                    onClick={() => {
+                      handleSubmit();
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    {"Submit"}
+                  </button>
+                )}
+              </div>
             </div>
+          </div>
         </div>
       </div>
     </>
