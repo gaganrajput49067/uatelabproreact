@@ -3304,6 +3304,7 @@ console.log(LTData)
     <>
       {slotOpen?.show && (
         <SlotBookModal
+        show={slotOpen?.show}
           slotOpen={slotOpen}
           setSlotOpen={setSlotOpen}
           handleSelectSlot={handleSelectSlot}
@@ -3341,6 +3342,7 @@ console.log(LTData)
       )}
       {show6 && (
         <SaveSmsEmail
+        show6={show6}
           state={state}
           LTData={LTData}
           saveSmsEmail={saveSmsEmail}

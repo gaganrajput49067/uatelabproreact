@@ -3,7 +3,7 @@ import logoitdose from "../../assets/image/logoitdose2.png"
 const Loading = () => {
   return (
     <div className="loading-overlay">
-       <img src={logoitdose} alt="itdose Logo" className="itdose-logo" />
+       {/* <img src={logoitdose} alt="itdose Logo" className="itdose-logo" /> */}
       <div className="loadingio-spinner-spinner-nq4q5u6dq7r">
         <div className="ldio-x2uulkbinbj">
           {[...Array(21)].map((_, index) => (

@@ -1872,26 +1872,8 @@ input::placeholder {
   color: white;
 }
 
-.custom-box-body {
-  height: auto;
-  font-size: 13px;
-  background-color: var(--bg-color);
-  color: var(--subMenuText-color);
-  font-weight: bold;
-  padding: 5px 5px 2px 5px;
-  padding: 5px 5px 2px 5px;
-  margin-bottom: 5px;
 
-  border-radius: 0px;
-  box-shadow: 0px 2px 4px var(--bg-color);
-}
-.custom-row {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-  flex-wrap: wrap;
-}
+
 .custom-col {
   display: flex;
   align-items: center;
@@ -1917,7 +1899,6 @@ input::placeholder {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--subMenuText-color);
 }
 .custom-icon[data-toggle="tooltip"]:hover::after,
 .custom-icon-large[data-toggle="tooltip"]:hover::after {
@@ -1952,7 +1933,6 @@ input::placeholder {
   cursor: pointer;
   font-size: 14px !important;
   margin-right: 10px;
-  color: var(--subMenuText-color); /* Subtle color for large icons */
 }
 
 /* Patient Register */

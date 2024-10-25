@@ -1056,8 +1056,8 @@ const SampleCollection = () => {
                 title={"PricksRemarks"}
               />
             )}
-            <div className="custom-box-body mb-3">
-              <div className="custom-row">
+            <div className="p-dialog-header mb-3">
+            
                 <div className="custom-col custom-col-visit">
                   <span className="fa fa-folder custom-text">
                     &nbsp; <span> {searchInvdata[0]?.VisitNo}</span>
@@ -1179,7 +1179,7 @@ const SampleCollection = () => {
                   </Tooltip>
                 </div>
               </div>
-            </div>
+         =
             <div>
               {}
               {searchInvdata.length > 0 ? (

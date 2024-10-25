@@ -1589,7 +1589,7 @@ const Investigations = () => {
                               <tr key={index}>
                                 <td data-title={t("Action")}>
                                   <button
-                                    className="btn btn-danger"
+                                    className="btn btn-danger w-7"
                                     name="disableData"
                                     onClick={() => handleFilter(index)}
                                   >

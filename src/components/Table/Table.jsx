@@ -6,7 +6,6 @@ import {
   renderPaginationButtons,
   updateFixedColumns,
 } from "./tableUtils";
-import { SelectBox } from "../CommonComponent/SelectBox";
 import TableSelectBox from "../TableComponent/TableSelectBox";
 
 const Table = ({
