@@ -19,7 +19,7 @@ const Reason = ({
         className="table-sm"
         handleClose={setReason}
       >
-        <div className="card">
+        <div className="">
           <div className="row">
             <label className="col-sm-12  col-md-3" htmlFor="Cancel Reason">
               {t("Reason")} :

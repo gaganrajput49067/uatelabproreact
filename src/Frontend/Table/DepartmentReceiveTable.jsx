@@ -360,7 +360,7 @@ function DepartmentReceiveTable({
           }}
         </Table>
       ) : (
-        <div className="card">
+        <div className="">
           <NoRecordFound />
         </div>
       )}

@@ -9,7 +9,7 @@ import Table from "../../components/Table/Table";
 import Loading from "../../components/Loading/Loading";
 import NoRecordFound from "../../components/CommonComponent/NoRecordFound";
 import {
-    checkEmploypeeWiseDiscount,
+  checkEmploypeeWiseDiscount,
   getBindDiscApproval,
   getBindDiscReason,
 } from "../../utils/NetworkApi/commonApi";

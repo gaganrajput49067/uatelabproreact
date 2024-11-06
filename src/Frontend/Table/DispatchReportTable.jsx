@@ -230,7 +230,7 @@ function DispatchTable({ dispatchData, show, show2, users }) {
                 <tr key={index}>
                   <td data-title={"S.No"} className="text-center">
                     {index + 1}&nbsp;
-                    {data?.IsVip === 1 && <img src={VIP}></img>}&nbsp;
+                  &nbsp;
                   </td>
                   <td data-title={"Reg Date"}>
                     <div>{dateConfig(data.Date)}</div>

@@ -1570,7 +1570,7 @@ const ResultEntry = () => {
             />
           )}
           <PageHead name="Result Entry" showDrop={"true"}>
-            <div className="card">
+            <div className="">
               <div className="row">
                 <div className="col-sm-2">
                   <div className="d-flex" style={{ display: "flex" }}>
@@ -1905,7 +1905,7 @@ const ResultEntry = () => {
                   </div>
                 </div>
               </div>
-              <div className="card">
+              <div className="">
                 <RETable
                   redata={redata}
                   GetResultEntry={GetResultEntry}
@@ -1916,7 +1916,7 @@ const ResultEntry = () => {
               </div>
             </div>
           ) : (
-            <div className="card">
+            <div className="">
               <NoRecordFound />
             </div>
           )}
@@ -1980,6 +1980,7 @@ const ResultEntry = () => {
           {show5?.modal && (
             <UploadFile
               show={show5?.modal}
+              options={Identity}
               handleClose={(data) => {
                 setShow5({
                   modal: false,
@@ -2184,7 +2185,7 @@ const ResultEntry = () => {
               </div>
             </div>
           </div> */}
-          {/* <div className="card pb-0"> */}
+          {/* <div className=" pb-0"> */}
           {/* <SubPageHead title={"Result Entry"}> */}
           <div className="custom-box-body mb-3 mt-3">
             <div className="custom-row">
@@ -3261,7 +3262,7 @@ const ResultEntry = () => {
               ))}
             </tbody>
           </Table>
-          <div className="card m-0 p-0 pb-2" style={{ zIndex: 0 }}>
+          <div className=" m-0 p-0 pb-2" style={{ zIndex: 0 }}>
             <div
               className="row mt-3  d-flex flex-wrap"
               style={{ textWrap: "avoid" }}

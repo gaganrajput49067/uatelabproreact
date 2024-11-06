@@ -362,7 +362,7 @@ const DepartmentReceive = () => {
   return (
     <>
       <PageHead name="Department Receive" showDrop={"true"}>
-        <div className="card">
+        <div className="">
           <div className="row">
             <div className="col-sm-2 ">
               <div className="d-flex" style={{ display: "flex" }}>
@@ -607,7 +607,7 @@ const DepartmentReceive = () => {
           handleUploadCount={handleUploadCount}
         />
       )}
-      <div className="card mt-2">
+      <div className=" mt-2">
         {loading ? (
           <Loading />
         ) : (

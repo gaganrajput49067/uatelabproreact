@@ -287,14 +287,14 @@ export let routeDetails = [
         path: "/TestMappingCenter",
         element: "../Frontend/Master/TestCentreMapping",
       },
-      // {
-      //   path: "/Settlement",
-      //   element: "../Frontend/Administrator/SettlementPatient",
-      // },
-      // {
-      //   path: "/DiscountMasterEmployeeWise",
-      //   element: "../Frontend/Administrator/DiscountMasterEmployeeWise",
-      // },
+      {
+        path: "/Settlement",
+        element: "../Frontend/Administrator/SettlementPatient",
+      },
+      {
+        path: "/DiscountMasterEmployeeWise",
+        element: "../Frontend/Administrator/DiscountMasterEmployeeWise",
+      },
       {
         path: "/OutSourceTagging",
         element: "../Frontend/Master/OutSourceTagging",
@@ -311,34 +311,34 @@ export let routeDetails = [
         path: "/IDMaster",
         element: "../Frontend/Master/IDMaster",
       },
-      // {
-      //   path: "/ChangePaymentMode",
-      //   element: "../Frontend/Administrator/ChangePaymentMode",
-      // },
+      {
+        path: "/ChangePaymentMode",
+        element: "../Frontend/Administrator/ChangePaymentMode",
+      },
       {
         path: "/ChangePassword",
         element: "../Frontend/Master/ChangePassword",
       },
-      // {
-      //   path: "/ChangeSampleStatus",
-      //   element: "../Frontend/Administrator/ChangeSampleStatus",
-      // },
-      // {
-      //   path: "/ChangeBarCode",
-      //   element: "../Frontend/Administrator/ChangeBarCode",
-      // },
-      // {
-      //   path: "/DiscountApproval",
-      //   element: "../Frontend/Administrator/DiscountApproval",
-      // },
+      {
+        path: "/ChangeSampleStatus",
+        element: "../Frontend/Administrator/ChangeSampleStatus",
+      },
+      {
+        path: "/ChangeBarCode",
+        element: "../Frontend/Administrator/ChangeBarCode",
+      },
+      {
+        path: "/DiscountApproval",
+        element: "../Frontend/Administrator/DiscountApproval",
+      },
       {
         path: "/ManageHoliday",
         element: "../Frontend/Master/ManageHoliday",
       },
-      // {
-      //   path: "/RevertDiscountApprovalStatus",
-      //   element: "../Frontend/Administrator/RevertDiscountApprovalStatus",
-      // },
+      {
+        path: "/RevertDiscountApprovalStatus",
+        element: "../Frontend/Administrator/RevertDiscountApprovalStatus",
+      },
       {
         path: "/AgeWiseDiscount",
         element: "../Frontend/Master/AgeWiseDiscount",
@@ -347,14 +347,14 @@ export let routeDetails = [
         path: "/AgeWiseDiscountList",
         element: "../Frontend/Master/AgeWiseDiscountList",
       },
-      // {
-      //   path: "/DiscountAfterBill",
-      //   element: "../Frontend/Administrator/DiscountAfterBill",
-      // },
-      // {
-      //   path: "/RefundAfterBill",
-      //   element: "../Frontend/Administrator/RefundAfterBill",
-      // },
+      {
+        path: "/DiscountAfterBill",
+        element: "../Frontend/Administrator/DiscountAfterBill",
+      },
+      {
+        path: "/RefundAfterBill",
+        element: "../Frontend/Administrator/RefundAfterBill",
+      },
       {
         path: "/MacData",
         element: "../Frontend/Master/MacData",
@@ -375,38 +375,38 @@ export let routeDetails = [
         path: "/CompanyPaymentDetail",
         element: "../Frontend/CompanyMaster/CompanyPaymentDetail",
       },
-      // {
-      //   path: "/setDoctor",
-      //   element: "../Frontend/Master/SetDoctorShare",
-      // },
-      // {
-      //   path: "/MergeDoctor",
-      //   element: "../Frontend/Master/MergeDoctor",
-      // },
-      // {
-      //   path: "/DoctorMisReportPage",
-      //   element: "../Frontend/Master/DoctorMisReportPage",
-      // },
-      // {
-      //   path: "/DoctorShareMaster",
-      //   element: "../Frontend/Master/DoctorShareMaster",
-      // },
-      // {
-      //   path: "/DoctorTypeCopyShare",
-      //   element: "../Frontend/Master/DoctorTypeCopyShare",
-      // },
+      {
+        path: "/setDoctor",
+        element: "../Frontend/Master/SetDoctorShare",
+      },
+      {
+        path: "/MergeDoctor",
+        element: "../Frontend/Master/MergeDoctor",
+      },
+      {
+        path: "/DoctorMisReportPage",
+        element: "../Frontend/Master/DoctorMisReportPage",
+      },
+      {
+        path: "/DoctorShareMaster",
+        element: "../Frontend/Master/DoctorShareMaster",
+      },
+      {
+        path: "/DoctorTypeCopyShare",
+        element: "../Frontend/Master/DoctorTypeCopyShare",
+      },
       {
         path: "/MachineMaster",
         element: "../Frontend/Machine/MachineMaster",
       },
-      // {
-      //   path: "/CompanyKey",
-      //   element: "../Frontend/CompanyMaster/CompanyKey",
-      // },
-      // {
-      //   path: "/OnlinePaymentPage",
-      //   element: "../Frontend/CompanyMaster/OnlinePaymentPage",
-      // },
+      {
+        path: "/CompanyKey",
+        element: "../Frontend/CompanyMaster/CompanyKey",
+      },
+      {
+        path: "/OnlinePaymentPage",
+        element: "../Frontend/CompanyMaster/OnlinePaymentPage",
+      },
       {
         path: "/CompanyMaster",
         element: "../Frontend/CompanyMaster/CompanyMaster",
@@ -439,22 +439,22 @@ export let routeDetails = [
         path: "/MachineReferenceRangeMaster",
         element: "../Frontend/Master/MachineReferenceRangeMaster",
       },
-      // {
-      //   path: "/ModalityMaster",
-      //   element: "../Frontend/Radiology/ModalityMaster",
-      // },
-      // {
-      //   path: "/TokenGenerationMaster",
-      //   element: "../Frontend/Radiology/TokenGenerationMaster",
-      // },
-      // {
-      //   path: "/ScRoomMaster",
-      //   element: "../Frontend/Radiology/ScRoomMaster",
-      // },
-      // {
-      //   path: "/InvestigationTimeSlotMaster",
-      //   element: "../Frontend/Radiology/InvestigationTimeSlotMaster",
-      // },
+      {
+        path: "/ModalityMaster",
+        element: "../Frontend/Radiology/ModalityMaster",
+      },
+      {
+        path: "/TokenGenerationMaster",
+        element: "../Frontend/Radiology/TokenGenerationMaster",
+      },
+      {
+        path: "/ScRoomMaster",
+        element: "../Frontend/Radiology/ScRoomMaster",
+      },
+      {
+        path: "/InvestigationTimeSlotMaster",
+        element: "../Frontend/Radiology/InvestigationTimeSlotMaster",
+      },
       {
         path: "/ReportBill",
         element: "../Frontend/Reports/ReportBill",

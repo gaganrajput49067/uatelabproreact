@@ -100,7 +100,7 @@ function TemplateMasterModal({ show, handleClose, handleSave }) {
 
   return (
     <Modal title={"Enter Value"} handleClose={handleClose}>
-      <div className="card">
+      <div className="">
         <div className="row">
           <div className="col-12">
             <select
@@ -127,7 +127,7 @@ function TemplateMasterModal({ show, handleClose, handleSave }) {
           </div>
         </div>
       </div>
-      <div className="card">
+      <div className="">
         <div className="row">
           <div className="col-sm-1">
             <button
