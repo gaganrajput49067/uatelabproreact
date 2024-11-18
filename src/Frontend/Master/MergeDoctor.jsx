@@ -214,8 +214,8 @@ const MergeDoctor = () => {
               ))}
             </tbody>
           </Table>
-          <div 
-          className="row"
+          <div
+            className="row"
             style={{
               marginTop: "5px",
               display: "flex",
@@ -223,22 +223,22 @@ const MergeDoctor = () => {
             }}
           >
             {payload?.Status == 0 ? (
-                <div className="col-sm-2">
-              <button
-                className="btn btn-sm btn-success mx-2"
-                onClick={() => handleSave("InsertTempDoctor")}
-              >
-                Save
-              </button>
+              <div className="col-sm-2">
+                <button
+                  className="btn btn-sm btn-success mx-2"
+                  onClick={() => handleSave("InsertTempDoctor")}
+                >
+                  Save
+                </button>
               </div>
             ) : (
-                <div className="col-sm-2">
-              <button
-                className="btn btn-sm btn-danger mx-2"
-                onClick={() => handleSave("RemoveTempDoctor")}
-              >
-                Remove
-              </button>
+              <div className="col-sm-2">
+                <button
+                  className="btn btn-sm btn-danger mx-2"
+                  onClick={() => handleSave("RemoveTempDoctor")}
+                >
+                  Remove
+                </button>
               </div>
             )}
           </div>

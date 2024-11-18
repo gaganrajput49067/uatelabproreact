@@ -11,7 +11,7 @@ import DatePicker from "../../components/CommonComponent/DatePicker";
 import Loading from "../../components/Loading/Loading";
 import Table from "../../components/Table/Table";
 import { Link } from "react-router-dom";
-import UploadModal from "../utils/UploadModal";
+// import UploadModal from "../utils/UploadModal";
 import PageHead from "../../components/CommonComponent/PageHead";
 import UploadFile from "../utils/UploadFIleModal/UploadFile";
 

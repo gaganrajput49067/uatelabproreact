@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import PageHead from "../../components/CommonComponent/PageHead";

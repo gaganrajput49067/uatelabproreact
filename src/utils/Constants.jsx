@@ -1067,7 +1067,6 @@ export const RoundUpTo = [
   { label: "2", value: "2" },
   { label: "3", value: "3" },
   { label: "4", value: "4" },
-
 ];
 
 export const NoOfRecord = [
@@ -1087,4 +1086,10 @@ export const NoOfRecord = [
     label: 50,
     value: Number(50),
   },
+];
+
+export const ManageDeliveryDaysType = [
+  { label: "Investigation", value: 1 },
+  { label: "Department", value: 2 },
+  { label: "Urgent", value: 3 },
 ];

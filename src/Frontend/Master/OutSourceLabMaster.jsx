@@ -336,5 +336,5 @@ const OutSourceLabMaster = () => {
     </>
   );
 };
-
+ 
 export default OutSourceLabMaster;

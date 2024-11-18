@@ -1,9 +1,6 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Link, useLocation } from "react-router-dom";
-
 import { useTranslation } from "react-i18next";
 import { axiosInstance } from "../../utils/axiosInstance";
 import LinkPageHead from "../../components/CommonComponent/LinkPageHead";
@@ -240,7 +237,7 @@ const MicroBiologyMasterMapping = () => {
                   className="form-control mapping-tag "
                   onChange={(e) => handleChange(e, getUnMapItem)}
                   style={{ border: "none" }}
-                >
+                 >
                   {getUnMapItem.map((ele, index) => (
                     <option
                       key={index}

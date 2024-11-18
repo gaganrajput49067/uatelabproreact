@@ -477,7 +477,7 @@ export let routeDetails = [
       },
       {
         path: "/MemberShipCardEdit",
-        element: "../Frontend/MembershipCard/MemberShipCardEdit"
+        element: "../Frontend/MembershipCard/MemberShipCardEdit",
       },
       {
         path: "/CampConfigurationMaster",
@@ -498,7 +498,8 @@ export let routeDetails = [
       {
         path: "/WelcomePage",
         element: "../Frontend/Extra/WelcomePage",
-      }, {
+      },
+      {
         path: "/CampReject",
         element: "../Frontend/Camp/CampReject",
       },
@@ -513,6 +514,14 @@ export let routeDetails = [
       {
         path: "/CampRequestApproval",
         element: "../Frontend/Camp/CampRequestApproval",
+      },
+      {
+        path: "/ManageDeliveryDays",
+        element: "../Frontend/Master/ManageDeliveryDays",
+      },
+      {
+        path: "/LocationMaster",
+        element: "../Frontend/HomeCollection/LocationMaster",
       },
       { path: "*", element: "../Frontend/Extra/BlankPage" },
     ],

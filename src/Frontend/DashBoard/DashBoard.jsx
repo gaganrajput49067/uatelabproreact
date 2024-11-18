@@ -246,6 +246,7 @@ function RevenueCollection({ userWiseDashBoard }) {
 }
 
 function SalesCollection({ userWiseDashBoard }) {
+  console.log(userWiseDashBoard)
   const month = getGreeting("month");
   const SalesCollection = {
     labels: [month[2], month[1], month[0]],
@@ -309,6 +310,38 @@ function SalesCollection({ userWiseDashBoard }) {
     </div>
   );
 }
+
+const getLastThreeMonths = () => {
+  const date = new Date();
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const currentMonthIndex = date.getMonth();
+  const previousMonthIndex =
+    currentMonthIndex === 0 ? 11 : currentMonthIndex - 1;
+  const twoMonthsAgoIndex =
+    currentMonthIndex <= 1
+      ? 11 - (1 - currentMonthIndex)
+      : currentMonthIndex - 2;
+  return [
+    monthNames[currentMonthIndex],
+    monthNames[previousMonthIndex],
+    monthNames[twoMonthsAgoIndex],
+  ];
+};
+
+const [currentMonth, previousMonth, twoMonthsAgo] = getLastThreeMonths();
 
 function DataSet({ data }) {
   const totalDasRef = useRef(null);
@@ -383,7 +416,7 @@ function DataSet({ data }) {
           </p>
         </p>
         <p>
-          <p>August</p>
+          <p>{currentMonth}</p>
           <p>{data?.monthwisedata || 0}</p>
         </p>
       </div>

@@ -188,6 +188,7 @@ const MachineReferenceRangeMaster = () => {
                   </Link>
                 </td>
               </tr>
+              
             ))}
           </tbody>
         </Table>

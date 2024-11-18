@@ -519,7 +519,6 @@ const OutSourceTestToOtherLab = () => {
                     <div className="col-sm-1">
                       <button
                         className="btn btn-block btn-success btn-sm"
-                        // style={{marginLeft:"10px"}}
                         onClick={handleSave}
                       >
                         {t("Save")}

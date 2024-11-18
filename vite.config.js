@@ -10,6 +10,7 @@ export default ({ mode }) => {
     plugins: [react()],
 
     server: {
+      port: 3001,
       proxy: {
         "/api": {
           target: process.env.VITE_PROXY_HOST,
@@ -24,3 +25,4 @@ export default ({ mode }) => {
     },
   });
 };
+

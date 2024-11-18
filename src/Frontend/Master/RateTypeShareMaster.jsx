@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-
 import { Link } from "react-router-dom";
-
 import { toast } from "react-toastify";
-
 import { useTranslation } from "react-i18next";
 import { axiosInstance } from "../../utils/axiosInstance";
 import RateTypeDefaultShareModal from "../utils/RateTypeDefaultShareModal";
@@ -340,7 +337,7 @@ const RateTypeShareMaster = () => {
           <>
             {TableData.length > 0 && (
               <Table>
-                <thead className="cf" >
+                <thead className="cf">
                   <tr>
                     <th>{t("S.No")}</th>
                     <th>{t("Investigation")}</th>

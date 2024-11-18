@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { getDepartment } from "../../utils/NetworkApi/commonApi";

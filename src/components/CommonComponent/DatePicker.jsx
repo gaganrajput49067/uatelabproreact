@@ -2,20 +2,14 @@ import React from "react";
 import { Calendar } from "primereact/calendar";
 
 function DatePicker({
-  type,
   name,
   className,
   respclass,
   id,
-  placeholder,
   lable,
   value,
-  onKeyDown,
-  required,
   onChange,
   tabIndex,
-  timeOnly,
-
   maxDate,
   minDate,
   disabled,

@@ -2,8 +2,15 @@ import React from "react";
 import { Calendar } from "primereact/calendar";
 
 const TimePicker = (props) => {
-  const { respclass, placeholderName, value, onChange, name, lable, id } =
-    props;
+  const { 
+    respclass, 
+    placeholderName, 
+    value,
+    onChange, 
+    name,
+    lable,
+    id 
+  } = props;
 
   const handleTimeChange = (e) => {
     const selectedDate = e.value;

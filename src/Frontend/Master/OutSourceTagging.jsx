@@ -182,6 +182,6 @@ const OutSourceTagging = () => {
       </PageHead>
     </>
   );
-};
+}; 
 
 export default OutSourceTagging;
